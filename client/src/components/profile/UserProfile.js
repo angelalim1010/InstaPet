@@ -6,9 +6,10 @@ import "./UserProfile.css";
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
-
+    // Will probably replace state with user:{}
     this.state = {
       name: "Bob Anderson",
+      nickname: "Bob the great",
       email: "blah@mcblah.com",
       imageUrl: "../../img/fetchDog.png",
       bio: "I am cool , follow me :)",
@@ -22,7 +23,8 @@ export default class UserProfile extends Component {
       <div>
         <div className="row top">
           <div className="col-sm-6">
-            <h1 className="name">{this.state.name}</h1>
+            <h1>@{this.state.nickname}</h1>
+            <h2 className="name">{this.state.name}</h2>
             <img src={this.state.imageUrl} alt="profile" />
             <a href="#">Edit Profile</a>
           </div>
@@ -46,3 +48,15 @@ export default class UserProfile extends Component {
     );
   }
 }
+
+UserProfile.propTypes = {
+  name: PropTypes.string,
+  nickname: PropTypes.string,
+  email: PropTypes.string,
+  imageUrl: PropTypes.string,
+  bio: PropTypes.string,
+  followers: PropTypes.number,
+  following: PropTypes.string
+};
+
+// CONNECT TO REDUX
