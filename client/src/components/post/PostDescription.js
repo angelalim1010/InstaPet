@@ -11,8 +11,8 @@ class PostDescription extends Component {
   render() {
     return (
       <div className="postDescription">
-        {/* <Button onClick={() => this.props.likePost(this.props.post.id)}>Like</Button> */}
-        <p>Liked by {this.props.postLikes} of people</p>
+        <Button onClick={() => this.props.likePost(this.props.id)}>Like</Button>
+        <p>Liked by {this.props.likes} people</p>
         <Comment />
       </div>
     );

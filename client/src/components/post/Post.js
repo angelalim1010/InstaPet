@@ -13,8 +13,6 @@ class Post extends Component {
     super(props);
   }
 
-  componentWillReceiveProps = () => { };
-
   displayPost = () => {
     if (!this.props.post) {
       return <div />;
@@ -23,7 +21,7 @@ class Post extends Component {
         <div className="postItems">
           <PostTopBar />
           <PostImage imageURL={this.props.post.imageURL} />
-          <PostDescription />
+          <PostDescription likes={this.props.post.likes} id={this.props.post.id} />
           <PostComments />
         </div>
       );

@@ -24,7 +24,6 @@ class AllPostsView extends Component {
             <div>
                 {this.state.posts.map((post) => (
                     <div key={post.id}>
-                        <p>{post.id}</p>
                         <Post post={post} />
                     </div>
                 ))}

@@ -5,9 +5,9 @@ import {
 
 const initialState = {
     posts:
-        [{ "id": 1, "imageUrl": "https://i.pinimg.com/originals/04/98/65/0498659455374a06c7db95f3a55222bd.jpg", "Description": "Doggo", "likes": 0 },
-        { "id": 2, "imageUrl": "https://data.whicdn.com/images/298844185/large.jpg?t=1507433077", "Description": "Gatto", "likes": 0 },
-        { "id": 3, "imageUrl": "https://i.pinimg.com/originals/c1/d3/ce/c1d3ce3e21df873370596aeef34d061b.jpg", "Description": "Moo", "likes": 0 }],
+        [{ "id": 1, "imageURL": "https://i.pinimg.com/originals/04/98/65/0498659455374a06c7db95f3a55222bd.jpg", "Description": "Doggo", "likes": 340 },
+        { "id": 2, "imageURL": "https://data.whicdn.com/images/298844185/large.jpg?t=1507433077", "Description": "Gatto", "likes": 123 },
+        { "id": 3, "imageURL": "https://i.pinimg.com/originals/c1/d3/ce/c1d3ce3e21df873370596aeef34d061b.jpg", "Description": "Moo", "likes": 562 }],
 };
 
 export default (state = initialState, action) => {
