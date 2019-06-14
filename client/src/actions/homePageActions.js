@@ -1,6 +1,6 @@
 import {
     GET_POSTS,
-    // LIKE_POST
+    LIKE_POST
 } from "./types";
 
 const getPosts = posts => {
@@ -10,17 +10,17 @@ const getPosts = posts => {
     };
 };
 
-// const likePost = post => {
-//     return {
-//         type: LIKE_POST,
-//         payload: post
-//     };
-// };
+const likePost = postId => {
+    return {
+        type: LIKE_POST,
+        payload: postId
+    };
+};
 
 export const getPostsThunk = () => dispatch => {
     return (posts => dispatch(getPosts(posts)))
 };
 
-// export const likePostThunk = () => dispatch => {
-//     return (post => dispatch(likePost(post)))
-// };
+export const likePostThunk = () => dispatch => {
+    return (postId => dispatch(likePost(postId)))
+};

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { Button } from "reactstrap";
-// import { likePostThunk } from "../../actions/homePageActions";
+import Post from "../post/Post";
 
 class AllPostsView extends Component {
     constructor(props) {
@@ -16,9 +15,8 @@ class AllPostsView extends Component {
             <div>
                 {this.state.posts.map((post) => (
                     <div key={post.id}>
-                        <img src={post.imageURL} />
-                        <p> Description: {post.description}</p>
-                        {/* <Button onClick={() => this.props.likePost(post.id)}>Like</Button> */}
+                        <p>{post.id}</p>
+                        <Post postLikes={post.likes} />
                     </div>
                 ))}
             </div>
@@ -29,12 +27,6 @@ class AllPostsView extends Component {
 const mapStateToProps = state => ({
     homePage: state.homePage
 });
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         likePost: postId => dispatch(likePostThunk(postId))
-//     };
-// };
 
 export default connect(
     mapStateToProps,

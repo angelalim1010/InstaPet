@@ -1,14 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Comment from "./Comment";
+import { Button } from "reactstrap";
+import { likePostThunk } from "../../actions/homePageActions";
 
-const PostDescription = props => {
-  const {} = props;
-  return (
-    <div className="postDescription">
-      <p>Liked by ### of people</p>
-      <Comment />
-    </div>
-  );
+class PostDescription extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className="postDescription">
+        {/* <Button onClick={() => this.props.likePost(this.props.post.id)}>Like</Button> */}
+        <p>Liked by {this.props.postLikes} of people</p>
+        <Comment />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  homePage: state.homePage
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    likePost: postId => dispatch(likePostThunk(postId))
+  };
 };
-
-export default PostDescription;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostDescription);

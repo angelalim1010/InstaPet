@@ -18,7 +18,7 @@ class Post extends Component {
       <div className="post">
         <PostTopBar />
         <PostImage />
-        <PostDescription />
+        <PostDescription postLikes={this.props.postLikes} />
         <PostComments />
       </div>
     );
