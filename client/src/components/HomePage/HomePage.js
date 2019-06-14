@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPostsThunk } from "../../actions/homePageActions";
+import AllPostsView from "./AllPostsView";
 
 class HomePage extends Component {
   constructor() {
