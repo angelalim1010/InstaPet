@@ -13,12 +13,20 @@ class Post extends Component {
     super(props);
   }
 
+  displayPost = () => {
+    if (!this.props.post) {
+      return <p>Post Not Avaliable</p>;
+    } else {
+      return <AllCampusesView />;
+    }
+  };
+
   render() {
     return (
       <div className="post">
         <PostTopBar />
         <PostImage />
-        <PostDescription postLikes={this.props.postLikes} />
+        <PostDescription postLikes={this.props.post.likes} />
         <PostComments />
       </div>
     );
