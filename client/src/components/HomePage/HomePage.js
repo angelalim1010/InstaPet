@@ -14,7 +14,7 @@ class HomePage extends Component {
     this.props.getPosts();
   };
 
-  displayCampuses = () => {
+  displayPosts = () => {
     if (this.props.homePage.posts.length === 0) {
       return <p>No Posts Avaliable</p>;
     } else {
