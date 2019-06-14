@@ -15,7 +15,7 @@ class HomePage extends Component {
   };
 
   displayCampuses = () => {
-    if (this.props.posts.length === 0) {
+    if (this.props.homePage.posts.length === 0) {
       return <p>No Posts Avaliable</p>;
     } else {
       return <AllPostsView />;
@@ -32,7 +32,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  homePage: state.homePage
 });
 
 const mapDispatchToProps = dispatch => {

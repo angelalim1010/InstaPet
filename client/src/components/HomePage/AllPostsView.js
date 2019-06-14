@@ -7,7 +7,7 @@ class AllPostsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: this.props.posts
+            posts: this.props.homePage.posts
         };
     }
 
@@ -27,7 +27,7 @@ class AllPostsView extends Component {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts
+    homePage: state.homePage
 });
 
 // const mapDispatchToProps = dispatch => {
