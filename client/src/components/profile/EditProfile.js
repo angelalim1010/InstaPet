@@ -6,6 +6,7 @@ export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.id,
       name: this.props.name,
       nickname: this.props.name,
       email: this.props.email,
@@ -29,6 +30,7 @@ export default class EditProfile extends Component {
     } else {
       // send changed user data
       let changedUser = {
+        id: this.props.id,
         nickname: this.state.nickname,
         name: this.state.name,
         email: this.state.email,
