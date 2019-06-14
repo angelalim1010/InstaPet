@@ -25,7 +25,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        {this.displayPosts}
+        {this.displayPosts()}
       </div>
     );
   }
