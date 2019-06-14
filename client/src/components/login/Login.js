@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import "./Login.css"
 class Login extends Component{
     constructor(props){
@@ -11,19 +12,27 @@ class Login extends Component{
     }
     render(){
         return(
-            <div>
+            <div className = "background">
                 <div className = "box">
                     <h1 className= "title">Instapet</h1>
+
                     <Form>
                         <FormGroup>
-                          <Input type="email" name="email" className="email" placeholder="Email" />
+                          <Input type="email" name="email" className="formbox" placeholder="Email" />
                         </FormGroup>
+                        <br></br>
                         <FormGroup>
-                          <Input type="password" name="password" className="password" placeholder="Password" />
+                          <Input type="password" name="password" className="formbox" placeholder="Password" />
                         </FormGroup>
                     </Form>
-                     <Button>Submit</Button>
+                    <br></br>
+                     <Button className="submit">Log In</Button>
+                     <br></br>
+                     <div className= "signupbox">
+                        Don't have an account? <Link to="/signup">Sign Up</Link>
+                     </div>
                  </div>
+
             </div>
         )
     }
