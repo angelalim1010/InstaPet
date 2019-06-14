@@ -12,6 +12,23 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
+    case ADD_USER:
+      return {
+        ...state,
+        users: [action.payload, ...state.users]
+      };
+    case REMOVE_USER:
+      // NEEDS TO BE IMPLEMENTED
+      return {
+        ...state
+      };
+    case EDIT_USER:
+      // EDIT PERSON (REQUIRES SOME IMPLEMENTATION)
+      let editedUsers = state.users;
+      return {
+        ...state,
+        users: editedUsers
+      };
     default:
       return state;
   }

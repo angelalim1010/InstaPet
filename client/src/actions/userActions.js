@@ -1,4 +1,2 @@
-export const GET_USERS = "GET_USERS";
-export const EDIT_USER = "EDIT_USERS";
-export const ADD_USER = "ADD_USER";
-export const REMOVE_USER = "REMOVE_USER";
+import axios from "axios";
+import { GET_USERS, ADD_USER, REMOVE_USER, EDIT_USER } from "./types";
