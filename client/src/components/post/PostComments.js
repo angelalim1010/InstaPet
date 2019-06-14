@@ -14,10 +14,7 @@ class PostComments extends Component {
           <i>View all #### comments</i>
         </p>
         <p>Map the comments array for this postId:</p>
-        <p>
-          <b>user.username</b> Lorem ipsum Consequat nulla labore laborum nulla
-          sit ad esse eiusmod fugiat aliquip consectetur mollit.
-        </p>
+        <Comment />
       </div>
     );
   }

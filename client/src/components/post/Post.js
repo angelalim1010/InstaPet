@@ -13,15 +13,25 @@ class Post extends Component {
     super(props);
   }
 
+  componentWillReceiveProps = () => {};
+
+  displayPost = () => {
+    if (!this.props.post) {
+      return <div>No Posts Found</div>;
+    } else {
+      return (
+        <div className="postItems">
+          <PostTopBar />
+          <PostImage imageURL={this.props.post.imageURL} />
+          <PostDescription />
+          <PostComments />
+        </div>
+      );
+    }
+  };
+
   render() {
-    return (
-      <div className="post">
-        <PostTopBar />
-        <PostImage />
-        <PostDescription />
-        <PostComments />
-      </div>
-    );
+    return <div className="post">{this.displayPost()}</div>;
   }
 }
 
