@@ -17,7 +17,7 @@ class Post extends Component {
 
   displayPost = () => {
     if (!this.props.post) {
-      return <div>No Posts Found</div>;
+      return <div />;
     } else {
       return (
         <div className="postItems">
