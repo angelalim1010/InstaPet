@@ -1,0 +1,33 @@
+.post * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.post {
+  width: 600px;
+  margin: 25px auto;
+  border: 1px solid black;
+  background-color: lightskyblue;
+}
+
+.postTopBar {
+  background-color: lightblue;
+}
+
+.postImage {
+  background-color: lightcoral;
+  height: 750px;
+}
+
+.postLikes {
+  background-color: lightgreen;
+}
+
+.postComments {
+  background-color: #ffff22;
+}
