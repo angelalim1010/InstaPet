@@ -1,16 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-
-class EditProfile extends Component{
-    render(){
-        return(
-            <h1>edit page</h1>
-        )
-    }
-}
-
-export default EditProfile;
-=======
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -123,4 +111,3 @@ EditProfile.propTypes = {
 };
 
 // CONNECT TO REDUX
->>>>>>> 4c43a61762a7ce506cde5cb28419c4bd72abfb4e
