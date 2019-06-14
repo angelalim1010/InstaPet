@@ -1,12 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-const PostTopBar = props => {
-  const {} = props;
-  return (
-    <div className="postTopBar">
-      <p>user.image user.username</p>
-    </div>
-  );
-};
+class PostTopBar extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className="postTopBar">
+        <p>user.image user.username</p>
+      </div>
+    );
+  }
+}
 
-export default PostTopBar;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostTopBar);
