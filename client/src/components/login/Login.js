@@ -12,14 +12,14 @@ class Login extends Component{
     render(){
         return(
             <div>
-                <div>
-                    <h1>Instapet</h1>
+                <div className = "box">
+                    <h1 className= "title">Instapet</h1>
                     <Form>
                         <FormGroup>
-                          <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
+                          <Input type="email" name="email" className="email" placeholder="Email" />
                         </FormGroup>
                         <FormGroup>
-                          <Input type="password" name="password" id="password" placeholder="Password" />
+                          <Input type="password" name="password" className="password" placeholder="Password" />
                         </FormGroup>
                     </Form>
                      <Button>Submit</Button>
