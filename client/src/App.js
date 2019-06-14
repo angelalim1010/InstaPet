@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import UserProfile from "./components/profile/UserProfile";
+import NavBar from "./components/layout/NavBar";
+import Post from "./components/post/Post";
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <UserProfile />
-      </div>
+      <Router>
+        <div className="app">
+          <Route path="/" component={NavBar} />
+          <div className="content">
+            <Route path="/" component={Post} />
+          </div>
+        </div>
+      </Router>
     );
   }
 }
-
-export default App;
