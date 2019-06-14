@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import NavigationBar from "./components/layout/NavigationBar";
-import Homepage from "./components/HomePage/HomePage";
+import NavBar from "./components/layout/NavBar";
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <NavigationBar />
-          <Route exact path="/" component={Homepage}>
-          </Route>
+          <Route path="/" component={NavBar} />
         </div>
       </Router>
     );
