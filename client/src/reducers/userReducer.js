@@ -1,7 +1,16 @@
-import { GET_USERS, ADD_USER, REMOVE_USER, EDIT_USER } from "../actions/types";
+import {
+  GET_USERS,
+  GET_USER_POSTS,
+  REMOVE_USER_POST,
+  ADD_USER_POST,
+  ADD_USER,
+  REMOVE_USER,
+  EDIT_USER
+} from "../actions/types";
 
 const initialState = {
   users: [],
+  userPosts: [],
   user: {}
 };
 
@@ -12,13 +21,28 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
+    case GET_USER_POSTS:
+      return {
+        ...state,
+        userPosts: action.payload
+      };
     case ADD_USER:
       return {
         ...state,
         users: [action.payload, ...state.users]
       };
+    case ADD_USER_POST:
+      return {
+        ...state,
+        userPosts: [action.payload, ...state.userPosts]
+      };
     case REMOVE_USER:
       // NEEDS TO BE IMPLEMENTED
+      return {
+        ...state
+      };
+    case REMOVE_USER_POST:
+      // TO BE IMPLEMENTED
       return {
         ...state
       };
