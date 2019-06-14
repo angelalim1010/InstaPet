@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "./UserProfile.css";
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class UserProfile extends Component {
             <h3>Following: {this.state.following}</h3>
           </div>
         </div>
-        <div className="row">
+        <div className="row posts">
           <p>Posts go here</p>
         </div>
       </div>
