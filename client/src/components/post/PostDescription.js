@@ -12,8 +12,12 @@ class PostDescription extends Component {
     return (
       <div className="postDescription">
         {/* <Button onClick={() => this.props.likePost(this.props.id)}>Like</Button> */}
-        <p>Liked by {this.props.likes.length} people</p>
-        <Comment />
+        <p className="postLikes">Liked by {this.props.likes.length} people</p>
+        <Comment
+          className="postCaption"
+          userName={this.props.userName}
+          content={this.props.caption}
+        />
       </div>
     );
   }

@@ -7,14 +7,25 @@ class PostComments extends Component {
     super(props);
   }
 
+  displayViewAllComments = () => {
+    if (this.props.comments.length === 0) {
+      return <div className="postCommentsNone" />;
+    }
+    if (this.props.comments.length >= 3) {
+      return <i>View all {this.props.comments.length} comments</i>;
+    }
+  };
+
   render() {
     return (
       <div className="postComments">
-        <p>
-          <i>View all #### comments</i>
-        </p>
-        <p>Map the comments array for this postId:</p>
-        <Comment />
+        {this.displayViewAllComments()}
+        {this.props.comments.map(comment => {
+          return (
+            <Comment userName={comment.userName} content={comment.content} />
+          );
+        })}
+        <i>12 minutes ago</i>
       </div>
     );
   }

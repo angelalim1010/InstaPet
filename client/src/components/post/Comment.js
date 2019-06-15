@@ -10,8 +10,7 @@ class Comment extends Component {
     return (
       <div className="comment">
         <p>
-          <b>user.username</b>comment.content Lorem ipsum Consequat nulla labore
-          laborum nulla sit ad esse eiusmod fugiat aliquip consectetur mollit.
+          <b>{this.props.userName}</b> {this.props.content}
         </p>
       </div>
     );

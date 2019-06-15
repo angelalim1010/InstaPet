@@ -6,6 +6,7 @@ import PostTopBar from "./PostTopBar";
 import PostImage from "./PostImage";
 import PostDescription from "./PostDescription";
 import PostComments from "./PostComments";
+import PostAddComment from "./PostAddComment";
 import { Form, Input } from "reactstrap";
 
 class Post extends Component {
@@ -19,13 +20,15 @@ class Post extends Component {
     } else {
       return (
         <div className="post">
-          <PostTopBar />
+          <PostTopBar userName={this.props.post.userName} />
           <PostImage imageURL={this.props.post.imageURL} />
           <PostDescription
             likes={this.props.post.likes}
-            id={this.props.post.id}
+            userName={this.props.post.userName}
+            caption={this.props.post.caption}
           />
-          <PostComments />
+          <PostComments comments={this.props.post.comments} />
+          <PostAddComment />
         </div>
       );
     }

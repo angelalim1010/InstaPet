@@ -8,7 +8,9 @@ class PostTopBar extends Component {
   render() {
     return (
       <div className="postTopBar">
-        <p>user.image user.username</p>
+        <p>
+          <b>{this.props.userName}</b>
+        </p>
       </div>
     );
   }

@@ -21,7 +21,7 @@ a {
 
 .postImage {
   background-color: lightcoral;
-  height: 750px;
+  max-height: 750px;
 }
 
 .postImage img {
@@ -34,4 +34,26 @@ a {
 
 .postComments {
   background-color: #ffff22;
+}
+
+.postTopBar,
+.postDescription,
+.postComments {
+  padding: 10px;
+}
+
+.postCommentsNone {
+  padding: -10px;
+}
+
+.postAddComment .postAddCommentInput {
+  width: 90%;
+}
+
+.postAddComment .postAddCommentSubmit {
+  width: 10%;
+}
+
+.postAddComment .input-group-text {
+  width: 100%;
 }
