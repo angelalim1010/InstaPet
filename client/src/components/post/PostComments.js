@@ -1,24 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
+import Comment from "./Comment";
+import { connect } from "react-redux";
 
-const PostComments = props => {
-  const {} = props;
-  return (
-    <div className="postComments">
-      <p>
-        <b>user.username</b> Lorem ipsum Consequat nulla labore laborum nulla
-        sit ad esse eiusmod fugiat aliquip consectetur mollit.
-      </p>
-      <p>
-        <i>View all #### comments</i>
-      </p>
-      <p>Map the comments array for this postId:</p>
-      <p>
-        <b>user.username</b> Lorem ipsum Consequat nulla labore laborum nulla
-        sit ad esse eiusmod fugiat aliquip consectetur mollit.
-      </p>
-      <p>Add a comment... button for post</p>
-    </div>
-  );
-};
+class PostComments extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-export default PostComments;
+  render() {
+    return (
+      <div className="postComments">
+        <p>
+          <i>View all #### comments</i>
+        </p>
+        <p>Map the comments array for this postId:</p>
+        <Comment />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostComments);

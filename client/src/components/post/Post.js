@@ -13,15 +13,26 @@ class Post extends Component {
     super(props);
   }
 
+  displayPost = () => {
+    if (!this.props.post) {
+      return <div />;
+    } else {
+      return (
+        <div className="post">
+          <PostTopBar />
+          <PostImage imageURL={this.props.post.imageURL} />
+          <PostDescription
+            likes={this.props.post.likes}
+            id={this.props.post.id}
+          />
+          <PostComments />
+        </div>
+      );
+    }
+  };
+
   render() {
-    return (
-      <div className="post" key={this.props.post.id}>
-        <PostTopBar />
-        <PostImage />
-        <PostDescription likes={this.props.post.likes} />
-        <PostComments />
-      </div>
-    );
+    return <div className="postContainer">{this.displayPost()}</div>;
   }
 }
 

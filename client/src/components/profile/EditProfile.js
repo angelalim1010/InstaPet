@@ -10,7 +10,7 @@ export default class EditProfile extends Component {
       name: this.props.name,
       nickname: this.props.name,
       email: this.props.email,
-      imageUrl: this.props.imageUrl,
+      imageURL: this.props.imageURL,
       bio: this.props.bio,
       phone: this.props.phone
     };
@@ -34,7 +34,7 @@ export default class EditProfile extends Component {
         nickname: this.state.nickname,
         name: this.state.name,
         email: this.state.email,
-        imageUrl: this.state.imageUrl,
+        imageURL: this.state.imageURL,
         bio: this.state.bio,
         phone: this.state.phone
       };
@@ -77,8 +77,8 @@ export default class EditProfile extends Component {
           <label>Image Url: </label>
           <input
             type="text"
-            value={this.props.imageUrl}
-            name="imageUrl"
+            value={this.props.imageURL}
+            name="imageURL"
             placeholder="New image"
             onChange={this.handleChange}
           />
@@ -107,7 +107,7 @@ EditProfile.propTypes = {
   name: PropTypes.string,
   nickname: PropTypes.string,
   email: PropTypes.string,
-  imageUrl: PropTypes.string,
+  imageURL: PropTypes.string,
   bio: PropTypes.string,
   phone: PropTypes.string
 };

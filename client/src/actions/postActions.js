@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GET_POSTS, ADD_POST, REMOVE_POST } from "./types";
-import sampleData from "../data/sampleData";
 
 const getPosts = posts => {
   return {
@@ -17,9 +16,7 @@ const getPosts = posts => {
 // };
 
 export const getPostsThunk = () => dispatch => {
-  return (() => {
-    return sampleData;
-  }).then(posts => dispatch(getPosts(posts)));
+  return posts => dispatch(getPosts(posts));
 };
 
 // export const likePostThunk = () => dispatch => {

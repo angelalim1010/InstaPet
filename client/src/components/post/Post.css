@@ -24,6 +24,10 @@ a {
   height: 750px;
 }
 
+.postImage img {
+  width: 100%;
+}
+
 .postLikes {
   background-color: lightgreen;
 }

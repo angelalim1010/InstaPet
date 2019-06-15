@@ -1,7 +1,8 @@
 import { GET_POSTS, ADD_POST, REMOVE_POST } from "../actions/types";
+import posts from "../data/sampleData";
 
 const initialState = {
-  posts: []
+  posts: posts
 };
 
 export default (state = initialState, action) => {
