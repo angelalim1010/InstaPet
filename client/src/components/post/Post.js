@@ -15,10 +15,10 @@ class Post extends Component {
 
   render() {
     return (
-      <div className="post">
+      <div className="post" key={this.props.post.id}>
         <PostTopBar />
         <PostImage />
-        <PostDescription />
+        <PostDescription likes={this.props.post.likes} />
         <PostComments />
       </div>
     );

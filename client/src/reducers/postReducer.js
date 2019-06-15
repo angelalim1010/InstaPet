@@ -1,8 +1,7 @@
-import { GET_PETS, GET_POSTS, ADD_POST, REMOVE_POST } from "../actions/types";
+import { GET_POSTS, ADD_POST, REMOVE_POST } from "../actions/types";
 
 const initialState = {
-  posts: [],
-  post: {}
+  posts: []
 };
 
 export default (state = initialState, action) => {
