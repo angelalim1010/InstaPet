@@ -8,11 +8,20 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
   }
+
+  displayLikeCount = () => {
+    if (this.props.likes.length === 1) {
+      return <p className="postLikes">1 like</p>;
+    } else {
+      return <p className="postLikes">{this.props.likes.length} likes </p>;
+    }
+  };
+
   render() {
     return (
       <div className="postDescription">
         {/* <Button onClick={() => this.props.likePost(this.props.id)}>Like</Button> */}
-        <p className="postLikes">Liked by {this.props.likes.length} people</p>
+        {this.displayLikeCount()}
         <Comment
           className="postCaption"
           userName={this.props.userName}
