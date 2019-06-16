@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import "./Login.css"
+import Phone from './Phone'
 class Login extends Component{
     constructor(props){
         super(props);
@@ -13,9 +14,9 @@ class Login extends Component{
     render(){
         return(
             <div className = "background">
+                <Phone/>
                 <div className = "box">
                     <h1 className= "title">Instapet</h1>
-
                     <Form>
                         <FormGroup>
                           <Input type="email" name="email" className="formbox" placeholder="Email" />
