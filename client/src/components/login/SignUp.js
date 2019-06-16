@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import "./SignUp.css"
+import Phone from './Phone'
 class SignUp extends Component{
     constructor(props){
         super(props);
@@ -15,9 +16,10 @@ class SignUp extends Component{
     render(){
         return(
             <div className = "background">
+            <Phone/>
                 <div className="signupheader">
                     <h1>Instapet</h1>
-                    <h3>Sign up to see some wholesome content</h3>
+                    <h3 className = "signupmessage">Sign up to see some wholesome content</h3>
                     <Form>
                         <FormGroup>
                           <Input type="email" name="email" className="formbox" placeholder="Email" />
