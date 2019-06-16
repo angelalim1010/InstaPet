@@ -90,11 +90,9 @@ a:hover {
 }
 
 .postAddComment .postAddCommentText {
-  display: inline-block;
   width: 95%;
   font-size: 14px;
   line-height: 18px;
-  min-height: 18px;
   resize: none;
 }
 

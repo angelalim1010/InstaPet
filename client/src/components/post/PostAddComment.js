@@ -19,6 +19,7 @@ class PostComments extends Component {
             className="postAddCommentInput postAddCommentText"
             type="textarea"
             placeholder="Add a comment..."
+            rows="1"
           />
           <Input
             className="postAddCommentInput postAddCommentSubmit"
