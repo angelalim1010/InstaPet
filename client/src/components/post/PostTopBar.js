@@ -6,16 +6,19 @@ class PostTopBar extends Component {
   constructor(props) {
     super(props);
   }
+
+  displayTopBar = () => {
+    if (this.props.userName) {
+      return (
+        <b>
+          <Link to={this.props.userName}>{this.props.userName}</Link>
+        </b>
+      );
+    }
+  };
+
   render() {
-    return (
-      <div className="postTopBar">
-        <p>
-          <b>
-            <Link to={this.props.userName}>{this.props.userName}</Link>
-          </b>
-        </p>
-      </div>
-    );
+    return <div className="postTopBar">{this.displayTopBar()}</div>;
   }
 }
 

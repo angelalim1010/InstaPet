@@ -5,7 +5,7 @@
 }
 
 a {
-  color: black;
+  color: #000;
 }
 
 a:hover {
@@ -13,7 +13,7 @@ a:hover {
 }
 
 .noPosts {
-  background-color: white;
+  background-color: #fff;
   text-align: center;
   padding-top: 200px;
 }
@@ -52,7 +52,6 @@ a:hover {
 }
 
 .postImage {
-  background-color: lightcoral;
   max-height: 750px;
 }
 
@@ -91,6 +90,7 @@ a:hover {
 }
 
 .postAddComment .postAddCommentText {
+  display: inline-block;
   width: 95%;
   font-size: 14px;
   line-height: 18px;
