@@ -27,6 +27,10 @@ class PostTimestamp extends Component {
     this.calculateTime();
   };
 
+  componentWillUnmount = () => {
+    clearInterval(this.state.interval);
+  };
+
   calculateTime = () => {
     const ONE_SECOND = 1000; // 1 second = 1000 milliseconds
     const ONE_MINUTE = ONE_SECOND * 60;
