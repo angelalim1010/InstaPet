@@ -27,10 +27,6 @@ class NavBar extends Component {
             <Input type="text" placeholder="Search" />
           </Form>
 
-          <div className="navBarCreate navBarItem">
-            <Link to="/create">Create Post</Link>
-          </div>
-
           <div className="navBarProfile navBarItem">
             <Link to="/">Profile</Link>
           </div>
