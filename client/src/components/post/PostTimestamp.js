@@ -4,6 +4,31 @@ import { connect } from "react-redux";
 class Postdifference extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      // postedTime: Date.parse(this.props.createdAt),
+      postedTime: Date.now(),
+      timeAgo: 0
+    };
+  }
+
+  componentDidMount = () => {
+    let currentTime = new Date().getTime();
+    let millisecondsAgo = currentTime - this.state.postedTime;
+    this.setState({
+      timeAgo: millisecondsAgo
+    });
+
+    this.interval = setInterval(
+      () =>
+        this.setState(prevState => ({
+          timeAgo: prevState.timeAgo + 1000 // Every second, 60 milliseconds will be added to timeAgo
+        })),
+      1000
+    );
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   displayDifference = () => {
@@ -12,16 +37,18 @@ class Postdifference extends Component {
     const ONE_HOUR = ONE_MINUTE * 60;
     const ONE_DAY = ONE_HOUR * 24;
     const ONE_WEEK = ONE_DAY * 7;
-    let postedTime = Date.parse(this.props.createdAt);
-    let postedTimeISO = new Date(postedTime).toISOString();
-    let currentTime = new Date().getTime();
-    let difference = currentTime - postedTime;
-    let weeksAgo = Math.floor(difference / ONE_WEEK);
-    let daysAgo = Math.floor(difference / ONE_DAY);
-    let hoursAgo = Math.floor(difference / ONE_HOUR);
-    let minutesAgo = Math.floor(difference / ONE_MINUTE);
-    let secondsAgo = Math.floor(difference / ONE_SECOND);
+
+    let postedTimeISO = new Date(this.state.postedTime).toISOString();
+    let postedTimeDate = new Date(this.state.postedTime).toDateString();
+
+    let weeksAgo = Math.floor(this.state.timeAgo / ONE_WEEK);
+    let daysAgo = Math.floor(this.state.timeAgo / ONE_DAY);
+    let hoursAgo = Math.floor(this.state.timeAgo / ONE_HOUR);
+    let minutesAgo = Math.floor(this.state.timeAgo / ONE_MINUTE);
+    let secondsAgo = Math.floor(this.state.timeAgo / ONE_SECOND);
+
     let timestamp = 0;
+
     if (weeksAgo >= 1) {
       timestamp = weeksAgo;
       if (weeksAgo === 1) {
@@ -50,6 +77,8 @@ class Postdifference extends Component {
       } else {
         timestamp += " minutes ago";
       }
+    } else if (secondsAgo < 1) {
+      timestamp = "less than 1 second ago";
     } else if (secondsAgo >= 1) {
       timestamp = secondsAgo;
       if (secondsAgo === 1) {
@@ -58,7 +87,12 @@ class Postdifference extends Component {
         timestamp += " seconds ago";
       }
     }
-    return <time datetime={postedTimeISO}>{timestamp}</time>;
+
+    return (
+      <time datetime={postedTimeISO} title={postedTimeDate}>
+        {timestamp}
+      </time>
+    );
   };
 
   render() {
