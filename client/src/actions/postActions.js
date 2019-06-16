@@ -8,6 +8,13 @@ const fetchAllPosts = posts => {
   };
 };
 
+const createPost = post => {
+  return {
+    type: CREATE_POST,
+    payload: post
+  };
+};
+
 // const likePost = post => {
 //     return {
 //         type: LIKE_POST,
@@ -20,6 +27,14 @@ export const fetchAllPostsThunk = () => dispatch => {
     .get(`/p/`)
     .then(res => res.data)
     .then(posts => dispatch(fetchAllPosts(posts)))
+    .catch(err => console.log(err));
+};
+
+export const createPostThunk = post => dispatch => {
+  return axios
+    .post(`/p/`, post)
+    .then(res => res.data)
+    .then(post => dispatch(createPost(post)))
     .catch(err => console.log(err));
 };
 
