@@ -8,6 +8,12 @@ a {
   text-decoration: none;
 }
 
+.noPosts {
+  background-color: white;
+  text-align: center;
+  padding-top: 200px;
+}
+
 .post {
   width: 600px;
   margin: 25px auto;

@@ -15,7 +15,11 @@ class AllPosts extends Component {
 
   displayPosts = () => {
     if (this.props.post.posts.length === 0) {
-      return <p>No Posts Avaliable</p>;
+      return (
+        <div className="noPosts">
+          <h2>Loading Posts...</h2>
+        </div>
+      );
     } else {
       return (
         <div className="allPosts">
