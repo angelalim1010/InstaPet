@@ -59,14 +59,40 @@ a {
   padding: -10px;
 }
 
-.postAddComment .postAddCommentInput {
-  width: 90%;
+.postAddComment {
+  padding: 10px 15px;
+  border-top: 1px solid #efefef;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.postAddCommentForm {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  vertical-align: baseline;
+}
+
+.postAddComment .postAddCommentInput,
+.postAddComment .postAddCommentInput:active {
+  border: none;
+  box-shadow: none;
+}
+
+.postAddComment .postAddCommentText {
+  width: 95%;
+  font-size: 14px;
+  line-height: 18px;
+  min-height: 18px;
+  resize: none;
+  color: #999;
 }
 
 .postAddComment .postAddCommentSubmit {
-  width: 10%;
-}
-
-.postAddComment .input-group-text {
-  width: 100%;
+  width: 5%;
+  color: #3897f0;
+  font-weight: 600;
+  font-size: 14px;
 }
