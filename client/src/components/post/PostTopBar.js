@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class PostTopBar extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class PostTopBar extends Component {
     return (
       <div className="postTopBar">
         <p>
-          <b>{this.props.userName}</b>
+          <b>
+            <Link to={this.props.userName}>{this.props.userName}</Link>
+          </b>
         </p>
       </div>
     );

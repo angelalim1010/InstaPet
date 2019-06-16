@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Comment extends Component {
   constructor(props) {
@@ -9,9 +10,10 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <p>
-          <b>{this.props.userName}</b> {this.props.content}
-        </p>
+        <b>
+          <Link to={this.props.userName}>{this.props.userName}</Link>
+        </b>
+        {this.props.content}
       </div>
     );
   }
