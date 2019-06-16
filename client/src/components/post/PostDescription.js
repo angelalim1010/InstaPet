@@ -10,14 +10,23 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      likeStatus: false
+      likeStatus: false,
+      likeCount: this.props.likes.length
     };
   }
 
-  toggleLikeStatus = e => {
-    this.setState(prevState => ({
-      likeStatus: !prevState.likeStatus
-    }));
+  toggleLikeStatus = () => {
+    if (!this.state.likeStatus) {
+      this.setState(prevState => ({
+        likeStatus: !prevState.likeStatus,
+        likeCount: prevState.likeCount + 1
+      }));
+    } else {
+      this.setState(prevState => ({
+        likeStatus: !prevState.likeStatus,
+        likeCount: prevState.likeCount - 1
+      }));
+    }
   };
 
   displayLikeStatus = () => {
@@ -41,10 +50,10 @@ class PostDescription extends Component {
   };
 
   displayLikeCount = () => {
-    if (this.props.likes.length === 1) {
+    if (this.state.likeCount === 1) {
       return `1 like`;
     } else {
-      return `${this.props.likes.length} likes`;
+      return `${this.state.likeCount} likes`;
     }
   };
 

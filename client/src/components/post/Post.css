@@ -44,6 +44,7 @@ a {
 .postLikeStatus {
   font-size: 24px;
   margin-top: 8px;
+  user-select: none;
 }
 
 .postLikeStatusFull {
