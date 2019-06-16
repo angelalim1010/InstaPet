@@ -1,45 +1,58 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, DataTypes) => {
     return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       userName: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+		allowNull: false,
+		  validate: {
+			  notEmpty: true
+		  }
       },
       name: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+		allowNull: false,
+		  validate: {
+			  notEmpty: true
+		  }
       },
       profilePicture: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+		allowNull: true,
       },
       bio: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+		allowNull: true
       },
       posts: {
-        type: Sequelize.ARRAY
+        type: DataTypes.ARRAY,
+		allowNull: true
       },
       followers: {
-        type: Sequelize.ARRAY
+		  type: DataTypes.ARRAY,
+		  allowNull: true
       },
       following: {
-        type: Sequelize.ARRAY
+        type: DataTypes.ARRAY,
+		allowNull: true
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+	down: (queryInterface/* , DataTypes */) => {
     return queryInterface.dropTable('Users');
   }
 };
