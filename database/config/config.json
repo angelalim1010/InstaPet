@@ -3,9 +3,9 @@
     "use_env_variable": "DATABASE_URL"
   },
   "test": {
-    "username": "postgres",
+    "username": "root",
     "password": null,
-    "database": "insta-pet",
+    "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false

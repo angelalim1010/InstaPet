@@ -12,7 +12,7 @@ export default class UserProfile extends Component {
       name: "Bob Anderson",
       nickname: "Bob the great",
       email: "blah@mcblah.com",
-      imageURL: "../../img/fetchDog.png",
+      imageUrl: "../../img/fetchDog.png",
       bio: "I am cool , follow me :)",
       followers: 5,
       following: 5
@@ -26,7 +26,7 @@ export default class UserProfile extends Component {
           <div className="col-sm-6">
             <h1>@{this.state.nickname}</h1>
             <h2 className="name">{this.state.name}</h2>
-            <img src={this.state.imageURL} alt="profile" />
+            <img src={this.state.imageUrl} alt="profile" />
             <a href="#">Edit Profile</a>
           </div>
           <div className="col-sm-6">
@@ -54,7 +54,7 @@ UserProfile.propTypes = {
   name: PropTypes.string,
   nickname: PropTypes.string,
   email: PropTypes.string,
-  imageURL: PropTypes.string,
+  imageUrl: PropTypes.string,
   bio: PropTypes.string,
   followers: PropTypes.number,
   following: PropTypes.string
