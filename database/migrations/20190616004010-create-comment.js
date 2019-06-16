@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Comments", {
+    return queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,17 +10,17 @@ module.exports = {
       },
       userId: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+		allowNull: false,
+		  validate: {
+			  notEmpty: true
+		  }
       },
       content: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+		allowNull: false,
+		  validate: {
+			  notEmpty: true
+		  }
       },
       createdAt: {
         allowNull: false,
@@ -32,7 +32,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /*, DataTypes*/) => {
-    return queryInterface.dropTable("Comments");
+	down: (queryInterface/*, DataTypes*/) => {
+    return queryInterface.dropTable('Comments');
   }
 };

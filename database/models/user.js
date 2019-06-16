@@ -27,17 +27,17 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     posts: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY,
       allowNull: true
     },
 
     followers: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY,
       allowNull: true
     },
 
     following: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY,
       allowNull: true
     }
   });
