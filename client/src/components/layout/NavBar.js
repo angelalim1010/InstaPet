@@ -14,7 +14,7 @@ class NavBar extends Component {
       <div className="navBar">
         <div className="navBarItems">
           <div className="navBarLogo navBarItem">
-            <Link to="/">Logo</Link>
+            <Link to="/"><img src = {require("../../img/logo.png")}width={150} height ={60}></img></Link>
           </div>
 
           <Form className="navBarSearch navBarItem">
