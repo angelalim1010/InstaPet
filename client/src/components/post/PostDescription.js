@@ -1,27 +1,60 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comment from "./Comment";
-import { Button } from "reactstrap";
 // import { likePostThunk } from "../../actions/postActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
 
 class PostDescription extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      likeStatus: false
+    };
   }
+
+  toggleLikeStatus = e => {
+    this.setState(prevState => ({
+      likeStatus: !prevState.likeStatus
+    }));
+  };
+
+  displayLikeStatus = () => {
+    if (this.state.likeStatus) {
+      return (
+        <FontAwesomeIcon
+          className="postLikeStatus postLikeStatusFull"
+          icon={faHeartFull}
+          onClick={this.toggleLikeStatus}
+        />
+      );
+    } else {
+      return (
+        <FontAwesomeIcon
+          className="postLikeStatus postLikeStatusEmpty"
+          icon={faHeartEmpty}
+          onClick={this.toggleLikeStatus}
+        />
+      );
+    }
+  };
 
   displayLikeCount = () => {
     if (this.props.likes.length === 1) {
-      return <p className="postLikes">1 like</p>;
+      return `1 like`;
     } else {
-      return <p className="postLikes">{this.props.likes.length} likes </p>;
+      return `${this.props.likes.length} likes`;
     }
   };
 
   render() {
     return (
       <div className="postDescription">
-        {/* <Button onClick={() => this.props.likePost(this.props.id)}>Like</Button> */}
-        {this.displayLikeCount()}
+        <div>{this.displayLikeStatus()}</div>
+        <div className="postLikeCount">
+          <b>{this.displayLikeCount()}</b>
+        </div>
         <Comment
           className="postCaption"
           userName={this.props.userName}
