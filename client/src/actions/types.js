@@ -1,7 +1,5 @@
 // POSTS
-
-export const GET_PETS = "GET_PETS";
-export const GET_POSTS = "GET_POSTS";
+export const FETCH_ALL_POSTS = "FETCH_ALL_POSTS";
 export const ADD_POST = "ADD_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const LIKE_POST = "LIKE_POST";

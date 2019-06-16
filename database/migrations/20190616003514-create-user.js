@@ -31,7 +31,6 @@ module.exports = {
         allowNull: true
       },
       posts: {
-<<<<<<< HEAD
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: true
       },
@@ -41,17 +40,6 @@ module.exports = {
       },
       following: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
-=======
-        type: DataTypes.ARRAY,
-        allowNull: true
-      },
-      followers: {
-        type: DataTypes.ARRAY,
-        allowNull: true
-      },
-      following: {
-        type: DataTypes.ARRAY,
->>>>>>> 8bb6a6c... Merge pull request #13 from angelalim1010/Controllers
         allowNull: true
       },
       createdAt: {
