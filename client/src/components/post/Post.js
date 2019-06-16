@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./Post.css";
 import PostTopBar from "./PostTopBar";
 import PostImage from "./PostImage";
 import PostDescription from "./PostDescription";
 import PostComments from "./PostComments";
+import PostTimestamp from "./PostTimestamp";
 import PostAddComment from "./PostAddComment";
-import { Form, Input } from "reactstrap";
 
 class Post extends Component {
   constructor(props) {
@@ -28,6 +27,7 @@ class Post extends Component {
             caption={this.props.post.caption}
           />
           <PostComments comments={this.props.post.comments} />
+          <PostTimestamp createdAt={this.props.post.createdAt} />
           <PostAddComment />
         </div>
       );
@@ -41,7 +41,9 @@ class Post extends Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

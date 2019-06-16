@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comment from "./Comment";
-// import { likePostThunk } from "../../actions/postActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
@@ -79,9 +78,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {
-    // likePost: postId => dispatch(likePostThunk(postId))
-  };
+  return {};
 };
 export default connect(
   mapStateToProps,

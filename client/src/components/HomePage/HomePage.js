@@ -19,7 +19,9 @@ class HomePage extends Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

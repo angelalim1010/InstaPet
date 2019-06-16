@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Comment from "./Comment";
 import { connect } from "react-redux";
 import { Form, Input } from "reactstrap";
 
@@ -31,7 +30,9 @@ class PostComments extends Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

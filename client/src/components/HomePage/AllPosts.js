@@ -20,7 +20,7 @@ class AllPosts extends Component {
       return (
         <div className="allPosts">
           {this.props.post.posts.map(post => {
-            return <Post post={post} />;
+            return <Post post={post} key={post.id} />;
           })}
         </div>
       );

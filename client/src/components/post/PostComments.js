@@ -22,10 +22,13 @@ class PostComments extends Component {
         {this.displayViewAllComments()}
         {this.props.comments.map(comment => {
           return (
-            <Comment userName={comment.userName} content={comment.content} />
+            <Comment
+              userName={comment.userName}
+              content={comment.content}
+              key={comment.id}
+            />
           );
         })}
-        <i>12 minutes ago</i>
       </div>
     );
   }
@@ -33,7 +36,9 @@ class PostComments extends Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

@@ -28,7 +28,9 @@ const posts = [
         content: "!!!!!!!!!!"
       }
     ],
-    tags: ["dog", "pet", "cute", "aww"]
+    tags: ["dog", "pet", "cute", "aww"],
+    createdAt: "2019-06-15 15:54:06 +0000",
+    updatedAt: "2019-06-15 15:54:06 +0000"
   },
   {
     id: 2,
@@ -39,13 +41,15 @@ const posts = [
     caption: "Gatto",
     comments: [
       {
-        id: 1,
+        id: 4,
         userId: 5,
         userName: "billy",
         content: "Congratulations!"
       }
     ],
-    tags: ["cat", "pet", "cute", "aww"]
+    tags: ["cat", "pet", "cute", "aww"],
+    createdAt: "2019-06-14 21:54:06 +0000",
+    updatedAt: "2019-06-14 21:54:06 +0000"
   },
   {
     id: 3,
@@ -56,7 +60,9 @@ const posts = [
     likes: [],
     caption: "Moo",
     comments: [],
-    tags: ["cow", "pet", "cute", "aww"]
+    tags: ["cow", "pet", "cute", "aww"],
+    createdAt: "2019-06-13 21:54:06 +0000",
+    updatedAt: "2019-06-13 21:54:06 +0000"
   }
 ];
 
