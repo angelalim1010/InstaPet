@@ -1,8 +1,8 @@
-import { GET_POSTS, ADD_POST, REMOVE_POST, LIKE_POST } from "../actions/types";
-import posts from "../data/sampleData";
+import { GET_PETS, GET_POSTS, ADD_POST, REMOVE_POST } from "../actions/types";
 
 const initialState = {
-  posts: posts
+  posts: [],
+  post: {}
 };
 
 export default (state = initialState, action) => {
@@ -16,18 +16,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: [action.payload, ...state.posts]
-      };
-    case LIKE_POST:
-      let targetPostId = action.payload;
-      let updatedPostArray = state.posts;
-      let indexOfTargetPost = updatedPostArray.findIndex(
-        post => post.id === targetPostId
-      );
-      updatedPostArray[indexOfTargetPost].likes =
-        state.posts[indexOfTargetPost].likes + 1;
-      return {
-        ...state,
-        posts: updatedPostArray
       };
     case REMOVE_POST:
       // TO BE IMPLEMENTED

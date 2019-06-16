@@ -1,46 +1,24 @@
-import React, { Component } from "react";
-import Comment from "./Comment";
-import { connect } from "react-redux";
+import React from "react";
 
-class PostComments extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  displayViewAllComments = () => {
-    if (this.props.comments.length === 0) {
-      return <div className="postCommentsNone" />;
-    }
-    if (this.props.comments.length >= 3) {
-      return <i>View all {this.props.comments.length} comments</i>;
-    }
-  };
-
-  render() {
-    return (
-      <div className="postComments">
-        {this.displayViewAllComments()}
-        {this.props.comments.map(comment => {
-          return (
-            <Comment
-              userName={comment.userName}
-              content={comment.content}
-              key={comment.id}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => {
-  return {};
+const PostComments = props => {
+  const {} = props;
+  return (
+    <div className="postComments">
+      <p>
+        <b>user.username</b> Lorem ipsum Consequat nulla labore laborum nulla
+        sit ad esse eiusmod fugiat aliquip consectetur mollit.
+      </p>
+      <p>
+        <i>View all #### comments</i>
+      </p>
+      <p>Map the comments array for this postId:</p>
+      <p>
+        <b>user.username</b> Lorem ipsum Consequat nulla labore laborum nulla
+        sit ad esse eiusmod fugiat aliquip consectetur mollit.
+      </p>
+      <p>Add a comment... button for post</p>
+    </div>
+  );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostComments);
+export default PostComments;

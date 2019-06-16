@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "deploy": "bash script/deploy"
   },
   "dependencies": {
@@ -20,8 +20,5 @@
     "reactstrap": "^8.0.0",
     "sequelize": "^5.8.9",
     "sequelize-cli": "^5.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
   }
 }
