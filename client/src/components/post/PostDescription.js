@@ -10,6 +10,7 @@ class PostDescription extends Component {
     super(props);
     this.state = {
       likeStatus: false,
+      likes: this.props.likes,
       likeCount: this.props.likes.length
     };
   }

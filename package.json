@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix client",
+    "client-install": "cd client && npm install && cd ..",
+    "server": "nodemon ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "bash script/deploy"
   },
   "dependencies": {
@@ -20,10 +24,11 @@
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "reactstrap": "^8.0.0",
-    "sequelize": "^5.8.9",
-    "sequelize-cli": "^5.5.0"
+    "sequelize": "^5.8.9"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.1",
+    "sequelize-cli": "^5.5.0"
   }
 }
