@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 class PostTimestamp extends Component {
   constructor(props) {
     super(props);
+    this.interval = null;
     this.state = {
-      // postedTime: Date.parse(this.props.createdAt),
+      postedTime: Date.parse(this.props.createdAt),
       postedTime: Date.now(),
       timeAgo: 0,
       weeksAgo: 0,
@@ -13,22 +14,22 @@ class PostTimestamp extends Component {
       hoursAgo: 0,
       minutesAgo: 0,
       secondsAgo: 0,
-      timestamp: "just now",
-      interval: null
+      timestamp: "just now"
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let currentTime = new Date().getTime();
     let millisecondsAgo = currentTime - this.state.postedTime;
-    this.setState({
-      timeAgo: millisecondsAgo
+    await this.setState({
+      //timeAgo: millisecondsAgo
+      timeAgo: 50000
     });
     this.calculateTime();
   };
 
   componentWillUnmount = () => {
-    clearInterval(this.state.interval);
+    clearInterval(this.interval);
   };
 
   calculateTime = () => {
@@ -44,6 +45,7 @@ class PostTimestamp extends Component {
     let minutesAgo = Math.floor(this.state.timeAgo / ONE_MINUTE);
     let secondsAgo = Math.floor(this.state.timeAgo / ONE_SECOND);
 
+    // Sets how many units of time it has been since the post was created
     this.setState({
       weeksAgo: weeksAgo,
       daysAgo: daysAgo,
@@ -52,38 +54,17 @@ class PostTimestamp extends Component {
       secondsAgo: secondsAgo
     });
 
-    // If the post was created less than a minute ago, tick every second
-    if (this.state.secondsAgo < 60) {
-      this.state.interval = setInterval(() => {
-        this.updateState("everySecond", ONE_SECOND);
-        this.setTimestamp();
-        if (this.state.secondsAgo === 60) {
-          clearInterval(this.state.interval);
-        }
-      }, ONE_SECOND);
-    }
+    // Sets the initial timestamp immediately after calculations
+    this.setTimestamp();
 
-    // If the post was created less than an hour ago, tick every minute
-    if (this.state.minutesAgo < 60) {
-      this.interval = setInterval(() => {
+    // Tick every second
+    this.interval = setInterval(() => {
+      this.updateState("everySecond", ONE_SECOND);
+      this.setTimestamp();
+      if ((this.state.secondsAgo + 1) % 60 == 0) {
         this.updateState("everyMinute", ONE_MINUTE);
-        this.setTimestamp();
-        if (this.state.minutesAgo === 60) {
-          clearInterval(this.state.interval);
-        }
-      }, ONE_MINUTE);
-    }
-
-    // If the post was created less than a day ago, tick every hour
-    if (this.state.hoursAgo < 24) {
-      this.interval = setInterval(() => {
-        this.updateState("everyHour", ONE_HOUR);
-        this.setTimestamp();
-        if (this.state.hoursAgo === 24) {
-          clearInterval(this.state.interval);
-        }
-      }, ONE_HOUR);
-    }
+      }
+    }, ONE_SECOND);
   }; // End calculateTime
 
   updateState = (interval, timeUnit) => {
@@ -98,12 +79,6 @@ class PostTimestamp extends Component {
         this.setState(prevState => ({
           timeAgo: prevState.timeAgo + timeUnit, // Every minute, a minute (in milliseconds) will be added to timeAgo
           minutesAgo: prevState.minutesAgo + 1
-        }));
-        break;
-      case "everyHour":
-        this.setState(prevState => ({
-          timeAgo: prevState.timeAgo + timeUnit, // Every hour, an hour (in milliseconds) will be added to timeAgo
-          hoursAgo: prevState.hoursAgo + 1
         }));
         break;
     }

@@ -16,18 +16,24 @@ class PostComments extends Component {
     }
   };
 
+  displayComment = comment => {
+    return (
+      <Comment
+        userName={comment.userName}
+        content={comment.content}
+        key={comment.id}
+      />
+    );
+  };
+
   render() {
     return (
       <div className="postComments">
         {this.displayViewAllComments()}
         {this.props.comments.map(comment => {
-          return (
-            <Comment
-              userName={comment.userName}
-              content={comment.content}
-              key={comment.id}
-            />
-          );
+          {
+            this.displayComment(comment);
+          }
         })}
       </div>
     );

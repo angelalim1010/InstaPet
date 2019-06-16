@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPostsThunk } from "../../actions/postActions";
+import { fetchAllPostsThunk } from "../../actions/postActions";
 import Post from "../post/Post";
 
 class AllPosts extends Component {
@@ -10,12 +10,16 @@ class AllPosts extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getPosts();
+    this.props.fetchAllPosts();
   };
 
   displayPosts = () => {
     if (this.props.post.posts.length === 0) {
-      return <p>No Posts Avaliable</p>;
+      return (
+        <div className="noPosts">
+          <h2>Loading Posts...</h2>
+        </div>
+      );
     } else {
       return (
         <div className="allPosts">
@@ -38,7 +42,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: () => dispatch(getPostsThunk())
+    fetchAllPosts: () => dispatch(fetchAllPostsThunk())
   };
 };
 

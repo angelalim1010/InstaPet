@@ -11,23 +11,35 @@ import PostAddComment from "./PostAddComment";
 class Post extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      post: this.props.post
+    };
   }
 
+  componentDidMount = () => {
+    this.setState(prevState => ({
+      post: {
+        ...prevState.post,
+        userName: "userName"
+      }
+    }));
+  };
+
   displayPost = () => {
-    if (!this.props.post) {
+    if (!this.state.post) {
       return <div />;
     } else {
       return (
         <div className="post">
-          <PostTopBar userName={this.props.post.userName} />
-          <PostImage imageURL={this.props.post.imageURL} />
+          <PostTopBar userName={this.state.post.userName} />
+          <PostImage imageURL={this.state.post.imageURL} />
           <PostDescription
-            likes={this.props.post.likes}
-            userName={this.props.post.userName}
-            caption={this.props.post.caption}
+            likes={this.state.post.likes}
+            userName={this.state.post.userName}
+            caption={this.state.post.caption}
           />
-          <PostComments comments={this.props.post.comments} />
-          <PostTimestamp createdAt={this.props.post.createdAt} />
+          <PostComments comments={this.state.post.comments} />
+          <PostTimestamp createdAt={this.state.post.createdAt} />
           <PostAddComment />
         </div>
       );

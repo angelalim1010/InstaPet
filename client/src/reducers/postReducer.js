@@ -1,18 +1,22 @@
-import { GET_POSTS, ADD_POST, REMOVE_POST, LIKE_POST } from "../actions/types";
-import posts from "../data/sampleData";
+import {
+  FETCH_ALL_POSTS,
+  CREATE_POST,
+  DELETE_POST,
+  LIKE_POST
+} from "../actions/types";
 
 const initialState = {
-  posts: posts
+  posts: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_POSTS:
+    case FETCH_ALL_POSTS:
       return {
         ...state,
         posts: action.payload
       };
-    case ADD_POST:
+    case CREATE_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts]
@@ -29,7 +33,7 @@ export default (state = initialState, action) => {
         ...state,
         posts: updatedPostArray
       };
-    case REMOVE_POST:
+    case DELETE_POST:
       // TO BE IMPLEMENTED
       return {
         ...state

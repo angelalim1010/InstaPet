@@ -7,6 +7,10 @@ class PostComments extends Component {
     super(props);
   }
 
+  handleSubmit = e => {
+    e.preventDefault();
+  };
+
   render() {
     return (
       <div className="postAddComment">
@@ -21,6 +25,7 @@ class PostComments extends Component {
             className="postAddCommentInput postAddCommentSubmit"
             type="submit"
             value="Post"
+            onClick={this.handleSubmit}
           />
         </Form>
       </div>
