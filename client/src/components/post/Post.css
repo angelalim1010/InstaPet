@@ -60,19 +60,13 @@ a {
 }
 
 .postAddComment {
-  padding: 10px 15px;
+  padding: 18.5px 16px;
   border-top: 1px solid #efefef;
-  display: flex;
-  align-items: stretch;
-  flex-shrink: 0;
-  position: relative;
 }
 
 .postAddCommentForm {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  vertical-align: baseline;
 }
 
 .postAddComment .postAddCommentInput,
@@ -87,7 +81,6 @@ a {
   line-height: 18px;
   min-height: 18px;
   resize: none;
-  color: #999;
 }
 
 .postAddComment .postAddCommentSubmit {
@@ -95,4 +88,6 @@ a {
   color: #3897f0;
   font-weight: 600;
   font-size: 14px;
+  line-height: 18px;
+  height: 18px;
 }
