@@ -28,7 +28,9 @@ module.exports = {
       },
       // An array of the userIds who liked this post
       likes: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER)
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        allowNull: false,
+        defaultValue: []
       },
       // A string of the post's caption
       caption: {
@@ -36,11 +38,15 @@ module.exports = {
       },
       // An array of the commentIds that belong to this post
       comments: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER)
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        allowNull: false,
+        defaultValue: []
       },
       // An array of the tags that belong to this post
       tags: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+        defaultValue: []
       },
       // The date when the post was created
       createdAt: {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ALL_POSTS, ADD_POST, REMOVE_POST } from "./types";
+import { FETCH_ALL_POSTS, CREATE_POST, DELETE_POST } from "./types";
 
 const fetchAllPosts = posts => {
   return {

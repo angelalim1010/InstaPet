@@ -1,7 +1,7 @@
 import {
   FETCH_ALL_POSTS,
-  ADD_POST,
-  REMOVE_POST,
+  CREATE_POST,
+  DELETE_POST,
   LIKE_POST
 } from "../actions/types";
 
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         ...state,
         posts: action.payload
       };
-    case ADD_POST:
+    case CREATE_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts]
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
         ...state,
         posts: updatedPostArray
       };
-    case REMOVE_POST:
+    case DELETE_POST:
       // TO BE IMPLEMENTED
       return {
         ...state
