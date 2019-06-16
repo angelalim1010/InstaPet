@@ -7,7 +7,6 @@ class PostTimestamp extends Component {
     this.interval = null;
     this.state = {
       postedTime: Date.parse(this.props.createdAt),
-      postedTime: Date.now(),
       timeAgo: 0,
       weeksAgo: 0,
       daysAgo: 0,
@@ -22,8 +21,7 @@ class PostTimestamp extends Component {
     let currentTime = new Date().getTime();
     let millisecondsAgo = currentTime - this.state.postedTime;
     await this.setState({
-      //timeAgo: millisecondsAgo
-      timeAgo: 50000
+      timeAgo: millisecondsAgo
     });
     this.calculateTime();
   };

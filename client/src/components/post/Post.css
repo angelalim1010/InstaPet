@@ -105,18 +105,53 @@ a:hover {
   height: 18px;
 }
 
-.createPost * {
+.createPostFormToggleButton {
+  display: block;
+  margin: 50px auto;
+  width: 200px;
+  background-color: lightgreen;
+  color: black;
+  padding: 10px;
+}
+
+.createPostForm * {
   text-align: center;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.createPost .createPostForm {
+.createPostForm {
   width: 600px;
   margin: 100px auto;
 }
 
-.createPostSubmit {
+.createPostForm .createPostSubmit {
   background-color: lightskyblue;
+}
+
+.createPostForm {
+  width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 50px;
+  background-color: lightskyblue;
+  border-radius: 25px;
+}
+
+.createPostForm h1 {
+  padding-bottom: 25px;
+}
+
+.createPostForm input {
+  text-align: center;
+  border-radius: 3px;
+  background-color: #dadada;
+  border: 1px solid black;
+  color: black;
+  margin: 5px auto;
+}
+
+.createPostForm input[type="submit"] {
+  background-color: lightgreen;
 }
