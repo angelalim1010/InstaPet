@@ -13,12 +13,8 @@ class PostTopBar extends Component {
     if (this.props.userName) {
       return (
         <b>
-<<<<<<< HEAD
-          <Link to={this.props.userName}>{this.props.userName}</Link>
-          <Button onClick={() => this.props.deletePost(this.props.postId)}>Delete</Button>
-=======
           <Link to="/profile">{this.props.userName}</Link>
->>>>>>> 18733a12b6a9fbf184622280b8b95f771e925b19
+          <Button onClick={() => this.props.deletePost(this.props.postId)}>Delete</Button>
         </b>
       );
     }
