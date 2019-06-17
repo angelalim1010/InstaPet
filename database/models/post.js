@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     // A string of the URL containing the image
     imageURL: {
       type: DataTypes.STRING,
-      defaultValue: "/img/default_student.jpg",
       allowNull: false,
       validate: {
         notEmpty: true

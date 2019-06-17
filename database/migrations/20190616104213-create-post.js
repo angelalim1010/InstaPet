@@ -15,12 +15,17 @@ module.exports = {
         allowNull: false,
         validate: {
           notEmpty: true
+        },
+        onDelete: "CASCADE",
+        references: {
+          model: "Users",
+          key: "id",
+          as: "userId"
         }
       },
       // A string of the URL containing the image
       imageURL: {
         type: DataTypes.STRING,
-        defaultValue: "/img/default_student.jpg",
         allowNull: false,
         validate: {
           notEmpty: true
@@ -53,7 +58,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       },
-      // The date when the post was updated/edited
+      // The date when the post was last updated
       updatedAt: {
         allowNull: false,
         type: DataTypes.DATE
