@@ -13,11 +13,17 @@ module.exports = app => {
    *  USER ROUTES
    */
 
-  app.post('/api/instaPet', UsersController.create);
+  app.get('/api/instaPet/users', UsersController.list);
+  app.post('/api/instaPet/users', UsersController.create);
+  app.put('/api/instaPet/users/:userId', UsersController.update);
+  app.delete('/api/instaPet/users/:userId', UsersController.destroy);
 
   /**
    *  COMMENT ROUTES
    */
+
+  app.post('/api/instaPet/comments', CommentsController.create);
+  app.delete('/api/instaPet/comments/:userId', CommentsController.delete);
 
   /**
    * POST ROUTES

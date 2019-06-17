@@ -3,7 +3,7 @@ const Comment = require('../models').Comment;
 module.exports = {
   create(req, res) {
     return Comment.create(req.body)
-      .then(comment => res.status(201).json(comment))
+      .then(comment => res.status(200).json(comment))
       .catch(err => res.status(400).json(err));
   },
   delete(req, res) {

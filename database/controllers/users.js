@@ -3,7 +3,14 @@ const User = require('../models').User;
 module.exports = {
   create(req, res) {
     return User.create(req.body)
-      .then(user => res.status(201).json(user))
+      .then(user => res.status(200).json(user))
+      .catch(err => res.status(400).json(err));
+  },
+  list(req, res) {
+    return User.findAll({
+      order: [['id', 'DESC']]
+    })
+      .then(users => res.status(200).json(users))
       .catch(err => res.status(400).json(err));
   },
   update(req, res) {
