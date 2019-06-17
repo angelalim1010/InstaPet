@@ -64,4 +64,20 @@ const removeUserPost = postId => {
 
 // USER THUNKS
 
+export const getUsersThunk = () => dispatch => {
+  return axios
+    .get(`/accounts/`)
+    .then(res => res.data)
+    .then(users => dispatch(getUsers(users)))
+    .catch(err => console.log(err));
+};
+
+export const addUserThunk = user => dispatch => {
+  return axios
+    .post(`/accounts/`, user)
+    .then(res => res.data)
+    .then(user => dispatch(addUser(user)))
+    .catch(err => console.log(err));
+};
+
 // USER POST THUNKS

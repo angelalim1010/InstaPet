@@ -1,19 +1,25 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 // .env config
-require("dotenv").config();
+require('dotenv').config();
 
 const app = express();
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 
 // Parse requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure routes
-require("./database/routes")(app);
+require('./database/routes')(app);
+
+app.get('*', (req, res) =>
+  res.status(200).send({
+    message: 'Welcome to InstaPet'
+  })
+);
 
 module.exports = app;
