@@ -1,37 +1,31 @@
-const UsersController = require('../controllers').users;
-const CommentsController = require('../controllers').comments;
-const PostsController = require('../controllers').posts;
+const UsersController = require("../controllers").users;
+const CommentsController = require("../controllers").comments;
+const PostsController = require("../controllers").posts;
 
 module.exports = app => {
-  app.get('/api', (req, res) =>
-    res.status(200).send({
-      message: 'InstaPet Api test'
-    })
-  );
-
   /**
    *  USER ROUTES
    */
 
-  app.get('/api/instaPet/users', UsersController.list);
-  app.post('/api/instaPet/users', UsersController.create);
-  app.put('/api/instaPet/users/:userId', UsersController.update);
-  app.delete('/api/instaPet/users/:userId', UsersController.destroy);
+  app.get("/accounts/", UsersController.list);
+  app.post("/accounts/", UsersController.create);
+  app.put("/accounts/:userId", UsersController.update);
+  app.delete("/accounts/:userId", UsersController.destroy);
 
   /**
    *  COMMENT ROUTES
    */
 
-  app.post('/api/instaPet/comments', CommentsController.create);
-  app.delete('/api/instaPet/comments/:userId', CommentsController.delete);
+  app.post("/comments", CommentsController.create);
+  app.delete("/comments/:userId", CommentsController.delete);
 
   /**
    * POST ROUTES
    */
 
   // createPost
-  app.post('/p/', PostsController.create);
+  app.post("/p/", PostsController.create);
 
   // fetchAllPosts
-  app.get('/p/', PostsController.list);
+  app.get("/p/", PostsController.list);
 };

@@ -8,14 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    // A string containing the user's chosen displayName. ie. John Doe
-    displayName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
     // A string containing the user's email
     email: {
       type: DataTypes.STRING,
@@ -31,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    // A string containing the user's chosen displayName. ie. John Doe.
+    // Allowed to be left empty/null
+    displayName: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     // A string containing the imageURL to the user's profilePicture
     profilePicture: {
