@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId', // Post uses the userId to uniquely identify each User
       onDelete: 'CASCADE'
     });
-    Post.hasMany(model.Comment, {
+    Post.hasMany(models.Comment, {
       foreignKey: 'postId'
     });
   };
