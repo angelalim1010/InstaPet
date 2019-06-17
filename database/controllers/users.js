@@ -19,7 +19,7 @@ module.exports = {
         return user
           .destroy()
           .then(() => res.status(200).json(user))
-          .catch(err => res.status(400).send(error));
+          .catch(err => res.status(400).json(err));
       }
     });
   }

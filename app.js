@@ -16,4 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Configure routes
 require('./database/routes')(app);
 
+app.get('*', (req, res) =>
+  res.status(200).send({
+    message: 'Welcome to InstaPet'
+  })
+);
+
 module.exports = app;
