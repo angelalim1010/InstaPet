@@ -12,12 +12,10 @@ class ProfileHeader extends Component {
   render() {
     return (
       <div className="profileHeader">
-        <div className="profilePictureContainer">
-          <img
-            className="profilePicture"
-            src="https://scontent-lga3-1.cdninstagram.com/vp/8f44df3ad8ebaffa965a411c4970749b/5D8063C7/t51.2885-19/s150x150/47694621_2177639972485384_1638061124664426496_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com"
-          />
-        </div>
+        <img
+          className="profilePicture"
+          src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+        />
         <div className="userInfoContainer">
           <div className="userNameFollowStatus">
             <div className="userName">
