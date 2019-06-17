@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import { getUsersThunk } from "../../actions/userActions";
 import "./Login.css"
 import Phone from './Phone'
 class Login extends Component{
@@ -11,6 +14,42 @@ class Login extends Component{
             password: ""
         }
     }
+
+    handleChange = e => {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    };
+
+    handleSubmit = e => {
+      e.preventDefault();
+      if (
+        this.state.password == "" &&
+        this.state.email.match(/\w+@\w+\.(com|edu|org)/)
+      ) {
+        let newUser = {
+          email: this.state.email,
+          password: this.state.password
+        };
+        this.props.getUsers(newUser);
+        this.setAuthSuccess();
+      } else {
+        alert("Incorrect email or password");
+      }
+    };
+
+    setAuthSuccess = () => {
+      this.setState({
+        authSuccess: true
+      });
+    };
+
+    renderRedirect = () => {
+      if (this.state.authSuccess) {
+        return <Redirect to="/" />;
+      }
+    };
+
     render(){
         return(
             <div className = "background">
@@ -19,15 +58,15 @@ class Login extends Component{
                     <h1 className= "title">Instapet</h1>
                     <Form>
                         <FormGroup>
-                          <Input type="email" name="email" className="formbox" placeholder="Email" />
+                          <Input type="email" name="email" className="formbox" placeholder="Email" onChange={this.handleChange}/>
                         </FormGroup>
                         <br></br>
                         <FormGroup>
-                          <Input type="password" name="password" className="formbox" placeholder="Password" />
+                          <Input type="password" name="password" className="formbox" placeholder="Password" onChange={this.handleChange}/>
                         </FormGroup>
                     </Form>
                     <br></br>
-                     <Button className="submit">Log In</Button>
+                     <Button className="submit" onClick={this.handleSubmit}>Log In</Button>
                      <br></br>
                      <div className= "signupbox">
                         Don't have an account? <Link to="/signup">Sign Up</Link>
@@ -39,4 +78,15 @@ class Login extends Component{
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUser: user => dispatch(getUsersThunk(user))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
