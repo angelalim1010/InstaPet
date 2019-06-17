@@ -36,6 +36,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Test heroku post-build script
-
 module.exports = app;
