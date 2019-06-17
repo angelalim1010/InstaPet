@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Input } from "reactstrap";
+import { addCommentThunk } from "../../actions/postActions";
 
 class PostComments extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+
+    };
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    this.props.addComment(this.state.newComment)
   };
 
   render() {
@@ -36,7 +41,9 @@ class PostComments extends Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    addComment: newComment => dispatch(addCommentThunk(newComment))
+  };
 };
 
 export default connect(

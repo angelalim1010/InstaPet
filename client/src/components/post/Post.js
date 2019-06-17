@@ -31,7 +31,7 @@ class Post extends Component {
     } else {
       return (
         <div className="post">
-          <PostTopBar userName={this.state.post.userName} />
+          <PostTopBar userName={this.state.post.userName} postId={this.state.post.id} />
           <PostImage imageURL={this.state.post.imageURL} />
           <PostDescription
             likes={this.state.post.likes}

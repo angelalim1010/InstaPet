@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
+import { deletePostThunk } from "../../actions/postActions";
 
 class PostTopBar extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class PostTopBar extends Component {
       return (
         <b>
           <Link to={this.props.userName}>{this.props.userName}</Link>
+          <Button onClick={() => this.props.deletePost(this.props.postId)}>Delete</Button>
         </b>
       );
     }
@@ -25,7 +28,9 @@ class PostTopBar extends Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    deletePost: postId => dispatch(deletePostThunk(postId))
+  };
 };
 
 export default connect(

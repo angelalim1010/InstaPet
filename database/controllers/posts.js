@@ -13,5 +13,10 @@ module.exports = {
     })
       .then(posts => res.status(200).json(posts))
       .catch(err => res.status(400).json(err));
+  },
+  delete(req, res) {
+    return Post.destroy({ where: { id: req.params.postId } })
+      .then(() => res.status(200).send({ message: 'Deleted Post' }))
+      .catch(error => res.status(400).json(error));
   }
 };

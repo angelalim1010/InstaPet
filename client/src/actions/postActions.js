@@ -56,9 +56,10 @@ export const createPostThunk = post => dispatch => {
 
 export const deletePostThunk = postId => dispatch => {
   return axios
-    .delete(`/p/${postId}`).catch(err => console.log(err))
+    .delete(`/p/${postId}`)
     .then(res => res.data)
-    .then(postId => dispatch(deletePost(postId)));
+    .then(postId => dispatch(deletePost(postId)))
+    .catch(err => console.log(err));
 };
 
 export const likePostThunk = () => dispatch => {

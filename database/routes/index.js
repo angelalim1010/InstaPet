@@ -23,9 +23,7 @@ module.exports = app => {
    * POST ROUTES
    */
 
-  // createPost
   app.post("/p/", PostsController.create);
-
-  // fetchAllPosts
   app.get("/p/", PostsController.list);
+  app.delete("/p/:postId", PostsController.delete);
 };
