@@ -38,6 +38,7 @@ a {
   width: 215px;
   min-width: 125px;
   height: 28px;
+  padding-bottom: 35px;
 }
 
 .navBarSearch input[type="text"] {
