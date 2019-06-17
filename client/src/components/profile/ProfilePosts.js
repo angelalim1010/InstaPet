@@ -37,6 +37,36 @@ class ProfilePosts extends Component {
             src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
           />
         </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
       </div>
     );
   }

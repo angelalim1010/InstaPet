@@ -28,7 +28,7 @@ class NavBar extends Component {
           </Form>
 
           <div className="navBarProfile navBarItem">
-            <Link to="/">Profile</Link>
+            <Link to="/profile">Profile</Link>
           </div>
         </div>
       </div>
