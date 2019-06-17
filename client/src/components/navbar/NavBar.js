@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./NavBar.css";
-import { Form, Input } from "reactstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './NavBar.css';
+import { Form, Input } from 'reactstrap';
 
 class NavBar extends Component {
   constructor(props) {
@@ -16,9 +16,10 @@ class NavBar extends Component {
           <div className="navBarLogo navBarItem">
             <Link to="/">
               <img
-                src={require("../../img/logo.png")}
+                src={require('../../img/logo.png')}
                 width={150}
                 height={60}
+                alt="logo"
               />
             </Link>
           </div>
