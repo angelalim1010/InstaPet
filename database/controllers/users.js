@@ -1,4 +1,4 @@
-const User = require('../models').User;
+const User = require("../models").User;
 
 module.exports = {
   create(req, res) {
@@ -8,7 +8,7 @@ module.exports = {
   },
   list(req, res) {
     return User.findAll({
-      order: [['id', 'DESC']]
+      order: [["id", "DESC"]]
     })
       .then(users => res.status(200).json(users))
       .catch(err => res.status(400).json(err));
@@ -21,7 +21,7 @@ module.exports = {
   destroy(req, res) {
     return User.FindByPk(req.params.id).then(user => {
       if (!user) {
-        return res.status(400).json({ message: 'invalid' });
+        return res.status(400).json({ message: "invalid" });
       } else {
         return user
           .destroy()
