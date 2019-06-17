@@ -58,7 +58,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       },
-      // The date when the post was updated/edited
+      // The date when the post was last updated
       updatedAt: {
         allowNull: false,
         type: DataTypes.DATE
