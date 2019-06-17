@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Comment.associate = models => {
-    Comment.belongsTo(models.Post, {
+    Comment.belongsTo(models.User, {
       foreignKey: 'userId', // A user can leave multiple comments
       onDelete: 'CASCADE'
     });
