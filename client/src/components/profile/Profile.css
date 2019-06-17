@@ -1,0 +1,71 @@
+.profile * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile {
+  margin: auto;
+}
+
+.profileHeader {
+  display: flex;
+  margin: auto;
+  max-width: 900px;
+  border: 1px solid red;
+  padding: 50px 50px;
+}
+
+.profilePictureContainer {
+  height: 168px;
+  width: 168px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.profilePicture {
+  border-radius: 100px;
+}
+
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  margin-right: 20px;
+}
+
+.userNameFollowStatus {
+  display: flex;
+}
+
+.userStats {
+  display: flex;
+  margin: 20px 0;
+}
+
+.userStat {
+  margin-right: 20px;
+}
+
+.profilePosts {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 900px;
+  margin-top: 10px;
+}
+
+.profilePost {
+  display: block;
+  border: 1px solid black;
+  height: 290px;
+  width: 290px;
+  margin: 10px 0;
+  text-align: center;
+  line-height: 290px;
+}
