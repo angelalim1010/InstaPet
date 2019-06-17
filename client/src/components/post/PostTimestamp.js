@@ -18,17 +18,11 @@ class PostTimestamp extends Component {
   }
 
   componentDidMount = async () => {
-    let currentTime = new Date().getTime();
-    let millisecondsAgo = currentTime - this.state.postedTime;
-    await this.setState({
-      timeAgo: millisecondsAgo
-    });
-
     // Calculates the timeAgo for everything for the first time
-    this.calculateTime();
+    await this.calculateTime();
 
     // Sets the initial timestamp immediately after calculations
-    this.setTimestamp();
+    await this.setTimestamp();
 
     // Tick every second
     this.interval = setInterval(() => {
@@ -41,12 +35,19 @@ class PostTimestamp extends Component {
     clearInterval(this.interval);
   };
 
-  calculateTime = () => {
+  calculateTime = async () => {
     const ONE_SECOND = 1000; // 1 second = 1000 milliseconds
     const ONE_MINUTE = ONE_SECOND * 60;
     const ONE_HOUR = ONE_MINUTE * 60;
     const ONE_DAY = ONE_HOUR * 24;
     const ONE_WEEK = ONE_DAY * 7;
+
+    // Sets how long it's been since the post was created in milliseconds
+    let currentTime = new Date().getTime();
+    let millisecondsAgo = currentTime - this.state.postedTime;
+    await this.setState({
+      timeAgo: millisecondsAgo
+    });
 
     let weeksAgo = Math.floor(this.state.timeAgo / ONE_WEEK);
     let daysAgo = Math.floor(this.state.timeAgo / ONE_DAY);
