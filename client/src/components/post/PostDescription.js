@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
+import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 
 class PostDescription extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
-          icon={faHeartFull}
+          icon={faStarFull}
           onClick={this.toggleLikeStatus}
         />
       );
@@ -42,7 +42,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
-          icon={faHeartEmpty}
+          icon={faStarEmpty}
           onClick={this.toggleLikeStatus}
         />
       );

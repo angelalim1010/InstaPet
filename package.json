@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node ./bin/www",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
     "client-install": "cd client && npm install && cd ..",
     "server": "nodemon ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "bash script/deploy"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "axios": "^0.19.0",

@@ -13,7 +13,6 @@ a:hover {
 }
 
 .noPosts {
-  background-color: #fff;
   text-align: center;
   padding-top: 200px;
 }
@@ -66,7 +65,7 @@ a:hover {
 }
 
 .postLikeStatusFull {
-  color: red;
+  color: #3897f0;
 }
 
 .postCommentsNone {

@@ -23,7 +23,18 @@ class PostTimestamp extends Component {
     await this.setState({
       timeAgo: millisecondsAgo
     });
+
+    // Calculates the timeAgo for everything for the first time
     this.calculateTime();
+
+    // Sets the initial timestamp immediately after calculations
+    this.setTimestamp();
+
+    // Tick every second
+    this.interval = setInterval(() => {
+      this.calculateTime();
+      this.setTimestamp();
+    }, 1000);
   };
 
   componentWillUnmount = () => {
@@ -51,36 +62,7 @@ class PostTimestamp extends Component {
       minutesAgo: minutesAgo,
       secondsAgo: secondsAgo
     });
-
-    // Sets the initial timestamp immediately after calculations
-    this.setTimestamp();
-
-    // Tick every second
-    this.interval = setInterval(() => {
-      this.updateState("everySecond", ONE_SECOND);
-      this.setTimestamp();
-      if ((this.state.secondsAgo + 1) % 60 == 0) {
-        this.updateState("everyMinute", ONE_MINUTE);
-      }
-    }, ONE_SECOND);
   }; // End calculateTime
-
-  updateState = (interval, timeUnit) => {
-    switch (interval) {
-      case "everySecond":
-        this.setState(prevState => ({
-          timeAgo: prevState.timeAgo + timeUnit, // Every second, a second (in milliseconds) will be added to timeAgo
-          secondsAgo: prevState.secondsAgo + 1
-        }));
-        break;
-      case "everyMinute":
-        this.setState(prevState => ({
-          timeAgo: prevState.timeAgo + timeUnit, // Every minute, a minute (in milliseconds) will be added to timeAgo
-          minutesAgo: prevState.minutesAgo + 1
-        }));
-        break;
-    }
-  };
 
   setTimestamp = () => {
     let timestamp = this.state.timestamp;
