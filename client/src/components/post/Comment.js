@@ -12,7 +12,7 @@ class Comment extends Component {
       return (
         <div className="comment">
           <b>
-            <Link to={this.props.userName}>{this.props.userName}</Link>
+            <Link to="/profile">{this.props.userName}</Link>
           </b>{" "}
           {this.props.content}
         </div>

@@ -6,20 +6,37 @@ import "./Profile.css";
 class ProfilePosts extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
+    // This component will receive a prop with the postIds
   }
 
   render() {
     return (
       <div className="profilePosts">
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
-        <div className="profilePost ">profilePost</div>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
+        <Link to="/">
+          <img
+            className="profilePost"
+            src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
+          />
+        </Link>
       </div>
     );
   }
