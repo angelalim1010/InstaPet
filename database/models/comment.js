@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define("Comment", {
+  const Comment = sequelize.define('Comment', {
     userId: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Comment.associate = models => {
-    // associations can be defined here
+    Comment.belongsTo(models.Post, {
+      foreignKey: 'userId', // A user can leave multiple comments
+      onDelete: 'CASCADE'
+    });
   };
   return Comment;
 };
