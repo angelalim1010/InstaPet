@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { User } = require("../database/models").User;
+const User = require("../database/models").User;
 module.exports = router;
 
 router.get("/me", (req, res, next) => {
-  res.json(req.user || {});
+  res.json(req.body || {});
 });
 
 router.post("/login", async (req, res, next) => {
