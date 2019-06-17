@@ -37,10 +37,11 @@ export default (state = initialState, action) => {
         userPosts: [action.payload, ...state.userPosts]
       };
     case REMOVE_USER:
-      // NEEDS TO BE IMPLEMENTED
       return {
-        ...state
+        ...state,
+        users: [...state.users.filter(user => user.id !== action.payload)]
       };
+
     case REMOVE_USER_POST:
       // TO BE IMPLEMENTED
       return {

@@ -2,7 +2,8 @@ import {
   FETCH_ALL_POSTS,
   CREATE_POST,
   DELETE_POST,
-  LIKE_POST
+  LIKE_POST,
+  ADD_COMMENT
 } from "../actions/types";
 
 const initialState = {
@@ -22,22 +23,41 @@ export default (state = initialState, action) => {
         posts: [action.payload, ...state.posts]
       };
     case LIKE_POST:
-      let targetPostId = action.payload;
-      let updatedPostArray = state.posts;
-      let indexOfTargetPost = updatedPostArray.findIndex(
-        post => post.id === targetPostId
+      let userId = action.payload.userId;
+      let postId = action.payload.postId;
+      let updatedLikesPostArray = state.posts;
+
+      let indexOfTargetPost = updatedLikesPostArray.findIndex(
+        post => post.id === postId
       );
-      updatedPostArray[indexOfTargetPost].likes =
-        state.posts[indexOfTargetPost].likes + 1;
+
+      updatedLikesPostArray[indexOfTargetPost].likes = [userId, ...(updatedLikesPostArray[indexOfTargetPost].likes)]
+      return {
+        ...state,
+        posts: updatedLikesPostArray
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: [...state.posts.filter(post => post.id !== action.payload)]
+      };
+
+    case ADD_COMMENT:
+      let addCommentPostId = action.payload.postId;
+      let newComment = action.payload.newComment;
+      let updatedPostArray = state.posts;
+
+      let indexOfTargetPostComment = updatedPostArray.findIndex(
+        post => post.id === addCommentPostId
+      );
+
+      updatedPostArray[indexOfTargetPostComment].comments = [newComment, ...(updatedPostArray[indexOfTargetPostComment].comments)]
       return {
         ...state,
         posts: updatedPostArray
-      };
-    case DELETE_POST:
-      // TO BE IMPLEMENTED
-      return {
-        ...state
-      };
+      }
+
+
     default:
       return state;
   }
