@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Post, {
       foreignKey: 'userId' // Each user can habe multiple posts
     });
-    User.hasMany(models.Comments, {
+    User.hasMany(models.Comment, {
       foreignKey: 'userId'
     });
   };
