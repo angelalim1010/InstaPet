@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Users", {
+    return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -22,6 +22,17 @@ module.exports = {
           notEmpty: true
         }
       },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       profilePicture: {
         type: DataTypes.STRING,
         allowNull: true
@@ -32,15 +43,18 @@ module.exports = {
       },
       posts: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: true
+        allowNull: true,
+        defaultValue: []
       },
       followers: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: true
+        allowNull: true,
+        defaultValue: []
       },
       following: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: true
+        allowNull: true,
+        defaultValue: []
       },
       createdAt: {
         allowNull: false,
@@ -53,6 +67,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , DataTypes */) => {
-    return queryInterface.dropTable("Users");
+    return queryInterface.dropTable('Users');
   }
 };
