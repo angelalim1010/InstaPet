@@ -8,11 +8,11 @@ class Comment extends Component {
   }
 
   displayComment = () => {
-    if (this.props.userName) {
+    if (this.props.userId) {
       return (
         <div className="comment">
           <b>
-            <Link to={this.props.userName}>{this.props.userName}</Link>
+            <Link to={this.props.userId}>{this.props.userId}</Link>
           </b>{" "}
           {this.props.content}
         </div>

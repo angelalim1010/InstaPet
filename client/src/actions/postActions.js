@@ -7,37 +7,6 @@ const fetchAllPosts = posts => {
     payload: posts
   };
 };
-
-const createPost = post => {
-  return {
-    type: CREATE_POST,
-    payload: post
-  };
-};
-
-//payload had postId and userId
-const likePost = likedPost => {
-  return {
-    type: LIKE_POST,
-    payload: likedPost
-  };
-};
-
-//payload has postId and newComment
-const addComment = addedComment => {
-  return {
-    type: ADD_COMMENT,
-    payload: addedComment
-  };
-};
-
-const deletePost = postId => {
-  return {
-    type: DELETE_POST,
-    payload: postId
-  };
-};
-
 export const fetchAllPostsThunk = () => dispatch => {
   return axios
     .get(`/p/`)
@@ -46,6 +15,14 @@ export const fetchAllPostsThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
+
+
+const createPost = post => {
+  return {
+    type: CREATE_POST,
+    payload: post
+  };
+};
 export const createPostThunk = post => dispatch => {
   return axios
     .post(`/p/`, post)
@@ -54,6 +31,14 @@ export const createPostThunk = post => dispatch => {
     .catch(err => console.log(err));
 };
 
+
+
+const deletePost = postId => {
+  return {
+    type: DELETE_POST,
+    payload: postId
+  };
+};
 export const deletePostThunk = postId => dispatch => {
   return axios
     .delete(`/p/${postId}`)
@@ -62,12 +47,51 @@ export const deletePostThunk = postId => dispatch => {
     .catch(err => console.log(err));
 };
 
+
+
+//payload had postId and userId
+const likePost = likedPost => {
+  return {
+    type: LIKE_POST,
+    payload: likedPost
+  };
+};
 export const likePostThunk = () => dispatch => {
   //update database
   return (likedPost => dispatch(likePost(likedPost)))
 };
 
+
+
+//payload: postId and array of comments
+const getComments = (comments, postId) => {
+  return {
+    type: FETCH_ALL_POSTS,
+    payload: {
+      comments,
+      postId
+    }
+  };
+};
+export const getCommentsThunk = postId => dispatch => {
+  return axios
+    .get(`/comments/${postId}`) //get all comments for postId
+    .then(res => res.data)
+    .then(comments => dispatch(getComments(comments, postId)))
+    .catch(err => console.log(err));
+};
+
+
+
+//payload has postId and (content, userId)
+const addComment = addedComment => {
+  return {
+    type: ADD_COMMENT,
+    payload: addedComment
+  };
+};
 export const addCommentThunk = () => dispatch => {
   //update database
   return (addedComment => dispatch(addComment(addedComment)))
 };
+

@@ -19,7 +19,7 @@ class PostComments extends Component {
   displayComment = comment => {
     return (
       <Comment
-        userName={comment.userName}
+        userName={comment.userId}
         content={comment.content}
         key={comment.id}
       />

@@ -15,9 +15,9 @@ module.exports = app => {
   /**
    *  COMMENT ROUTES
    */
-
+  app.get("/comments/:postId", CommentsController.list);
   app.post("/comments", CommentsController.create);
-  app.delete("/comments/:userId", CommentsController.delete);
+  app.delete("/comments/:commentId", CommentsController.delete);
 
   /**
    * POST ROUTES

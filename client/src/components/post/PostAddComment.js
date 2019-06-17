@@ -7,13 +7,26 @@ class PostComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      content: ""
     };
   }
 
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addComment(this.state.newComment)
+    let addedComment = {
+      newComment: {
+        userId: 1,
+        content: this.state.content
+      },
+      postId: this.props.postId,
+    };
+    this.props.addComment(addedComment)
   };
 
   render() {
@@ -25,6 +38,8 @@ class PostComments extends Component {
             type="textarea"
             placeholder="Add a comment..."
             rows="1"
+            name="comment"
+            onChange={this.handleChange}
           />
           <Input
             className="postAddCommentInput postAddCommentSubmit"
@@ -42,7 +57,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
   return {
-    addComment: newComment => dispatch(addCommentThunk(newComment))
+    addComment: addedComment => dispatch(addCommentThunk(addedComment))
   };
 };
 
