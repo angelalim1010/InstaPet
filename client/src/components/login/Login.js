@@ -44,12 +44,12 @@ class Login extends Component {
         <div className="box">
           <h1 className="title">Instapet</h1>
           <Form>
-            <FormGroup>
+            <FormGroup className="formbox">
               <Input
                 type="email"
                 name="email"
-                className="formbox"
                 placeholder="Email"
+                className = "inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -58,8 +58,8 @@ class Login extends Component {
               <Input
                 type="password"
                 name="password"
-                className="formbox"
                 placeholder="Password"
+                className = "inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>
