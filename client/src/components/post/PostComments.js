@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./Comment";
 import { connect } from "react-redux";
-// import { deleteCommentThunk } from "../../actions/postActions";
+import { deleteCommentThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
 
@@ -43,8 +43,6 @@ class PostComments extends Component {
     // filter through comments array in store for comments in this post
     let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
 
-    console.log("HEELLOOOO");
-
     if (allCommentsForPost.length === 0) {
       return <div className="postCommentsNone" />;
     } else {
@@ -57,7 +55,7 @@ class PostComments extends Component {
                   <Link to="/profile">{comment.userId}</Link>
                 </b>{" "}
                 {comment.content}
-                {/* <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button> */}
+                <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
               </div>
             )
           }
@@ -82,7 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    // deleteComment: commentId => dispatch(deleteCommentThunk(commentId))
+    deleteComment: commentId => dispatch(deleteCommentThunk(commentId))
   };
 };
 

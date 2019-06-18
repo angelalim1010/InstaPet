@@ -1,6 +1,7 @@
 const UsersController = require("../database/controllers/").users;
-const CommentsController = require("../database/controllers/").comments;
 const PostsController = require("../database/controllers/").posts;
+const CommentsController = require("../database/controllers/").comments;
+const LikesController = require("../database/controllers/").likes;
 
 module.exports = app => {
   /**
@@ -32,12 +33,12 @@ module.exports = app => {
   app.delete("/comments/:commentId", CommentsController.delete);
 
 
+  /**
+  *  LIKES ROUTES
+  */
+  app.get("/likes", LikesController.list);
+  app.post("/likes", LikesController.create);
+  app.delete("/likes/:likeId", LikesController.delete);
+
 };
 
-
-/**
-*  LIKES ROUTES
-*/
-// app.get("/likes", LikesController.list);
-// app.post("/likes", LikesController.create);
-// app.delete("/likes/:likeId", LikesController.delete);
