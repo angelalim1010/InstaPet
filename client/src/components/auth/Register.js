@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./Register.css";
 import Phone from "./Phone";
 import { registerUser } from "../../actions/userActions";
-import { clearErrors } from "../../actions/errorActions";
+import { clearErrors } from "../../actions/errorsActions";
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       userName: "",
       email: "",
       displayName: "",
       password: "",
       password2: "",
-      error: {}
+      errors: {}
     };
   }
 
@@ -28,9 +29,9 @@ class Register extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.error) {
+    if (nextProps.errors) {
       this.setState({
-        error: nextProps.error
+        errors: nextProps.errors
       });
     }
   };
@@ -43,7 +44,6 @@ class Register extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-<<<<<<< HEAD:client/src/components/auth/Register.js
 
     const newUser = {
       email: this.state.email,
@@ -57,30 +57,12 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
 
     // Clear the errorReducer
-    this.props.clearError();
+    this.props.clearErrors();
   };
 
-=======
-    if (
-      this.state.userName !== "" &&
-      this.state.password !== "" &&
-      this.state.email.match(/\w+@\w+\.(com|edu|org)/)
-    ) {
-      let newUser = {
-        email: this.state.email,
-        displayName: this.state.displayName,
-        userName: this.state.userName,
-        password: this.state.password
-      };
-      await this.props.registerUser(newUser);
-      this.props.history.push("/login");
-    } else {
-      alert("Please fill out all the appropriate fields");
-    }
-  };
-
->>>>>>> ee5da4ca6a359b0ad3e67f772b3947e1763281fd:client/src/components/login/SignUp.js
   render() {
+    const { errors } = this.state; // Equivalent to const errors = this.state.errors. This just makes the code easier to read; can write errors.email instead of this.state.errors.email
+
     return (
       <div className="background">
         <Phone />
@@ -89,50 +71,63 @@ class Register extends Component {
           <h3 className="signupmessage">
             Sign up to see some wholesome content
           </h3>
-          <br></br>
-          <Form>
+          <br />
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup className="formbox">
               <Input
                 type="email"
                 name="email"
-                className = "inputBox"
+                className="inputBox"
                 placeholder="Email"
                 onChange={this.handleChange}
               />
+              <span>{errors.email}</span>
             </FormGroup>
-            <br></br>
+            <br />
             <FormGroup>
               <Input
-                type="name"
+                type="text"
                 name="displayName"
-                className = "inputBox"
+                className="inputBox"
                 placeholder="Full Name"
                 onChange={this.handleChange}
               />
+              <span>{errors.displayName}</span>
             </FormGroup>
             <FormGroup>
               <Input
-                type="userName"
+                type="text"
                 name="userName"
-                className = "inputBox"
+                className="inputBox"
                 placeholder="Username"
                 onChange={this.handleChange}
               />
+              <span>{errors.userName}</span>
             </FormGroup>
             <FormGroup>
               <Input
                 type="password"
                 name="password"
-                className = "inputBox"
+                className="inputBox"
                 placeholder="Password"
                 onChange={this.handleChange}
               />
+              <span>{errors.password}</span>
             </FormGroup>
+            <FormGroup>
+              <Input
+                type="password"
+                name="password2"
+                className="inputBox"
+                placeholder="Confirm Password"
+                onChange={this.handleChange}
+              />
+              <span>{errors.password2}</span>
+            </FormGroup>
+            <Button type="submit" className="signupbutton">
+              Sign Up
+            </Button>
           </Form>
-          <Button className="signupbutton" onClick={this.handleSubmit}>
-            Sign Up
-          </Button>
-          <br />
           <div className="loginbox">
             Already have an account? <Link to="/login">Login</Link>
           </div>
@@ -142,18 +137,26 @@ class Register extends Component {
   }
 }
 
+Register.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
-  error: state.error
+  errors: state.errors
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerUser
+    registerUser,
+    clearErrors
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Register);
+)(withRouter(Register));

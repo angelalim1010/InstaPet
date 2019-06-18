@@ -1,7 +1,7 @@
-import { CLEAR_ERROR } from "../actions/types";
+import { CLEAR_ERRORS } from "../actions/types";
 
-export const clearError = () => {
+export const clearErrors = () => {
   return {
-    type: CLEAR_ERROR
+    type: CLEAR_ERRORS
   };
 };

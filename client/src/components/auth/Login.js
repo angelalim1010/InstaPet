@@ -46,6 +46,7 @@ class Login extends Component {
   };
 
   render() {
+    const { errors } = this.state; // Equivalent to const errors = this.state.errors
     return (
       <div className="background">
         <Phone />
@@ -87,7 +88,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  errors: state.errors
 });
 
 const mapDispatchToProps = dispatch => {

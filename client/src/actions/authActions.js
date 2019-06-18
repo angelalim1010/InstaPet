@@ -1,7 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { REGISTER_USER, SET_CURRENT_USER, SET_ERROR } from "./types";
+import { REGISTER_USER, SET_CURRENT_USER, SET_ERRORS } from "./types";
 
 const setCurrentUser = user => {
   return {
@@ -17,9 +17,9 @@ const registerUser = user => {
   };
 };
 
-const setError = err => {
+const setErrors = err => {
   return {
-    type: SET_ERROR,
+    type: SET_ERRORS,
     payload: err.response.data
   };
 };
@@ -41,7 +41,7 @@ export const registerUser = (user, history) => dispatch => {
       // Re-direct to login on successful register. withRouter is necessary for this in the component.
       history.push("/login");
     })
-    .catch(err => dispatch(setError(err)));
+    .catch(err => dispatch(setErrors(err)));
 };
 
 /**
@@ -68,7 +68,7 @@ export const loginUser = user => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err => dispatch(setError(err)));
+    .catch(err => dispatch(setErrors(err)));
 };
 
 /**
