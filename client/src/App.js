@@ -13,6 +13,10 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    console.log(localStorage);
+  };
+
   displayContent = () => {
     // If logged in
     if (this.props.user.user.auth) {
