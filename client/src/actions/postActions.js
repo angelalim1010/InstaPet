@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ALL_POSTS, CREATE_POST, DELETE_POST, LIKE_POST, ADD_COMMENT, GET_COMMENTS } from "./types";
+import { FETCH_ALL_POSTS, CREATE_POST, DELETE_POST, LIKE_POST, UNLIKE_POST, ADD_COMMENT, GET_COMMENTS } from "./types";
 
 const fetchAllPosts = posts => {
   return {
@@ -63,9 +63,23 @@ export const likePostThunk = () => dispatch => {
 
 
 
+//payload had postId and userId
+const unlikePost = unlikedPost => {
+  return {
+    type: UNLIKE_POST,
+    payload: unlikedPost
+  };
+};
+export const unlikePostThunk = () => dispatch => {
+  //update database
+  return (unlikedPost => dispatch(unlikePost(unlikedPost)))
+};
+
+
+
+
 //payload: postId and array of comments
 const getComments = (comments, postId) => {
-  // const getComments = (comments) => {
   return {
     type: GET_COMMENTS,
     payload: {
@@ -76,25 +90,25 @@ const getComments = (comments, postId) => {
 };
 export const getCommentsThunk = postId => dispatch => {
   return axios
-    // .get(`/comments/3`) //get all comments for postId
     .get(`/comments/${postId}`) //get all comments for postId
     .then(res => res.data)
     .then(comments => dispatch(getComments(comments, postId)))
-    // .then(comments => dispatch(getComments(comments)))
     .catch(err => console.log(err));
 };
 
 
 
-//payload has postId and (content, userId)
+//payload has postId, content, userId)
 const addComment = addedComment => {
   return {
     type: ADD_COMMENT,
     payload: addedComment
   };
 };
-export const addCommentThunk = () => dispatch => {
-  //update database
-  return (addedComment => dispatch(addComment(addedComment)))
+export const addCommentThunk = addedComment => dispatch => {
+  return axios
+    .post(`/comments/`, addedComment)
+    .then(res => res.data)
+    .then(addedComment => dispatch(addComment(addedComment)))
+    .catch(err => console.log(err));
 };
-

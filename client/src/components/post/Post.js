@@ -33,7 +33,7 @@ class Post extends Component {
         <div className="post">
           <PostTopBar userName={this.state.post.userName} postId={this.state.post.id} />
           <PostImage imageURL={this.state.post.imageURL} />
-          <PostDescription
+          <PostDescription postId={this.state.post.id}
             likes={this.state.post.likes}
             userName={this.state.post.userName}
             caption={this.state.post.caption}

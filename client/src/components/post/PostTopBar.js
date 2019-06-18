@@ -25,7 +25,9 @@ class PostTopBar extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  post: state.post
+});
 
 const mapDispatchToProps = dispatch => {
   return {

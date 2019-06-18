@@ -7,7 +7,8 @@ class PostComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: ""
+      content: "",
+      currentUserId: 1
     };
   }
 
@@ -19,14 +20,12 @@ class PostComments extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // let addedComment = {
-    //   newComment: {
-    //     userId: 1,
-    //     content: this.state.content
-    //   },
-    //   postId: this.props.postId,
-    // };
-    // this.props.addComment(addedComment)
+    let addedComment = {
+      userId: this.state.currentUserId,
+      postId: this.props.postId,
+      content: this.state.content
+    };
+    this.props.addComment(addedComment)
   };
 
   render() {
@@ -38,7 +37,7 @@ class PostComments extends Component {
             type="textarea"
             placeholder="Add a comment..."
             rows="1"
-            name="comment"
+            name="content"
             onChange={this.handleChange}
           />
           <Input
