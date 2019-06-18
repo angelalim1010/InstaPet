@@ -15,6 +15,13 @@ module.exports = {
           notEmpty: true
         }
       },
+      postId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       content: {
         type: DataTypes.STRING,
         allowNull: false,
