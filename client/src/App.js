@@ -15,25 +15,34 @@ class App extends Component {
 
   displayContent = () => {
     // If logged in
-    if (this.props.user.user.auth) {
-      return (
-        <div className="content">
-          <Route path="/" component={NavBar} />
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/profile" component={Profile} />
-        </div>
-      );
-    }
-    // If not logged in
-    else {
-      return (
-        <div className="content">
-          <Route path="/" component={SignUp} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={Login} />
-        </div>
-      );
-    }
+    // if (this.props.user.user.auth) {
+    //   return (
+    //     <div className="content">
+    //       <Route path="/" component={NavBar} />
+    //       <Route exact path="/" component={HomePage} />
+    //       <Route exact path="/profile" component={Profile} />
+    //     </div>
+    //   );
+    // }
+    // // If not logged in
+    // else {
+    //   return (
+    //     <div className="content">
+    //       <Route path="/" component={SignUp} />
+    //       <Route exact path="/signup" component={SignUp} />
+    //       <Route exact path="/login" component={Login} />
+    //     </div>
+    //   );
+    // }
+    return (
+      <div className="content">
+        <Route path="/" component={NavBar} />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={Login} />
+      </div>
+    );
   };
 
   render() {
