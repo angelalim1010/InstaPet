@@ -74,7 +74,7 @@ export const getUsersThunk = () => dispatch => {
 
 export const addUserThunk = user => dispatch => {
   return axios
-    .post(`/accounts/`, user)
+    .post(`/accounts/registerUser`, user)
     .then(res => res.data)
     .then(user => dispatch(addUser(user)))
     .catch(err => console.log(err));

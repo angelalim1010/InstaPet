@@ -13,14 +13,14 @@ const passport = require("passport");
 const http = require("http");
 const PORT = parseInt(process.env.PORT, 10) || 5000;
 
-// Set "PORT" variable to PORT const
-app.set("PORT", PORT);
-
 // Require .env config
 require("dotenv").config();
 
 // Express Initialization
 const app = express();
+
+// Set "PORT" variable to PORT const
+app.set("PORT", PORT);
 
 // Cors
 app.use(Cors());

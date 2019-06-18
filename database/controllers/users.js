@@ -1,9 +1,11 @@
-const passport = require("../../config/passport");
+const passport = require("passport");
 const User = require("../models").User;
 
 module.exports = {
   create(req, res, next) {
+    console.log("create");
     passport.authenticate("register", (err, user, info) => {
+      console.log("Doing passport authentication");
       if (err) {
         console.log(err);
       }
@@ -13,12 +15,17 @@ module.exports = {
         res.send(info.message);
       } else {
         req.logIn((user, err) => {
-          User.create(req.body)
+          const data = {
+            username: user.userName,
+            password: req.body.password,
+            email: req.body.email
+          };
+          User.create(data)
             .then(user => res.status(200).json(user))
             .catch(err => res.status(400).json(err));
         });
       }
-    });
+    })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() does something, then pipes it to (req, res, next)
   },
   list(req, res, next) {
     return User.findAll({
