@@ -14,32 +14,26 @@ passport.use(
   "register",
   new localStrategy(
     {
-      usernameField: "username",
+      usernameField: "userName",
       passwordField: "password",
-      emailField: "email",
+      passReqToCallback: true,
       session: false
     },
-    (username, password, email, done) => {
+    (req, userName, password, done) => {
       try {
-        User.findOne({
+        console.log(req.body.email, userName, password, done);
+        const user = User.findOne({
           where: {
-            username: username
-          }
-        }).then(user => {
-          if (user != null) {
-            console.log("Username is already taken");
-            return done(null, false, { message: "Username is already taken" });
-          } else {
-            bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-              User.create({ username, password: hashedPassword, email }).then(
-                user => {
-                  console.log("User created");
-                  return done(null, user);
-                }
-              );
-            });
+            userName: userName
           }
         });
+
+        if (!user) {
+          console.log("Username is already taken");
+          return done(null, false, { message: "Username is already taken" });
+        } else {
+          return done(null, user);
+        }
       } catch (err) {
         done(err);
       }

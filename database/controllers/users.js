@@ -1,5 +1,8 @@
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 const User = require("../models").User;
+
+const BCRYPT_SALT_ROUNDS = 12;
 
 module.exports = {
   create(req, res, next) {
@@ -14,9 +17,11 @@ module.exports = {
         console.log(info.message);
         res.send(info.message);
       } else {
-        req.logIn((user, err) => {
+        req.logIn(user => {
+          console.log("Logging in");
+          console.log(req.body);
           const data = {
-            username: user.userName,
+            userName: user.userName,
             password: req.body.password,
             email: req.body.email
           };
