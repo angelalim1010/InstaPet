@@ -9,7 +9,6 @@ a {
 }
 
 .navBar {
-  background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
   position: fixed;
   z-index: 1;
@@ -17,6 +16,8 @@ a {
   height: 52px;
   box-sizing: border-box;
   top: 0;
+  background-color: lightskyblue;
+  box-shadow: 0 2px 2px #efefef;
 }
 
 .navBarItems {
@@ -53,12 +54,47 @@ a {
   text-align: center;
 }
 
+.navBarSearch input[type="text"]::placeholder {
+  color: darkorange;
+  opacity: 0.8;
+}
+
 .navBarLogo {
   position: absolute;
+  height: 15px;
+  width: 50px;
   left: 0;
+  padding-bottom: 50px;
+}
+
+.navBarLogo img {
+  height: 60px;
+  width: 120px;
+  padding-bottom: 15px;
+  transition: all 0.6s ease-in-out;
+}
+
+.navBarLogo img:active,
+.navBarLogo img:hover {
+  height: 70px;
+  width: 180px;
+  transform: rotate(360deg);
 }
 
 .navBarProfile {
   position: absolute;
   right: 0;
+}
+
+.navBarProfile a:link,
+.navBarProfile a:visited {
+  font-size: 25px;
+  color: orange;
+  transition: color 0.5s, background-color 0.5s, font-size 0.6s;
+}
+
+.navBarProfile a:active,
+.navBarProfile a:hover {
+  color: red;
+  font-size: 35px;
 }
