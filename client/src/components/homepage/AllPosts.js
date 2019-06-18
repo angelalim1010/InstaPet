@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchAllPostsThunk } from "../../actions/postActions";
-import Post from "../post/Post";
-import CreatePostForm from "../post/CreatePostForm";
-import "../post/Post.css";
-import { Button } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAllPostsThunk } from '../../actions/postActions';
+import Post from '../post/Post';
+import CreatePostForm from '../post/CreatePostForm';
+import '../post/Post.css';
+import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronCircleDown,
   faChevronCircleUp,
   faMinusCircle
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 class AllPosts extends Component {
   constructor(props) {

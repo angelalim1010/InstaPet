@@ -16,17 +16,16 @@ module.exports = app => {
   /**
    *  COMMENT ROUTES
    */
-
+  app.get("/comments/:postId", CommentsController.list);
   app.post("/comments", CommentsController.create);
-  app.delete("/comments/:userId", CommentsController.delete);
+  app.delete("/comments/:commentId", CommentsController.delete);
 
   /**
    * POST ROUTES
    */
 
-  // createPost
   app.post("/p/", PostsController.create);
-
-  // fetchAllPosts
   app.get("/p/", PostsController.list);
+  app.delete("/p/:postId", PostsController.delete);
+  app.put("/p/:postId", PostsController.update);
 };
