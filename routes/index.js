@@ -6,7 +6,7 @@ module.exports = app => {
   /**
    *  USER ROUTES
    */
-
+  app.get("/secret", UsersController.findUser);
   app.get("/accounts/", UsersController.list);
   app.post("/accounts/registerUser", UsersController.register);
   app.post("/accounts/loginUser", UsersController.login);
