@@ -42,48 +42,48 @@ class PostDescription extends Component {
     }
   };
 
-  displayLikeStatus = () => {
-    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
+  // displayLikeStatus = () => {
+  //   let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
 
-    //check if current user liked post
-    if (postObject[0].likes.includes(this.state.currentUserId)) {
-      return (
-        <FontAwesomeIcon
-          className="postLikeStatus postLikeStatusFull"
-          icon={faStarFull}
-          onClick={this.toggleLikeStatus}
-        />
-      );
-    } else {
-      return (
-        <FontAwesomeIcon
-          className="postLikeStatus postLikeStatusEmpty"
-          icon={faStarEmpty}
-          onClick={this.toggleLikeStatus}
-        />
-      );
-    }
-  }
+  //   //check if current user liked post
+  //   if (postObject[0].likes.includes(this.state.currentUserId)) {
+  //     return (
+  //       <FontAwesomeIcon
+  //         className="postLikeStatus postLikeStatusFull"
+  //         icon={faStarFull}
+  //         onClick={this.toggleLikeStatus}
+  //       />
+  //     );
+  //   } else {
+  //     return (
+  //       <FontAwesomeIcon
+  //         className="postLikeStatus postLikeStatusEmpty"
+  //         icon={faStarEmpty}
+  //         onClick={this.toggleLikeStatus}
+  //       />
+  //     );
+  //   }
+  // }
 
-  displayLikeCount = () => {
-    //find post with postId
-    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
-    //find like count of that post
-    console.log(postObject[0].likes.length);
+  // displayLikeCount = () => {
+  //   //find post with postId
+  //   let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
+  //   //find like count of that post
+  //   console.log(postObject[0].likes.length);
 
-    if (postObject[0].likes.length === 1) {
-      return `1 like`;
-    } else {
-      return `${postObject[0].likes.length} likes`;
-    }
-  };
+  //   if (postObject[0].likes.length === 1) {
+  //     return `1 like`;
+  //   } else {
+  //     return `${postObject[0].likes.length} likes`;
+  //   }
+  // };
 
   render() {
     return (
       <div className="postDescription">
-        <div>{this.displayLikeStatus()}</div>
+        {/* <div>{this.displayLikeStatus()}</div> */}
         <div className="postLikeCount">
-          <b>{this.displayLikeCount()}</b>
+          {/* <b>{this.displayLikeCount()}</b> */}
         </div>
         <Comment
           className="postCaption"

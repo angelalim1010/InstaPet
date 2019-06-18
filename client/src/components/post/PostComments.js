@@ -43,6 +43,8 @@ class PostComments extends Component {
     // filter through comments array in store for comments in this post
     let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
 
+    console.log("HEELLOOOO");
+
     if (allCommentsForPost.length === 0) {
       return <div className="postCommentsNone" />;
     } else {
