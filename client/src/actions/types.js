@@ -11,7 +11,11 @@ export const GET_USER_POSTS = "GET_USER_POSTS";
 export const GET_USERS = "GET_USERS";
 export const EDIT_USER = "EDIT_USERS";
 export const REGISTER_USER = "REGISTER_USER";
-export const LOGIN_USER = "LOGIN_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADD_USER_POST = "ADD_USER_POST";
 export const REMOVE_USER_POST = "REMOVE_USER_POSTS";
 export const REMOVE_USER = "REMOVE_USER";
+
+// ERRORS
+
+export const SET_ERRORS = "SET_ERRORS";

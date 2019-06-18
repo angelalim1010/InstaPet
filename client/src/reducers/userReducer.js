@@ -4,15 +4,12 @@ import {
   REMOVE_USER_POST,
   ADD_USER_POST,
   REGISTER_USER,
-  LOGIN_USER,
   REMOVE_USER,
   EDIT_USER
 } from "../actions/types";
 
 const initialState = {
-  users: [],
-  userPosts: [],
-  user: { auth: false }
+  users: []
 };
 
 export default (state = initialState, action) => {
@@ -31,11 +28,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: [action.payload, ...state.users]
-      };
-    case LOGIN_USER:
-      return {
-        ...state,
-        user: action.payload
       };
     case ADD_USER_POST:
       return {

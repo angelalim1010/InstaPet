@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUserThunk } from "../../actions/userActions";
+import { loginUser } from "../../actions/userActions";
 import "./Login.css";
 import Phone from "./Phone";
 class Login extends Component {
@@ -84,8 +84,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    //getUser: user => dispatch(getUsersThunk(user))
-    loginUser: user => dispatch(loginUserThunk(user))
+    loginUser
   };
 };
 

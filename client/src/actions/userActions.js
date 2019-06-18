@@ -5,7 +5,7 @@ import {
   ADD_USER_POST,
   REMOVE_USER_POST,
   REGISTER_USER,
-  LOGIN_USER,
+  SET_CURRENT_USER,
   REMOVE_USER,
   EDIT_USER
 } from "./types";
@@ -26,7 +26,7 @@ const registerUser = newUser => {
   };
 };
 
-const loginUser = user => {
+const setCurrentUser = user => {
   return {
     type: LOGIN_USER,
     payload: user
@@ -88,11 +88,11 @@ export const registerUserThunk = user => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const loginUserThunk = user => dispatch => {
+export const loginUser = user => dispatch => {
   return axios
     .post(`/accounts/loginUser`, user)
     .then(res => res.data)
-    .then(user => dispatch(loginUser(user)))
+    .then(user => dispatch(setCurrentUser(user)))
     .catch(err => console.log(err));
 };
 
