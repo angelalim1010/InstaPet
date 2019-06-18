@@ -7,11 +7,10 @@ import {
   LOGIN_USER,
   REMOVE_USER,
   EDIT_USER
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
   users: [],
-  userPosts: [],
   user: { auth: false }
 };
 
@@ -40,7 +39,7 @@ export default (state = initialState, action) => {
     case ADD_USER_POST:
       return {
         ...state,
-        userPosts: [action.payload, ...state.userPosts]
+        user: action.payload
       };
     case REMOVE_USER:
       // NEEDS TO BE IMPLEMENTED
@@ -54,10 +53,10 @@ export default (state = initialState, action) => {
       };
     case EDIT_USER:
       // EDIT PERSON (REQUIRES SOME IMPLEMENTATION)
-      let editedUsers = state.users;
+      let editedUser = state.user;
       return {
         ...state,
-        users: editedUsers
+        user: editedUser
       };
     default:
       return state;
