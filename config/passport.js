@@ -22,18 +22,27 @@ passport.use(
     (req, userName, password, done) => {
       try {
         console.log(req.body.email, userName, password, done);
-        const user = User.findOne({
+        User.findOne({
           where: {
             userName: userName
           }
+        }).then(user => {
+          if (user != null) {
+            console.log("Username is already taken");
+            return done(null, false, { message: "Username is already taken" });
+          } else {
+            bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+              User.create({
+                userName,
+                password: hashedPassword,
+                email: req.body.email
+              }).then(user => {
+                console.log("User created");
+                return done(null, user);
+              });
+            });
+          }
         });
-
-        if (!user) {
-          console.log("Username is already taken");
-          return done(null, false, { message: "Username is already taken" });
-        } else {
-          return done(null, user);
-        }
       } catch (err) {
         done(err);
       }
