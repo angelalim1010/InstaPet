@@ -18,7 +18,8 @@ class App extends Component {
     if (this.props.user.user.auth) {
       return (
         <div className="content">
-          <Route path="/" component={HomePage} />
+          <Route path="/" component={NavBar} />
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/profile" component={Profile} />
         </div>
       );
@@ -28,8 +29,8 @@ class App extends Component {
       return (
         <div className="content">
           <Route path="/" component={SignUp} />
-          <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
         </div>
       );
     }
@@ -38,10 +39,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="app">
-          <Route path="/" component={NavBar} />
-          {this.displayContent()}
-        </div>
+        <div className="app">{this.displayContent()}</div>
       </Router>
     );
   }

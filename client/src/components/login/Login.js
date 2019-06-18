@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { loginUserThunk } from "../../actions/userActions";
 import "./Login.css";
@@ -32,21 +31,15 @@ class Login extends Component {
         password: this.state.password
       };
       this.props.loginUser(user);
+      this.props.history.push("/");
     } else {
       alert("Invalid email or empty password");
-    }
-  };
-
-  renderRedirect = () => {
-    if (this.props.user.user.auth) {
-      return <Redirect to="/" />;
     }
   };
 
   render() {
     return (
       <div className="background">
-        {this.renderRedirect()}
         <Phone />
         <div className="box">
           <h1 className="title">Instapet</h1>
