@@ -1,6 +1,9 @@
 // POSTS
 
 export const FETCH_ALL_POSTS = 'FETCH_ALL_POSTS';
+export const FETCH_ALL_COMMENTS = 'FETCH_ALL_COMMENTS';
+export const FETCH_ALL_LIKES = 'FETCH_ALL_LIKES';
+
 export const CREATE_POST = 'CREATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const LIKE_POST = 'LIKE_POST';

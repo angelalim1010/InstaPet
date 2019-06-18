@@ -1,15 +1,23 @@
 import {
   FETCH_ALL_POSTS,
+  FETCH_ALL_COMMENTS,
+  FETCH_ALL_LIKES,
+
   CREATE_POST,
   DELETE_POST,
+
   LIKE_POST,
   UNLIKE_POST,
+
   ADD_COMMENT,
   GET_COMMENTS
+
 } from "../actions/types";
 
 const initialState = {
-  posts: []
+  posts: [],
+  comments: [],
+  likes: []
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +27,23 @@ export default (state = initialState, action) => {
         ...state,
         posts: action.payload
       };
+
+    case FETCH_ALL_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
+      };
+
+    // case FETCH_ALL_LIKES:
+    //   return {
+    //     ...state,
+    //     likes: action.payload
+    //   };
+
+
+
+
+
     case CREATE_POST:
       return {
         ...state,

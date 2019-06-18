@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Comment from "./Comment";
 import { connect } from "react-redux";
-import { getCommentsThunk } from "../../actions/postActions";
+import { deleteCommentThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
+import { Button } from 'reactstrap';
 
 class PostComments extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class PostComments extends Component {
                   <Link to="/profile">{comment.userId}</Link>
                 </b>{" "}
                 {comment.content}
+                <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
               </div>
             )
           }
@@ -78,7 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    // getComments: postId => dispatch(getCommentsThunk(postId))
+    deleteComment: commentId => dispatch(deleteCommentThunk(commentId))
   };
 };
 

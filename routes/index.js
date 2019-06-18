@@ -13,12 +13,6 @@ module.exports = app => {
   app.put("/accounts/:userId", UsersController.update);
   app.delete("/accounts/:userId", UsersController.destroy);
 
-  /**
-   *  COMMENT ROUTES
-   */
-  app.get("/comments/:postId", CommentsController.list);
-  app.post("/comments", CommentsController.create);
-  app.delete("/comments/:commentId", CommentsController.delete);
 
   /**
    * POST ROUTES
@@ -29,3 +23,19 @@ module.exports = app => {
   app.delete("/p/:postId", PostsController.delete);
   app.put("/p/:postId", PostsController.update);
 };
+
+
+/**
+ *  COMMENT ROUTES
+ */
+app.get("/comments", CommentsController.list);
+app.post("/comments", CommentsController.create);
+app.delete("/comments/:commentId", CommentsController.delete);
+
+
+/**
+*  LIKES ROUTES
+*/
+// app.get("/likes", LikesController.list);
+// app.post("/likes", LikesController.create);
+// app.delete("/likes/:likeId", LikesController.delete);
