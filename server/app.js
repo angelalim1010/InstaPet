@@ -5,7 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const { db } = require("../database/models");
-const { User } = require("../database/models").User;
+const User = require("../database/models").User;
 const PORT = 5000;
 
 // .env config
