@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ALL_POSTS, CREATE_POST, DELETE_POST, LIKE_POST, ADD_COMMENT } from "./types";
+import { FETCH_ALL_POSTS, CREATE_POST, DELETE_POST, LIKE_POST, ADD_COMMENT, GET_COMMENTS } from "./types";
 
 const fetchAllPosts = posts => {
   return {
@@ -65,8 +65,9 @@ export const likePostThunk = () => dispatch => {
 
 //payload: postId and array of comments
 const getComments = (comments, postId) => {
+  // const getComments = (comments) => {
   return {
-    type: FETCH_ALL_POSTS,
+    type: GET_COMMENTS,
     payload: {
       comments,
       postId
@@ -75,9 +76,11 @@ const getComments = (comments, postId) => {
 };
 export const getCommentsThunk = postId => dispatch => {
   return axios
+    // .get(`/comments/3`) //get all comments for postId
     .get(`/comments/${postId}`) //get all comments for postId
     .then(res => res.data)
     .then(comments => dispatch(getComments(comments, postId)))
+    // .then(comments => dispatch(getComments(comments)))
     .catch(err => console.log(err));
 };
 

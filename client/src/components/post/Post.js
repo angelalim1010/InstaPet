@@ -7,7 +7,6 @@ import PostDescription from "./PostDescription";
 import PostComments from "./PostComments";
 import PostTimestamp from "./PostTimestamp";
 import PostAddComment from "./PostAddComment";
-import { getCommentsThunk } from "../../actions/postActions";
 
 class Post extends Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class Post extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getComments(this.props.post.id);
     this.setState(prevState => ({
       post: {
         ...prevState.post,
@@ -40,8 +38,8 @@ class Post extends Component {
             userName={this.state.post.userName}
             caption={this.state.post.caption}
           />
-          <PostComments comments={this.state.post.comments} />
           <PostTimestamp createdAt={this.state.post.createdAt} />
+          <PostComments postId={this.state.post.id} />
           <PostAddComment postId={this.state.post.id} />
         </div>
       );
@@ -56,9 +54,7 @@ class Post extends Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
-  return {
-    getComments: postId => dispatch(getCommentsThunk(postId))
-  };
+  return {};
 };
 
 export default connect(

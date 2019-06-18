@@ -45,11 +45,13 @@ export default (state = initialState, action) => {
 
     case GET_COMMENTS:
       let getCommentsPostId = action.payload.postId;
+
       let updatedCommentsPostArray = state.posts;
 
       let indexOfTargetPostFillComments = updatedCommentsPostArray.findIndex(
         post => post.id === getCommentsPostId
       );
+
 
       updatedCommentsPostArray[indexOfTargetPostFillComments].comments = action.payload.comments;
 

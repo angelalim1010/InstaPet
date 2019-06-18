@@ -19,14 +19,14 @@ class PostComments extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let addedComment = {
-      newComment: {
-        userId: 1,
-        content: this.state.content
-      },
-      postId: this.props.postId,
-    };
-    this.props.addComment(addedComment)
+    // let addedComment = {
+    //   newComment: {
+    //     userId: 1,
+    //     content: this.state.content
+    //   },
+    //   postId: this.props.postId,
+    // };
+    // this.props.addComment(addedComment)
   };
 
   render() {
