@@ -63,5 +63,3 @@ export const getUsersThunk = () => dispatch => {
     .then(users => dispatch(getUsers(users)))
     .catch(err => console.log(err));
 };
-
-// USER POST THUNKS

@@ -112,15 +112,17 @@ passport.use(
         where: {
           username: jwt_payload.id // Make sure that the id in the payload is set to the username. Refer to controllers/users.js token declaration.
         }
-      }).then(user => {
-        if (user) {
-          console.log("User found in database in passport");
-          done(null, user);
-        } else {
-          console.log("User not found in database in passport");
-          done(null, false);
-        }
-      });
+      })
+        .then(user => {
+          if (user) {
+            console.log("User found in database in passport");
+            done(null, user);
+          } else {
+            console.log("User not found in database in passport");
+            done(null, false);
+          }
+        })
+        .then(res.json("Success!?? cant see this without token?"));
     } catch (err) {
       done(err);
     }

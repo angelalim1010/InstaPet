@@ -28,7 +28,6 @@ module.exports = {
   },
   login(req, res, next) {
     passport.authenticate("login", (err, user, info) => {
-      console.log("running login authenticate");
       if (err) {
         console.log(err);
       }
@@ -62,12 +61,28 @@ module.exports = {
             auth: true,
             token: token
           };
-
+          // res.cookie("jwt", jwt, { httpOnly: true, secure: true });
           res.status(200).json(currentUser);
         });
       }
     })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() is called, then pipes it to (req, res, next)
   },
+  findUser(req, res, next) {
+    passport.authenticate("jwt", { session: false }, (err, user, info) => {
+      if (err) {
+        console.log(err);
+      }
+      if (info != undefined) {
+        // If info isn't undefined, that means an error message was returned
+        console.log(info);
+        res.json(info);
+      } else {
+        console.log("User found from route");
+        res.status(200).json(user);
+      }
+    })(req, res, next);
+  },
+
   list(req, res, next) {
     return User.findAll({
       order: [["id", "DESC"]]

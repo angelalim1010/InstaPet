@@ -11,6 +11,11 @@
   height: 100%;
 }
 
+.title{
+    font-family: "Brush Script MT";
+    font-style: normal;
+    font-size: 70px;
+}
 .box {
     background-color: white;
     height: 400px;
@@ -22,7 +27,7 @@
     position: relative;
     margin-left: 65%;
     margin-top: 10%;
-    border-radius: 30px;
+    border-radius: 5px;
     z-index: 30;
 }
 
@@ -32,8 +37,9 @@
   display: flex;
   width: 215px;
   min-width: 125px;
-  height: 28px;
-  border-radius: 10px;
+  height: 20px;
+  border-radius: 2px;
+
 }
 
 
@@ -41,8 +47,8 @@
     align-items: center;
     width: 215px;
     min-width: 125px;
-    height: 28px;
-    border-radius: 10px;
+    height: 35px;
+    border-radius: 5px;
     display: table-cell;
     vertical-align: middle;
     color: white;
@@ -52,4 +58,10 @@
 }
 .signupbox{
     text-align: center;
+    color: #404040;
+}
+
+.inputBox{
+    background-color: #fafafa;
+    color: gray;
 }

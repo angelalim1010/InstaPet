@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import AllPosts from './AllPosts';
-import './Homepage.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import AllPosts from "./AllPosts";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount = () => {};
 
   render() {
     return (
@@ -18,7 +19,9 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
   return {};

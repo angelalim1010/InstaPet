@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import './NavBar.css';
-import { Form, Input } from 'reactstrap';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import "./NavBar.css";
+import { Form, Input, Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
+import { logoutUserThunk } from "../../actions/userActions";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
   }
+
+  logout = e => {
+    e.preventDefault();
+    localStorage.setItem("JWT", undefined);
+    this.props.logoutUser();
+  };
 
   render() {
     return (
@@ -17,7 +26,7 @@ class NavBar extends Component {
             <Link to="/">
               <img
                 className="logo"
-                src={require('../../img/logo.png')}
+                src={require("../../img/logo.png")}
                 alt="logo"
               />
             </Link>
@@ -27,8 +36,21 @@ class NavBar extends Component {
             <Input type="text" placeholder="Search" />
           </Form>
 
+          <div className="navBarItem">
+            <Link to="/signup">Signup</Link>
+          </div>
+          <div className="navBarItem">
+            <Link to="/login">Login</Link>
+          </div>
+
+          <Button className="navBarItem" onClick={this.logout}>
+            Logout
+          </Button>
+
           <div className="navBarProfile navBarItem">
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile">
+              <FontAwesomeIcon icon={faUserEmpty} size="2x" color="black" />
+            </Link>
           </div>
         </div>
       </div>
@@ -38,7 +60,11 @@ class NavBar extends Component {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: status => dispatch(logoutUserThunk(status))
+  };
+};
 
 export default connect(
   mapStateToProps,

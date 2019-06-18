@@ -11,7 +11,6 @@ import {
   faChevronCircleUp,
   faMinusCircle
 } from '@fortawesome/free-solid-svg-icons';
-import './Homepage.css';
 
 class AllPosts extends Component {
   constructor(props) {

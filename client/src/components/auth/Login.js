@@ -20,7 +20,7 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     if (
       this.state.password != "" &&
@@ -31,10 +31,18 @@ class Login extends Component {
         password: this.state.password
       };
       this.props.loginUser(user);
-      this.props.history.push("/");
     } else {
       alert("Invalid email or empty password");
     }
+  };
+
+  componentWillReceiveProps = async nextProps => {
+    console.log("Doing compoenent will receive props");
+    console.log(nextProps);
+  };
+
+  componentWillUnmount = async () => {
+    //this.props.history.push("/");
   };
 
   render() {
@@ -44,12 +52,12 @@ class Login extends Component {
         <div className="box">
           <h1 className="title">Instapet</h1>
           <Form>
-            <FormGroup>
+            <FormGroup className="formbox">
               <Input
                 type="email"
                 name="email"
-                className="formbox"
                 placeholder="Email"
+                className="inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -58,8 +66,8 @@ class Login extends Component {
               <Input
                 type="password"
                 name="password"
-                className="formbox"
                 placeholder="Password"
+                className="inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>

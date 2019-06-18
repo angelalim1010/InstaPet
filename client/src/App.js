@@ -13,6 +13,19 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount = async () => {
+    console.log("componentDidMount");
+    console.log(localStorage.getItem("JWT"));
+  };
+
+  componentWillReceiveProps = async nextProps => {
+    console.log("componentWillReceiveProps");
+    if (nextProps.user.user.token) {
+      await localStorage.setItem("JWT", nextProps.user.user.token);
+    }
+    console.log(localStorage.getItem("JWT"));
+  };
+
   displayContent = () => {
     // If logged in
     if (this.props.user.user.auth) {

@@ -4,33 +4,49 @@ import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
+import { likePostThunk } from "../../actions/postActions";
+import { unlikePostThunk } from "../../actions/postActions";
 
 class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
       likeStatus: false,
-      likes: this.props.likes,
-      likeCount: this.props.likes.length
+      currentUserId: 2
     };
   }
 
   toggleLikeStatus = () => {
+    //if current user did not like post and clicked like
     if (!this.state.likeStatus) {
       this.setState(prevState => ({
         likeStatus: !prevState.likeStatus,
-        likeCount: prevState.likeCount + 1
       }));
+      let newLikePost = {
+        postId: this.props.postId,
+        userId: this.state.currentUserId
+      }
+      //call likePost
+      this.props.likePost(newLikePost)
     } else {
       this.setState(prevState => ({
         likeStatus: !prevState.likeStatus,
-        likeCount: prevState.likeCount - 1
       }));
+      //if current user likes post and clicked unlike
+      let newUnlikePost = {
+        postId: this.props.postId,
+        userId: this.state.currentUserId
+      }
+      //call unlike
+      this.props.unlikePost(newUnlikePost)
     }
   };
 
   displayLikeStatus = () => {
-    if (this.state.likeStatus) {
+    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
+
+    //check if current user liked post
+    if (postObject[0].likes.includes(this.state.currentUserId)) {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
@@ -47,13 +63,18 @@ class PostDescription extends Component {
         />
       );
     }
-  };
+  }
 
   displayLikeCount = () => {
-    if (this.state.likeCount === 1) {
+    //find post with postId
+    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
+    //find like count of that post
+    console.log(postObject[0].likes.length);
+
+    if (postObject[0].likes.length === 1) {
       return `1 like`;
     } else {
-      return `${this.state.likeCount} likes`;
+      return `${postObject[0].likes.length} likes`;
     }
   };
 
@@ -72,14 +93,16 @@ class PostDescription extends Component {
       </div>
     );
   }
-}
-
+};
 const mapStateToProps = state => ({
   post: state.post
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    likePost: likedPost => dispatch(likePostThunk(likedPost)),
+    unlikePost: unlikedPost => dispatch(unlikePostThunk(unlikedPost))
+  };
 };
 export default connect(
   mapStateToProps,

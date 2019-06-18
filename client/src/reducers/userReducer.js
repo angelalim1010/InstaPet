@@ -32,13 +32,14 @@ export default (state = initialState, action) => {
     case ADD_USER_POST:
       return {
         ...state,
-        userPosts: [action.payload, ...state.userPosts]
+        user: action.payload
       };
     case REMOVE_USER:
-      // NEEDS TO BE IMPLEMENTED
       return {
-        ...state
+        ...state,
+        users: [...state.users.filter(user => user.id !== action.payload)]
       };
+
     case REMOVE_USER_POST:
       // TO BE IMPLEMENTED
       return {
@@ -46,10 +47,10 @@ export default (state = initialState, action) => {
       };
     case EDIT_USER:
       // EDIT PERSON (REQUIRES SOME IMPLEMENTATION)
-      let editedUsers = state.users;
+      let editedUser = state.user;
       return {
         ...state,
-        users: editedUsers
+        user: editedUser
       };
     default:
       return state;
