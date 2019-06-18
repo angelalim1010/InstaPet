@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import { Form, Input } from 'reactstrap';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,7 @@ class NavBar extends Component {
           </Form>
 
           <div className="navBarProfile navBarItem">
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile"><FontAwesomeIcon icon={faUserEmpty} size = "2x" color = "black"/></Link>
           </div>
         </div>
       </div>
