@@ -8,10 +8,8 @@ class HomePage extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
-    console.log(this.props.user.user);
-    console.log("From HomePage.js: ", localStorage.getItem("JWT"));
-  };
+  componentDidMount = () => {};
+
   render() {
     return (
       <div className="homePage">

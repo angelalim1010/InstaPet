@@ -6,7 +6,7 @@ import {
   REMOVE_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
-  SET_USER_AUTH,
+  LOGOUT_USER,
   REMOVE_USER,
   EDIT_USER
 } from "./types";
@@ -34,10 +34,9 @@ const loginUser = user => {
   };
 };
 
-const setUserAuth = status => {
+const logoutUser = () => {
   return {
-    type: SET_USER_AUTH,
-    payload: status
+    type: LOGOUT_USER
   };
 };
 
@@ -104,8 +103,8 @@ export const loginUserThunk = user => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const setUserAuthThunk = status => dispatch => {
-  return dispatch(setUserAuth(status)).catch(err => console.log(err));
+export const logoutUserThunk = () => dispatch => {
+  return dispatch(logoutUser());
 };
 
 // USER POST THUNKS

@@ -5,7 +5,7 @@ import {
   ADD_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
-  SET_USER_AUTH,
+  LOGOUT_USER,
   REMOVE_USER,
   EDIT_USER
 } from "../actions/types";
@@ -37,10 +37,10 @@ export default (state = initialState, action) => {
         ...state,
         user: action.payload
       };
-    case SET_USER_AUTH:
+    case LOGOUT_USER:
       return {
         ...state,
-        user: { ...state.user, auth: action.payload }
+        user: initialState.user
       };
     case ADD_USER_POST:
       return {
