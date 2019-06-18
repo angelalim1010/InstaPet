@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 import ProfileHeader from './ProfileHeader';
 import ProfilePosts from './ProfilePosts';
+import { getRelationshipsThunk } from '../../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {
@@ -25,7 +26,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    getRelationships: () => dispatch(getRelationshipsThunk())
+  };
 };
 
 export default connect(
