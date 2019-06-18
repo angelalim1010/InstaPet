@@ -21,27 +21,41 @@ passport.use(
     },
     (req, userName, password, done) => {
       try {
-        console.log(req.body.email, userName, password, done);
+        // Check if username is already in use
         User.findOne({
           where: {
             userName: userName
           }
         }).then(user => {
           if (user != null) {
-            console.log("Username is already taken");
-            return done(null, false, { message: "Username is already taken" });
-          } else {
-            bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-              User.create({
-                userName,
-                password: hashedPassword,
-                email: req.body.email
-              }).then(user => {
-                console.log("User created");
-                return done(null, user);
-              });
-            });
+            console.log("Username is already in use");
+            return done(null, false, { message: "Username is already in use" });
           }
+        });
+
+        // Check if email is already in use
+        User.findOne({
+          where: {
+            email: req.body.email
+          }
+        }).then(user => {
+          if (user != null) {
+            console.log("Email is already in use");
+            return done(null, false, { message: "Email is already in use" });
+          }
+        });
+
+        // Hash password
+        bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+          // Create User
+          User.create({
+            userName,
+            password: hashedPassword,
+            email: req.body.email
+          }).then(user => {
+            console.log("User created");
+            return done(null, user);
+          });
         });
       } catch (err) {
         done(err);

@@ -16,20 +16,13 @@ module.exports = {
         // If info isn't undefined, that means an error message was returned
         console.log(info.message);
         res.send(info.message);
-      } else {
-        req.logIn(user => {
-          console.log("Logging in");
-          console.log(req.body);
-          const data = {
-            userName: user.userName,
-            password: req.body.password,
-            email: req.body.email
-          };
-          User.create(data)
-            .then(user => res.status(200).json(user))
-            .catch(err => res.status(400).json(err));
-        });
       }
+
+      // else {
+      //   req.logIn(() => {
+      //     console.log("Logged in!");
+      //   });
+      // }
     })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() does something, then pipes it to (req, res, next)
   },
   list(req, res, next) {
