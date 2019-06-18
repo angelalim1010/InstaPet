@@ -18,19 +18,21 @@ module.exports = app => {
    * POST ROUTES
    */
 
-  app.post("/p/", PostsController.create);
   app.get("/p/", PostsController.list);
+  app.post("/p/", PostsController.create);
   app.delete("/p/:postId", PostsController.delete);
   app.put("/p/:postId", PostsController.update);
+
+
+  /**
+   *  COMMENT ROUTES
+   */
+  app.get("/comments/", CommentsController.list);
+  app.post("/comments/", CommentsController.create);
+  app.delete("/comments/:commentId", CommentsController.delete);
+
+
 };
-
-
-/**
- *  COMMENT ROUTES
- */
-app.get("/comments", CommentsController.list);
-app.post("/comments", CommentsController.create);
-app.delete("/comments/:commentId", CommentsController.delete);
 
 
 /**

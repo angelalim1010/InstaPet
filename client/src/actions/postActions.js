@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
-  FETCH_ALL_LIKES,
+  // FETCH_ALL_LIKES,
 
   CREATE_POST,
   DELETE_POST,
