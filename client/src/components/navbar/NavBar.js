@@ -15,8 +15,11 @@ class NavBar extends Component {
         <div className="navBarItems">
           <div className="navBarLogo navBarItem">
             <Link to="/">
-            <img className = "logo"
-              src={require("../../img/logo.png")}/>
+              <img
+                className="logo"
+                src={require('../../img/logo.png')}
+                alt="logo"
+              />
             </Link>
           </div>
 
