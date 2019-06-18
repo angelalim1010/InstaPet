@@ -68,16 +68,16 @@ passport.use(
   "login",
   new localStrategy(
     {
-      usernameField: "username",
+      usernameField: "userName",
       passwordField: "password",
-      emailField: "email",
+      passReqToCallback: true,
       session: false
     },
-    (username, password, email, done) => {
+    (req, userName, password, done) => {
       try {
         User.findOne({
           where: {
-            username: username
+            email: req.body.email
           }
         }).then(user => {
           if (user == null) {
@@ -112,7 +112,7 @@ passport.use(
     try {
       User.findOne({
         where: {
-          username: jwt_payload.id // The id in the payload must be the username
+          username: jwt_payload.id // Make sure that the id in the payload is set to the username. Refer to controllers/users.js token declaration.
         }
       }).then(user => {
         if (user) {

@@ -8,7 +8,8 @@ module.exports = app => {
    */
 
   app.get("/accounts/", UsersController.list);
-  app.post("/accounts/registerUser", UsersController.create);
+  app.post("/accounts/registerUser", UsersController.register);
+  app.post("/accounts/loginUser", UsersController.login);
   app.put("/accounts/:userId", UsersController.update);
   app.delete("/accounts/:userId", UsersController.destroy);
 
