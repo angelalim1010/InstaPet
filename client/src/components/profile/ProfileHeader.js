@@ -1,13 +1,33 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./Profile.css";
-import { Button } from "reactstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './Profile.css';
+import { Button } from 'reactstrap';
+import { timingSafeEqual } from 'crypto';
 
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      following: false,
+      text: 'Follow'
+    };
   }
+
+  follow = () => {
+    if (this.state.following) {
+      this.setState(prevState => ({
+        following: !prevState.following,
+        text: 'Follow'
+      }));
+    } else {
+      this.setState(prevState => ({
+        following: !prevState.following,
+        text: 'Following'
+      }));
+    }
+  };
 
   render() {
     return (
@@ -15,6 +35,7 @@ class ProfileHeader extends Component {
         <img
           className="profilePicture"
           src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+          alt="profilepic"
         />
         <div className="userInfoContainer">
           <div className="userNameFollowStatus">
@@ -22,7 +43,9 @@ class ProfileHeader extends Component {
               <h3>userName</h3>
             </div>
             <div className="followButtonContainer">
-              <Button className="followButton">Following</Button>
+              <Button onClick={this.follow} className="followButton">
+                {this.state.text}
+              </Button>
             </div>
           </div>
           <div className="userStats">

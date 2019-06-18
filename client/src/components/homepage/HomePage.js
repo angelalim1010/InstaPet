@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import AllPosts from "./AllPosts";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AllPosts from './AllPosts';
+import './Homepage.css';
 
 class HomePage extends Component {
   constructor(props) {
