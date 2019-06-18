@@ -27,7 +27,6 @@ module.exports = {
     })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() is called, then pipes it to (req, res, next)
   },
   login(req, res, next) {
-    console.log(JWT_SECRET);
     passport.authenticate("login", (err, user, info) => {
       console.log("running login authenticate");
       if (err) {

@@ -32,20 +32,13 @@ class Login extends Component {
         password: this.state.password
       };
       this.props.loginUser(user);
-      this.setAuthSuccess();
     } else {
       alert("Invalid email or empty password");
     }
   };
 
-  setAuthSuccess = () => {
-    this.setState({
-      authSuccess: true
-    });
-  };
-
   renderRedirect = () => {
-    if (this.state.authSuccess) {
+    if (this.props.user.user.auth) {
       return <Redirect to="/" />;
     }
   };
@@ -53,6 +46,7 @@ class Login extends Component {
   render() {
     return (
       <div className="background">
+        {this.renderRedirect()}
         <Phone />
         <div className="box">
           <h1 className="title">Instapet</h1>
@@ -91,7 +85,9 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
   return {
