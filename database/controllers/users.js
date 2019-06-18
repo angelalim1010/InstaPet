@@ -1,4 +1,4 @@
-import passport from "../../config/passport";
+const passport = require("../../config/passport");
 const User = require("../models").User;
 
 module.exports = {
