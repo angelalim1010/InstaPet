@@ -1,12 +1,13 @@
 import {
   GET_USERS,
-  GET_USER_POSTS,
+  GET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
   REMOVE_USER,
-  EDIT_USER
+  EDIT_USER,
+  GET_RELATIONSHIPS
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: action.payload
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload
       };
     case REGISTER_USER:
       return {
@@ -51,7 +57,14 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        users: [
+          /* edited array */
+        ]
+      };
+    case GET_RELATIONSHIPS:
+      return {
+        ...state
       };
     default:
       return state;

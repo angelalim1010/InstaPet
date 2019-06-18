@@ -1,13 +1,14 @@
 import axios from 'axios';
 import {
   GET_USERS,
-  GET_USER_POSTS,
+  GET_USER,
   ADD_USER_POST,
   REMOVE_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
   REMOVE_USER,
-  EDIT_USER
+  EDIT_USER,
+  GET_RELATIONSHIPS
 } from './types';
 
 // Users
@@ -21,7 +22,7 @@ const getUsers = users => {
 
 const getUser = userId => {
   return {
-    type: GET_USERS,
+    type: GET_USER,
     payload: userId
   };
 };
@@ -54,14 +55,14 @@ const editUser = editedUser => {
   };
 };
 
-// User Posts
-
-const getUserPosts = posts => {
+const getRelationships = relationships => {
   return {
-    type: GET_USER_POSTS,
-    payload: posts
+    type: GET_RELATIONSHIPS,
+    payload: relationships
   };
 };
+
+// User Posts
 
 const addUserPost = newPost => {
   return {
@@ -113,4 +114,12 @@ export const getUserThunk = userId => dispatch => {
 
 export const editUserThunk = editedUser => dispatch => {
   return dispatch(editUser(editedUser));
+};
+
+export const getRelationshipsThunk = () => dispatch => {
+  return axios
+    .get('/accounts/relationships')
+    .then(res => res.data)
+    .then(relationships => dispatch(getRelationships(relationships)))
+    .catch(err => console.log(err));
 };
