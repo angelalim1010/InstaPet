@@ -53,7 +53,6 @@ passport.use(
             password: hashedPassword,
             email: req.body.email
           }).then(user => {
-            console.log("User created");
             return done(null, user);
           });
         });
