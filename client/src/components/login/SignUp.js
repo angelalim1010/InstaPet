@@ -25,7 +25,7 @@ class SignUp extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     if (
       this.state.userName !== "" &&
@@ -38,29 +38,16 @@ class SignUp extends Component {
         userName: this.state.userName,
         password: this.state.password
       };
-      this.props.registerUser(newUser);
-      this.setAuthSuccess();
+      await this.props.registerUser(newUser);
+      this.props.history.push("/login");
     } else {
       alert("Please fill out all the appropriate fields");
-    }
-  };
-
-  setAuthSuccess = () => {
-    this.setState({
-      authSuccess: true
-    });
-  };
-
-  renderRedirect = () => {
-    if (this.state.authSuccess) {
-      return <Redirect to="/" />;
     }
   };
 
   render() {
     return (
       <div className="background">
-        {this.renderRedirect()}
         <Phone />
         <div className="signupheader">
           <h1>Instapet</h1>
