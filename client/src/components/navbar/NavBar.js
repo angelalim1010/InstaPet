@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import './NavBar.css';
-import { Form, Input } from 'reactstrap';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import "./NavBar.css";
+import { Form, Input } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
 class NavBar extends Component {
@@ -18,7 +18,7 @@ class NavBar extends Component {
             <Link to="/">
               <img
                 className="logo"
-                src={require('../../img/logo.png')}
+                src={require("../../img/logo.png")}
                 alt="logo"
               />
             </Link>
@@ -27,6 +27,13 @@ class NavBar extends Component {
           <Form className="navBarSearch navBarItem">
             <Input type="text" placeholder="Search" />
           </Form>
+
+          <div className="navBarItem">
+            <Link to="/signup">Signup</Link>
+          </div>
+          <div className="navBarItem">
+            <Link to="/login">Login</Link>
+          </div>
 
           <div className="navBarProfile navBarItem">
             <Link to="/profile"><FontAwesomeIcon icon={faUserEmpty} size = "2x" color = "black"/></Link>
