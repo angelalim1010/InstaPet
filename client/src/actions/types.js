@@ -18,4 +18,5 @@ export const REMOVE_USER = "REMOVE_USER";
 
 // ERRORS
 
-export const SET_ERRORS = "SET_ERRORS";
+export const SET_ERROR = "SET_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";

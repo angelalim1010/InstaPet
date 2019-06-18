@@ -1,7 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { SET_CURRENT_USER, SET_ERRORS } from "./types";
+import { REGISTER_USER, SET_CURRENT_USER, SET_ERROR } from "./types";
 
 const setCurrentUser = user => {
   return {
@@ -10,9 +10,16 @@ const setCurrentUser = user => {
   };
 };
 
-const setErrors = err => {
+const registerUser = user => {
   return {
-    type: SET_ERRORS,
+    type: REGISTER_USER,
+    payload: user
+  };
+};
+
+const setError = err => {
+  return {
+    type: SET_ERROR,
     payload: err.response.data
   };
 };
@@ -27,8 +34,14 @@ const setErrors = err => {
 export const registerUser = (user, history) => dispatch => {
   return axios
     .post(`/accounts/register`, user)
-    .then(res => history.push("/login")) // Re-direct to login on successful register. withRouter is necessary for this in the component.
-    .catch(err => dispatch(setErrors(err)));
+    .then(res => {
+      // Register new user in the store
+      dispatch(registerUser(res.data));
+
+      // Re-direct to login on successful register. withRouter is necessary for this in the component.
+      history.push("/login");
+    })
+    .catch(err => dispatch(setError(err)));
 };
 
 /**
@@ -55,14 +68,14 @@ export const loginUser = user => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err => dispatch(setErrors(err)));
+    .catch(err => dispatch(setError(err)));
 };
 
 /**
  * Logout User
- * Removes token from both localStorage and Authorization header
- * Sets current user to empty object
- * Sets isAuthenticated to false
+ * Remove token from both localStorage and Authorization header
+ * Set current user to empty object
+ * Set isAuthenticated to false
  */
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage

@@ -1,23 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import { Link } from "react-router-dom";
-import "./SignUp.css";
+import "./Register.css";
 import Phone from "./Phone";
-import { registerUserThunk } from "../../actions/userActions";
+import { registerUser } from "../../actions/userActions";
+import { clearErrors } from "../../actions/errorActions";
 
-class SignUp extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: "",
       email: "",
       displayName: "",
-      userName: "",
       password: "",
-      authSuccess: false
+      password2: "",
+      error: {}
     };
   }
+
+  componentDidMount = () => {
+    // If user is already logged in and navigates to the Register page, they will be redirected to the homepage
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.error) {
+      this.setState({
+        error: nextProps.error
+      });
+    }
+  };
 
   handleChange = e => {
     this.setState({
@@ -27,40 +43,25 @@ class SignUp extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (
-      this.state.userName !== "" &&
-      this.state.password !== "" &&
-      this.state.email.match(/\w+@\w+\.(com|edu|org)/)
-    ) {
-      let newUser = {
-        email: this.state.email,
-        displayName: this.state.displayName,
-        userName: this.state.userName,
-        password: this.state.password
-      };
-      this.props.registerUser(newUser);
-      this.setAuthSuccess();
-    } else {
-      alert("Please fill out all the appropriate fields");
-    }
-  };
 
-  setAuthSuccess = () => {
-    this.setState({
-      authSuccess: true
-    });
-  };
+    const newUser = {
+      email: this.state.email,
+      displayName: this.state.displayName,
+      userName: this.state.userName,
+      password: this.state.password,
+      password2: this.state.password2
+    };
 
-  renderRedirect = () => {
-    if (this.state.authSuccess) {
-      return <Redirect to="/" />;
-    }
+    // Since the redirect is handled within the action, the history needs to be passed. withRouter is necessary for this.
+    this.props.registerUser(newUser, this.props.history);
+
+    // Clear the errorReducer
+    this.props.clearError();
   };
 
   render() {
     return (
       <div className="background">
-        {this.renderRedirect()}
         <Phone />
         <div className="signupheader">
           <h1>Instapet</h1>
@@ -118,15 +119,18 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth,
+  error: state.error
+});
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerUser: user => dispatch(registerUserThunk(user))
+    registerUser
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUp);
+)(Register);
