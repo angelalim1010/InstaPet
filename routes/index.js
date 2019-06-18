@@ -1,6 +1,6 @@
-const UsersController = require("../controllers").users;
-const CommentsController = require("../controllers").comments;
-const PostsController = require("../controllers").posts;
+const UsersController = require("../database/controllers/").users;
+const CommentsController = require("../database/controllers/").comments;
+const PostsController = require("../database/controllers/").posts;
 
 module.exports = app => {
   /**
@@ -8,7 +8,8 @@ module.exports = app => {
    */
 
   app.get("/accounts/", UsersController.list);
-  app.post("/accounts/", UsersController.create);
+  app.post("/accounts/registerUser", UsersController.register);
+  app.post("/accounts/loginUser", UsersController.login);
   app.put("/accounts/:userId", UsersController.update);
   app.delete("/accounts/:userId", UsersController.destroy);
 

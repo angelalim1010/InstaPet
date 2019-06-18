@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define("User", {
     // A string containing the user's chosen userName. ie. johndoe22
     userName: {
       type: DataTypes.STRING,
@@ -61,13 +61,17 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = models => {
-    // associations can be defined here
     User.hasMany(models.Post, {
-      foreignKey: 'userId' // Each user can habe multiple posts
+      foreignKey: "userId" // Each user can have multiple posts
     });
     User.hasMany(models.Comment, {
-      foreignKey: 'userId'
+      foreignKey: "userId"
     });
   };
+
+  User.sync()
+    .then(() => console.log("User synced successfully"))
+    .catch(err => console.log(err));
+
   return User;
 };
