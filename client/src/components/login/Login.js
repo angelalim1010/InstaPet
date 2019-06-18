@@ -20,7 +20,7 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     if (
       this.state.password != "" &&
@@ -30,7 +30,7 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       };
-      this.props.loginUser(user);
+      await this.props.loginUser(user);
       this.props.history.push("/");
     } else {
       alert("Invalid email or empty password");
