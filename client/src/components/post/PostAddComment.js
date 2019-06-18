@@ -8,7 +8,7 @@ class PostComments extends Component {
     super(props);
     this.state = {
       content: "",
-      currentUserId: 1
+      currentUserId: this.props.user.user.userId
     };
   }
 
@@ -52,7 +52,9 @@ class PostComments extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
   return {

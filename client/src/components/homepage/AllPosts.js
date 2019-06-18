@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAllPostsThunk } from '../../actions/postActions';
+import { fetchAllCommentsThunk } from '../../actions/postActions';
+import { fetchAllLikesThunk } from '../../actions/postActions';
 import Post from '../post/Post';
 import CreatePostForm from '../post/CreatePostForm';
 import '../post/Post.css';
@@ -20,6 +22,8 @@ class AllPosts extends Component {
 
   componentDidMount = () => {
     this.props.fetchAllPosts();
+    this.props.fetchAllComments();
+    this.props.fetchAllLikes();
   };
 
   displayPosts = () => {
@@ -83,7 +87,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllPosts: () => dispatch(fetchAllPostsThunk())
+    fetchAllPosts: () => dispatch(fetchAllPostsThunk()),
+    fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
+    fetchAllLikes: () => dispatch(fetchAllLikesThunk()),
   };
 };
 

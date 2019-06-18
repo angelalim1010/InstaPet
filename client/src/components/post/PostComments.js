@@ -9,9 +9,9 @@ class PostComments extends Component {
     super(props);
   }
 
-  componentDidMount = () => {
-    this.props.getComments(this.props.postId);
-  };
+  // componentDidMount = () => {
+  //   // this.props.getComments(this.props.postId);
+  // };
 
   // displayViewAllComments = () => {
   //   console.log("LIL VIEW ALL SECTION");
@@ -37,16 +37,16 @@ class PostComments extends Component {
   // };
 
   displayComments = () => {
+    // filter through comments for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
 
-    let indexOfTarget = this.props.post.posts.findIndex(
-      post => post.id === this.props.postId
-    );
-
-    if (this.props.post.posts[indexOfTarget].comments.length === 0) {
+    if (allCommentsForPost.length === 0) {
       return <div className="postCommentsNone" />;
     } else {
       return (
-        this.props.post.posts[indexOfTarget].comments.map(comment => {
+        allCommentsForPost.map(comment => {
           {
             return (
               <div className="comment" key={comment.id}>
@@ -78,7 +78,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getComments: postId => dispatch(getCommentsThunk(postId))
+    // getComments: postId => dispatch(getCommentsThunk(postId))
   };
 };
 
