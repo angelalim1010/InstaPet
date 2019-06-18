@@ -6,6 +6,11 @@ module.exports = {
       .then(comment => res.status(200).json(comment))
       .catch(err => res.status(400).json(err));
   },
+  list(req, res) {
+    return Comment.findAll({ where: { postId: req.params.postId }, order: [["id", "DESC"]] })
+      .then(posts => res.status(200).json(posts))
+      .catch(err => res.status(400).json(err));
+  },
   delete(req, res) {
     return Comment.destroy({ where: { id: req.params.userId } })
       .then(() =>
