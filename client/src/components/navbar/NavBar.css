@@ -9,7 +9,6 @@ a {
 }
 
 .navBar {
-  background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
   position: fixed;
   z-index: 1;
@@ -17,6 +16,8 @@ a {
   height: 52px;
   box-sizing: border-box;
   background-color: lightskyblue;
+  box-shadow: 0 2px 2px #efefef;
+  z-index: 9999;
 }
 
 .navBarItems {
@@ -97,5 +98,5 @@ a {
 .navBarProfile a:active,
 .navBarProfile a:hover {
 	color: red;
-	font-size: 35px;
+  font-size: 35px;
 }
