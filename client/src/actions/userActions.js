@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_USERS,
   GET_USER_POSTS,
@@ -8,7 +8,7 @@ import {
   LOGIN_USER,
   REMOVE_USER,
   EDIT_USER
-} from "./types";
+} from './types';
 
 // Users
 
@@ -96,4 +96,6 @@ export const loginUserThunk = user => dispatch => {
     .catch(err => console.log(err));
 };
 
-// USER POST THUNKS
+export const editUserThunk = editedUser => dispatch => {
+  return dispatch(editUser(editedUser));
+};

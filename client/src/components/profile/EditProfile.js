@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { editUserThunk } from '../../actions/userActions';
 
-export default class EditProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,8 +26,8 @@ export default class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.name === "" || this.state.imageURL === "") {
-      alert("One or more fields are invalid");
+    if (this.state.name === '' || this.state.imageURL === '') {
+      alert('One or more fields are invalid');
     } else {
       // send changed user data
       let changedUser = {
@@ -113,3 +114,18 @@ EditProfile.propTypes = {
 };
 
 // CONNECT TO REDUX
+
+const mapStateToProps = state => ({
+  user: this.state.user
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editUser: changedUser => dispatch(editUserThunk(changedUser))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditProfile);
