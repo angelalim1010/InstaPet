@@ -36,37 +36,34 @@ module.exports = {
         console.log(info);
         res.json(info);
       } else {
-        req
-          .login(user, err => {
-            User.findOne({
-              where: {
-                email: req.body.email
-              }
-            });
-          })
-          .then(user => {
-            const token = jwt.sign(
-              {
-                id: user.userName
-              },
-              JWT_SECRET
-            );
+        User.findOne({
+          where: {
+            email: req.body.email
+          }
+        }).then(user => {
+          const token = jwt.sign(
+            {
+              id: user.userName
+            },
+            JWT_SECRET
+          );
 
-            let currentUser = {
-              id: user.id,
-              userName: user.userName,
-              email: user.email,
-              displayName: user.displayName,
-              profilePicture: user.profilePicture,
-              bio: user.bio,
-              posts: user.posts,
-              followers: user.followers,
-              following: user.following,
-              auth: true,
-              token: token
-            };
-            res.status(200).json(currentUser);
-          });
+          let currentUser = {
+            id: user.id,
+            userName: user.userName,
+            email: user.email,
+            displayName: user.displayName,
+            profilePicture: user.profilePicture,
+            bio: user.bio,
+            posts: user.posts,
+            followers: user.followers,
+            following: user.following,
+            auth: true,
+            token: token
+          };
+          // res.cookie("jwt", jwt, { httpOnly: true, secure: true });
+          res.status(200).json(currentUser);
+        });
       }
     })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() is called, then pipes it to (req, res, next)
   },
@@ -81,10 +78,7 @@ module.exports = {
         res.json(info);
       } else {
         console.log("User found from route");
-        res.status(200).json({
-          auth: true,
-          email: user.email
-        });
+        res.status(200).json(user);
       }
     })(req, res, next);
   },

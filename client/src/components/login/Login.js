@@ -30,11 +30,19 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       };
-      await this.props.loginUser(user);
-      this.props.history.push("/");
+      this.props.loginUser(user);
     } else {
       alert("Invalid email or empty password");
     }
+  };
+
+  componentWillReceiveProps = async nextProps => {
+    console.log("Doing compoenent will receive props");
+    console.log(nextProps);
+  };
+
+  componentWillUnmount = async () => {
+    //this.props.history.push("/");
   };
 
   render() {
@@ -49,7 +57,7 @@ class Login extends Component {
                 type="email"
                 name="email"
                 placeholder="Email"
-                className = "inputBox"
+                className="inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -59,7 +67,7 @@ class Login extends Component {
                 type="password"
                 name="password"
                 placeholder="Password"
-                className = "inputBox"
+                className="inputBox"
                 onChange={this.handleChange}
               />
             </FormGroup>

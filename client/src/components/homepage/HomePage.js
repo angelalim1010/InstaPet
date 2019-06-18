@@ -8,6 +8,10 @@ class HomePage extends Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    console.log(this.props.user.user);
+    console.log("From HomePage.js: ", localStorage.getItem("JWT"));
+  };
   render() {
     return (
       <div className="homePage">
@@ -17,7 +21,9 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
   return {};

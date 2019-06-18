@@ -3,10 +3,11 @@ const CommentsController = require("../database/controllers/").comments;
 const PostsController = require("../database/controllers/").posts;
 
 module.exports = app => {
+  app.get("/findUser/", UsersController.findUser);
   /**
    *  USER ROUTES
    */
-  app.get("/secret", UsersController.findUser);
+
   app.get("/accounts/", UsersController.list);
   app.post("/accounts/registerUser", UsersController.register);
   app.post("/accounts/loginUser", UsersController.login);

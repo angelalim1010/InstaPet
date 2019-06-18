@@ -13,8 +13,19 @@ class App extends Component {
     super(props);
   }
 
-  componentDidMount = () => {
-    console.log(localStorage);
+  componentDidMount = async () => {
+    if (localStorage.getItem("JWT")) {
+      console.log(
+        "There is a JWT token in localStorage: ",
+        localStorage.getItem("JWT")
+      );
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.user.user.token) {
+      localStorage.setItem("JWT", nextProps.user.user.token);
+    }
   };
 
   displayContent = () => {

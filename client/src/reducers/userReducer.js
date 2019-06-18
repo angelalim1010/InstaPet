@@ -5,9 +5,10 @@ import {
   ADD_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
+  SET_USER_AUTH,
   REMOVE_USER,
   EDIT_USER
-} from '../actions/types';
+} from "../actions/types";
 
 const initialState = {
   users: [],
@@ -35,6 +36,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.payload
+      };
+    case SET_USER_AUTH:
+      return {
+        ...state,
+        user: { ...state.user, auth: action.payload }
       };
     case ADD_USER_POST:
       return {

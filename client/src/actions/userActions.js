@@ -6,6 +6,7 @@ import {
   REMOVE_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
+  SET_USER_AUTH,
   REMOVE_USER,
   EDIT_USER
 } from "./types";
@@ -30,6 +31,13 @@ const loginUser = user => {
   return {
     type: LOGIN_USER,
     payload: user
+  };
+};
+
+const setUserAuth = status => {
+  return {
+    type: SET_USER_AUTH,
+    payload: status
   };
 };
 
@@ -94,6 +102,10 @@ export const loginUserThunk = user => dispatch => {
     .then(res => res.data)
     .then(user => dispatch(loginUser(user)))
     .catch(err => console.log(err));
+};
+
+export const setUserAuthThunk = status => dispatch => {
+  return dispatch(setUserAuth(status)).catch(err => console.log(err));
 };
 
 // USER POST THUNKS
