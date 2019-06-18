@@ -116,7 +116,7 @@ EditProfile.propTypes = {
 // CONNECT TO REDUX
 
 const mapStateToProps = state => ({
-  user: this.state.user
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => {

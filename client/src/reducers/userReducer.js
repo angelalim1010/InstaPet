@@ -21,11 +21,6 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
-    case GET_USER_POSTS:
-      return {
-        ...state,
-        userPosts: action.payload
-      };
     case REGISTER_USER:
       return {
         ...state,
@@ -46,18 +41,17 @@ export default (state = initialState, action) => {
         ...state,
         users: [...state.users.filter(user => user.id !== action.payload)]
       };
-
     case REMOVE_USER_POST:
       // TO BE IMPLEMENTED
       return {
         ...state
       };
     case EDIT_USER:
-      // EDIT PERSON (REQUIRES SOME IMPLEMENTATION)
-      let editedUser = state.user;
+      let usersCopy = state.users;
+
       return {
         ...state,
-        user: editedUser
+        user: action.payload
       };
     default:
       return state;

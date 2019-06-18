@@ -19,6 +19,13 @@ const getUsers = users => {
   };
 };
 
+const getUser = userId => {
+  return {
+    type: GET_USERS,
+    payload: userId
+  };
+};
+
 const registerUser = newUser => {
   return {
     type: REGISTER_USER,
@@ -94,6 +101,14 @@ export const loginUserThunk = user => dispatch => {
     .then(res => res.data)
     .then(user => dispatch(loginUser(user)))
     .catch(err => console.log(err));
+};
+
+export const getUserThunk = userId => dispatch => {
+  return axios
+    .get('/accounts/${userId}')
+    .catch(err => console.log(err))
+    .then(res => res.data)
+    .then(userId => dispatch(getUser(userId)));
 };
 
 export const editUserThunk = editedUser => dispatch => {
