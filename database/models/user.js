@@ -61,9 +61,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = models => {
-    // associations can be defined here
     User.hasMany(models.Post, {
-      foreignKey: "userId" // Each user can habe multiple posts
+      foreignKey: "userId" // Each user can have multiple posts
     });
     User.hasMany(models.Comment, {
       foreignKey: "userId"
@@ -71,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.sync()
-    .then(() => console.log("User table created successfully"))
+    .then(() => console.log("User synced successfully"))
     .catch(err => console.log(err));
 
   return User;

@@ -4,7 +4,8 @@ import {
   GET_USER_POSTS,
   ADD_USER_POST,
   REMOVE_USER_POST,
-  ADD_USER,
+  REGISTER_USER,
+  LOGIN_USER,
   REMOVE_USER,
   EDIT_USER
 } from "./types";
@@ -18,10 +19,17 @@ const getUsers = users => {
   };
 };
 
-const addUser = newUser => {
+const registerUser = newUser => {
   return {
-    type: ADD_USER,
+    type: REGISTER_USER,
     payload: newUser
+  };
+};
+
+const loginUser = user => {
+  return {
+    type: LOGIN_USER,
+    payload: user
   };
 };
 
@@ -72,11 +80,19 @@ export const getUsersThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const addUserThunk = user => dispatch => {
+export const registerUserThunk = user => dispatch => {
   return axios
     .post(`/accounts/registerUser`, user)
     .then(res => res.data)
-    .then(user => dispatch(addUser(user)))
+    .then(user => dispatch(registerUser(user)))
+    .catch(err => console.log(err));
+};
+
+export const loginUserThunk = user => dispatch => {
+  return axios
+    .post(`/accounts/loginUser`, user)
+    .then(res => res.data)
+    .then(user => dispatch(loginUser(user)))
     .catch(err => console.log(err));
 };
 

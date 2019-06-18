@@ -14,9 +14,9 @@ passport.use(
   "register",
   new localStrategy(
     {
-      usernameField: "userName",
-      passwordField: "password",
-      passReqToCallback: true,
+      usernameField: "userName", // Letting passport know that the chosen field that has the username/key is userName
+      passwordField: "password", // Letting passport know that the chosen field that has the password/value is password
+      passReqToCallback: true, // Allows access to the req in the callback function
       session: false
     },
     (req, userName, password, done) => {
@@ -68,16 +68,15 @@ passport.use(
   "login",
   new localStrategy(
     {
-      usernameField: "userName",
+      usernameField: "email",
       passwordField: "password",
-      passReqToCallback: true,
       session: false
     },
-    (req, userName, password, done) => {
+    (email, password, done) => {
       try {
         User.findOne({
           where: {
-            email: req.body.email
+            email: email
           }
         }).then(user => {
           if (user == null) {
@@ -89,7 +88,7 @@ passport.use(
                 console.log("Passwords do not match");
                 return done(null, false, { message: "Passwords do not match" });
               }
-              console.log("User found and authenticated");
+              console.log("Login successful!");
               return done(null, user);
             });
           }

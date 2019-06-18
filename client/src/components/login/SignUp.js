@@ -5,7 +5,7 @@ import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 import Phone from "./Phone";
-import { addUserThunk } from "../../actions/userActions";
+import { registerUserThunk } from "../../actions/userActions";
 
 class SignUp extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class SignUp extends Component {
         userName: this.state.userName,
         password: this.state.password
       };
-      this.props.addUser(newUser);
+      this.props.registerUser(newUser);
       this.setAuthSuccess();
     } else {
       alert("Please fill out all the appropriate fields");
@@ -122,7 +122,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: user => dispatch(addUserThunk(user))
+    registerUser: user => dispatch(registerUserThunk(user))
   };
 };
 

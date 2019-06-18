@@ -24,9 +24,10 @@ module.exports = {
           res.status(200).json(user);
         });
       }
-    })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() does something, then pipes it to (req, res, next)
+    })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() is called, then pipes it to (req, res, next)
   },
   login(req, res, next) {
+    console.log(JWT_SECRET);
     passport.authenticate("login", (err, user, info) => {
       console.log("running login authenticate");
       if (err) {
@@ -48,14 +49,25 @@ module.exports = {
             },
             JWT_SECRET
           );
-          res.status(200).json({
+
+          let currentUser = {
+            id: user.id,
+            userName: user.userName,
+            email: user.email,
+            displayName: user.displayName,
+            profilePicture: user.profilePicture,
+            bio: user.bio,
+            posts: user.posts,
+            followers: user.followers,
+            following: user.following,
             auth: true,
-            token: token,
-            message: "User found and logged in"
-          });
+            token: token
+          };
+
+          res.status(200).json(currentUser);
         });
       }
-    })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() does something, then pipes it to (req, res, next)
+    })(req, res, next); // The (req, res, next) is necessary. The function passport.authenticate() is called, then pipes it to (req, res, next)
   },
   list(req, res, next) {
     return User.findAll({

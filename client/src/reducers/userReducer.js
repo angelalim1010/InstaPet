@@ -3,7 +3,8 @@ import {
   GET_USER_POSTS,
   REMOVE_USER_POST,
   ADD_USER_POST,
-  ADD_USER,
+  REGISTER_USER,
+  LOGIN_USER,
   REMOVE_USER,
   EDIT_USER
 } from "../actions/types";
@@ -11,7 +12,7 @@ import {
 const initialState = {
   users: [],
   userPosts: [],
-  user: {}
+  user: { auth: false }
 };
 
 export default (state = initialState, action) => {
@@ -26,10 +27,15 @@ export default (state = initialState, action) => {
         ...state,
         userPosts: action.payload
       };
-    case ADD_USER:
+    case REGISTER_USER:
       return {
         ...state,
         users: [action.payload, ...state.users]
+      };
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload
       };
     case ADD_USER_POST:
       return {
