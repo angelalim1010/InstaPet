@@ -50,25 +50,27 @@ class SignUp extends Component {
       <div className="background">
         <Phone />
         <div className="signupheader">
-          <h1>Instapet</h1>
+          <h1 className="title">Instapet</h1>
           <h3 className="signupmessage">
             Sign up to see some wholesome content
           </h3>
+          <br></br>
           <Form>
-            <FormGroup>
+            <FormGroup className="formbox">
               <Input
                 type="email"
                 name="email"
-                className="formbox"
+                className = "inputBox"
                 placeholder="Email"
                 onChange={this.handleChange}
               />
             </FormGroup>
+            <br></br>
             <FormGroup>
               <Input
                 type="name"
                 name="displayName"
-                className="formbox"
+                className = "inputBox"
                 placeholder="Full Name"
                 onChange={this.handleChange}
               />
@@ -77,7 +79,7 @@ class SignUp extends Component {
               <Input
                 type="userName"
                 name="userName"
-                className="formbox"
+                className = "inputBox"
                 placeholder="Username"
                 onChange={this.handleChange}
               />
@@ -86,7 +88,7 @@ class SignUp extends Component {
               <Input
                 type="password"
                 name="password"
-                className="formbox"
+                className = "inputBox"
                 placeholder="Password"
                 onChange={this.handleChange}
               />
