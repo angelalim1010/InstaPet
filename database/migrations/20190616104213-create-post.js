@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Posts", {
+    return queryInterface.createTable('Posts', {
       // The postId
       id: {
         allowNull: false,
@@ -10,18 +10,18 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       // The userId whom this post belongsTo
-      userId: {
-        type: DataTypes.INTEGER,
+      userName: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true
-        },
-        onDelete: "CASCADE",
-        references: {
-          model: "Users",
-          key: "id",
-          as: "userId"
         }
+        // onDelete: 'CASCADE'
+        // //       references: {
+        // //         model: 'Users',
+        // //         key: 'userName',
+        // //         as: 'username'
+        // //       }
       },
       // A string of the URL containing the image
       imageURL: {
@@ -48,6 +48,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , DataTypes */) => {
-    return queryInterface.dropTable("Posts");
+    return queryInterface.dropTable('Posts');
   }
 };
