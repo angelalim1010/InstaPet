@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./Post.css";
-import PostTopBar from "./PostTopBar";
-import PostImage from "./PostImage";
-import PostDescription from "./PostDescription";
-import PostComments from "./PostComments";
-import PostTimestamp from "./PostTimestamp";
-import PostAddComment from "./PostAddComment";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './Post.css';
+import PostTopBar from './PostTopBar';
+import PostImage from './PostImage';
+import PostDescription from './PostDescription';
+import PostComments from './PostComments';
+import PostTimestamp from './PostTimestamp';
+import PostAddComment from './PostAddComment';
 
 class Post extends Component {
   constructor(props) {
@@ -16,14 +16,7 @@ class Post extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.setState(prevState => ({
-      post: {
-        ...prevState.post,
-        userName: "userName"
-      }
-    }));
-  };
+  componentDidMount = () => {};
 
   displayPost = () => {
     if (!this.state.post) {
@@ -31,7 +24,10 @@ class Post extends Component {
     } else {
       return (
         <div className="post">
-          <PostTopBar userName={this.state.post.userName} postId={this.state.post.id} />
+          <PostTopBar
+            userName={this.state.post.userName}
+            postId={this.state.post.id}
+          />
           <PostImage imageURL={this.state.post.imageURL} />
           <PostDescription
             postId={this.state.post.id}
@@ -51,7 +47,9 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = dispatch => {
   return {};

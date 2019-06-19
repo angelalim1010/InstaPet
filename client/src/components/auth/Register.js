@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import "./Register.css";
-import Phone from "./Phone";
 import { registerUser } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
-
+import "./Login.css";
 class Register extends Component {
   constructor() {
     super();
@@ -66,70 +64,72 @@ class Register extends Component {
 
     return (
       <div className="background">
-        <Phone />
-        <div className="signupheader">
-          <h1 className="title">Instapet</h1>
-          <h3 className="signupmessage">
-            Sign up to see some wholesome content
-          </h3>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup className="formbox">
-              <Input
-                type="email"
-                name="email"
-                className="inputBox"
-                placeholder="Email"
-                onChange={this.handleChange}
-              />
-              <span>{errors.email}</span>
-            </FormGroup>
-            <FormGroup>
-              <Input
-                type="text"
-                name="displayName"
-                className="inputBox"
-                placeholder="Full Name"
-                onChange={this.handleChange}
-              />
-              <span>{errors.displayName}</span>
-            </FormGroup>
-            <FormGroup>
-              <Input
-                type="text"
-                name="userName"
-                className="inputBox"
-                placeholder="Username"
-                onChange={this.handleChange}
-              />
-              <span>{errors.userName}</span>
-            </FormGroup>
-            <FormGroup>
-              <Input
-                type="password"
-                name="password"
-                className="inputBox"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-              <span>{errors.password}</span>
-            </FormGroup>
-            <FormGroup>
-              <Input
-                type="password"
-                name="password2"
-                className="inputBox"
-                placeholder="Confirm Password"
-                onChange={this.handleChange}
-              />
-              <span>{errors.password2}</span>
-            </FormGroup>
-            <Button type="submit" className="signupbutton">
-              Sign Up
-            </Button>
-          </Form>
-          <div className="loginbox">
-            Already have an account? <Link to="/login">Login</Link>
-          </div>
+        <div className="box">
+         <img src={require("../../img/phone.png")} className = "phoneImage"></img>
+          <div className = "formContainer">
+              <h1 className="title">Instapet</h1>
+              <h3 className="signupmessage">
+                Sign up to see some wholesome content
+              </h3>
+              <Form className = "form" onSubmit={this.handleSubmit}>
+                <FormGroup className="formBox">
+                  <Input
+                    type="email"
+                    name="email"
+                    className="formBoxInput"
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                  />
+                <FormText className="formBoxError">{errors.email}</FormText>
+                </FormGroup>
+                <FormGroup className="formBox">
+                  <Input
+                    type="text"
+                    name="displayName"
+                    className="formBoxInput"
+                    placeholder="Full Name"
+                    onChange={this.handleChange}
+                  />
+                <FormText className="formBoxError">{errors.displayName}</FormText>
+                </FormGroup>
+                <FormGroup className="formBox">
+                  <Input
+                    type="text"
+                    name="userName"
+                    className="formBoxInput"
+                    placeholder="Username"
+                    onChange={this.handleChange}
+                  />
+                <FormText className="formBoxError">{errors.userName}</FormText>
+                </FormGroup>
+                <FormGroup className="formBox">
+                  <Input
+                    type="password"
+                    name="password"
+                    className="formBoxInput"
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                  />
+                <FormText className="formBoxError">{errors.password}</FormText>
+                </FormGroup>
+                <FormGroup className="formBox">
+                  <Input
+                    type="password"
+                    name="password2"
+                    className="formBoxInput"
+                    placeholder="Confirm Password"
+                    onChange={this.handleChange}
+                  />
+                <FormText className="formBoxError">{errors.password2}</FormText>
+                </FormGroup>
+                <Button type="submit"  className="submit">
+                  Sign Up
+                </Button>
+              </Form>
+              <div className="signupbox">
+                Already have an account? <Link to="/login">Login</Link>
+              </div>
+            </div>
         </div>
       </div>
     );
