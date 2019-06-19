@@ -12,29 +12,48 @@ class PostTopBar extends Component {
     super(props);
   }
 
+  canDelete = () => {
+    let res;
+    console.log('Props Username');
+    console.log(this.props.userName);
+
+    console.log('Auth username');
+    console.log(this.props.auth.user.userName);
+    if (this.props.auth.user.userName === this.props.userName) {
+      console.log('INSIDE HERE!!');
+      res = (
+        <Button
+          className="deleteButton"
+          onClick={() => this.props.deletePost(this.props.postId)}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} size="2x" />
+        </Button>
+      );
+    }
+
+    return res;
+  };
+
   displayTopBar = () => {
     if (this.props.userName) {
       return (
         <b>
           <Link to="/${this.props.user.id}">{this.props.userName}</Link>
-          <Button
-            className="deleteButton"
-            onClick={() => this.props.deletePost(this.props.postId)}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} size="2x" />
-          </Button>
+          {this.canDelete()}
         </b>
       );
     }
   };
 
   render() {
+    console.log(this.props.auth);
     return <div className="postTopBar">{this.displayTopBar()}</div>;
   }
 }
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {
