@@ -10,7 +10,6 @@ import './Post.css';
 class PostTopBar extends Component {
   constructor(props) {
     super(props);
-
   }
 
   canDelete = () => {
@@ -33,7 +32,7 @@ class PostTopBar extends Component {
     if (this.props.userName) {
       return (
         <b>
-          <Link to="/${this.props.user.id}">{this.props.userName}</Link>
+          <Link to={'/' + this.props.userName}>{this.props.userName}</Link>
           {this.canDelete()}
         </b>
       );
