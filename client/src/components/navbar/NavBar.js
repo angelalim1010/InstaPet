@@ -35,19 +35,12 @@ class NavBar extends Component {
             <Input type="text" placeholder="Search" />
           </Form>
 
-          <div className="navBarItem">
-            <Link to="/register">Register</Link>
-          </div>
-          <div className="navBarItem">
-            <Link to="/login">Login</Link>
-          </div>
-
           <Button className="navBarItem" onClick={this.logout}>
             Logout
           </Button>
 
           <div className="navBarProfile navBarItem">
-            <Link to="/profile">
+            <Link to={"/" + this.props.auth.user.userName}>
               <FontAwesomeIcon icon={faUserEmpty} size="2x" color="black" />
             </Link>
           </div>
@@ -57,7 +50,9 @@ class NavBar extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = dispatch => {
   return {
