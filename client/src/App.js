@@ -44,7 +44,7 @@ if (localStorage.jwtToken) {
     // Redirect to Login page
     window.location.href = "./login";
   }
-}
+} // End checking for token
 
 class App extends Component {
   constructor(props) {
@@ -57,12 +57,10 @@ class App extends Component {
         <Router>
           <div className="app">
             <ProtectedRoute path="/" component={NavBar} />
-            <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <ProtectedRoute exact path="/" component={HomePage} />
-              <ProtectedRoute exact path="/profile" component={Profile} />
-            </Switch>
+            <ProtectedRoute exact path="/" component={HomePage} />
+            <ProtectedRoute exact path="/profile" component={Profile} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
           </div>
         </Router>
       </Provider>

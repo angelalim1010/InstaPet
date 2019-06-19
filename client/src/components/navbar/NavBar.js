@@ -14,7 +14,6 @@ class NavBar extends Component {
 
   logout = e => {
     e.preventDefault();
-    localStorage.setItem("JWT", undefined);
     this.props.logoutUser();
   };
 
@@ -37,7 +36,7 @@ class NavBar extends Component {
           </Form>
 
           <div className="navBarItem">
-            <Link to="/signup">Signup</Link>
+            <Link to="/register">Register</Link>
           </div>
           <div className="navBarItem">
             <Link to="/login">Login</Link>
@@ -62,7 +61,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutUser
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 

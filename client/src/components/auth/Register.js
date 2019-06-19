@@ -152,8 +152,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerUser,
-    clearErrors
+    registerUser: (user, history) => dispatch(registerUser(user, history)),
+    clearErrors: () => dispatch(clearErrors())
   };
 };
 

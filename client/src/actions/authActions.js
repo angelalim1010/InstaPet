@@ -20,7 +20,7 @@ const addUser = user => {
 const setErrors = err => {
   return {
     type: SET_ERRORS,
-    payload: err.response.data
+    payload: err
   };
 };
 

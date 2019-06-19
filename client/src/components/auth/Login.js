@@ -45,20 +45,23 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = e => {
     e.preventDefault();
+    console.log("handleSubmit");
 
     const user = {
       email: this.state.email,
       password: this.state.password
     };
 
+    console.log(user);
+
     // Since the redirect is handled within our component, the history does not need to be passed. 'withRouter' is NOT necessary for this.
     // The redirect is handled in componentWillReceiveProps when the component hears that the user is authenticated.
     this.props.loginUser(user);
 
     // Clear the errors in the store
-    this.props.clearErrors();
+    // this.props.clearErrors();
   };
 
   render() {
@@ -69,7 +72,7 @@ class Login extends Component {
         <Phone />
         <div className="box">
           <h1 className="title">Instapet</h1>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup className="formbox">
               <Input
                 type="email"
@@ -90,10 +93,14 @@ class Login extends Component {
               />
               <span>{errors.password}</span>
             </FormGroup>
+            <Button
+              type="submit"
+              className="submit"
+              onClick={this.handleSubmit}
+            >
+              Log In
+            </Button>
           </Form>
-          <Button className="submit" onClick={this.handleSubmit}>
-            Log In
-          </Button>
           <div className="signupbox">
             Don't have an account? <Link to="/register">Sign Up</Link>
           </div>
@@ -117,8 +124,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser,
-    clearErrors
+    loginUser: user => dispatch(loginUser(user)),
+    clearErrors: () => dispatch(clearErrors())
   };
 };
 
