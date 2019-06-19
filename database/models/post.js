@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    // The userId whom this post belongsTo
-    userId: {
-      type: DataTypes.INTEGER,
+    // The userName whom this post belongsTo
+    username: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
