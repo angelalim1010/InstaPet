@@ -11,32 +11,40 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserName: this.props.user.user.userName
+      currentUserName: this.props.auth.user.userName
     };
   }
 
+  componentWillReceiveProps = async nextProps => {
+    await this.setState({
+      currentUserName: nextProps.auth.user.userName
+    });
+  };
+
   clickedLikePost = () => {
     //if current user did not like post and clicked like
-    let newLikePost = {
+    let newLike = {
       postId: this.props.postId,
       userName: this.state.currentUserName
-    }
+    };
     //call likePost
-    this.props.likePost(newLikePost)
+    this.props.likePost(newLike)
   };
 
   clickedUnlikePost = likeId => {
     //if current user likes post and clicked unlike
-    this.props.unlikePost(likeId)
+    this.props.unlikePost(likeId);
   };
 
   displayLikeStatus = () => {
     // filter through comments array in store for comments in this post
-    let allLikesForPost = this.props.post.likes.filter(like => like.postId == this.props.postId);
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === this.props.postId
+    );
 
     //find index of like by currentUser
     let indexOfTargetLike = allLikesForPost.findIndex(
-      like => like.userId === this.state.currentUserId
+      like => like.userName === this.state.currentUserName
     );
 
     //if index is -1 (user did not like)
@@ -47,7 +55,7 @@ class PostDescription extends Component {
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
           icon={faStarFull}
-          onClick={this.clickedUnlikePost(likeId)}
+          onClick={() => this.clickedUnlikePost(likeId)}
         />
       );
     } else {
@@ -55,9 +63,9 @@ class PostDescription extends Component {
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
           icon={faStarEmpty}
-          onClick={this.clickedlikePost}
+          onClick={() => this.clickedLikePost()}
         />
-      )
+      );
     }
   };
 
@@ -65,7 +73,9 @@ class PostDescription extends Component {
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
-    let allLikesForPost = this.props.post.likes.filter(like => like.postId == postId);
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
 
     if (allLikesForPost.length === 1) {
       return `1 like`;
@@ -89,15 +99,16 @@ class PostDescription extends Component {
       </div>
     );
   }
-};
+}
 const mapStateToProps = state => ({
+  auth: state.auth,
   user: state.user,
   post: state.post
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    likePost: likedPost => dispatch(likePostThunk(likedPost)),
+    likePost: newLike => dispatch(likePostThunk(newLike)),
     unlikePost: likeId => dispatch(unlikePostThunk(likeId))
   };
 };

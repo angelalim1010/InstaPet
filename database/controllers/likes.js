@@ -15,9 +15,7 @@ module.exports = {
     },
     delete(req, res) {
         return Like.destroy({ where: { id: req.params.likeId } })
-            .then(() =>
-                res.status(200).json({ message: 'Removed like' })
-            )
+            .then(() => res.status(200).json(req.params.likeId))
             .catch(err => res.status(400).json(err));
     }
 };

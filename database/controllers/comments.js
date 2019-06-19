@@ -15,9 +15,7 @@ module.exports = {
   },
   delete(req, res) {
     return Comment.destroy({ where: { id: req.params.commentId } })
-      .then(() =>
-        res.status(200).json({ message: 'Comment deleted Successfully' })
-      )
+      .then(() => res.status(200).json(req.params.commentId))
       .catch(err => res.status(400).json(err));
   }
 };

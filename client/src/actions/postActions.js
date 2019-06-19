@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
@@ -9,7 +9,7 @@ import {
   UNLIKE_POST,
   CREATE_POST,
   DELETE_POST
-} from '../actions/types';
+} from "../actions/types";
 
 const fetchAllPosts = posts => {
   return {
@@ -84,18 +84,18 @@ export const deleteCommentThunk = commentId => dispatch => {
     .catch(err => console.log(err));
 };
 
-//payload had postId and userId
-const likePost = likedPost => {
+//payload has postId and userId
+const likePost = newLike => {
   return {
     type: LIKE_POST,
-    payload: likedPost
+    payload: newLike
   };
 };
-export const likePostThunk = likedPost => dispatch => {
+export const likePostThunk = newLike => dispatch => {
   return axios
-    .post(`/likes/`, likedPost)
+    .post(`/likes/`, newLike)
     .then(res => res.data)
-    .then(likedPost => dispatch(likePost(likedPost)))
+    .then(newLike => dispatch(likePost(newLike)))
     .catch(err => console.log(err));
 };
 
@@ -105,6 +105,7 @@ const unlikePost = likeId => {
     payload: likeId
   };
 };
+
 export const unlikePostThunk = likeId => dispatch => {
   return axios
     .delete(`/likes/${likeId}`)
