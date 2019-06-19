@@ -32,41 +32,52 @@ class ProfileHeader extends Component {
   render() {
     return (
       <div className="profileHeader">
+
         <img
           className="profilePicture"
           src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
           alt="profilepic"
         />
+
         <div className="userInfoContainer">
           <div className="userNameFollowStatus">
+
             <div className="userName">
-              <h3>userName</h3>
+              <h3>{this.props.viewUserObject.userName}</h3>
             </div>
+
             <div className="followButtonContainer">
               <Button onClick={this.follow} className="followButton">
                 {this.state.text}
               </Button>
             </div>
+
           </div>
+
           <div className="userStats">
+
             <div className="userStat userPostCount">
-              <b>368</b> posts
+              <b>{this.props.viewUserObject.posts.length}</b> posts
             </div>
+
             <div className="userStat userFollowers">
-              <b>300</b> followers
+              <b>{this.props.viewUserObject.followers.length}</b> followers
             </div>
+
             <div className="userStat userFollowing">
-              <b>350</b> following
+              <b>{this.props.viewUserObject.following.length}</b> following
             </div>
+
           </div>
+
           <div className="userDisplayName">
-            <b>userDisplayName</b>
+            <b>{this.props.viewUserObject.displayName}</b>
           </div>
+
           <div className="userBio">
-            Reprehenderit culpa culpa nisi ex laborum. Est cillum eiusmod
-            incididunt sunt esse est sit eiusmod ut aliqua sunt eiusmod eiusmod
-            cillum.
+            <p>MOOO</p>
           </div>
+
         </div>
       </div>
     );

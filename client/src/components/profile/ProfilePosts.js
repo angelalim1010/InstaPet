@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchAllPostsThunk } from '../../actions/postActions';
 import './Profile.css';
 
 class ProfilePosts extends Component {
@@ -11,14 +10,41 @@ class ProfilePosts extends Component {
     // This component will receive a prop with the postIds
   }
 
-  componentDidMount = () => {
-    this.props.fetchAllPosts();
-  };
-
   render() {
+    //testing for bob
+    let userName = this.props.currentUserObject.userName;
+    let allPostsForUser = this.props.post.posts.filter(post => post.userId == 16);
+
+
+    if (allPostsForUser.length === 0) {
+      return <div className="postCommentsNone" />;
+    } else {
+      return (
+        allPostsForUser.map(post => {
+          {
+            return (
+              <img
+                className="profilePost" key={post.id}
+                src={post.imageURL}
+              />
+            )
+          }
+        })
+      )
+    }
+
+
+
+
+
+
+
+
     return (
       <div className="profilePosts">
-        <Link to="/">
+
+
+        {/* <Link to="/">
           <img
             className="profilePost"
             src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
@@ -71,17 +97,18 @@ class ProfilePosts extends Component {
             className="profilePost"
             src="https://data.whicdn.com/images/298844185/large.jpg?t=1507433077"
           />
-        </Link>
+        </Link> */}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  post: state.post
+});
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllPosts: () => dispatch(fetchAllPostsThunk())
   };
 };
 
