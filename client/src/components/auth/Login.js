@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
 import { loginUser } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "./Login.css";
@@ -47,7 +47,6 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("handleSubmit");
 
     const user = {
       email: this.state.email,
@@ -73,25 +72,25 @@ class Login extends Component {
         <div className="box">
           <h1 className="title">Instapet</h1>
           <Form onSubmit={this.handleSubmit}>
-            <FormGroup className="formbox">
+            <FormGroup className="formBox">
               <Input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="inputBox"
+                className="formBoxInput"
                 onChange={this.handleChange}
               />
-              <span>{errors.email}</span>
+              <FormText className="formBoxError">{errors.email}</FormText>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="formBox">
               <Input
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="inputBox"
+                className="formBoxInput"
                 onChange={this.handleChange}
               />
-              <span>{errors.password}</span>
+              <FormText className="formBoxError">{errors.password}</FormText>
             </FormGroup>
             <Button
               type="submit"

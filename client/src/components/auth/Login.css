@@ -1,69 +1,51 @@
-.background {
-  background-color: #fafafa;
-  position: fixed;
-  padding: 0;
-  margin: 0;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
+.title {
+  font-family: "Brush Script MT";
+  font-style: normal;
+  font-size: 70px;
 }
 
-.title{
-    font-family: "Brush Script MT";
-    font-style: normal;
-    font-size: 70px;
-}
 .box {
-    background-color: white;
-    height: 400px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-left: 65%;
-    margin-top: 10%;
-    border-radius: 5px;
-    z-index: 30;
+  background-color: white;
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: 65%;
+  margin-top: 10%;
+  border-radius: 5px;
 }
 
-
-
-.formbox {
+.formBox {
   display: flex;
+  flex-direction: column;
+}
+
+.formBoxInput {
+  background-color: #fafafa;
+  color: gray;
+}
+
+.formBoxError {
+  margin: 5px 0;
+}
+
+.submit {
+  align-items: center;
   width: 215px;
   min-width: 125px;
-  height: 20px;
-  border-radius: 2px;
-  margin-top: 10px;
-  margin-bottom: 35px;
-
+  height: 35px;
+  border-radius: 5px;
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  background-color: #4286f4;
+  padding: 2px;
 }
-
-
-.submit{
-    align-items: center;
-    width: 215px;
-    min-width: 125px;
-    height: 35px;
-    border-radius: 5px;
-    display: table-cell;
-    vertical-align: middle;
-    color: white;
-    background-color: #4286f4;
-    padding: 2px;
-
-}
-.signupbox{
-    text-align: center;
-    color: #404040;
-}
-
-.inputBox{
-    background-color: #fafafa;
-    color: gray;
+.signupbox {
+  margin-top: 15px;
+  text-align: center;
+  color: #404040;
 }
