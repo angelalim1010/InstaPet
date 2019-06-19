@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+// Set Comment model
 const { Comment } = require("../database/models");
 
 /**
@@ -18,10 +19,33 @@ router.get("/", (req, res, next) => {
 }); // End FindAllComments endpoint
 
 /**
- *  COMMENT ROUTES
+ * CreateComment endpoint
+ * @route POST /comments
+ * @desc Create a comment
+ * @access Public
  */
-// app.get("/comments/:postId", CommentsController.list);
-// app.post("/comments", CommentsController.create);
-// app.delete("/comments/:commentId", CommentsController.delete);
+router.post("/", (req, res, next) => {
+  return Comment.create(req.body)
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
+}); // End CreateComment endpoint
+
+/**
+ * DeleteComment endpoint
+ * @route POST /comments/:commentId
+ * @desc Delete a comment
+ * @access Public
+ */
+router.delete("/", (req, res, next) => {
+  return Comment.destroy({
+    where: {
+      id: req.params.commentId
+    }
+  })
+    .then(() =>
+      res.status(200).json({ message: "Comment successfully deleted" })
+    )
+    .catch(err => res.status(400).json(err));
+}); // End DeleteComment endpoint
 
 module.exports = router;
