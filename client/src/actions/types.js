@@ -26,6 +26,9 @@ export const ADD_USER_POST = "ADD_USER_POST";
 export const REMOVE_USER_POST = "REMOVE_USER_POSTS";
 export const REMOVE_USER = "REMOVE_USER";
 
+export const FOLLOW_USER = "FOLLOW_USER";
+export const UNFOLLOW_USER = "UNFOLLOW_USER";
+
 // ERRORS
 
 export const SET_ERRORS = "SET_ERRORS";

@@ -5,27 +5,66 @@ import './Profile.css';
 import { Button } from 'reactstrap';
 import { timingSafeEqual } from 'crypto';
 
+import { followUserThunk } from "../../actions/userActions";
+import { unfollowUserThunk } from "../../actions/userActions";
+
+
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      following: false,
-      text: 'Follow'
+      currentUserName: this.props.auth.user.userName
     };
   }
 
-  follow = () => {
-    if (this.state.following) {
-      this.setState(prevState => ({
-        following: !prevState.following,
-        text: 'Follow'
-      }));
+
+  clickedFollow = () => {
+    //if current user did not follow and clicked follow
+    let newFollow = {
+      following: this.props.viewUserObject.userName,
+      follower: this.state.currentUserName
+    };
+    //call followUser
+    this.props.followUser(newFollow)
+  };
+
+  clickedUnfollow = relationshipId => {
+    //if current user follows and clicked unfollow
+    this.props.unfollowUser(relationshipId);
+  };
+
+
+
+  displayFollowStatus = () => {
+
+    let userName = this.props.viewUserObject.userName;
+
+    // filter through relationships array in store for followings of currentUser
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower === this.state.currentUserName
+    );
+
+    //find index of relationship by currentUser
+    let indexOfTargetRelationship = allFollowingForUser.findIndex(
+      relationship => relationship.following === userName
+    );
+
+    //if index is not -1 (user is following)
+    if (indexOfTargetRelationship !== -1) {
+      //look for relationshipId
+      let relationshipId = allFollowingForUser[indexOfTargetRelationship].id;
+      return (
+        <Button onClick={() => this.clickedUnfollow(relationshipId)} className="followButton">
+          Unfollow
+      </Button>
+      );
     } else {
-      this.setState(prevState => ({
-        following: !prevState.following,
-        text: 'Following'
-      }));
+      //is not following
+      return (
+        <Button onClick={() => this.clickedFollow()} className="followButton">
+          Follow
+      </Button>
+      );
     }
   };
 
@@ -64,11 +103,10 @@ class ProfileHeader extends Component {
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
 
-            <div className="followButtonContainer">
-              <Button onClick={this.follow} className="followButton">
-                {this.state.text}
-              </Button>
-            </div>
+
+            {/* CHANGE BUTTON TO EDIT FOR CURRENTUSER */}
+
+            <div>{this.displayFollowStatus()}</div>
 
           </div>
 
@@ -79,10 +117,16 @@ class ProfileHeader extends Component {
             </div>
 
             <div className="userStat userFollowers">
+
+              {/* ADD CLICK EVENT LISTENER (pop up array of followers) */}
+
               <b>{allFollowersForUser.length}</b> followers
             </div>
 
             <div className="userStat userFollowing">
+
+              {/* ADD CLICK EVENT LISTENER (pop up array of following) */}
+
               <b>{allFollowingForUser.length}</b> following
             </div>
 
@@ -93,7 +137,7 @@ class ProfileHeader extends Component {
           </div>
 
           <div className="userBio">
-            <p>MOOO</p>
+            <p>{this.props.viewUserObject.bio}</p>
           </div>
 
         </div>
@@ -109,7 +153,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    followUser: newFollow => dispatch(followUserThunk(newFollow)),
+    unfollowUser: relationshipId => dispatch(unfollowUserThunk(relationshipId))
+  };
 };
 
 export default connect(

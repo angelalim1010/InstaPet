@@ -16,11 +16,11 @@ class PostDescription extends Component {
     };
   }
 
-  componentWillReceiveProps = async nextProps => {
-    await this.setState({
-      currentUserName: nextProps.auth.user.userName
-    });
-  };
+  // componentWillReceiveProps = async nextProps => {
+  //   await this.setState({
+  //     currentUserName: nextProps.auth.user.userName
+  //   });
+  // };
 
   clickedLikePost = () => {
     //if current user did not like post and clicked like
@@ -71,6 +71,12 @@ class PostDescription extends Component {
   };
 
   displayLikeCount = () => {
+
+    /*
+    *   ADD CLICK EVENT LISTENER (pop up array of likes)
+    *
+    */
+
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
