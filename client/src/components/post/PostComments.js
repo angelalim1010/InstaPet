@@ -8,6 +8,9 @@ import { Button } from 'reactstrap';
 class PostComments extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentUserName: this.props.auth.user.userName
+    };
   }
 
   // componentDidMount = () => {
@@ -49,15 +52,26 @@ class PostComments extends Component {
       return (
         allCommentsForPost.map(comment => {
           {
-            return (
-              <div className="comment" key={comment.id}>
-                <b>
-                  <Link to="/profile">{comment.userName}</Link>
-                </b>{" "}
-                {comment.content}
-                <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
-              </div>
-            )
+            if (comment.userName === this.state.currentUserName) {
+              return (
+                <div className="comment" key={comment.id}>
+                  <b>
+                    <Link to="/profile">{comment.userName}</Link>
+                  </b>{" "}
+                  {comment.content}
+                  <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
+                </div>
+              )
+            } else {
+              return (
+                <div className="comment" key={comment.id}>
+                  <b>
+                    <Link to="/profile">{comment.userName}</Link>
+                  </b>{" "}
+                  {comment.content}
+                </div>
+              )
+            }
           }
         })
       )
@@ -75,6 +89,7 @@ class PostComments extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   post: state.post
 });
 
