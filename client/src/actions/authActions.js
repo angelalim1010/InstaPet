@@ -38,7 +38,7 @@ export const registerUser = (user, history) => dispatch => {
       // Register new user in the store
       dispatch(registerUser(res.data));
 
-      // Re-direct to login on successful register. withRouter is necessary for this in the component.
+      // Re-direct to login on successful register. It is necessary to wrap the component with 'withRouter'.
       history.push("/login");
     })
     .catch(err => dispatch(setErrors(err)));
@@ -65,7 +65,7 @@ export const loginUser = user => dispatch => {
       // Decode token to get user data
       const decoded = jwt_decode(token);
 
-      // Set current user
+      // Set current user and isAuthenticated
       dispatch(setCurrentUser(decoded));
     })
     .catch(err => dispatch(setErrors(err)));

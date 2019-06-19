@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./Register.css";
 import Phone from "./Phone";
@@ -22,13 +22,14 @@ class Register extends Component {
   }
 
   componentDidMount = () => {
-    // If user is already logged in and navigates to the Register page, they will be redirected to the homepage
+    // If the user is already logged in and navigates to the Register page, they will be redirected to the homepage
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   };
 
   componentWillReceiveProps = nextProps => {
+    // If there are errors in the form fields, set them to the errors object in the state
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -42,7 +43,7 @@ class Register extends Component {
     });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = e => {
     e.preventDefault();
 
     const newUser = {
@@ -53,10 +54,10 @@ class Register extends Component {
       password2: this.state.password2
     };
 
-    // Since the redirect is handled within the action, the history needs to be passed. withRouter is necessary for this.
+    // Since the redirect is handled within the action, the history needs to be passed. It is necessary to wrap the component with 'withRouter'.
     this.props.registerUser(newUser, this.props.history);
 
-    // Clear the errorReducer
+    // Clear the errors in the store
     this.props.clearErrors();
   };
 
