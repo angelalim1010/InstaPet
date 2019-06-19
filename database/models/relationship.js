@@ -5,17 +5,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isNotEmpty: true
+        notEmpty: true
       }
     },
     following: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isNotEmpty: true
+        notEmpty: true
       }
     }
   });
+
   Relationship.associate = function (models) {
     // associations can be defined here
   };

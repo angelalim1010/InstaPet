@@ -12,14 +12,14 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isNotEmpty: true
+          notEmpty: true
         }
       },
       following: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isNotEmpty: true
+          notEmpty: true
         }
       },
       createdAt: {
