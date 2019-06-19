@@ -10,6 +10,7 @@ import './Post.css';
 class PostTopBar extends Component {
   constructor(props) {
     super(props);
+
   }
 
   displayTopBar = () => {

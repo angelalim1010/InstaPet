@@ -12,7 +12,7 @@ class ProfilePosts extends Component {
 
   render() {
     //testing for bob
-    let userName = this.props.currentUserObject.userName;
+    let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(post => post.userId == 16);
 
 
