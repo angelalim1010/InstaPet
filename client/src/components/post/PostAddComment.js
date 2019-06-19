@@ -46,6 +46,7 @@ class PostComments extends Component {
             className="postAddCommentInput postAddCommentText"
             type="textarea"
             placeholder="Add a comment..."
+            value={this.state.content}
             rows="1"
             name="content"
             onChange={this.handleChange}
