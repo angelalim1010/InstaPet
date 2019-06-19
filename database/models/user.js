@@ -61,12 +61,12 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = models => {
-    User.hasMany(models.Post, {
-      foreignKey: 'userId' // Each user can have multiple posts
-    });
-    User.hasMany(models.Comment, {
-      foreignKey: "userId"
-    });
+    // User.hasMany(models.Post, {
+    //   foreignKey: 'userId' // Each user can have multiple posts
+    // });
+    // User.hasMany(models.Comment, {
+    //   foreignKey: "userId"
+    // });
   };
 
   User.sync()

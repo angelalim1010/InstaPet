@@ -7,12 +7,14 @@ module.exports = {
       .catch(err => res.status(400).json(err));
   },
   list(req, res) {
-    return Comment.findAll({ where: { postId: req.params.postId }, order: [["id", "DESC"]] })
-      .then(posts => res.status(200).json(posts))
+    return Comment.findAll({
+      order: [["id", "ASC"]]
+    })
+      .then(comments => res.status(200).json(comments))
       .catch(err => res.status(400).json(err));
   },
   delete(req, res) {
-    return Comment.destroy({ where: { id: req.params.userId } })
+    return Comment.destroy({ where: { id: req.params.commentId } })
       .then(() =>
         res.status(200).json({ message: 'Comment deleted Successfully' })
       )

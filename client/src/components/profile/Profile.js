@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./Profile.css";
-import ProfileHeader from "./ProfileHeader";
-import ProfilePosts from "./ProfilePosts";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './Profile.css';
+import ProfileHeader from './ProfileHeader';
+import ProfilePosts from './ProfilePosts';
+import { getRelationshipsThunk } from '../../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {
@@ -20,10 +21,14 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    getRelationships: () => dispatch(getRelationshipsThunk())
+  };
 };
 
 export default connect(
