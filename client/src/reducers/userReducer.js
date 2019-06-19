@@ -3,7 +3,7 @@ import {
   GET_USER_POSTS,
   REMOVE_USER_POST,
   ADD_USER_POST,
-  REGISTER_USER,
+  ADD_USER,
   REMOVE_USER,
   EDIT_USER
 } from "../actions/types";
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         userPosts: action.payload
       };
-    case REGISTER_USER:
+    case ADD_USER:
       return {
         ...state,
         users: [action.payload, ...state.users]

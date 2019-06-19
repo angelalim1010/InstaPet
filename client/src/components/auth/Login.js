@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { loginUser } from "../../actions/userActions";
+import { loginUser } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "./Login.css";
 import Phone from "./Phone";
@@ -80,7 +80,6 @@ class Login extends Component {
               />
               <span>{errors.email}</span>
             </FormGroup>
-            <br />
             <FormGroup>
               <Input
                 type="password"
@@ -92,13 +91,11 @@ class Login extends Component {
               <span>{errors.password}</span>
             </FormGroup>
           </Form>
-          <br />
           <Button className="submit" onClick={this.handleSubmit}>
             Log In
           </Button>
-          <br />
           <div className="signupbox">
-            Don't have an account? <Link to="/signup">Sign Up</Link>
+            Don't have an account? <Link to="/register">Sign Up</Link>
           </div>
         </div>
       </div>
@@ -114,7 +111,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.user,
+  auth: state.auth,
   errors: state.errors
 });
 

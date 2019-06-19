@@ -5,7 +5,7 @@ import "./NavBar.css";
 import { Form, Input, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
-import { logoutUserThunk } from "../../actions/userActions";
+import { logoutUser } from "../../actions/authActions";
 
 class NavBar extends Component {
   constructor(props) {
@@ -62,7 +62,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutUser: status => dispatch(logoutUserThunk(status))
+    logoutUser
   };
 };
 

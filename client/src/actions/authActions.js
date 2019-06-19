@@ -1,18 +1,18 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { REGISTER_USER, SET_CURRENT_USER, SET_ERRORS } from "./types";
+import { ADD_USER, SET_CURRENT_USER, SET_ERRORS } from "./types";
 
-const setCurrentUser = user => {
+export const setCurrentUser = user => {
   return {
     type: SET_CURRENT_USER,
     payload: user
   };
 };
 
-const registerUser = user => {
+const addUser = user => {
   return {
-    type: REGISTER_USER,
+    type: ADD_USER,
     payload: user
   };
 };
@@ -36,7 +36,7 @@ export const registerUser = (user, history) => dispatch => {
     .post(`/accounts/register`, user)
     .then(res => {
       // Register new user in the store
-      dispatch(registerUser(res.data));
+      dispatch(addUser(res.data));
 
       // Re-direct to login on successful register. It is necessary to wrap the component with 'withRouter'.
       history.push("/login");

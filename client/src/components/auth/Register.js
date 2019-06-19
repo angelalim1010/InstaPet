@@ -5,8 +5,8 @@ import { Link, withRouter } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./Register.css";
 import Phone from "./Phone";
-import { registerUser } from "../../actions/userActions";
-import { clearErrors } from "../../actions/errorsActions";
+import { registerUser } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 
 class Register extends Component {
   constructor() {
