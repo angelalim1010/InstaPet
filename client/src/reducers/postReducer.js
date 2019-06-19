@@ -2,17 +2,13 @@ import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
   FETCH_ALL_LIKES,
-
   CREATE_POST,
   DELETE_POST,
-
   LIKE_POST,
   UNLIKE_POST,
-
   ADD_COMMENT,
   GET_COMMENTS
-
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -33,17 +29,6 @@ export default (state = initialState, action) => {
         ...state,
         comments: action.payload
       };
-
-    // case FETCH_ALL_LIKES:
-    //   return {
-    //     ...state,
-    //     likes: action.payload
-    //   };
-
-
-
-
-
     case CREATE_POST:
       return {
         ...state,
@@ -65,8 +50,8 @@ export default (state = initialState, action) => {
         post => post.id === getCommentsPostId
       );
 
-
-      updatedCommentsPostArray[indexOfTargetPostFillComments].comments = action.payload.comments;
+      updatedCommentsPostArray[indexOfTargetPostFillComments].comments =
+        action.payload.comments;
 
       return {
         ...state,
@@ -82,11 +67,14 @@ export default (state = initialState, action) => {
         post => post.id == addCommentPostId
       );
 
-      updatedPostArray[indexOfTargetPostComment].comments = [...updatedPostArray[indexOfTargetPostComment].comments, newComment]
+      updatedPostArray[indexOfTargetPostComment].comments = [
+        ...updatedPostArray[indexOfTargetPostComment].comments,
+        newComment
+      ];
       return {
         ...state,
         posts: updatedPostArray
-      }
+      };
     case LIKE_POST:
       let userId = action.payload.userId;
       let postId = action.payload.postId;
@@ -98,7 +86,10 @@ export default (state = initialState, action) => {
       );
 
       //add userId to like array for post
-      updatedLikesPostArray[indexOfTargetPost].likes = [userId, ...(updatedLikesPostArray[indexOfTargetPost].likes)]
+      updatedLikesPostArray[indexOfTargetPost].likes = [
+        userId,
+        ...updatedLikesPostArray[indexOfTargetPost].likes
+      ];
       return {
         ...state,
         posts: updatedLikesPostArray
@@ -115,13 +106,16 @@ export default (state = initialState, action) => {
       );
 
       //remove user: add userIds to like array for post if it does not equal unlikeUserId
-      updatedUnlikePostArray[indexOfTargetPostUnlike].likes = [...(updatedUnlikePostArray[indexOfTargetPostUnlike].likes).filter(like => like.userId !== unlikeUserId)]
+      updatedUnlikePostArray[indexOfTargetPostUnlike].likes = [
+        ...updatedUnlikePostArray[indexOfTargetPostUnlike].likes.filter(
+          like => like.userId !== unlikeUserId
+        )
+      ];
 
       return {
         ...state,
         posts: updatedLikesPostArray
       };
-
 
     default:
       return state;
