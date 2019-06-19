@@ -16,7 +16,7 @@ class Post extends Component {
     };
   }
 
-  componentDidMount = () => {};
+  componentDidMount = () => { };
 
   displayPost = () => {
     if (!this.state.post) {
