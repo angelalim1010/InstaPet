@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_ALL_LIKES:
-      console.log(action.payload);
       return {
         ...state,
         likes: action.payload
@@ -40,27 +39,25 @@ export default (state = initialState, action) => {
     case ADD_COMMENT:
       return {
         ...state,
-        comments: [action.payload, ...state.comments]
+        comments: [...state.comments, action.payload]
       };
 
     case DELETE_COMMENT:
       return {
         ...state,
-        comments: [
-          state.comments.filter(comment => comment.id !== action.payload)
-        ]
+        comments: state.comments.filter(comment => comment.id != action.payload)
       };
 
     case LIKE_POST:
       return {
         ...state,
-        likes: [action.payload, ...state.likes]
+        likes: [...state.likes, action.payload]
       };
 
     case UNLIKE_POST:
       return {
         ...state,
-        likes: [state.likes.filter(like => like.id !== action.payload)]
+        likes: state.likes.filter(like => like.id != action.payload)
       };
 
     case CREATE_POST:
@@ -72,7 +69,7 @@ export default (state = initialState, action) => {
     case DELETE_POST:
       return {
         ...state,
-        posts: [state.posts.filter(post => post.id !== action.payload)]
+        posts: state.posts.filter(post => post.id != action.payload)
       };
 
     default:

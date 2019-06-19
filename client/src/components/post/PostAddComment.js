@@ -20,7 +20,6 @@ class PostComments extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.currentUserName);
     let addedComment = {
       userName: this.state.currentUserName,
       postId: this.props.postId,

@@ -16,8 +16,6 @@ class PostDescription extends Component {
   }
 
   clickedLikePost = () => {
-    console.log("I CLICKED LIKE");
-
     //if current user did not like post and clicked like
     let newLike = {
       postId: this.props.postId,
@@ -27,10 +25,10 @@ class PostDescription extends Component {
     this.props.likePost(newLike)
   };
 
-  // clickedUnlikePost = likeId => {
-  //   //if current user likes post and clicked unlike
-  //   this.props.unlikePost(likeId)
-  // };
+  clickedUnlikePost = likeId => {
+    //if current user likes post and clicked unlike
+    this.props.unlikePost(likeId)
+  };
 
   displayLikeStatus = () => {
     // filter through comments array in store for comments in this post
@@ -49,18 +47,15 @@ class PostDescription extends Component {
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
           icon={faStarFull}
-        // onClick={this.clickedUnlikePost(likeId)}
+          onClick={() => this.clickedUnlikePost(likeId)}
         />
       );
     } else {
-
-      console.log("I CLICKED LIKE");
-
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
           icon={faStarEmpty}
-          onClick={this.clickedlikePost}
+          onClick={() => this.clickedLikePost()}
         />
       )
     }
