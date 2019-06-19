@@ -18,28 +18,44 @@ const { User } = require("../database/models");
 
 /**
  * FindAllUsers endpoint
- * @route GET /accounts
+ * @route GET /profile
  * @desc Find all users
  * @access Public
  */
 router.get("/", (req, res, next) => {
   return User.findAll({
-    order: [["id", "DESC"]]
+    order: [["userName", "DESC"]]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
 }); // End FindAllUsers endpoint
 
 /**
+ * FindUser endpoint
+ * @route GET /profile/:userName
+ * @desc Find a user
+ * @access Public
+ */
+router.get("/:userName", (req, res, next) => {
+  return User.find({
+    where: {
+      userName: req.params.userName
+    }
+  })
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err));
+}); // End FindUser endpoint
+
+/**
  * UpdateUser endpoint
- * @route PUT /accounts/:userId
+ * @route PUT /profile/:userName
  * @desc Update a user
  * @access Public
  */
-router.put("/:userId", (req, res, next) => {
+router.put("/:userName", (req, res, next) => {
   return User.update({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(user => res.status(200).json(user))
@@ -48,20 +64,20 @@ router.put("/:userId", (req, res, next) => {
 
 /**
  * Register endpoint
- * @route POST /accounts/register
+ * @route POST /profile/register
  * @desc Register user
  * @access Public
  */
 router.post("/register", (req, res, next) => {
   // Validate form inputs
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValuserName } = validateRegisterInput(req.body);
 
-  // If not valid, return errors
-  if (!isValid) {
+  // If not valuserName, return errors
+  if (!isValuserName) {
     return res.status(400).json(errors);
   }
 
-  // If valid, try to find existing user with same email
+  // If valuserName, try to find existing user with same email
   User.findOne({
     where: {
       email: req.body.email
@@ -95,22 +111,22 @@ router.post("/register", (req, res, next) => {
 
 /**
  * Login endpoint
- * @route POST /accounts/login
+ * @route POST /profile/login
  * @desc Login user
  * @access Public
  */
 router.post("/login", (req, res, next) => {
   // Validate form inputs
-  const { errors, isValid } = validateLoginInput(req.body);
+  const { errors, isValuserName } = validateLoginInput(req.body);
 
-  // If not valid, return errors
-  if (!isValid) {
+  // If not valuserName, return errors
+  if (!isValuserName) {
     return res.status(400).json(errors);
   }
 
   const { email, password } = req.body;
 
-  // If valid, try to find existing user with same email
+  // If valuserName, try to find existing user with same email
   User.findOne({
     where: {
       email: email
@@ -127,7 +143,7 @@ router.post("/login", (req, res, next) => {
       if (isMatch) {
         // Create JWT Payload
         const payload = {
-          id: user.id,
+          userName: user.userName,
           userName: user.userName,
           email: user.email,
           displayName: user.displayName,
@@ -160,14 +176,14 @@ router.post("/login", (req, res, next) => {
 
 /**
  * DeleteUser endpoint
- * @route DELETE /accounts/:userId
+ * @route DELETE /profile/:userName
  * @desc Delete a user
  * @access Public
  */
-router.delete("/:userId", (req, res, next) => {
+router.delete("/:userName", (req, res, next) => {
   return User.destroy({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(() => res.status(200).json({ message: "User successfully deleted" }))

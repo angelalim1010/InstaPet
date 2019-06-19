@@ -16,7 +16,7 @@ export const DELETE_POST = "DELETE_POST";
 // USERS
 
 export const GET_USER_POSTS = "GET_USER_POSTS";
-export const GET_USERS = "GET_USERS";
+export const SET_USERS = "SET_USERS";
 export const EDIT_USER = "EDIT_USERS";
 export const ADD_USER = "ADD_USER";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";

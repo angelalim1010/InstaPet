@@ -1,5 +1,5 @@
 import {
-  GET_USERS,
+  SET_USERS,
   GET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
@@ -17,7 +17,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_USERS:
+    case SET_USERS:
       return {
         ...state,
         users: action.payload
