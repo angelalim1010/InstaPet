@@ -3,12 +3,11 @@ import {
   GET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
-  REGISTER_USER,
-  LOGIN_USER,
+  ADD_USER,
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS
-} from '../actions/types';
+} from "../actions/types";
 
 const initialState = {
   users: [], // array of User Id's
@@ -28,15 +27,10 @@ export default (state = initialState, action) => {
         ...state,
         user: action.payload
       };
-    case REGISTER_USER:
+    case ADD_USER:
       return {
         ...state,
         users: [action.payload, ...state.users]
-      };
-    case LOGIN_USER:
-      return {
-        ...state,
-        user: action.payload
       };
     case ADD_USER_POST:
       return {

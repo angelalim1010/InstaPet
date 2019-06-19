@@ -1,43 +1,43 @@
-//import express from "express";
-// import Cors from "cors";
-// import bodyParser from "body-parser";
-// import logger from "morgan";
-// import passport from "passport";
-
 const express = require("express");
-const Cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const passport = require("passport");
-const http = require("http");
-const PORT = parseInt(process.env.PORT, 10) || 5000;
+
+// Initialize Express
+const app = express();
 
 // Require .env config
 require("dotenv").config();
 
-// Express Initialization
-const app = express();
+// Grab or initialize port
+const port = parseInt(process.env.PORT, 10) || 5000;
 
-// Set "PORT" variable to PORT const
-app.set("PORT", PORT);
+// Set port
+app.set("port", port);
 
-// Cors
-app.use(Cors());
-
-// Logger
+// Use logger
 app.use(logger("dev"));
 
-// Parse requests
+// Use bodyParser middleware to parse requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Passport
-require("./config/passport");
+// Use Passport middleware
 app.use(passport.initialize());
 
-// Configure routes
-require("./routes")(app);
+// Require Passport config and pipe it to passport
+require("./config/passport")(passport);
+
+// Obtain routes
+const { users, posts, comments, relationships, likes } = require("./routes");
+
+// Use routes
+app.use("/accounts", users);
+app.use("/p", posts);
+app.use("/comments", comments);
+app.use("/relationships", relationships);
+app.use("/likes", likes);
 
 // Heroku post-build script
 // Serve static assets if in production
@@ -49,8 +49,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Create server and listen on port
-const server = http.createServer(app);
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+// Have app listen to port ####
+app.listen(port, () => console.log(`Server up! Listening on port ${port}`));
 
 module.exports = app;

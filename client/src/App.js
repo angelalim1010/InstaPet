@@ -1,68 +1,71 @@
+// React & Redux
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
+// Authentication
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute"; // ProtectedRoutes will only display if the user isAuthenticated
+
+// Components
 import NavBar from "./components/navbar/NavBar";
 import HomePage from "./components/homepage/HomePage";
-import Login from "./components/login/Login";
-import SignUp from "./components/login/SignUp";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import Profile from "./components/profile/Profile";
+
+// Check localStorage for token
+if (localStorage.jwtToken) {
+  // Grab token from localStorage
+  const token = localStorage.jwtToken;
+
+  // Set Authorization header
+  setAuthToken(token);
+
+  // Decode token to get user data
+  const decoded = jwt_decode(token);
+
+  // Set current user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // Date.now() returns the current time in milliseconds. Divide by 1000 to convert it into seconds. The token is configured to expire in terms of seconds.
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+
+    // Redirect to Login page
+    window.location.href = "/login";
+  }
+} // End checking for token
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
-  displayContent = () => {
-    // If logged in
-    // if (this.props.user.user.auth) {
-    //   return (
-    //     <div className="content">
-    //       <Route path="/" component={NavBar} />
-    //       <Route exact path="/" component={HomePage} />
-    //       <Route exact path="/profile" component={Profile} />
-    //     </div>
-    //   );
-    // }
-    // // If not logged in
-    // else {
-    //   return (
-    //     <div className="content">
-    //       <Route path="/" component={SignUp} />
-    //       <Route exact path="/signup" component={SignUp} />
-    //       <Route exact path="/login" component={Login} />
-    //     </div>
-    //   );
-    // }
-    return (
-      <div className="content">
-        <Route path="/" component={NavBar} />
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/login" component={Login} />
-      </div>
-    );
-  };
-
   render() {
     return (
-      <Router>
-        <div className="app">{this.displayContent()}</div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="app">
+            <ProtectedRoute path="/" component={NavBar} />
+            <ProtectedRoute exact path="/" component={HomePage} />
+            <ProtectedRoute exact path="/profile" component={Profile} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

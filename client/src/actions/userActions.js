@@ -1,15 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   GET_USERS,
   GET_USER,
   ADD_USER_POST,
   REMOVE_USER_POST,
-  REGISTER_USER,
-  LOGIN_USER,
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS
-} from './types';
+} from "./types";
 
 // Users
 
@@ -24,20 +22,6 @@ const getUser = userId => {
   return {
     type: GET_USER,
     payload: userId
-  };
-};
-
-const registerUser = newUser => {
-  return {
-    type: REGISTER_USER,
-    payload: newUser
-  };
-};
-
-const loginUser = user => {
-  return {
-    type: LOGIN_USER,
-    payload: user
   };
 };
 
@@ -88,25 +72,9 @@ export const getUsersThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const registerUserThunk = user => dispatch => {
-  return axios
-    .post(`/accounts/registerUser`, user)
-    .then(res => res.data)
-    .then(user => dispatch(registerUser(user)))
-    .catch(err => console.log(err));
-};
-
-export const loginUserThunk = user => dispatch => {
-  return axios
-    .post(`/accounts/loginUser`, user)
-    .then(res => res.data)
-    .then(user => dispatch(loginUser(user)))
-    .catch(err => console.log(err));
-};
-
 export const getUserThunk = userId => dispatch => {
   return axios
-    .get('/accounts/${userId}')
+    .get("/accounts/${userId}")
     .catch(err => console.log(err))
     .then(res => res.data)
     .then(userId => dispatch(getUser(userId)));
@@ -118,7 +86,7 @@ export const editUserThunk = editedUser => dispatch => {
 
 export const getRelationshipsThunk = () => dispatch => {
   return axios
-    .get('/accounts/relationships')
+    .get("/accounts/relationships")
     .then(res => res.data)
     .then(relationships => dispatch(getRelationships(relationships)))
     .catch(err => console.log(err));

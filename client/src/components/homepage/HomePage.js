@@ -8,6 +8,8 @@ class HomePage extends Component {
     this.state = {};
   }
 
+  componentDidMount = () => {};
+
   render() {
     return (
       <div className="homePage">
@@ -17,7 +19,9 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => {
   return {};
