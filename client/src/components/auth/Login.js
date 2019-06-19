@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
 import { loginUser } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "./Login.css";
-import Phone from "./Phone";
-
 class Login extends Component {
   constructor() {
     super();
@@ -47,7 +45,6 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("handleSubmit");
 
     const user = {
       email: this.state.email,
@@ -69,29 +66,30 @@ class Login extends Component {
 
     return (
       <div className="background">
-        <Phone />
         <div className="box">
+        <img src={require("../../img/phone.png")} className = "phoneImage"></img>
+        <div className = "formContainer">
           <h1 className="title">Instapet</h1>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup className="formbox">
+          <Form className = "form" onSubmit={this.handleSubmit}>
+            <FormGroup className="formBox">
               <Input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="inputBox"
+                className="formBoxInput"
                 onChange={this.handleChange}
               />
-              <span>{errors.email}</span>
+              <FormText className="formBoxError">{errors.email}</FormText>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="formBox">
               <Input
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="inputBox"
+                className="formBoxInput"
                 onChange={this.handleChange}
               />
-              <span>{errors.password}</span>
+              <FormText className="formBoxError">{errors.password}</FormText>
             </FormGroup>
             <Button
               type="submit"
@@ -103,6 +101,7 @@ class Login extends Component {
           </Form>
           <div className="signupbox">
             Don't have an account? <Link to="/register">Sign Up</Link>
+          </div>
           </div>
         </div>
       </div>
