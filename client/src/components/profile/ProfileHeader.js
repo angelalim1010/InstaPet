@@ -30,6 +30,24 @@ class ProfileHeader extends Component {
   };
 
   render() {
+
+    let userName = this.props.viewUserObject.userName;
+
+    //THIS USERS' POSTS
+    // filter through posts for userName
+    // filter through posts array in store for posts for this user
+    let allPostsForUser = this.props.post.posts.filter(post => post.userName == userName);
+
+    //THIS USERS' FOLLOWERS
+    // filter through relationships for where this user is the following
+    // filter through posts array in store for posts for this user
+    let allFollowersForUser = this.props.user.relationships.filter(relationship => relationship.following == userName);
+
+    //THIS USERS' FOLLOWING
+    // filter through relationships for where this user is the follower
+    // filter through posts array in store for posts for this user
+    let allFollowingForUser = this.props.user.relationships.filter(relationship => relationship.follower == userName);
+
     return (
       <div className="profileHeader">
 
@@ -57,15 +75,15 @@ class ProfileHeader extends Component {
           <div className="userStats">
 
             <div className="userStat userPostCount">
-              <b>{this.props.viewUserObject.posts.length}</b> posts
+              <b>{allPostsForUser.length}</b> posts
             </div>
 
             <div className="userStat userFollowers">
-              <b>{this.props.viewUserObject.followers.length}</b> followers
+              <b>{allFollowersForUser.length}</b> followers
             </div>
 
             <div className="userStat userFollowing">
-              <b>{this.props.viewUserObject.following.length}</b> following
+              <b>{allFollowingForUser.length}</b> following
             </div>
 
           </div>
@@ -84,7 +102,11 @@ class ProfileHeader extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth,
+  user: state.user,
+  post: state.post
+});
 
 const mapDispatchToProps = dispatch => {
   return {};
