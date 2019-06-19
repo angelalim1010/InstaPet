@@ -35,7 +35,6 @@ class Post extends Component {
           <PostImage imageURL={this.state.post.imageURL} />
           <PostDescription
             postId={this.state.post.id}
-            likes={this.state.post.likes}
             userName={this.state.post.userName}
             caption={this.state.post.caption}
           />
