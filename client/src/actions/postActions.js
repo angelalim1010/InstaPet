@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
@@ -9,7 +9,7 @@ import {
   UNLIKE_POST,
   CREATE_POST,
   DELETE_POST
-} from '../actions/types';
+} from "../actions/types";
 
 const fetchAllPosts = posts => {
   return {
@@ -105,6 +105,7 @@ const unlikePost = likeId => {
     payload: likeId
   };
 };
+
 export const unlikePostThunk = likeId => dispatch => {
   return axios
     .delete(`/likes/${likeId}`)

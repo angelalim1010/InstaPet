@@ -57,19 +57,19 @@ router.post("/register", (req, res, next) => {
     }
 
     // Otherwise
-    const newUser = new User({
+    const newUser = {
       userName: req.body.userName,
       email: req.body.email,
-      password: req.body.password
-    });
+      password: req.body.password,
+      displayName: req.body.displayName
+    };
 
     // Hash password before saving to database
     bcrypt.genSalt(12, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) throw err;
         newUser.password = hash;
-        newUser
-          .save()
+        User.create(newUser)
           .then(user => res.json(user))
           .catch(err => console.log(err));
       });
@@ -102,7 +102,7 @@ router.post("/login", (req, res, next) => {
   }).then(user => {
     // If a user was not found
     if (!user) {
-      return res.status(400).json({ emailNotFound: "Email not found" });
+      return res.status(400).json({ email: "Email not found" });
     }
 
     // Otherwise, check password
@@ -136,9 +136,7 @@ router.post("/login", (req, res, next) => {
           }
         );
       } else {
-        return res
-          .status(400)
-          .json({ passwordIncorrect: "Password incorrect" });
+        return res.status(400).json({ password: "Password incorrect" });
       }
     });
   });

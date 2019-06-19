@@ -37,7 +37,7 @@ const comments = require("./routes/comments");
 // Use routes
 app.use("/accounts", users);
 app.use("/p", posts);
-app.use("/c", comments);
+app.use("/comments", comments);
 
 // Heroku post-build script
 // Serve static assets if in production
