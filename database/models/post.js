@@ -23,13 +23,13 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Post.associate = models => {
-    Post.belongsTo(models.User, {
-      foreignKey: 'userId', // Post uses the userId to uniquely identify each User
-      onDelete: 'CASCADE'
-    });
-    Post.hasMany(models.Comment, {
-      foreignKey: 'postId'
-    });
+    // Post.belongsTo(models.User, {
+    //   foreignKey: 'userName', // Post uses the userId to uniquely identify each User
+    //   onDelete: 'CASCADE'
+    // });
+    // Post.hasMany(models.Comment, {
+    //   foreignKey: 'postId'
+    // });
   };
   return Post;
 };
