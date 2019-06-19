@@ -154,3 +154,10 @@ a:hover {
 .createPostForm input[type="submit"] {
   background-color: lightgreen;
 }
+
+.deleteButton {
+  margin-left: 440px;
+  color: gray;
+  background-color: #fff;
+  border-color: #fff;
+}
