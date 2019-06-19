@@ -2,18 +2,13 @@ import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
   FETCH_ALL_LIKES,
-
   ADD_COMMENT,
   DELETE_COMMENT,
-
   LIKE_POST,
   UNLIKE_POST,
-
-
   CREATE_POST,
   DELETE_POST
-
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -48,10 +43,11 @@ export default (state = initialState, action) => {
       };
 
     case DELETE_COMMENT:
-
       return {
         ...state,
-        comments: [state.comments.filter(comment => comment.id !== action.payload)]
+        comments: [
+          state.comments.filter(comment => comment.id !== action.payload)
+        ]
       };
 
     case LIKE_POST:
@@ -65,13 +61,6 @@ export default (state = initialState, action) => {
         ...state,
         likes: [state.likes.filter(like => like.id !== action.payload)]
       };
-
-
-
-
-
-
-
 
     case CREATE_POST:
       return {

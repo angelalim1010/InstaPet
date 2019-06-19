@@ -11,6 +11,10 @@ class Profile extends Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    this.props.getRelationships();
+  };
+
   render() {
     return (
       <div className="profile">
