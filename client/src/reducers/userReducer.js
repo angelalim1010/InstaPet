@@ -1,12 +1,13 @@
 import {
   GET_USERS,
-  GET_USER_POSTS,
+  GET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
   REGISTER_USER,
   LOGIN_USER,
   REMOVE_USER,
-  EDIT_USER
+  EDIT_USER,
+  GET_RELATIONSHIPS
 } from '../actions/types';
 
 const initialState = {
@@ -21,10 +22,10 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
-    case GET_USER_POSTS:
+    case GET_USER:
       return {
         ...state,
-        userPosts: action.payload
+        user: action.payload
       };
     case REGISTER_USER:
       return {
@@ -46,18 +47,24 @@ export default (state = initialState, action) => {
         ...state,
         users: [...state.users.filter(user => user.id !== action.payload)]
       };
-
     case REMOVE_USER_POST:
       // TO BE IMPLEMENTED
       return {
         ...state
       };
     case EDIT_USER:
-      // EDIT PERSON (REQUIRES SOME IMPLEMENTATION)
-      let editedUser = state.user;
+      let usersCopy = state.users;
+
       return {
         ...state,
-        user: editedUser
+        user: action.payload,
+        users: [
+          /* edited array */
+        ]
+      };
+    case GET_RELATIONSHIPS:
+      return {
+        ...state
       };
     default:
       return state;
