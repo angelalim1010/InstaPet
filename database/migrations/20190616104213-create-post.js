@@ -15,13 +15,13 @@ module.exports = {
         allowNull: false,
         validate: {
           notEmpty: true
-        },
-        onDelete: 'CASCADE'
-        //       references: {
-        //         model: 'Users',
-        //         key: 'userName',
-        //         as: 'username'
-        //       }
+        }
+        // onDelete: 'CASCADE'
+        // //       references: {
+        // //         model: 'Users',
+        // //         key: 'userName',
+        // //         as: 'username'
+        // //       }
       },
       // A string of the URL containing the image
       imageURL: {
