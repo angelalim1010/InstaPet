@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const passport = require("passport");
-const http = require("http");
 
 // Express Initialization
 const app = express();
@@ -43,8 +42,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Create server and listen on port ####
-const server = http.createServer(app);
-server.listen(port, () => console.log(`Server up! Listening on port ${port}`));
+// Have app listen to port ####
+app.listen(port, () => console.log(`Server up! Listening on port ${port}`));
 
 module.exports = app;
