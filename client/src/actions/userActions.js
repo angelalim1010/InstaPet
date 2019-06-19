@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   SET_USERS,
-  GET_USER,
+  SET_USER,
   ADD_USER_POST,
   REMOVE_USER_POST,
   REMOVE_USER,
@@ -18,17 +18,17 @@ const setUsers = users => {
   };
 };
 
-const getUser = userId => {
+const setUser = user => {
   return {
-    type: GET_USER,
-    payload: userId
+    type: SET_USER,
+    payload: user
   };
 };
 
-const removeUser = userId => {
+const removeUser = userName => {
   return {
     type: REMOVE_USER,
-    payload: userId
+    payload: userName
   };
 };
 
@@ -72,12 +72,12 @@ export const getUsers = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const getUserThunk = userId => dispatch => {
+export const getUser = userName => dispatch => {
   return axios
-    .get("/profile/${userId}")
+    .get("/profile/${userName}")
     .catch(err => console.log(err))
     .then(res => res.data)
-    .then(userId => dispatch(getUser(userId)));
+    .then(user => dispatch(setUser(user)));
 };
 
 export const editUserThunk = editedUser => dispatch => {

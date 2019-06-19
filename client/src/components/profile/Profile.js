@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
-import { getUsers } from "../../actions/userActions";
+import { getUsers, getUser } from "../../actions/userActions";
 
 class Profile extends Component {
   constructor(props) {
@@ -14,9 +14,9 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     // Gets users and sets them to the userReducer part of the store
-    this.props.getUsers();
+    // this.props.getUsers();
 
     // Gets the parameters from the URL
     const {
@@ -30,9 +30,12 @@ class Profile extends Component {
      */
 
     // Sets the state so that the rest of the component can use the username taken from the parameter
-    this.setState({
+    await this.setState({
       userName: params.userName
     });
+
+    // Gets this specific user and sets them to the this.props.user.user
+    this.props.getUser(this.state.userName);
   };
 
   render() {
@@ -69,7 +72,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(getUsers())
+  getUsers: () => dispatch(getUsers()),
+  getUser: userName => dispatch(getUser(userName))
 });
 
 export default connect(

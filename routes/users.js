@@ -37,7 +37,7 @@ router.get("/", (req, res, next) => {
  * @access Public
  */
 router.get("/:userName", (req, res, next) => {
-  return User.find({
+  return User.findOne({
     where: {
       userName: req.params.userName
     }
