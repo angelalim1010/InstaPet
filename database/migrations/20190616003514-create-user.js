@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Users", {
+    return queryInterface.createTable('Users', {
       // The userId
       id: {
         allowNull: false,
@@ -80,6 +80,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , DataTypes */) => {
-    return queryInterface.dropTable("Users");
+    return queryInterface.dropTable('Users');
   }
 };

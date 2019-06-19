@@ -2,14 +2,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Relationships = sequelize.define('Relationships', {
     follower: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isNotEmpty: true
       }
     },
     following: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isNotEmpty: true

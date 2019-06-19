@@ -4,34 +4,58 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 import ProfileHeader from './ProfileHeader';
 import ProfilePosts from './ProfilePosts';
-import { getRelationshipsThunk } from '../../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userName: ""
+    }
   }
 
   componentDidMount = () => {
-    this.props.getRelationships();
+    const {
+      match: { params }
+    } = this.props;
+
+    this.setState({
+      userName: params.userName
+    });
   };
 
   render() {
-    return (
-      <div className="profile">
-        <ProfileHeader />
-        <ProfilePosts />
-      </div>
-    );
+    let userName = this.state.userName;
+    let viewUserArray = this.props.user.users.filter(user => user.userName == userName);
+
+    let viewUserObject = viewUserArray[0];
+
+    console.log("viewUserObject:");
+    console.log(viewUserObject);
+
+    if (viewUserObject == undefined) {
+      return (
+        <div className="noPosts">
+          <h2>Loading User...</h2>
+        </div>
+      )
+    } else {
+      return (
+        <div className="profile">
+          <ProfileHeader viewUserObject={viewUserObject} />
+          <ProfilePosts viewUserObject={viewUserObject} />
+        </div>
+      );
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    getRelationships: () => dispatch(getRelationshipsThunk())
   };
 };
 

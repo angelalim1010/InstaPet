@@ -59,7 +59,7 @@ class App extends Component {
             <ProtectedRoute path="/" component={NavBar} />
             <div className="content">
               <ProtectedRoute exact path="/" component={HomePage} />
-              <ProtectedRoute exact path="/profile" component={Profile} />
+              <ProtectedRoute exact path="/profile/:userName" component={Profile} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </div>

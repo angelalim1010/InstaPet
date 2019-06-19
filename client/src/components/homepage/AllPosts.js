@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchAllPostsThunk } from '../../actions/postActions';
 import { fetchAllCommentsThunk } from '../../actions/postActions';
 import { fetchAllLikesThunk } from '../../actions/postActions';
+import { getRelationshipsThunk } from '../../actions/userActions';
+import { getUsersThunk } from '../../actions/userActions';
 import Post from '../post/Post';
 import CreatePostForm from '../post/CreatePostForm';
 import '../post/Post.css';
@@ -24,6 +26,8 @@ class AllPosts extends Component {
     this.props.fetchAllPosts();
     this.props.fetchAllComments();
     this.props.fetchAllLikes();
+    this.props.getUsers();
+    this.props.getRelationships();
   };
 
   displayPosts = () => {
@@ -89,7 +93,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchAllPosts: () => dispatch(fetchAllPostsThunk()),
     fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
-    fetchAllLikes: () => dispatch(fetchAllLikesThunk())
+    fetchAllLikes: () => dispatch(fetchAllLikesThunk()),
+    getRelationships: () => dispatch(getRelationshipsThunk()),
+    getUsers: () => dispatch(getUsersThunk())
   };
 };
 
