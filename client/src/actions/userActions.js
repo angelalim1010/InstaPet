@@ -74,10 +74,10 @@ export const getUsers = () => dispatch => {
 
 export const getUser = userName => dispatch => {
   return axios
-    .get("/profile/${userName}")
-    .catch(err => console.log(err))
+    .get(`/profile/${userName}`)
     .then(res => res.data)
-    .then(user => dispatch(setUser(user)));
+    .then(user => dispatch(setUser(user)))
+    .catch(err => console.log(err));
 };
 
 export const editUserThunk = editedUser => dispatch => {
