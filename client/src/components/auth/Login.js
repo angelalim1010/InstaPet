@@ -6,8 +6,6 @@ import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
 import { loginUser } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "./Login.css";
-import Phone from "./Phone";
-
 class Login extends Component {
   constructor() {
     super();
@@ -68,10 +66,11 @@ class Login extends Component {
 
     return (
       <div className="background">
-        <Phone />
         <div className="box">
+        <img src={require("../../img/phone.png")} className = "phoneImage"></img>
+        <div className = "formContainer">
           <h1 className="title">Instapet</h1>
-          <Form onSubmit={this.handleSubmit}>
+          <Form className = "form" onSubmit={this.handleSubmit}>
             <FormGroup className="formBox">
               <Input
                 type="email"
@@ -102,6 +101,7 @@ class Login extends Component {
           </Form>
           <div className="signupbox">
             Don't have an account? <Link to="/register">Sign Up</Link>
+          </div>
           </div>
         </div>
       </div>

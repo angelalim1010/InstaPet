@@ -2,20 +2,42 @@
   font-family: "Brush Script MT";
   font-style: normal;
   font-size: 70px;
+
+}
+
+.signupmessage{
+    text-align: center;
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 20px;
+
 }
 
 .box {
-  background-color: white;
-  height: 400px;
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-left: 65%;
-  margin-top: 10%;
-  border-radius: 5px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+ }
+ .phoneImage{
+     height: 618px;
+     width:400px;
+ }
+.formContainer{
+    border:1px solid #e6e6e6;
+    background-color: #fff;
+    border-radius: 1px;
+    padding: 40px 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+.form{
+    width:100%;
+    margin: 0 auto;
 }
 
 .formBox {
@@ -30,19 +52,14 @@
 
 .formBoxError {
   margin: 5px 0;
+  text-align: left;
 }
 
 .submit {
-  align-items: center;
-  width: 215px;
-  min-width: 125px;
-  height: 35px;
-  border-radius: 5px;
-  display: table-cell;
-  vertical-align: middle;
   color: white;
   background-color: #4286f4;
-  padding: 2px;
+  margin: auto;
+  width: 100%;
 }
 .signupbox {
   margin-top: 15px;
