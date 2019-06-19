@@ -86,7 +86,7 @@ export const editUserThunk = editedUser => dispatch => {
 
 export const getRelationshipsThunk = () => dispatch => {
   return axios
-    .get("/accounts/relationships")
+    .get("/relationships/")
     .then(res => res.data)
     .then(relationships => dispatch(getRelationships(relationships)))
     .catch(err => console.log(err));
