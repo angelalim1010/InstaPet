@@ -14,14 +14,10 @@ class PostTopBar extends Component {
 
   canDelete = () => {
     let res;
-    console.log('Props Username');
-    console.log(this.props.userName);
 
-    console.log('Auth username');
-    console.log(this.props.auth.user.userName);
     if (this.props.auth.user.userName === this.props.userName) {
       console.log('INSIDE HERE!!');
-      res = (
+      return (
         <Button
           className="deleteButton"
           onClick={() => this.props.deletePost(this.props.postId)}
@@ -30,8 +26,6 @@ class PostTopBar extends Component {
         </Button>
       );
     }
-
-    return res;
   };
 
   displayTopBar = () => {
