@@ -9,14 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       follower: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           isNotEmpty: true
         }
       },
       following: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           isNotEmpty: true
