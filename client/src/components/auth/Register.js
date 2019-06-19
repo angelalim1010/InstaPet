@@ -72,7 +72,6 @@ class Register extends Component {
           <h3 className="signupmessage">
             Sign up to see some wholesome content
           </h3>
-          <br />
           <Form onSubmit={this.handleSubmit}>
             <FormGroup className="formbox">
               <Input
@@ -84,7 +83,6 @@ class Register extends Component {
               />
               <span>{errors.email}</span>
             </FormGroup>
-            <br />
             <FormGroup>
               <Input
                 type="text"
