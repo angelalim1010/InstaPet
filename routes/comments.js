@@ -31,6 +31,22 @@ router.get("/", (req, res, next) => {
 }); // End FindAllComments endpoint
 
 /**
+ * UpdateComment endpoint
+ * @route PUT /comments/:commentId
+ * @desc Update a comment
+ * @access Public
+ */
+router.put("/:commentId", (req, res, next) => {
+  return Comment.update({
+    where: {
+      id: req.params.commentId
+    }
+  })
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
+}); // End UpdateComment endpoint
+
+/**
  * DeleteComment endpoint
  * @route DELETE /comments/:commentId
  * @desc Delete a comment

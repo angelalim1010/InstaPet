@@ -31,6 +31,22 @@ router.get("/", (req, res, next) => {
 }); // End FindAllUsers endpoint
 
 /**
+ * UpdateUser endpoint
+ * @route PUT /accounts/:userId
+ * @desc Update a user
+ * @access Public
+ */
+router.put("/:userId", (req, res, next) => {
+  return User.update({
+    where: {
+      id: req.params.userId
+    }
+  })
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err));
+}); // End UpdateUser endpoint
+
+/**
  * Register endpoint
  * @route POST /accounts/register
  * @desc Register user
@@ -141,5 +157,21 @@ router.post("/login", (req, res, next) => {
     });
   });
 }); // End Login endpoint
+
+/**
+ * DeleteUser endpoint
+ * @route DELETE /accounts/:userId
+ * @desc Delete a user
+ * @access Public
+ */
+router.delete("/:userId", (req, res, next) => {
+  return User.destroy({
+    where: {
+      id: req.params.userId
+    }
+  })
+    .then(() => res.status(200).json({ message: "User successfully deleted" }))
+    .catch(err => res.status(400).json(err));
+}); // End DeleteUser endpoint
 
 module.exports = router;

@@ -30,11 +30,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Obtain routes
-const users = require("./routes/users");
-const posts = require("./routes/posts");
-const comments = require("./routes/comments");
-const relationships = require("./routes/relationships");
-const likes = require("./routes/likes");
+const { users, posts, comments, relationships, likes } = require("./routes");
 
 // Use routes
 app.use("/accounts", users);

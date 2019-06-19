@@ -31,6 +31,22 @@ router.get("/", (req, res, next) => {
 }); // End FindAllPosts endpoint
 
 /**
+ * UpdatePost endpoint
+ * @route PUT /posts/:postId
+ * @desc Update a post
+ * @access Public
+ */
+router.put("/:postId", (req, res, next) => {
+  return Post.update({
+    where: {
+      id: req.params.postId
+    }
+  })
+    .then(post => res.status(200).json(post))
+    .catch(err => res.status(400).json(err));
+}); // End UpdatePost endpoint
+
+/**
  * DeletePost endpoint
  * @route DELETE /p/:postId
  * @desc Delete a post
