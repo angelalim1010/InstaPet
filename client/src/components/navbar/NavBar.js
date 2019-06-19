@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import './NavBar.css';
-import { Form, Input, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser as faUserEmpty } from '@fortawesome/free-regular-svg-icons';
-import { logoutUser } from '../../actions/authActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import "./NavBar.css";
+import { Form, Input, Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
+import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
+import { logoutUser } from "../../actions/authActions";
 
 class NavBar extends Component {
   constructor(props) {
@@ -36,14 +37,14 @@ class NavBar extends Component {
           </Form>
 
           <div className="navBarProfile navBarItem">
-            <Link to={'/profile/' + this.props.auth.user.userName}>
-              <FontAwesomeIcon icon={faUserEmpty} size="2x" color="black" />
+            <Link to="/profile">
+              <FontAwesomeIcon className="navBarIcon" icon={faUserEmpty}/>
             </Link>
-          </div>
 
-          <Button className="navBarItem" onClick={this.logout}>
-            Logout
-          </Button>
+              <Button className="navBarItem" onClick={this.logout}>
+                 <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen}/>
+              </Button>
+          </div>
         </div>
       </div>
     );

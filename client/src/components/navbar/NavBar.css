@@ -29,9 +29,6 @@ a {
   position: relative;
 }
 
-.navBarItem {
-  text-align: center;
-}
 
 .navBarSearch {
   display: flex;
@@ -65,4 +62,10 @@ a {
   height: 60px;
   width: 120px;
   padding-bottom: 15px;
+}
+
+.navBarItem {
+    background-color: transparent;
+    border: transparent;
+    color: black;
 }
