@@ -53,6 +53,9 @@ class PostDescription extends Component {
         />
       );
     } else {
+
+      console.log("I CLICKED LIKE");
+
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
