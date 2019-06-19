@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_USERS,
   GET_USER,
@@ -7,7 +7,7 @@ import {
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS
-} from "./types";
+} from './types';
 
 // Users
 
@@ -72,12 +72,12 @@ export const getUsersThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const getUserThunk = userId => dispatch => {
+export const getUserThunk = userName => dispatch => {
   return axios
-    .get("/accounts/${userId}")
+    .get('/profile/${userName}')
     .catch(err => console.log(err))
     .then(res => res.data)
-    .then(userId => dispatch(getUser(userId)));
+    .then(userName => dispatch(getUser(userName)));
 };
 
 export const editUserThunk = editedUser => dispatch => {
@@ -86,7 +86,7 @@ export const editUserThunk = editedUser => dispatch => {
 
 export const getRelationshipsThunk = () => dispatch => {
   return axios
-    .get("/relationships/")
+    .get('/relationships/')
     .then(res => res.data)
     .then(relationships => dispatch(getRelationships(relationships)))
     .catch(err => console.log(err));
