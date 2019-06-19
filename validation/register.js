@@ -5,7 +5,7 @@ const isEmpty = require("is-empty");
 /**
  * validateRegisterInput
  * @pre Takes in object containing: email, password
- * @desc Validates that email, userName, password, password2 are valid and non-empty. displayName is allowed to be empty.
+ * @desc Validates that email, userName, password, password2 are valid and non-empty, as well as that password and password2 match. displayName is allowed to be empty.
  * @post Returns an object containing an object 'errors' and if the input was valid
  * @param {*} data
  */

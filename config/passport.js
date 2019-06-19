@@ -28,7 +28,6 @@ passport.use(
           }
         }).then(user => {
           if (user != null) {
-            console.log("Username is already in use");
             return done(null, false, { message: "Username is already in use" });
           }
         });
@@ -40,7 +39,6 @@ passport.use(
           }
         }).then(user => {
           if (user != null) {
-            console.log("Email is already in use");
             return done(null, false, { message: "Email is already in use" });
           }
         });
@@ -79,12 +77,10 @@ passport.use(
           }
         }).then(user => {
           if (user == null) {
-            console.log("Username does not exist");
-            return done(null, false, { message: "Username does not exist" });
+            return done(null, false, { message: "Email does not exist" });
           } else {
             bcrypt.compare(password, user.password).then(res => {
               if (!res) {
-                console.log("Passwords do not match");
                 return done(null, false, { message: "Passwords do not match" });
               }
               console.log("Login successful!");
