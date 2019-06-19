@@ -33,11 +33,15 @@ require("./config/passport")(passport);
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const comments = require("./routes/comments");
+const relationships = require("./routes/relationships");
+const likes = require("./routes/likes");
 
 // Use routes
 app.use("/accounts", users);
 app.use("/p", posts);
 app.use("/comments", comments);
+app.use("/relationships", relationships);
+app.use("/likes", likes);
 
 // Heroku post-build script
 // Serve static assets if in production

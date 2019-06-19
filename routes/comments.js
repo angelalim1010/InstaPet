@@ -5,6 +5,18 @@ const router = express.Router();
 const { Comment } = require("../database/models");
 
 /**
+ * CreateComment endpoint
+ * @route POST /comments
+ * @desc Create a comment
+ * @access Public
+ */
+router.post("/", (req, res, next) => {
+  return Comment.create(req.body)
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
+}); // End CreateComment endpoint
+
+/**
  * FindAllComments endpoint
  * @route GET /comments
  * @desc Find all comments
@@ -19,24 +31,12 @@ router.get("/", (req, res, next) => {
 }); // End FindAllComments endpoint
 
 /**
- * CreateComment endpoint
- * @route POST /comments
- * @desc Create a comment
- * @access Public
- */
-router.post("/", (req, res, next) => {
-  return Comment.create(req.body)
-    .then(comment => res.status(200).json(comment))
-    .catch(err => res.status(400).json(err));
-}); // End CreateComment endpoint
-
-/**
  * DeleteComment endpoint
- * @route POST /comments/:commentId
+ * @route DELETE /comments/:commentId
  * @desc Delete a comment
  * @access Public
  */
-router.delete("/", (req, res, next) => {
+router.delete("/:commentId", (req, res, next) => {
   return Comment.destroy({
     where: {
       id: req.params.commentId
