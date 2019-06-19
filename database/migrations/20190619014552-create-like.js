@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 module.exports = {
-  up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Comments", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Likes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       userName: {
         type: DataTypes.STRING,
@@ -22,24 +22,17 @@ module.exports = {
           notEmpty: true
         }
       },
-      content: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
     });
   },
-  down: (queryInterface /*, DataTypes*/) => {
-    return queryInterface.dropTable("Comments");
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Likes');
   }
 };

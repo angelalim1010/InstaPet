@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     postId: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
