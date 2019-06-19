@@ -4,7 +4,7 @@ const logger = require("morgan");
 const path = require("path");
 const passport = require("passport");
 
-// Express Initialization
+// Initialize Express
 const app = express();
 
 // Require .env config
@@ -16,7 +16,7 @@ const port = parseInt(process.env.PORT, 10) || 5000;
 // Set port
 app.set("port", port);
 
-// Logger
+// Use logger
 app.use(logger("dev"));
 
 // Use bodyParser middleware to parse requests
