@@ -52,7 +52,7 @@ class PostComments extends Component {
             return (
               <div className="comment" key={comment.id}>
                 <b>
-                  <Link to="/profile">{comment.userId}</Link>
+                  <Link to="/profile">{comment.userName}</Link>
                 </b>{" "}
                 {comment.content}
                 <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>

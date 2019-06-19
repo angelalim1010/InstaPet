@@ -71,7 +71,7 @@ export const fetchAllLikesThunk = () => dispatch => {
 
 
 
-//payload has postId, content, userId)
+//payload has postId, content, userName)
 const addComment = addedComment => {
   return {
     type: ADD_COMMENT,

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userId: {
+      userName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

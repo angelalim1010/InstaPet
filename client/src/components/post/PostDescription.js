@@ -11,7 +11,7 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: this.props.user.user.id
+      currentUserName: this.props.user.user.userName
     };
   }
 
@@ -19,7 +19,7 @@ class PostDescription extends Component {
     //if current user did not like post and clicked like
     let newLikePost = {
       postId: this.props.postId,
-      userId: this.state.currentUserId
+      userName: this.state.currentUserName
     }
     //call likePost
     this.props.likePost(newLikePost)

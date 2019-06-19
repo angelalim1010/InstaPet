@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    userId: {
-      type: DataTypes.NUMBER,
+    userName: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true

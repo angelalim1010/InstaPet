@@ -8,7 +8,7 @@ class PostComments extends Component {
     super(props);
     this.state = {
       content: "",
-      currentUserId: this.props.user.user.userId
+      currentUserName: this.props.user.user.userName
     };
   }
 
@@ -20,8 +20,9 @@ class PostComments extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state.currentUserName);
     let addedComment = {
-      userId: this.state.currentUserId,
+      userName: this.state.currentUserName,
       postId: this.props.postId,
       content: this.state.content
     };
