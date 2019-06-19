@@ -36,8 +36,9 @@ const validateRegisterInput = data => {
   if (validator.isEmpty(data.password)) {
     errors.password = "Password is required";
   }
+
   // Check password length
-  else if (!validator.isLength(data.password, { min: 6, max: 30 })) {
+  if (!validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = "Password must be between 6 and 30 characters";
   }
 
@@ -45,8 +46,9 @@ const validateRegisterInput = data => {
   if (validator.isEmpty(data.password2)) {
     errors.password2 = "Password is required";
   }
+
   // Check if passwords match
-  else if (!validator.equals(data.password1, data.password2)) {
+  else if (!validator.equals(data.password, data.password2)) {
     errors.password2 = "Passwords must match";
   }
 
