@@ -1,27 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   FETCH_ALL_POSTS,
   FETCH_ALL_COMMENTS,
   FETCH_ALL_LIKES,
-
   ADD_COMMENT,
   DELETE_COMMENT,
-
   LIKE_POST,
   UNLIKE_POST,
-
-
-
-
-
-
-
   CREATE_POST,
   DELETE_POST
-
-} from "../actions/types";
-
-
+} from '../actions/types';
 
 const fetchAllPosts = posts => {
   return {
@@ -29,6 +17,7 @@ const fetchAllPosts = posts => {
     payload: posts
   };
 };
+
 export const fetchAllPostsThunk = () => dispatch => {
   return axios
     .get(`/p/`)
@@ -37,14 +26,13 @@ export const fetchAllPostsThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
 const fetchAllComments = comments => {
   return {
     type: FETCH_ALL_COMMENTS,
     payload: comments
   };
 };
+
 export const fetchAllCommentsThunk = () => dispatch => {
   return axios
     .get(`/comments/`)
@@ -52,8 +40,6 @@ export const fetchAllCommentsThunk = () => dispatch => {
     .then(comments => dispatch(fetchAllComments(comments)))
     .catch(err => console.log(err));
 };
-
-
 
 const fetchAllLikes = likes => {
   return {
@@ -68,8 +54,6 @@ export const fetchAllLikesThunk = () => dispatch => {
     .then(likes => dispatch(fetchAllLikes(likes)))
     .catch(err => console.log(err));
 };
-
-
 
 //payload has postId, content, userName)
 const addComment = addedComment => {
@@ -86,8 +70,6 @@ export const addCommentThunk = addedComment => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
 const deleteComment = commentId => {
   return {
     type: DELETE_COMMENT,
@@ -101,8 +83,6 @@ export const deleteCommentThunk = commentId => dispatch => {
     .then(commentId => dispatch(deleteComment(commentId)))
     .catch(err => console.log(err));
 };
-
-
 
 //payload had postId and userId
 const likePost = likedPost => {
@@ -119,8 +99,6 @@ export const likePostThunk = likedPost => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
 const unlikePost = likeId => {
   return {
     type: UNLIKE_POST,
@@ -135,29 +113,6 @@ export const unlikePostThunk = likeId => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const createPost = post => {
   return {
     type: CREATE_POST,
@@ -171,8 +126,6 @@ export const createPostThunk = post => dispatch => {
     .then(post => dispatch(createPost(post)))
     .catch(err => console.log(err));
 };
-
-
 
 const deletePost = postId => {
   return {

@@ -9,7 +9,7 @@ class EditProfile extends Component {
     this.state = {
       id: this.props.id,
       name: this.props.name,
-      nickname: this.props.name,
+      userName: this.props.name,
       email: this.props.email,
       imageURL: this.props.imageURL,
       bio: this.props.bio,
@@ -32,7 +32,7 @@ class EditProfile extends Component {
       // send changed user data
       let changedUser = {
         id: this.props.id,
-        nickname: this.state.nickname,
+        userName: this.state.nickname,
         name: this.state.name,
         email: this.state.email,
         imageURL: this.state.imageURL,
@@ -48,11 +48,11 @@ class EditProfile extends Component {
     return (
       <div>
         <form className="editUserForm">
-          <label>Nickname: </label>
+          <label>UserName: </label>
           <input
             type="text"
             value={this.props.nickname}
-            name="nickname"
+            name="userName"
             placeholder="New nickname"
             onChange={this.handleChange}
           />

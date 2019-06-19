@@ -11,8 +11,9 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  users: [],
-  user: { auth: false }
+  users: [], // array of User Id's
+  user: { auth: false }, // user object
+  relationships: {} // object with followees and followers id arrays
 };
 
 export default (state = initialState, action) => {
@@ -53,18 +54,28 @@ export default (state = initialState, action) => {
         ...state
       };
     case EDIT_USER:
-      let usersCopy = state.users;
+      let newArr = state.users;
+
+      // find index of edited  user
+      let targetIndex = newArr.findIndex(user => user.id === action.payload.id);
+
+      // edit user in the array
+
+      newArr[targetIndex].name = action.payload.name;
+      newArr[targetIndex].userName = action.payload.userName;
+      newArr[targetIndex].email = action.payload.email;
+      newArr[targetIndex].imageURL = action.payload.imageURL;
+      newArr[targetIndex].phone = action.payload.phone;
 
       return {
         ...state,
         user: action.payload,
-        users: [
-          /* edited array */
-        ]
+        users: newArr
       };
     case GET_RELATIONSHIPS:
       return {
-        ...state
+        ...state,
+        relationships: action.payload
       };
     default:
       return state;
