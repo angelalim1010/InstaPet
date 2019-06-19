@@ -29,8 +29,15 @@ require("./config/passport");
 // Use Passport middleware
 app.use(passport.initialize());
 
-// Obtain routes and apply it to the Express app
-require("./routes")(app);
+// Obtain routes
+const users = require("./routes/users");
+const posts = require("./routes/posts");
+const comments = require("./routes/comments");
+
+// Use routes
+app.use("/accounts", users);
+app.use("/p", posts);
+app.use("/c", comments);
 
 // Heroku post-build script
 // Serve static assets if in production

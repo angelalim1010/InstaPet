@@ -100,7 +100,7 @@ passport.use(
 );
 
 const opts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("JWT"),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwtToken"),
   secretOrKey: JWT_SECRET
 };
 
