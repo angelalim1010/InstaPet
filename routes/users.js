@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-import validateRegisterInput from "../validation/register";
-import validateLoginInput from "../validation/login";
+
+// Set input validation methods
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 // Require .env config
 require("dotenv").config();
 
-// Load User model
+// Set User model
 const { User } = require("../database/models");
 
 /**
@@ -17,7 +19,7 @@ const { User } = require("../database/models");
  * @desc Register user
  * @access Public
  */
-router.post("/accounts/register", (req, res, next) => {
+router.post("/register", (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -27,6 +29,33 @@ router.post("/accounts/register", (req, res, next) => {
   }
 
   // If valid, try to find existing user with same email
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(user => {
+    // If a user was found
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    }
+    // Otherwise
+    const newUser = new User({
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    bcrypt.getSalt(12, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if (err) throw err;
+        newUser.password = hash;
+        newUser
+          .save()
+          .then(user => res.json(user))
+          .catch(err => console.log(err));
+      });
+    });
+  }); // End Register endpoint
 });
 
 /**

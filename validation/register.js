@@ -1,6 +1,6 @@
 const validator = require("validator");
 const isEmpty = require("is-empty");
-// validator has its own isEmpty function, but is-empty is used because validator only works on strings. isEmpty is used for isValid to check the object 'errors'.
+// validator has its own isEmpty function, but is-empty is used because validator only works on strings. isEmpty is used because it can check for undefined fields, as well as the object 'errors'.
 
 /**
  * validateRegisterInput
@@ -11,6 +11,12 @@ const isEmpty = require("is-empty");
  */
 const validateRegisterInput = data => {
   let errors = {};
+
+  // If fields are empty/undefined, return empty string instead because validator only works on strings
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.userName = !isEmpty(data.userName) ? data.userName : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   // Check if email is empty
   if (validator.isEmpty(data.email)) {
