@@ -31,6 +31,7 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_ALL_LIKES:
+      console.log(action.payload);
       return {
         ...state,
         likes: action.payload

@@ -84,18 +84,18 @@ export const deleteCommentThunk = commentId => dispatch => {
     .catch(err => console.log(err));
 };
 
-//payload had postId and userId
-const likePost = likedPost => {
+//payload has postId and userId
+const likePost = newLike => {
   return {
     type: LIKE_POST,
-    payload: likedPost
+    payload: newLike
   };
 };
-export const likePostThunk = likedPost => dispatch => {
+export const likePostThunk = newLike => dispatch => {
   return axios
-    .post(`/likes/`, likedPost)
+    .post(`/likes/`, newLike)
     .then(res => res.data)
-    .then(likedPost => dispatch(likePost(likedPost)))
+    .then(newLike => dispatch(likePost(newLike)))
     .catch(err => console.log(err));
 };
 

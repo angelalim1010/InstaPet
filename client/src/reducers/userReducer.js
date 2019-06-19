@@ -13,7 +13,7 @@ import {
 const initialState = {
   users: [], // array of User Id's
   user: { auth: false }, // user object
-  relationships: {} // object with followees and followers id arrays
+  relationships: [] // array with followees and followers id objects
 };
 
 export default (state = initialState, action) => {
