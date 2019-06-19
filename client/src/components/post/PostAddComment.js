@@ -8,9 +8,16 @@ class PostComments extends Component {
     super(props);
     this.state = {
       content: "",
-      currentUserName: this.props.user.user.userName
+      currentUserName: this.props.auth.user.userName
     };
   }
+
+  // componentWillReceiveProps = async nextProps => {
+  //   await console.log(nextProps.auth.user.userName);
+  //   await this.setState({
+  //     currentUserName: nextProps.auth.user.userName
+  //   });
+  // };
 
   handleChange = e => {
     this.setState({
@@ -26,7 +33,7 @@ class PostComments extends Component {
       postId: this.props.postId,
       content: this.state.content
     };
-    this.props.addComment(addedComment)
+    this.props.addComment(addedComment);
   };
 
   render() {
@@ -54,6 +61,7 @@ class PostComments extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   user: state.user
 });
 

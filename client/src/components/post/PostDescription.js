@@ -11,28 +11,36 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserName: this.props.user.user.userName
+      currentUserName: this.props.auth.user.userName
     };
   }
+
+  componentWillReceiveProps = async nextProps => {
+    await this.setState({
+      currentUserName: nextProps.auth.user.userName
+    });
+  };
 
   clickedLikePost = () => {
     //if current user did not like post and clicked like
     let newLikePost = {
       postId: this.props.postId,
       userName: this.state.currentUserName
-    }
+    };
     //call likePost
-    this.props.likePost(newLikePost)
+    this.props.likePost(newLikePost);
   };
 
   clickedUnlikePost = likeId => {
     //if current user likes post and clicked unlike
-    this.props.unlikePost(likeId)
+    this.props.unlikePost(likeId);
   };
 
   displayLikeStatus = () => {
     // filter through comments array in store for comments in this post
-    let allLikesForPost = this.props.post.likes.filter(like => like.postId == this.props.postId);
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === this.props.postId
+    );
 
     //find index of like by currentUser
     let indexOfTargetLike = allLikesForPost.findIndex(
@@ -57,7 +65,7 @@ class PostDescription extends Component {
           icon={faStarEmpty}
           onClick={this.clickedlikePost}
         />
-      )
+      );
     }
   };
 
@@ -65,7 +73,9 @@ class PostDescription extends Component {
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
-    let allLikesForPost = this.props.post.likes.filter(like => like.postId == postId);
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
 
     if (allLikesForPost.length === 1) {
       return `1 like`;
@@ -89,8 +99,9 @@ class PostDescription extends Component {
       </div>
     );
   }
-};
+}
 const mapStateToProps = state => ({
+  auth: state.auth,
   user: state.user,
   post: state.post
 });
