@@ -11,47 +11,43 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      likeStatus: false,
-      currentUserId: 2
+      currentUserName: this.props.user.user.userName
     };
   }
 
-  toggleLikeStatus = () => {
+  clickedLikePost = () => {
     //if current user did not like post and clicked like
-    if (!this.state.likeStatus) {
-      this.setState(prevState => ({
-        likeStatus: !prevState.likeStatus,
-      }));
-      let newLikePost = {
-        postId: this.props.postId,
-        userId: this.state.currentUserId
-      }
-      //call likePost
-      this.props.likePost(newLikePost)
-    } else {
-      this.setState(prevState => ({
-        likeStatus: !prevState.likeStatus,
-      }));
-      //if current user likes post and clicked unlike
-      let newUnlikePost = {
-        postId: this.props.postId,
-        userId: this.state.currentUserId
-      }
-      //call unlike
-      this.props.unlikePost(newUnlikePost)
+    let newLikePost = {
+      postId: this.props.postId,
+      userName: this.state.currentUserName
     }
+    //call likePost
+    this.props.likePost(newLikePost)
+  };
+
+  clickedUnlikePost = likeId => {
+    //if current user likes post and clicked unlike
+    this.props.unlikePost(likeId)
   };
 
   displayLikeStatus = () => {
-    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(like => like.postId == this.props.postId);
 
-    //check if current user liked post
-    if (postObject[0].likes.includes(this.state.currentUserId)) {
+    //find index of like by currentUser
+    let indexOfTargetLike = allLikesForPost.findIndex(
+      like => like.userId === this.state.currentUserId
+    );
+
+    //if index is -1 (user did not like)
+    if (indexOfTargetLike !== -1) {
+      //look for likeId
+      let likeId = allLikesForPost[indexOfTargetLike].id;
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
           icon={faStarFull}
-          onClick={this.toggleLikeStatus}
+          onClick={this.clickedUnlikePost(likeId)}
         />
       );
     } else {
@@ -59,22 +55,22 @@ class PostDescription extends Component {
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
           icon={faStarEmpty}
-          onClick={this.toggleLikeStatus}
+          onClick={this.clickedlikePost}
         />
-      );
+      )
     }
-  }
+  };
 
   displayLikeCount = () => {
-    //find post with postId
-    let postObject = this.props.post.posts.filter(post => post.id == this.props.postId)
-    //find like count of that post
-    console.log(postObject[0].likes.length);
+    // filter through likes for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(like => like.postId == postId);
 
-    if (postObject[0].likes.length === 1) {
+    if (allLikesForPost.length === 1) {
       return `1 like`;
     } else {
-      return `${postObject[0].likes.length} likes`;
+      return `${allLikesForPost.length} likes`;
     }
   };
 
@@ -95,13 +91,14 @@ class PostDescription extends Component {
   }
 };
 const mapStateToProps = state => ({
+  user: state.user,
   post: state.post
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     likePost: likedPost => dispatch(likePostThunk(likedPost)),
-    unlikePost: unlikedPost => dispatch(unlikePostThunk(unlikedPost))
+    unlikePost: likeId => dispatch(unlikePostThunk(likeId))
   };
 };
 export default connect(

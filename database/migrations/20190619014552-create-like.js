@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("Comments", {
+    return queryInterface.createTable('Likes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -22,13 +22,6 @@ module.exports = {
           notEmpty: true
         }
       },
-      content: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE
@@ -39,7 +32,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /*, DataTypes*/) => {
-    return queryInterface.dropTable("Comments");
+  down: (queryInterface, DataTypes) => {
+    return queryInterface.dropTable('Likes');
   }
 };

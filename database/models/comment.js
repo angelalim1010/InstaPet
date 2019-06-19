@@ -1,15 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    userId: {
-      type: DataTypes.NUMBER,
+    userName: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     postId: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
@@ -25,15 +25,15 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Comment.associate = models => {
-    Comment.belongsTo(models.User, {
-      foreignKey: 'userId', // A user can leave multiple comments
-      onDelete: 'CASCADE'
-    });
-    Comment.belongsTo(models.Post, {
-      // A comment can have multiple posts
-      foreignKey: 'postId',
-      onDelete: 'CASCADE'
-    });
+    // Comment.belongsTo(models.User, {
+    //   foreignKey: 'userName', // A user can leave multiple comments
+    //   onDelete: 'CASCADE'
+    // });
+    // Comment.belongsTo(models.Post, {
+    //   // A comment can have multiple posts
+    //   foreignKey: 'postId',
+    //   onDelete: 'CASCADE'
+    // });
   };
   return Comment;
 };

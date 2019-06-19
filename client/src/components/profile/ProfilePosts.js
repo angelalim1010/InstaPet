@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./Profile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchAllPostsThunk } from '../../actions/postActions';
+import './Profile.css';
 
 class ProfilePosts extends Component {
   constructor(props) {
@@ -9,6 +10,10 @@ class ProfilePosts extends Component {
     this.state = {};
     // This component will receive a prop with the postIds
   }
+
+  componentDidMount = () => {
+    this.props.fetchAllPosts();
+  };
 
   render() {
     return (
@@ -75,7 +80,9 @@ class ProfilePosts extends Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    fetchAllPosts: () => dispatch(fetchAllPostsThunk())
+  };
 };
 
 export default connect(

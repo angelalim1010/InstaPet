@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { editUserThunk } from '../../actions/userActions';
 
-export default class EditProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: this.props.id,
       name: this.props.name,
-      nickname: this.props.name,
+      userName: this.props.name,
       email: this.props.email,
       imageURL: this.props.imageURL,
       bio: this.props.bio,
@@ -25,13 +26,13 @@ export default class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.name === "" || this.state.imageURL === "") {
-      alert("One or more fields are invalid");
+    if (this.state.name === '' || this.state.imageURL === '') {
+      alert('One or more fields are invalid');
     } else {
       // send changed user data
       let changedUser = {
         id: this.props.id,
-        nickname: this.state.nickname,
+        userName: this.state.nickname,
         name: this.state.name,
         email: this.state.email,
         imageURL: this.state.imageURL,
@@ -47,11 +48,11 @@ export default class EditProfile extends Component {
     return (
       <div>
         <form className="editUserForm">
-          <label>Nickname: </label>
+          <label>UserName: </label>
           <input
             type="text"
             value={this.props.nickname}
-            name="nickname"
+            name="userName"
             placeholder="New nickname"
             onChange={this.handleChange}
           />
@@ -113,3 +114,18 @@ EditProfile.propTypes = {
 };
 
 // CONNECT TO REDUX
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editUser: changedUser => dispatch(editUserThunk(changedUser))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditProfile);
