@@ -6,6 +6,7 @@ import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
+import { Link } from "react-router-dom";
 
 class PostDescription extends Component {
   constructor(props) {
@@ -91,11 +92,12 @@ class PostDescription extends Component {
         <div className="postLikeCount">
           <b>{this.displayLikeCount()}</b>
         </div>
-        <Comment
-          className="postCaption"
-          userName={this.props.userName}
-          content={this.props.caption}
-        />
+
+        <b>
+          <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>
+        </b>{" "}
+        {this.props.caption}
+
       </div>
     );
   }

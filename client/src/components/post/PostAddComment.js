@@ -33,6 +33,9 @@ class PostComments extends Component {
       content: this.state.content
     };
     this.props.addComment(addedComment);
+    this.setState({
+      content: ""
+    });
   };
 
   render() {
