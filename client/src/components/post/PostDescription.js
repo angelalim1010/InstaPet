@@ -25,35 +25,29 @@ class PostDescription extends Component {
     this.props.likePost(newLikePost)
   };
 
-  clickedUnlikePost = () => {
+  clickedUnlikePost = likeId => {
     //if current user likes post and clicked unlike
     this.props.unlikePost(likeId)
   };
 
   displayLikeStatus = () => {
-
-
-
-    /* 
-     * 
-        MUST ADD FILTER TO FIND ID OF LIKE (USED TO REMOVE LIKE)
-     * 
-     */
-
-
-
-
-
     // filter through comments array in store for comments in this post
-    let allLikesForPost = this.props.post.likes.filter(like => like.postId == postId);
+    let allLikesForPost = this.props.post.likes.filter(like => like.postId == this.props.postId);
 
-    //check if current user liked post
-    if (allLikesForPost.includes(like => like.userId == this.state.currentUserId)) {
+    //find index of like by currentUser
+    let indexOfTargetLike = allLikesForPost.findIndex(
+      like => like.userId === this.state.currentUserId
+    );
+
+    //if index is -1 (user did not like)
+    if (indexOfTargetLike !== -1) {
+      //look for likeId
+      let likeId = allLikesForPost[indexOfTargetLike].id;
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
           icon={faStarFull}
-          onClick={this.clickedLikePost}
+          onClick={this.clickedUnlikePost(likeId)}
         />
       );
     } else {
@@ -61,11 +55,11 @@ class PostDescription extends Component {
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
           icon={faStarEmpty}
-          onClick={this.clickedUnlikePost}
+          onClick={this.clickedlikePost}
         />
-      );
+      )
     }
-  }
+  };
 
   displayLikeCount = () => {
     // filter through likes for postId
