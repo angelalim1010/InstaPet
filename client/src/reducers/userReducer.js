@@ -6,7 +6,11 @@ import {
   ADD_USER,
   REMOVE_USER,
   EDIT_USER,
-  GET_RELATIONSHIPS
+  GET_RELATIONSHIPS,
+
+  FOLLOW_USER,
+  UNFOLLOW_USER
+
 } from "../actions/types";
 
 const initialState = {
@@ -71,6 +75,21 @@ export default (state = initialState, action) => {
         ...state,
         relationships: action.payload
       };
+
+
+    case FOLLOW_USER:
+      return {
+        ...state,
+        relationships: [...state.relationships, action.payload]
+      };
+
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        relationships: state.relationships.filter(relationship => relationship.id != action.payload)
+      };
+
+
     default:
       return state;
   }
