@@ -32,7 +32,9 @@ class PostTopBar extends Component {
     if (this.props.userName) {
       return (
         <b>
-          <Link to={'/' + this.props.userName}>{this.props.userName}</Link>
+          <Link to={'/profile/' + this.props.userName}>
+            {this.props.userName}
+          </Link>
           {this.canDelete()}
         </b>
       );
