@@ -1,42 +1,36 @@
-//import express from "express";
-// import Cors from "cors";
-// import bodyParser from "body-parser";
-// import logger from "morgan";
-// import passport from "passport";
-
 const express = require("express");
-const Cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const passport = require("passport");
 const http = require("http");
-const PORT = parseInt(process.env.PORT, 10) || 5000;
-
-// Require .env config
-require("dotenv").config();
 
 // Express Initialization
 const app = express();
 
-// Set "PORT" variable to PORT const
-app.set("PORT", PORT);
+// Require .env config
+require("dotenv").config();
 
-// Cors
-app.use(Cors());
+// Grab or initialize port
+const port = parseInt(process.env.PORT, 10) || 5000;
+
+// Set port
+app.set("port", port);
 
 // Logger
 app.use(logger("dev"));
 
-// Parse requests
+// Use bodyParser middleware to parse requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Passport
+// Require Passport config
 require("./config/passport");
+
+// Use Passport middleware
 app.use(passport.initialize());
 
-// Configure routes
+// Obtain routes and apply it to the Express app
 require("./routes")(app);
 
 // Heroku post-build script
@@ -49,8 +43,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Create server and listen on port
+// Create server and listen on port ####
 const server = http.createServer(app);
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+server.listen(port, () => console.log(`Server up! Listening on port ${port}`));
 
 module.exports = app;
