@@ -47,7 +47,8 @@ router.put('/:userName', (req, res, next) => {
         email: req.body.email
       });
     })
-    .catch(err => console.log(err));
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err));
   // return User.update({
   //   where: {
   //     id: req.params.userId
