@@ -6,7 +6,9 @@ import {
   REMOVE_USER_POST,
   REMOVE_USER,
   EDIT_USER,
-  GET_RELATIONSHIPS
+  GET_RELATIONSHIPS,
+  FOLLOW_USER,
+  UNFOLLOW_USER
 } from "./types";
 
 // Users
@@ -46,6 +48,36 @@ const getRelationships = relationships => {
   };
 };
 
+//payload has follower and following
+const followUser = newFollow => {
+  return {
+    type: FOLLOW_USER,
+    payload: newFollow
+  };
+};
+export const followUserThunk = newFollow => dispatch => {
+  return axios
+    .post(`/relationships/`, newFollow)
+    .then(res => res.data)
+    .then(newFollow => dispatch(followUser(newFollow)))
+    .catch(err => console.log(err));
+};
+
+const unfollowUser = relationshipId => {
+  return {
+    type: UNFOLLOW_USER,
+    payload: relationshipId
+  };
+};
+
+export const unfollowUserThunk = relationshipId => dispatch => {
+  return axios
+    .delete(`/relationships/${relationshipId}`)
+    .then(res => res.data)
+    .then(relationshipId => dispatch(unfollowUser(relationshipId)))
+    .catch(err => console.log(err));
+};
+
 // User Posts
 
 const addUserPost = newPost => {
@@ -81,7 +113,13 @@ export const getUser = userName => dispatch => {
 };
 
 export const editUserThunk = editedUser => dispatch => {
-  return dispatch(editUser(editedUser));
+  return axios
+    .put(`/profile/${editedUser.userName}`, editUser)
+    .then(res => res.data)
+    .then(editedUser => dispatch(editUser(editedUser)))
+    .catch(err => console.log(err));
+
+  //return dispatch(editUser(editedUser));
 };
 
 export const getRelationshipsThunk = () => dispatch => {

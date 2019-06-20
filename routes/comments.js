@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
  */
 router.get("/", (req, res, next) => {
   return Comment.findAll({
-    order: [["id", "DESC"]]
+    order: [["id", "ASC"]]
   })
     .then(comments => res.status(200).json(comments))
     .catch(err => res.status(400).json(err));

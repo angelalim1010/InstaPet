@@ -33,6 +33,9 @@ class PostComments extends Component {
       content: this.state.content
     };
     this.props.addComment(addedComment);
+    this.setState({
+      content: ""
+    });
   };
 
   render() {
@@ -43,6 +46,7 @@ class PostComments extends Component {
             className="postAddCommentInput postAddCommentText"
             type="textarea"
             placeholder="Add a comment..."
+            value={this.state.content}
             rows="1"
             name="content"
             onChange={this.handleChange}

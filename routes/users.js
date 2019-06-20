@@ -24,7 +24,7 @@ const { User } = require("../database/models");
  */
 router.get("/", (req, res, next) => {
   return User.findAll({
-    order: [["userName", "DESC"]]
+    order: [["id", "DESC"]]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
@@ -64,13 +64,24 @@ router.get("/:userName", (req, res, next) => {
  * @access Public
  */
 router.put("/:userName", (req, res, next) => {
-  return User.update({
-    where: {
-      userName: req.params.userName
-    }
-  })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(400).json(err));
+  return User.findOne({ where: { id: req.body.id } })
+    .then(newUser => {
+      return User.update({
+        userName: req.body.userName,
+        displayName: req.body.displayName,
+        profilePicture: req.body.profilePicture,
+        bio: req.body.bio,
+        email: req.body.email
+      });
+    })
+    .catch(err => console.log(err));
+  // return User.update({
+  //   where: {
+  //     id: req.params.userId
+  //   }
+  // })
+  //   .then(user => res.status(200).json(user))
+  //   .catch(err => res.status(400).json(err));
 }); // End UpdateUser endpoint
 
 /**

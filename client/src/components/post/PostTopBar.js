@@ -10,14 +10,10 @@ import './Post.css';
 class PostTopBar extends Component {
   constructor(props) {
     super(props);
-
   }
 
   canDelete = () => {
-    let res;
-
     if (this.props.auth.user.userName === this.props.userName) {
-      console.log('INSIDE HERE!!');
       return (
         <Button
           className="deleteButton"
@@ -33,7 +29,9 @@ class PostTopBar extends Component {
     if (this.props.userName) {
       return (
         <b>
-          <Link to="/${this.props.user.id}">{this.props.userName}</Link>
+          <Link to={'/profile/' + this.props.userName}>
+            {this.props.userName}
+          </Link>
           {this.canDelete()}
         </b>
       );
@@ -41,7 +39,6 @@ class PostTopBar extends Component {
   };
 
   render() {
-    console.log(this.props.auth);
     return <div className="postTopBar">{this.displayTopBar()}</div>;
   }
 }

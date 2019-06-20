@@ -6,6 +6,7 @@ import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
+import { Link } from "react-router-dom";
 
 class PostDescription extends Component {
   constructor(props) {
@@ -15,11 +16,11 @@ class PostDescription extends Component {
     };
   }
 
-  componentWillReceiveProps = async nextProps => {
-    await this.setState({
-      currentUserName: nextProps.auth.user.userName
-    });
-  };
+  // componentWillReceiveProps = async nextProps => {
+  //   await this.setState({
+  //     currentUserName: nextProps.auth.user.userName
+  //   });
+  // };
 
   clickedLikePost = () => {
     //if current user did not like post and clicked like
@@ -70,6 +71,12 @@ class PostDescription extends Component {
   };
 
   displayLikeCount = () => {
+
+    /*
+    *   ADD CLICK EVENT LISTENER (pop up array of likes)
+    *
+    */
+
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
@@ -91,11 +98,12 @@ class PostDescription extends Component {
         <div className="postLikeCount">
           <b>{this.displayLikeCount()}</b>
         </div>
-        <Comment
-          className="postCaption"
-          userName={this.props.userName}
-          content={this.props.caption}
-        />
+
+        <b>
+          <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>
+        </b>{" "}
+        {this.props.caption}
+
       </div>
     );
   }

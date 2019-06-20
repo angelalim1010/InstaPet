@@ -5,6 +5,7 @@ import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
 import { getUsers, getUser } from "../../actions/userActions";
+import { withRouter } from "react-router";
 
 class Profile extends Component {
   constructor(props) {
@@ -14,28 +15,21 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    // Gets users and sets them to the userReducer part of the store
-    // this.props.getUsers();
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    // change user object based on params
+    if (nextProps.match.params.userName !== prevState.userName)
+      return { userName: nextProps.match.params.userName };
+    else return null;
+  };
 
-    // Gets the parameters from the URL
-    const {
-      match: { params }
-    } = this.props;
-
-    /**
-     * This is equivalent to:
-     * const match = this.props.match;
-     * const params = match.params;
-     */
-
-    // Sets the state so that the rest of the component can use the username taken from the parameter
-    await this.setState({
-      userName: params.userName
-    });
-
-    // Gets this specific user and sets them to the this.props.user.user
-    this.props.getUser(this.state.userName);
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("Running componentDidUpdate");
+    console.log(prevState.userName);
+    console.log(this.state.userName);
+    if (prevState.userName !== this.state.userName) {
+      // Gets this specific user and sets them to the this.props.user.user
+      this.props.getUser(this.state.userName);
+    }
   };
 
   render() {
@@ -76,7 +70,9 @@ const mapDispatchToProps = dispatch => ({
   getUser: userName => dispatch(getUser(userName))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Profile)
+);
