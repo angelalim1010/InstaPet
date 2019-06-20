@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editUserThunk } from '../../actions/userActions';
+import { modifyAuth } from '../../actions/authActions';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -25,8 +26,8 @@ class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.userName === '' || this.state.profilePicture === '') {
-      alert('One or more fields are invalid');
+    if (this.state.userName === '') {
+      alert('Username CANNOT be empty');
     } else {
       // send changed user data
       let changedUser = {
@@ -37,8 +38,14 @@ class EditProfile extends Component {
         profilePicture: this.state.profilePicture,
         bio: this.state.bio
       };
+
+      // send user to update Database
       console.log('Edited User sent!');
       this.props.editUser(changedUser);
+
+      // update the Authenticator
+      console.log('AUTH sent');
+      this.props.editAuth(changedUser);
     }
   };
 
@@ -130,7 +137,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    editUser: changedUser => dispatch(editUserThunk(changedUser))
+    editUser: changedUser => dispatch(editUserThunk(changedUser)),
+    editAuth: changedUser => dispatch(modifyAuth(changedUser))
   };
 };
 

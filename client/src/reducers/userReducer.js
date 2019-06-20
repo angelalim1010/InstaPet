@@ -7,11 +7,9 @@ import {
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
-
   FOLLOW_USER,
   UNFOLLOW_USER
-
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
   users: [], // array of User Id's
@@ -59,11 +57,11 @@ export default (state = initialState, action) => {
 
       // edit user in the array
 
-      newArr[targetIndex].name = action.payload.name;
+      newArr[targetIndex].displayName = action.payload.displayName;
       newArr[targetIndex].userName = action.payload.userName;
       newArr[targetIndex].email = action.payload.email;
-      newArr[targetIndex].imageURL = action.payload.imageURL;
-      newArr[targetIndex].phone = action.payload.phone;
+      newArr[targetIndex].profilePicture = action.payload.profilePicture;
+      newArr[targetIndex].bio = action.payload.bio;
 
       return {
         ...state,
@@ -76,7 +74,6 @@ export default (state = initialState, action) => {
         relationships: action.payload
       };
 
-
     case FOLLOW_USER:
       return {
         ...state,
@@ -86,9 +83,10 @@ export default (state = initialState, action) => {
     case UNFOLLOW_USER:
       return {
         ...state,
-        relationships: state.relationships.filter(relationship => relationship.id != action.payload)
+        relationships: state.relationships.filter(
+          relationship => relationship.id != action.payload
+        )
       };
-
 
     default:
       return state;

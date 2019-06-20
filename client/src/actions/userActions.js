@@ -120,8 +120,6 @@ export const editUserThunk = editedUser => dispatch => {
     .then(res => res.data)
     .then(editedUser => dispatch(editUser(editedUser)))
     .catch(err => console.log(err));
-
-  //return dispatch(editUser(editedUser));
 };
 
 export const getRelationshipsThunk = () => dispatch => {

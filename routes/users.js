@@ -78,14 +78,15 @@ router.get('/:userName', (req, res, next) => {
  * @desc Update a user
  * @access Public
  */
-router.put('/profile/:userName', (req, res, next) => {
+router.put('/:userName', (req, res, next) => {
   console.log('request BODY: ');
   console.log(req.body);
   console.log('Id:');
   console.log(req.body.id);
+  // res.json();
   return User.findOne({ where: { id: req.body.id } })
-    .then(() => {
-      return User.update({
+    .then(user => {
+      return user.update({
         userName: req.body.userName,
         displayName: req.body.displayName,
         profilePicture: req.body.profilePicture,

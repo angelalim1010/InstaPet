@@ -29,6 +29,8 @@ export const REMOVE_USER = 'REMOVE_USER';
 export const FOLLOW_USER = 'FOLLOW_USER';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 
+export const EDIT_AUTH = 'EDIT_AUTH';
+
 // ERRORS
 
 export const SET_ERRORS = 'SET_ERRORS';
