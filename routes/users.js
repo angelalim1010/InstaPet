@@ -75,7 +75,7 @@ router.get("/:userName", (req, res, next) => {
             .then(posts => {
               let newPosts = [];
               // For each post
-              for (i in posts) {
+              for (let i in posts) {
                 // Get the number of likes
                 Like.count({
                   where: {
@@ -92,9 +92,6 @@ router.get("/:userName", (req, res, next) => {
 
                     // Add each post to the array of new posts
                     newPosts.push(newPost);
-
-                    // Return the array of new posts
-                    return newPosts;
                   });
               }
               // Add them to the user's posts array
