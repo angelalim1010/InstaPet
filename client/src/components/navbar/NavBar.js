@@ -5,7 +5,7 @@ import './NavBar.css';
 import { Form, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser as faUserEmpty } from '@fortawesome/free-regular-svg-icons';
-import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { logoutUser } from '../../actions/authActions';
 
 class NavBar extends Component {
@@ -35,13 +35,13 @@ class NavBar extends Component {
 
           <div className="navBarProfile navBarItem">
             <Link to={'/profile/' + this.props.auth.user.userName}>
-              <FontAwesomeIcon icon={faUserEmpty}/>
+              <FontAwesomeIcon className="navBarIcon" icon={faUserEmpty} />
             </Link>
-          </div>
 
-          <Button className="navBarItem" onClick={this.logout}>
-            <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen}/>
-          </Button>
+            <Button className="navBarItem" onClick={this.logout}>
+              <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen} />
+            </Button>
+          </div>
         </div>
       </div>
     );
