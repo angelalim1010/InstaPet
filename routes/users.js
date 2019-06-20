@@ -13,8 +13,14 @@ require("dotenv").config();
 // Grab jwt secret
 const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
 
-// Set User model
-const { User } = require("../database/models");
+// Set models
+const {
+  User,
+  Post,
+  Comment,
+  Like,
+  Relationship
+} = require("../database/models");
 
 /**
  * FindAllUsers endpoint
@@ -43,13 +49,26 @@ router.get("/:userName", (req, res, next) => {
     }
   })
     .then(user => {
-      let jsonUser = user.toJSON();
+      const jsonUser = user.toJSON();
 
       // Destructure these values from jsonUser
       const { email, password, createdAt, updatedAt, ...rest } = jsonUser;
 
-      // Send back the rest
-      res.status(200).json(rest);
+      const newUser = rest;
+
+      // Find all the posts made by the user
+      Post.findAll({
+        where: {
+          userName: newUser.userName
+        }
+      }).then(posts => {
+        // Add to the user all posts made by the user
+        newUser.posts = posts;
+        res.status(200).json(newUser);
+      });
+
+      // Send back the newUser
+      // res.status(200).json(newUserPosts);
     })
     .catch(err => res.status(400).json(err));
 }); // End FindUser endpoint
