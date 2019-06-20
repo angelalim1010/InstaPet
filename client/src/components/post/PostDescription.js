@@ -91,11 +91,15 @@ class PostDescription extends Component {
     }
   };
 
+  displayAllLikes = () => {
+    console.log("clicked likes")
+  }
+
   render() {
     return (
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
-        <div className="postLikeCount">
+        <div className="postLikeCount" onClick={this.displayAllLikes}>
           <b>{this.displayLikeCount()}</b>
         </div>
 

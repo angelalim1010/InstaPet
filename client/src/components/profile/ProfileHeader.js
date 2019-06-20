@@ -72,6 +72,14 @@ class ProfileHeader extends Component {
     }
   };
 
+  displayAllFollowers = () => {
+    console.log("clicked followers")
+  }
+
+  displayAllFollowing = () => {
+    console.log("clicked following")
+  }
+
   render() {
     let userName = this.props.viewUserObject.userName;
 
@@ -118,12 +126,12 @@ class ProfileHeader extends Component {
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-            <div className="userStat userFollowers">
+            <div className="userStat userFollowers" onClick={this.displayAllFollowers}>
               {/* ADD CLICK EVENT LISTENER (pop up array of followers) */}
               <b>{allFollowersForUser.length}</b> followers
             </div>
 
-            <div className="userStat userFollowing">
+            <div className="userStat userFollowing" onClick={this.displayAllFollowing}>
               {/* ADD CLICK EVENT LISTENER (pop up array of following) */}
               <b>{allFollowingForUser.length}</b> following
             </div>
