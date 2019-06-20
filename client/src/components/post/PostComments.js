@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { deleteCommentThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 class PostComments extends Component {
   constructor(props) {
@@ -59,7 +61,9 @@ class PostComments extends Component {
                     <Link to={"/profile/" + comment.userName}> {comment.userName} </Link>
                   </b>{" "}
                   {comment.content}
-                  <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
+                  <Button  className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
+                    <FontAwesomeIcon className= "deleteCommentIcon"icon={faTrashAlt} size="2x" />
+                  </Button>
                 </div>
               )
             } else {
