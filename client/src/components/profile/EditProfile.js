@@ -8,15 +8,28 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      name: this.props.name,
-      userName: this.props.name,
-      email: this.props.email,
-      imageURL: this.props.imageURL,
-      bio: this.props.bio,
-      phone: this.props.phone
+      id: this.props.auth.user.id,
+      displayName: this.props.auth.user.displayName,
+      userName: this.props.auth.user.userName,
+      email: this.props.auth.user.email,
+      profilePicture: this.props.auth.user.profilePicture,
+      bio: this.props.auth.user.bio
     };
+
+    this.initial = this.state;
   }
+
+  componentDidMount = () => {
+    // set values to empty strings to avoid errors in case props recived are null
+
+    if (this.state.bio === null) {
+      this.setState({ bio: '' });
+    }
+
+    if (this.state.profilePicture === null) {
+      this.setState({ profilePicture: '' });
+    }
+  };
 
   // EVENT HANDLERS
   handleChange = e => {
@@ -32,13 +45,12 @@ class EditProfile extends Component {
     } else {
       // send changed user data
       let changedUser = {
-        id: this.props.id,
-        userName: this.state.nickname,
-        name: this.state.name,
+        id: this.props.auth.user.id,
+        userName: this.state.userName,
+        displayName: this.state.displayName,
         email: this.state.email,
-        imageURL: this.state.imageURL,
-        bio: this.state.bio,
-        phone: this.state.phone
+        profilePicture: this.state.profilePicture,
+        bio: this.state.bio
       };
 
       // send user to update Database
@@ -51,6 +63,16 @@ class EditProfile extends Component {
     }
   };
 
+  componentDidUpdate = () => {
+    if (this.state.bio === null) {
+      this.setState({ bio: '' });
+    }
+
+    if (this.state.profilePicture === null) {
+      this.setState({ profilePicture: '' });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -58,13 +80,13 @@ class EditProfile extends Component {
           <label>UserName: </label>
           <input
             type="text"
-            value={this.props.nickname}
+            value={this.state.userName}
             name="userName"
-            placeholder="New nickname"
+            placeholder="New userName"
             onChange={this.handleChange}
           />
           <br />
-          <label>Name: </label>
+          <label>Display Name: </label>
           <input
             type="text"
             value={this.state.displayName}
@@ -76,27 +98,27 @@ class EditProfile extends Component {
           <label>Email: </label>
           <input
             type="text"
-            value={this.props.email}
+            value={this.state.email}
             name="email"
             placeholder="New email"
             onChange={this.handleChange}
           />
           <br />
-          <label>Image Url: </label>
+          <label>Profile Picture: </label>
           <input
             type="text"
-            value={this.props.imageURL}
-            name="imageURL"
+            value={this.state.profilePicture}
+            name="profilePicture"
             placeholder="New image"
             onChange={this.handleChange}
           />
           <br />
-          <label>Phone:</label>
-          <input
+          <label>Bio:</label>
+          <textarea
             type="text"
-            value={this.props.phone}
-            name="phone"
-            placeholder="New Phone"
+            value={this.state.bio}
+            name="bio"
+            placeholder="your bio..."
             onChange={this.handleChange}
           />
           <br />
@@ -113,9 +135,9 @@ class EditProfile extends Component {
 
 EditProfile.propTypes = {
   name: PropTypes.string,
-  nickname: PropTypes.string,
+  userName: PropTypes.string,
   email: PropTypes.string,
-  imageURL: PropTypes.string,
+  profilePicture: PropTypes.string,
   bio: PropTypes.string,
   phone: PropTypes.string
 };

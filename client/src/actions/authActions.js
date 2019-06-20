@@ -40,7 +40,7 @@ const editAuth = editedAuth => {
  */
 export const registerUser = (user, history) => dispatch => {
   return axios
-    .post(`/accounts/register`, user)
+    .post(`/profile/register`, user)
     .then(res => {
       // Register new user in the store
       dispatch(addUser(res.data));
@@ -58,7 +58,7 @@ export const registerUser = (user, history) => dispatch => {
  */
 export const loginUser = user => dispatch => {
   return axios
-    .post(`/accounts/login`, user)
+    .post(`/profile/login`, user)
     .then(res => {
       // Grab token from res
       const { token } = res.data; // Equivalent to const token = res.data.token
@@ -102,7 +102,7 @@ export const logoutUser = () => dispatch => {
 
 export const modifyAuth = editedAuth => dispatch => {
   axios
-    .put(`/profile/${editedAuth.userName}`, editAuth)
+    .put(`/profile/${editedAuth.userName}`, editedAuth)
     .then(res => res.data)
     .then(editedAuth => dispatch(editAuth(editedAuth)))
     .catch(err => console.log(err));

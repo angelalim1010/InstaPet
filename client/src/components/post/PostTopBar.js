@@ -12,6 +12,12 @@ class PostTopBar extends Component {
     super(props);
   }
 
+  // static getDerivedStateFromProps = (nextProps, prevState) => {
+  //   console.log('POST TOP BAR:');
+  //   console.log(nextProps);
+  //   console.log(prevState);
+  // };
+
   canDelete = () => {
     if (this.props.auth.user.userName === this.props.userName) {
       return (
@@ -19,7 +25,7 @@ class PostTopBar extends Component {
           className="deleteButton"
           onClick={() => this.props.deletePost(this.props.postId)}
         >
-          <FontAwesomeIcon className = "deletePostIcon" icon={faTrashAlt}/>
+          <FontAwesomeIcon className="deletePostIcon" icon={faTrashAlt} />
         </Button>
       );
     }
@@ -45,6 +51,8 @@ class PostTopBar extends Component {
 
 const mapStateToProps = state => ({
   post: state.post,
+  user: state.user,
+  users: state.users,
   auth: state.auth
 });
 

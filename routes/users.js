@@ -90,10 +90,9 @@ router.put('/:userName', (req, res, next) => {
  */
 router.post('/register', (req, res, next) => {
   // Validate form inputs
-  const { errors, isValuserName } = validateRegisterInput(req.body);
-
+  const { errors, isValid } = validateRegisterInput(req.body);
   // If not valuserName, return errors
-  if (!isValuserName) {
+  if (!isValid) {
     return res.status(400).json(errors);
   }
 
@@ -122,7 +121,9 @@ router.post('/register', (req, res, next) => {
         if (err) throw err;
         newUser.password = hash;
         User.create(newUser)
-          .then(user => res.json(user))
+          .then(user => {
+            return res.json(user);
+          })
           .catch(err => console.log(err));
       });
     });
@@ -136,11 +137,12 @@ router.post('/register', (req, res, next) => {
  * @access Public
  */
 router.post('/login', (req, res, next) => {
+  console.log(req.body);
   // Validate form inputs
-  const { errors, isValuserName } = validateLoginInput(req.body);
+  const { errors, isValid } = validateLoginInput(req.body);
 
-  // If not valuserName, return errors
-  if (!isValuserName) {
+  // If not isValid, return errors
+  if (!isValid) {
     return res.status(400).json(errors);
   }
 
@@ -163,7 +165,7 @@ router.post('/login', (req, res, next) => {
       if (isMatch) {
         // Create JWT Payload
         const payload = {
-          userName: user.userName,
+          id: user.id,
           userName: user.userName,
           email: user.email,
           displayName: user.displayName,

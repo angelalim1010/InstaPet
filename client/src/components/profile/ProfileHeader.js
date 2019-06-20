@@ -15,8 +15,11 @@ import EditeProfile from './EditProfile';
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
+    let defsrc =
+      ' https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg';
     this.state = {
       currentUserName: this.props.auth.user.userName,
+      defaultSrc: defsrc,
       toggleEdit: false
     };
   }
@@ -32,6 +35,10 @@ class ProfileHeader extends Component {
       return <EditeProfile />;
     }
   };
+
+  // addDefaultSrc = e => {
+  //   e.target.src = this.state.defaultSrc;
+  // };
 
   clickedFollow = () => {
     //if current user did not follow and clicked follow
@@ -122,7 +129,7 @@ class ProfileHeader extends Component {
       <div className="profileHeader">
         <img
           className="profilePicture"
-          src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+          src={this.props.auth.user.profilePicture}
           alt="profilepic"
         />
 

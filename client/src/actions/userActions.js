@@ -98,7 +98,7 @@ const removeUserPost = postId => {
 
 export const getUsersThunk = () => dispatch => {
   return axios
-    .get(`/accounts/`)
+    .get(`/profile/`)
     .then(res => res.data)
     .then(users => dispatch(getUsers(users)))
     .catch(err => console.log(err));
@@ -106,7 +106,7 @@ export const getUsersThunk = () => dispatch => {
 
 export const getUserThunk = userName => dispatch => {
   return axios
-    .get('/profile/${userName}')
+    .get(`/profile/${userName}`)
     .catch(err => console.log(err))
     .then(res => res.data)
     .then(userName => dispatch(getUser(userName)));
