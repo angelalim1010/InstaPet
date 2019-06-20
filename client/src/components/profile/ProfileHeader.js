@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { withRouter } from 'react-router';
 import './Profile.css';
 import { Button } from 'reactstrap';
 import { timingSafeEqual } from 'crypto';
 
-import { followUserThunk } from "../../actions/userActions";
-import { unfollowUserThunk } from "../../actions/userActions";
-
+import { followUserThunk } from '../../actions/userActions';
+import { unfollowUserThunk } from '../../actions/userActions';
 
 class ProfileHeader extends Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class ProfileHeader extends Component {
     };
   }
 
-
   clickedFollow = () => {
     //if current user did not follow and clicked follow
     let newFollow = {
@@ -25,7 +25,7 @@ class ProfileHeader extends Component {
       follower: this.state.currentUserName
     };
     //call followUser
-    this.props.followUser(newFollow)
+    this.props.followUser(newFollow);
   };
 
   clickedUnfollow = relationshipId => {
@@ -33,10 +33,7 @@ class ProfileHeader extends Component {
     this.props.unfollowUser(relationshipId);
   };
 
-
-
   displayFollowStatus = () => {
-
     let userName = this.props.viewUserObject.userName;
 
     // filter through relationships array in store for followings of currentUser
@@ -54,42 +51,49 @@ class ProfileHeader extends Component {
       //look for relationshipId
       let relationshipId = allFollowingForUser[indexOfTargetRelationship].id;
       return (
-        <Button onClick={() => this.clickedUnfollow(relationshipId)} className="followButton">
+        <Button
+          onClick={() => this.clickedUnfollow(relationshipId)}
+          className="followButton"
+        >
           Unfollow
-      </Button>
+        </Button>
       );
     } else {
       //is not following
       return (
         <Button onClick={() => this.clickedFollow()} className="followButton">
           Follow
-      </Button>
+        </Button>
       );
     }
   };
 
   render() {
-
     let userName = this.props.viewUserObject.userName;
 
     //THIS USERS' POSTS
     // filter through posts for userName
     // filter through posts array in store for posts for this user
-    let allPostsForUser = this.props.post.posts.filter(post => post.userName == userName);
+    let allPostsForUser = this.props.post.posts.filter(
+      post => post.userName == userName
+    );
 
     //THIS USERS' FOLLOWERS
     // filter through relationships for where this user is the following
     // filter through posts array in store for posts for this user
-    let allFollowersForUser = this.props.user.relationships.filter(relationship => relationship.following == userName);
+    let allFollowersForUser = this.props.user.relationships.filter(
+      relationship => relationship.following == userName
+    );
 
     //THIS USERS' FOLLOWING
     // filter through relationships for where this user is the follower
     // filter through posts array in store for posts for this user
-    let allFollowingForUser = this.props.user.relationships.filter(relationship => relationship.follower == userName);
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower == userName
+    );
 
     return (
       <div className="profileHeader">
-
         <img
           className="profilePicture"
           src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
@@ -98,38 +102,29 @@ class ProfileHeader extends Component {
 
         <div className="userInfoContainer">
           <div className="userNameFollowStatus">
-
             <div className="userName">
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
 
-
             {/* CHANGE BUTTON TO EDIT FOR CURRENTUSER */}
 
             <div>{this.displayFollowStatus()}</div>
-
           </div>
 
           <div className="userStats">
-
             <div className="userStat userPostCount">
               <b>{allPostsForUser.length}</b> posts
             </div>
 
             <div className="userStat userFollowers">
-
               {/* ADD CLICK EVENT LISTENER (pop up array of followers) */}
-
               <b>{allFollowersForUser.length}</b> followers
             </div>
 
             <div className="userStat userFollowing">
-
               {/* ADD CLICK EVENT LISTENER (pop up array of following) */}
-
               <b>{allFollowingForUser.length}</b> following
             </div>
-
           </div>
 
           <div className="userDisplayName">
@@ -139,7 +134,6 @@ class ProfileHeader extends Component {
           <div className="userBio">
             <p>{this.props.viewUserObject.bio}</p>
           </div>
-
         </div>
       </div>
     );
@@ -159,7 +153,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfileHeader);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ProfileHeader)
+);
