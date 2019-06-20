@@ -32,7 +32,7 @@ router.get("/", (req, res, next) => {
 
 /**
  * FindUser endpoint
- * @route PUT /profile/:userName
+ * @route GET /profile/:userName
  * @desc Find a user
  * @access Public
  */
@@ -42,7 +42,15 @@ router.get("/:userName", (req, res, next) => {
       userName: req.params.userName
     }
   })
-    .then(user => res.status(200).json(user))
+    .then(user => {
+      let jsonUser = user.toJSON();
+
+      // Destructure these values from jsonUser
+      const { email, password, createdAt, updatedAt, ...rest } = jsonUser;
+
+      // Send back the rest
+      res.status(200).json(rest);
+    })
     .catch(err => res.status(400).json(err));
 }); // End FindUser endpoint
 
