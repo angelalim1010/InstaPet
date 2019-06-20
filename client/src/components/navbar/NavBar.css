@@ -68,4 +68,10 @@ a {
     background-color: transparent;
     border: transparent;
     color: black;
+    display: flex;
+}
+
+.navBarIcon{
+    display: flex;
+    font-size: 24px;
 }

@@ -19,7 +19,7 @@ class PostTopBar extends Component {
           className="deleteButton"
           onClick={() => this.props.deletePost(this.props.postId)}
         >
-          <FontAwesomeIcon icon={faTrashAlt} size="2x" />
+          <FontAwesomeIcon className = "deletePostIcon" icon={faTrashAlt}/>
         </Button>
       );
     }

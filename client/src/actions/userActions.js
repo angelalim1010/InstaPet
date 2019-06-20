@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-  SET_USERS,
-  SET_USER,
+  GET_USERS,
+  GET_USER,
   ADD_USER_POST,
   REMOVE_USER_POST,
   REMOVE_USER,
@@ -13,24 +13,24 @@ import {
 
 // Users
 
-const setUsers = users => {
+const getUsers = users => {
   return {
-    type: SET_USERS,
+    type: GET_USERS,
     payload: users
   };
 };
 
-const setUser = user => {
+const getUser = userId => {
   return {
-    type: SET_USER,
-    payload: user
+    type: GET_USER,
+    payload: userId
   };
 };
 
-const removeUser = userName => {
+const removeUser = userId => {
   return {
     type: REMOVE_USER,
-    payload: userName
+    payload: userId
   };
 };
 
@@ -96,20 +96,20 @@ const removeUserPost = postId => {
 
 // USER THUNKS
 
-export const getUsers = () => dispatch => {
+export const getUsersThunk = () => dispatch => {
   return axios
-    .get(`/profile/`)
+    .get(`/accounts/`)
     .then(res => res.data)
-    .then(users => dispatch(setUsers(users)))
+    .then(users => dispatch(getUsers(users)))
     .catch(err => console.log(err));
 };
 
-export const getUser = userName => dispatch => {
+export const getUserThunk = userName => dispatch => {
   return axios
-    .get(`/profile/${userName}`)
+    .get('/profile/${userName}')
+    .catch(err => console.log(err))
     .then(res => res.data)
-    .then(user => dispatch(setUser(user)))
-    .catch(err => console.log(err));
+    .then(userName => dispatch(getUser(userName)));
 };
 
 export const editUserThunk = editedUser => dispatch => {
@@ -124,7 +124,7 @@ export const editUserThunk = editedUser => dispatch => {
 
 export const getRelationshipsThunk = () => dispatch => {
   return axios
-    .get('/profile/relationships')
+    .get('/relationships/')
     .then(res => res.data)
     .then(relationships => dispatch(getRelationships(relationships)))
     .catch(err => console.log(err));

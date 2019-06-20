@@ -38,13 +38,13 @@ class NavBar extends Component {
 
           <div className="navBarProfile navBarItem">
             <Link to={'/profile/' + this.props.auth.user.userName}>
-              <FontAwesomeIcon className="navBarIcon" icon={faUserEmpty} />
+                 <FontAwesomeIcon className="navBarIcon" icon={faUserEmpty} />
             </Link>
 
-            <Button className="navBarItem" onClick={this.logout}>
-              <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen} />
-            </Button>
           </div>
+          <Button className="navBarItem" onClick={this.logout}>
+               <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen} />
+          </Button>
         </div>
       </div>
     );
@@ -55,9 +55,11 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: () => dispatch(logoutUser())
+  };
+};
 
 export default connect(
   mapStateToProps,

@@ -33,7 +33,7 @@ require("./config/passport")(passport);
 const { users, posts, comments, relationships, likes } = require("./routes");
 
 // Use routes
-app.use("/profile", users);
+app.use("/accounts", users);
 app.use("/p", posts);
 app.use("/comments", comments);
 app.use("/relationships", relationships);
