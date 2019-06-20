@@ -7,6 +7,7 @@ import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
 import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
+import './Post.css';
 
 class PostDescription extends Component {
   constructor(props) {
@@ -92,16 +93,31 @@ class PostDescription extends Component {
   };
 
   displayAllLikes = () => {
-    console.log("clicked likes")
+    document.getElementById("allLikesSection").style.display = "block";
+  }
+
+  closeAllLikes = () => {
+    document.getElementById("allLikesSection").style.display = "none";
   }
 
   render() {
     return (
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
+
+
         <div className="postLikeCount" onClick={this.displayAllLikes}>
           <b>{this.displayLikeCount()}</b>
         </div>
+
+        <div id="allLikesSection">
+          <div className="allLikesList">
+            <span className="closeBtn" onClick={this.closeAllLikes}>&times;</span>
+            <h1>LIKES</h1>
+          </div>
+        </div>
+
+
 
         <b>
           <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>
