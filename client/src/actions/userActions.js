@@ -1,17 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   GET_USERS,
-  GET_USER,
+  SET_USER,
   ADD_USER_POST,
   REMOVE_USER_POST,
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
-
   FOLLOW_USER,
   UNFOLLOW_USER
-
-} from './types';
+} from "./types";
 
 // Users
 
@@ -22,10 +20,10 @@ const getUsers = users => {
   };
 };
 
-const getUser = userId => {
+const setUser = user => {
   return {
-    type: GET_USER,
-    payload: userId
+    type: SET_USER,
+    payload: user
   };
 };
 
@@ -49,11 +47,6 @@ const getRelationships = relationships => {
     payload: relationships
   };
 };
-
-
-
-
-
 
 //payload has follower and following
 const followUser = newFollow => {
@@ -85,17 +78,6 @@ export const unfollowUserThunk = relationshipId => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
-
-
-
-
-
-
-
-
-
 // User Posts
 
 const addUserPost = newPost => {
@@ -122,12 +104,12 @@ export const getUsersThunk = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const getUserThunk = userName => dispatch => {
+export const getUser = userName => dispatch => {
   return axios
-    .get('/profile/${userName}')
-    .catch(err => console.log(err))
+    .get(`/profile/${userName}`)
     .then(res => res.data)
-    .then(userName => dispatch(getUser(userName)));
+    .then(user => dispatch(setUser(user)))
+    .catch(err => console.log(err));
 };
 
 export const editUserThunk = editedUser => dispatch => {
@@ -136,7 +118,7 @@ export const editUserThunk = editedUser => dispatch => {
 
 export const getRelationshipsThunk = () => dispatch => {
   return axios
-    .get('/relationships/')
+    .get(`/relationships/`)
     .then(res => res.data)
     .then(relationships => dispatch(getRelationships(relationships)))
     .catch(err => console.log(err));
