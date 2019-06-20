@@ -33,38 +33,42 @@ class ProfileHeader extends Component {
     this.props.unfollowUser(relationshipId);
   };
 
-  displayFollowStatus = () => {
+  displayButton = () => {
     let userName = this.props.viewUserObject.userName;
-
-    // filter through relationships array in store for followings of currentUser
-    let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower === this.state.currentUserName
-    );
-
-    //find index of relationship by currentUser
-    let indexOfTargetRelationship = allFollowingForUser.findIndex(
-      relationship => relationship.following === userName
-    );
-
-    //if index is not -1 (user is following)
-    if (indexOfTargetRelationship !== -1) {
-      //look for relationshipId
-      let relationshipId = allFollowingForUser[indexOfTargetRelationship].id;
-      return (
-        <Button
-          onClick={() => this.clickedUnfollow(relationshipId)}
-          className="followButton"
-        >
-          Unfollow
-        </Button>
-      );
+    //if on your own profile put edit button
+    if (userName === this.state.currentUserName) {
+      return <Button className="followButton">Edit Profile</Button>;
     } else {
-      //is not following
-      return (
-        <Button onClick={() => this.clickedFollow()} className="followButton">
-          Follow
-        </Button>
+      // filter through relationships array in store for followings of currentUser
+      let allFollowingForUser = this.props.user.relationships.filter(
+        relationship => relationship.follower === this.state.currentUserName
       );
+
+      //find index of relationship by currentUser
+      let indexOfTargetRelationship = allFollowingForUser.findIndex(
+        relationship => relationship.following === userName
+      );
+
+      //if index is not -1 (user is following)
+      if (indexOfTargetRelationship !== -1) {
+        //look for relationshipId
+        let relationshipId = allFollowingForUser[indexOfTargetRelationship].id;
+        return (
+          <Button
+            onClick={() => this.clickedUnfollow(relationshipId)}
+            className="followButton"
+          >
+            Unfollow
+          </Button>
+        );
+      } else {
+        //is not following
+        return (
+          <Button onClick={() => this.clickedFollow()} className="followButton">
+            Follow
+          </Button>
+        );
+      }
     }
   };
 
@@ -106,9 +110,7 @@ class ProfileHeader extends Component {
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
 
-            {/* CHANGE BUTTON TO EDIT FOR CURRENTUSER */}
-
-            <div>{this.displayFollowStatus()}</div>
+            <div>{this.displayButton()}</div>
           </div>
 
           <div className="userStats">
