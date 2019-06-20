@@ -43,34 +43,107 @@ router.get("/", (req, res, next) => {
  * @access Public
  */
 router.get("/:userName", (req, res, next) => {
-  return User.findOne({
-    where: {
-      userName: req.params.userName
-    }
-  })
-    .then(user => {
-      const jsonUser = user.toJSON();
-
-      // Destructure these values from jsonUser
-      const { email, password, createdAt, updatedAt, ...rest } = jsonUser;
-
-      const newUser = rest;
-
-      // Find all the posts made by the user
-      Post.findAll({
-        where: {
-          userName: newUser.userName
-        }
-      }).then(posts => {
-        // Add to the user all posts made by the user
-        newUser.posts = posts;
-        res.status(200).json(newUser);
-      });
-
-      // Send back the newUser
-      // res.status(200).json(newUserPosts);
+  return (
+    User.findOne({
+      where: {
+        userName: req.params.userName
+      }
     })
-    .catch(err => res.status(400).json(err));
+
+      // Filter out key:value pairs from the user
+      .then(user => {
+        // Convert it to JSON format
+        const jsonUser = user.toJSON();
+
+        // Destructure (filter) these key:value pairs from jsonUser because they contain sensitive information
+        const { email, password, createdAt, updatedAt, ...rest } = jsonUser;
+
+        // Return the other key:value pairs.
+        return rest;
+      })
+
+      // Find all the posts made by the user and return them
+      .then(user => {
+        return (
+          Post.findAll({
+            where: {
+              userName: user.userName
+            },
+            order: [["id", "DESC"]]
+          })
+            // Take the posts that were returned and
+            .then(posts => {
+              let newPosts = [];
+              // For each post
+              for (i in posts) {
+                // Get the number of likes
+                Like.count({
+                  where: {
+                    postId: posts[i].id
+                  }
+                })
+                  // Take that and
+                  .then(count => {
+                    // Set each post's likeCount to that number
+                    posts[i].caption = count;
+
+                    // Return the postCopy
+                    return posts;
+                  });
+                // Add them to the user's posts array
+                user.posts = posts;
+              }
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Find all the users that this user is following and return them
+      .then(user => {
+        return (
+          Relationship.findAll({
+            where: {
+              follower: user.userName
+            }
+          })
+            // Take the users that were returned
+            .then(following => {
+              // Add them to the user's following array
+              user.following = following;
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Find all the users that this following this user and return them
+      .then(user => {
+        return (
+          Relationship.findAll({
+            where: {
+              following: user.userName
+            }
+          })
+            // Take the users that were returned
+            .then(followers => {
+              // Add them to the user's followers array
+              user.followers = followers;
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Take the user and send a 200 response with the user
+      .then(user => res.status(200).json(user))
+
+      // Catch any errors and send a 400 response with the error
+      .catch(err => res.status(400).json(err))
+  );
 }); // End FindUser endpoint
 
 /**
