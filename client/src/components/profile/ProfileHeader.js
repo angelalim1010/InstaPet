@@ -99,7 +99,7 @@ class ProfileHeader extends Component {
 
         <img
           className="profilePicture"
-          src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+          src="https://i.pinimg.com/originals/9f/81/2d/9f812d4cf313e887ef99d8722229eee1.jpg"
           alt="profilepic"
         />
 
