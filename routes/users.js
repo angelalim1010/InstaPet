@@ -30,7 +30,7 @@ const {
  */
 router.get("/", (req, res, next) => {
   return User.findAll({
-    order: [["id", "DESC"]]
+    order: [["createdAt", "DESC"]]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
@@ -69,7 +69,7 @@ router.get("/:userName", (req, res, next) => {
             where: {
               userName: user.userName
             },
-            order: [["id", "DESC"]]
+            order: [["createdAt", "DESC"]]
           })
             // Take the posts that were returned and
             .then(posts => {
@@ -83,17 +83,22 @@ router.get("/:userName", (req, res, next) => {
                   }
                 })
                   // Take that and
-                  .then(count => {
-                    // Set each post's likeCount to that number
-                    posts[i].caption = count;
+                  .then(likeCount => {
+                    // Modify each post object to add likeCount
+                    let newPost = {
+                      ...posts[i].toJSON(),
+                      likeCount: likeCount
+                    };
 
-                    // Return the postCopy
-                    return posts;
+                    // Add each post to the array of new posts
+                    newPosts.push(newPost);
+
+                    // Return the array of new posts
+                    return newPosts;
                   });
-                // Add them to the user's posts array
-                user.posts = posts;
               }
-
+              // Add them to the user's posts array
+              user.posts = newPosts;
               // Return the user for the next .then handler
               return user;
             })
@@ -106,7 +111,8 @@ router.get("/:userName", (req, res, next) => {
           Relationship.findAll({
             where: {
               follower: user.userName
-            }
+            },
+            order: [["createdAt", "DESC"]]
           })
             // Take the users that were returned
             .then(following => {
@@ -125,7 +131,8 @@ router.get("/:userName", (req, res, next) => {
           Relationship.findAll({
             where: {
               following: user.userName
-            }
+            },
+            order: [["createdAt", "DESC"]]
           })
             // Take the users that were returned
             .then(followers => {
