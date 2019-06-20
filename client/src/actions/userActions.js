@@ -113,8 +113,10 @@ export const getUser = userName => dispatch => {
 };
 
 export const editUserThunk = editedUser => dispatch => {
+  console.log('USERNAME IN THUNK:');
+  console.log(editedUser.userName);
   return axios
-    .put(`/profile/${editedUser.userName}`, editUser)
+    .put(`/profile/${editedUser.userName}`, editedUser)
     .then(res => res.data)
     .then(editedUser => dispatch(editUser(editedUser)))
     .catch(err => console.log(err));

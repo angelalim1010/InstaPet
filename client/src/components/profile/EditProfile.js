@@ -37,7 +37,7 @@ class EditProfile extends Component {
         profilePicture: this.state.profilePicture,
         bio: this.state.bio
       };
-
+      console.log('Edited User sent!');
       this.props.editUser(changedUser);
     }
   };
@@ -69,7 +69,7 @@ class EditProfile extends Component {
           <input
             type="text"
             value={this.state.displayName}
-            name="displayN"
+            name="displayName"
             placeholder="New name"
             onChange={this.handleChange}
           />
@@ -104,7 +104,7 @@ class EditProfile extends Component {
           <input
             type="submit"
             onClick={this.handleSubmit}
-            value="save changes"
+            value="Save changes"
           />
         </form>
       </div>
@@ -124,7 +124,8 @@ EditProfile.propTypes = {
 // CONNECT TO REDUX
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => {

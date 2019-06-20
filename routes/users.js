@@ -30,20 +30,20 @@ router.get('/', (req, res, next) => {
     .catch(err => res.status(400).json(err));
 }); // End FindAllUsers endpoint
 
-router.put('/:userName', (req, res, next) => {
-  return User.findOne({ where: { id: req.body.id } })
-    .then(newUser => {
-      return User.update({
-        userName: req.body.userName,
-        displayName: req.body.displayName,
-        profilePicture: req.body.profilePicture,
-        bio: req.body.bio,
-        email: req.body.email
-      });
-    })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(400).json(err));
-});
+// router.put('/:userName', (req, res, next) => {
+//   return User.findOne({ where: { id: req.body.id } })
+//     .then(newUser => {
+//       return User.update({
+//         userName: req.body.userName,
+//         displayName: req.body.displayName,
+//         profilePicture: req.body.profilePicture,
+//         bio: req.body.bio,
+//         email: req.body.email
+//       });
+//     })
+//     .then(user => res.status(200).json(user))
+//     .catch(err => res.status(400).json(err));
+// });
 
 /**
  * FindUser endpoint
@@ -78,9 +78,13 @@ router.get('/:userName', (req, res, next) => {
  * @desc Update a user
  * @access Public
  */
-router.put('/:userName', (req, res, next) => {
+router.put('/profile/:userName', (req, res, next) => {
+  console.log('request BODY: ');
+  console.log(req.body);
+  console.log('Id:');
+  console.log(req.body.id);
   return User.findOne({ where: { id: req.body.id } })
-    .then(newUser => {
+    .then(() => {
       return User.update({
         userName: req.body.userName,
         displayName: req.body.displayName,
@@ -89,7 +93,8 @@ router.put('/:userName', (req, res, next) => {
         email: req.body.email
       });
     })
-    .catch(err => console.log(err));
+    .then(updatedUser => res.status(200).json(updatedUser))
+    .catch(err => res.status(400).json(err));
   // return User.update({
   //   where: {
   //     id: req.params.userId
