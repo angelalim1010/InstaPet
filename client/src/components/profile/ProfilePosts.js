@@ -4,30 +4,135 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./Profile.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faComment } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import Post from "../post/Post";
+
+
+// class ProfilePosts extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {};
+//     // This component will receive a prop with the postIds
+//   }
+
+//   render() {
+//     let userName = this.props.viewUserObject.userName;
+//     let allPostsForUser = this.props.post.posts.filter(
+//       post => post.userName == userName
+//     );
+
+//     if (allPostsForUser.length === 0) {
+//       return <div className="postCommentsNone" />;
+//     } else {
+//       return allPostsForUser.map(post => {
+//         {
+//           return (
+//             <img className="profilePost" key={post.id} src={post.imageURL} />
+//           );
+//         }
+//       });
+//     }
+//   }
+// }
+
+
+
+
+
+
 class ProfilePosts extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    // This component will receive a prop with the postIds
+    this.state = {
+      modal: false,
+      postIndex: 0
+    };
   }
 
-  render() {
+  handlePostClick = e => {
+    this.setPostIndex(e);
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+  setPostIndex = e => {
+    this.setState({
+      postIndex: e.target.id
+    });
+  };
+
+  displayModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
       post => post.userName == userName
     );
 
-    if (allPostsForUser.length === 0) {
-      return <div className="postCommentsNone" />;
-    } else {
-      return allPostsForUser.map(post => {
-        {
-          return (
-            <img className="profilePost" key={post.id} src={post.imageURL} />
-          );
-        }
-      });
+    if (allPostsForUser !== undefined) {
+      return (
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+          <Post
+            className="specificPost"
+            post={allPostsForUser[this.state.postIndex]}
+          />
+        </Modal>
+      );
     }
+  };
+
+  displayPosts = () => {
+
+    let userName = this.props.viewUserObject.userName;
+    let allPostsForUser = this.props.post.posts.filter(
+      post => post.userName == userName
+    );
+
+
+    if (allPostsForUser === undefined) {
+      return <div className="postCommentsNone">No Posts Available</div>;
+    } else {
+      return (
+        <div className="profilePosts">
+          {allPostsForUser.map((post, index) => {
+            return (
+              <div className="profilePost">
+                <img className="profilePostImage" src={post.imageURL} />
+                <div
+                  className="profilePostHover"
+                  key={post.id}
+                  id={index}
+                  onClick={this.handlePostClick}
+                >
+                  <span className="profilePostHoverItem">
+                    <FontAwesomeIcon icon={faStar} />
+                    <b>{post.likeCount}</b>
+                  </span>
+                  <span className="profilePostHoverItem">
+                    <FontAwesomeIcon icon={faComment} />
+                    <b>{post.commentCount}</b>
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  render() {
+    return (
+      <div className="profilePostsContainer">
+        {this.displayModal()}
+        {this.displayPosts()}
+      </div>
+    );
   }
 }
 

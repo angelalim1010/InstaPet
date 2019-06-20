@@ -53,20 +53,69 @@
   cursor: pointer;
 }
 
+
+
+
+
+.profilePostsContainer {
+  margin: auto;
+  max-width: 960px;
+  position: relative;
+}
+
 .profilePosts {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 900px;
+  justify-content: flex-start;
   margin-top: 10px;
 }
 
 .profilePost {
-  height: 290px;
-  width: 290px;
-  margin: 10px 0;
+  position: relative;
+  margin: 10px 10px;
 }
+
+.profilePostImage {
+  height: 300px;
+  width: 300px;
+}
+
+.profilePostHover {
+  position: absolute;
+  top: 0;
+  height: 300px;
+  width: 300px;
+  background-color: #000;
+  color: #fff;
+  z-index: 2;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePostHover:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.profilePostHoverItem {
+  margin: 0 10px;
+  font-size: 18px;
+}
+.profilePostHoverItem svg {
+  margin: 0 5px;
+}
+
+.modal-content {
+  background-color: transparent;
+}
+
+
+
+
+
 
 .allFollowersandFollowingSection {
   position:fixed;

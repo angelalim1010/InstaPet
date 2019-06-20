@@ -19,20 +19,6 @@ class PostComments extends Component {
   //   // this.props.getComments(this.props.postId);
   // };
 
-  displayViewAllComments = () => {
-    // filter through comments for postId
-    let postId = this.props.postId;
-    // filter through comments array in store for comments in this post
-    let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
-
-    if (allCommentsForPost.length === 0) {
-      return <div className="postCommentsNone" />;
-    }
-    if (allCommentsForPost.length >= 3) {
-      return <i>View all {allCommentsForPost.length} comments</i>;
-    }
-  };
-
   displayComments = () => {
     // filter through comments for postId
     let postId = this.props.postId;
@@ -52,8 +38,8 @@ class PostComments extends Component {
                     <Link to={"/profile/" + comment.userName}> {comment.userName} </Link>
                   </b>{" "}
                   {comment.content}
-                  <Button  className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
-                    <FontAwesomeIcon className= "deleteCommentIcon"icon={faTrashAlt} size="2x" />
+                  <Button className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
+                    <FontAwesomeIcon className="deleteCommentIcon" icon={faTrashAlt} size="2x" />
                   </Button>
                 </div>
               )
@@ -77,7 +63,6 @@ class PostComments extends Component {
   render() {
     return (
       <div className="postComments">
-        {this.displayViewAllComments()}
         {this.displayComments()}
       </div>
     );
