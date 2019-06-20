@@ -134,7 +134,7 @@ a:hover {
   margin: 50px auto;
   text-align: center;
   padding: 50px;
-  background-color: lightskyblue;
+  background-color: #fff;
   border-radius: 25px;
 }
 
@@ -145,14 +145,14 @@ a:hover {
 .createPostForm input {
   text-align: center;
   border-radius: 3px;
-  background-color: #dadada;
+  background-color: #fafafa;
   border: 1px solid black;
   color: black;
   margin: 5px auto;
 }
 
 .createPostForm input[type="submit"] {
-  background-color: lightgreen;
+  background-color: #dadada;
 }
 
 .deleteButton {
@@ -168,4 +168,5 @@ a:hover {
 }
 .deleteCommentIcon{
     font-size: 18px;
+    float: right;
 }
