@@ -13,10 +13,7 @@ class PostTopBar extends Component {
   }
 
   canDelete = () => {
-    let res;
-
     if (this.props.auth.user.userName === this.props.userName) {
-      console.log('INSIDE HERE!!');
       return (
         <Button
           className="deleteButton"
@@ -42,7 +39,6 @@ class PostTopBar extends Component {
   };
 
   render() {
-    console.log(this.props.auth);
     return <div className="postTopBar">{this.displayTopBar()}</div>;
   }
 }
