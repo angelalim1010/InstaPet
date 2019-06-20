@@ -166,6 +166,7 @@ a:hover {
   color: gray;
   cursor: pointer;
 }
+
 .allLikesSection {
   position:fixed;
   z-index: inherit 1;
