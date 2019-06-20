@@ -134,7 +134,7 @@ a:hover {
   margin: 50px auto;
   text-align: center;
   padding: 50px;
-  background-color: lightskyblue;
+  background-color: #fff;
   border-radius: 25px;
 }
 
@@ -145,18 +145,18 @@ a:hover {
 .createPostForm input {
   text-align: center;
   border-radius: 3px;
-  background-color: #dadada;
+  background-color: #fafafa;
   border: 1px solid black;
   color: black;
   margin: 5px auto;
 }
 
 .createPostForm input[type="submit"] {
-  background-color: lightgreen;
+  background-color: #dadada;
 }
 
 .deleteButton {
-  margin-left: 440px;
+  float: right;
   color: gray;
   background-color: #fff;
   border-color: #fff;
@@ -197,4 +197,12 @@ box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.2)
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+.deletePostIcon{
+    font-size: 30px;
+
+}
+.deleteCommentIcon{
+    font-size: 18px;
+    float: right;
 }
