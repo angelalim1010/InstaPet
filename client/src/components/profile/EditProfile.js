@@ -7,13 +7,12 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      name: this.props.name,
-      userName: this.props.name,
-      email: this.props.email,
-      imageURL: this.props.imageURL,
-      bio: this.props.bio,
-      phone: this.props.phone
+      id: this.props.auth.user.id,
+      displayName: this.props.auth.user.displayName,
+      userName: this.props.auth.user.userName,
+      email: this.props.auth.user.email,
+      profilePicture: this.props.auth.user.profilePicture,
+      bio: this.props.auth.user.bio
     };
   }
 
@@ -26,21 +25,30 @@ class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.name === '' || this.state.imageURL === '') {
+    if (this.state.userName === '' || this.state.profilePicture === '') {
       alert('One or more fields are invalid');
     } else {
       // send changed user data
       let changedUser = {
-        id: this.props.id,
-        userName: this.state.nickname,
-        name: this.state.name,
+        id: this.props.auth.user.id,
+        userName: this.state.userName,
+        displayName: this.state.name,
         email: this.state.email,
-        imageURL: this.state.imageURL,
-        bio: this.state.bio,
-        phone: this.state.phone
+        profilePicture: this.state.profilePicture,
+        bio: this.state.bio
       };
 
       this.props.editUser(changedUser);
+    }
+  };
+
+  componentDidUpdate = () => {
+    if (this.state.bio === null) {
+      this.setState({ bio: '' });
+    }
+
+    if (this.state.profilePicture === null) {
+      this.setState({ profilePicture: '' });
     }
   };
 
@@ -51,17 +59,17 @@ class EditProfile extends Component {
           <label>UserName: </label>
           <input
             type="text"
-            value={this.props.nickname}
+            value={this.state.userName}
             name="userName"
-            placeholder="New nickname"
+            placeholder="New userName"
             onChange={this.handleChange}
           />
           <br />
-          <label>Name: </label>
+          <label>Display Name: </label>
           <input
             type="text"
-            value={this.props.name}
-            name="name"
+            value={this.state.displayName}
+            name="displayN"
             placeholder="New name"
             onChange={this.handleChange}
           />
@@ -69,27 +77,27 @@ class EditProfile extends Component {
           <label>Email: </label>
           <input
             type="text"
-            value={this.props.email}
+            value={this.state.email}
             name="email"
             placeholder="New email"
             onChange={this.handleChange}
           />
           <br />
-          <label>Image Url: </label>
+          <label>Profile Picture: </label>
           <input
             type="text"
-            value={this.props.imageURL}
-            name="imageURL"
+            value={this.state.profilePicture}
+            name="profilePicture"
             placeholder="New image"
             onChange={this.handleChange}
           />
           <br />
-          <label>Phone:</label>
-          <input
+          <label>Bio:</label>
+          <textarea
             type="text"
-            value={this.props.phone}
-            name="phone"
-            placeholder="New Phone"
+            value={this.state.bio}
+            name="bio"
+            placeholder="your bio..."
             onChange={this.handleChange}
           />
           <br />
@@ -106,9 +114,9 @@ class EditProfile extends Component {
 
 EditProfile.propTypes = {
   name: PropTypes.string,
-  nickname: PropTypes.string,
+  userName: PropTypes.string,
   email: PropTypes.string,
-  imageURL: PropTypes.string,
+  profilePicture: PropTypes.string,
   bio: PropTypes.string,
   phone: PropTypes.string
 };
@@ -116,7 +124,7 @@ EditProfile.propTypes = {
 // CONNECT TO REDUX
 
 const mapStateToProps = state => ({
-  user: state.user
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {
