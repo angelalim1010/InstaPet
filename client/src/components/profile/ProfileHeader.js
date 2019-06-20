@@ -14,6 +14,7 @@ class ProfileHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      clickedShowFollowers: false,
       currentUserName: this.props.auth.user.userName
     };
   }
@@ -72,6 +73,58 @@ class ProfileHeader extends Component {
     }
   };
 
+  clickedShowAllFollowers = () => {
+    this.setState({
+      clickedShowFollowers: true
+    })
+  }
+
+  clickedUnshowFollowers = () => {
+    this.setState({
+      clickedShowFollowers: false
+    })
+  }
+
+  displayFollowersArray = () => {
+    let allFollowersForUser = this.props.user.relationships.filter(
+      relationship => relationship.following == this.props.viewUserObject.userName
+    );
+    return (
+      allFollowersForUser.map(relationship => {
+        return (
+          <div className="singleFollower" key={relationship.id}>
+            <b>
+              <Link to={"/profile/" + relationship.follower}> {relationship.follower} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
+  }
+
+
+  displayFollowersList = () => {
+    if (this.state.clickedShowFollowers === true) {
+      return (
+        <div className="allFollowersSection">
+          <div className="allFollowersList">
+            <span className="closeBtn" onClick={this.clickedUnshowFollowers}>&times;</span>
+            <p>All Followers</p>
+            <b>{this.displayFollowersArray()}</b>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div />
+      )
+    }
+  }
+
+  displayAllFollowing = () => {
+    console.log("clicked following")
+  }
+
   render() {
     let userName = this.props.viewUserObject.userName;
 
@@ -100,7 +153,7 @@ class ProfileHeader extends Component {
       <div className="profileHeader">
         <img
           className="profilePicture"
-          src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+          src="https://i.pinimg.com/originals/9f/81/2d/9f812d4cf313e887ef99d8722229eee1.jpg"
           alt="profilepic"
         />
 
@@ -118,13 +171,23 @@ class ProfileHeader extends Component {
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-            <div className="userStat userFollowers">
-              {/* ADD CLICK EVENT LISTENER (pop up array of followers) */}
-              <b>{allFollowersForUser.length}</b> followers
-            </div>
 
-            <div className="userStat userFollowing">
-              {/* ADD CLICK EVENT LISTENER (pop up array of following) */}
+
+
+
+            <div className="userStat userFollowers" onClick={this.clickedShowAllFollowers}>
+              <b>{allFollowersForUser.length}</b> followers
+        </div>
+
+            <div>{this.displayFollowersList()}</div>
+
+
+
+
+
+
+
+            <div className="userStat userFollowing" onClick={this.displayAllFollowing}>
               <b>{allFollowingForUser.length}</b> following
             </div>
           </div>
