@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import './Profile.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import "./Profile.css";
 
 class ProfilePosts extends Component {
   constructor(props) {
@@ -13,8 +13,6 @@ class ProfilePosts extends Component {
 
   render() {
     let userName = this.props.viewUserObject.userName;
-
-    console.log(userName);
     let allPostsForUser = this.props.post.posts.filter(
       post => post.userName == userName
     );

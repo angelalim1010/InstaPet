@@ -1,21 +1,19 @@
 import {
   GET_USERS,
-  GET_USER,
+  SET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
   ADD_USER,
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
-
   FOLLOW_USER,
   UNFOLLOW_USER
-
 } from "../actions/types";
 
 const initialState = {
   users: [], // array of User Id's
-  user: { auth: false }, // user object
+  user: {}, // user object
   relationships: [] // array with followees and followers id objects
 };
 
@@ -26,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
-    case GET_USER:
+    case SET_USER:
       return {
         ...state,
         user: action.payload
@@ -76,7 +74,6 @@ export default (state = initialState, action) => {
         relationships: action.payload
       };
 
-
     case FOLLOW_USER:
       return {
         ...state,
@@ -86,9 +83,10 @@ export default (state = initialState, action) => {
     case UNFOLLOW_USER:
       return {
         ...state,
-        relationships: state.relationships.filter(relationship => relationship.id != action.payload)
+        relationships: state.relationships.filter(
+          relationship => relationship.id != action.payload
+        )
       };
-
 
     default:
       return state;

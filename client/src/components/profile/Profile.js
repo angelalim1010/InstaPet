@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import './Profile.css';
-import ProfileHeader from './ProfileHeader';
-import ProfilePosts from './ProfilePosts';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import "./Profile.css";
+import ProfileHeader from "./ProfileHeader";
+import ProfilePosts from "./ProfilePosts";
+import { withRouter } from "react-router";
+import { getUser } from "../../actions/userActions";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ''
+      userName: ""
     };
   }
 
@@ -21,6 +22,10 @@ class Profile extends Component {
     else return null;
   };
 
+  componentDidMount = () => {
+    this.props.getUser(this.state.userName);
+  };
+
   render() {
     let userName = this.state.userName;
     let viewUserArray = this.props.user.users.filter(
@@ -29,7 +34,7 @@ class Profile extends Component {
 
     let viewUserObject = viewUserArray[0];
 
-    console.log('viewUserObject:');
+    console.log("viewUserObject:");
     console.log(viewUserObject);
 
     if (viewUserObject == undefined) {
@@ -54,9 +59,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
+const mapDispatchToProps = dispatch => ({
+  getUser: userName => dispatch(getUser(userName))
+});
 
 export default withRouter(
   connect(

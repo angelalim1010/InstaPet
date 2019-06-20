@@ -31,15 +31,31 @@ router.get("/", (req, res, next) => {
 }); // End FindAllUsers endpoint
 
 /**
+ * FindUser endpoint
+ * @route PUT /profile/:userName
+ * @desc Find a user
+ * @access Public
+ */
+router.get("/:userName", (req, res, next) => {
+  return User.findOne({
+    where: {
+      userName: req.params.userName
+    }
+  })
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err));
+}); // End FindUser endpoint
+
+/**
  * UpdateUser endpoint
- * @route PUT /accounts/:userId
+ * @route PUT /profile/:userName
  * @desc Update a user
  * @access Public
  */
-router.put("/:userId", (req, res, next) => {
+router.put("/:userName", (req, res, next) => {
   return User.update({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(user => res.status(200).json(user))
@@ -48,7 +64,7 @@ router.put("/:userId", (req, res, next) => {
 
 /**
  * Register endpoint
- * @route POST /accounts/register
+ * @route POST /profile/register
  * @desc Register user
  * @access Public
  */
@@ -95,7 +111,7 @@ router.post("/register", (req, res, next) => {
 
 /**
  * Login endpoint
- * @route POST /accounts/login
+ * @route POST /profile/login
  * @desc Login user
  * @access Public
  */
@@ -160,14 +176,14 @@ router.post("/login", (req, res, next) => {
 
 /**
  * DeleteUser endpoint
- * @route DELETE /accounts/:userId
+ * @route DELETE /profile/:userName
  * @desc Delete a user
  * @access Public
  */
-router.delete("/:userId", (req, res, next) => {
+router.delete("/:userName", (req, res, next) => {
   return User.destroy({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(() => res.status(200).json({ message: "User successfully deleted" }))
