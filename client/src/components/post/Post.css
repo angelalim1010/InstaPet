@@ -156,8 +156,16 @@ a:hover {
 }
 
 .deleteButton {
-  margin-left: 440px;
+  float: right;
   color: gray;
   background-color: #fff;
   border-color: #fff;
+}
+
+.deletePostIcon{
+    font-size: 30px;
+
+}
+.deleteCommentIcon{
+    font-size: 18px;
 }
