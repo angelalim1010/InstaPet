@@ -13,6 +13,7 @@ class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      clickedShow: false,
       currentUserName: this.props.auth.user.userName
     };
   }
@@ -92,12 +93,58 @@ class PostDescription extends Component {
     }
   };
 
-  displayAllLikes = () => {
-    document.getElementById("allLikesSection").style.display = "block";
+
+  displayLikeArray = () => {
+    // filter through likes for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
+
+    return (
+      allLikesForPost.map(like => {
+        return (
+          <div className="singleLike" key={like.id}>
+            <b>
+              <Link to={"/profile/" + like.userName}> {like.userName} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
   }
 
-  closeAllLikes = () => {
-    document.getElementById("allLikesSection").style.display = "none";
+
+
+  clickedShow = () => {
+    this.setState({
+      clickedShow: true
+    })
+  }
+
+  clickedUnshow = () => {
+    this.setState({
+      clickedShow: false
+    })
+  }
+
+  displayLikeList = () => {
+    if (this.state.clickedShow === true) {
+      return (
+        <div className="allLikesSection">
+          <div className="allLikesList">
+            <span className="closeBtn" onClick={this.clickedUnshow}>&times;</span>
+            <p>All Likes</p>
+            <b>{this.displayLikeArray()}</b>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div />
+      )
+    }
   }
 
   render() {
@@ -105,19 +152,11 @@ class PostDescription extends Component {
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
 
-
-        <div className="postLikeCount" onClick={this.displayAllLikes}>
+        <div className="postLikeCount" onClick={this.clickedShow}>
           <b>{this.displayLikeCount()}</b>
         </div>
 
-        <div id="allLikesSection">
-          <div className="allLikesList">
-            <span className="closeBtn" onClick={this.closeAllLikes}>&times;</span>
-            <h1>LIKES</h1>
-          </div>
-        </div>
-
-
+        <div>{this.displayLikeList()}</div>
 
         <b>
           <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>

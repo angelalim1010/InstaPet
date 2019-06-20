@@ -65,7 +65,7 @@ a:hover {
 }
 
 .postLikeStatusFull {
-  color: #3897f0;
+  color: red;
 }
 
 .postCommentsNone {
@@ -166,9 +166,7 @@ a:hover {
   color: gray;
   cursor: pointer;
 }
-
-#allLikesSection {
-  display:none;
+.allLikesSection {
   position:fixed;
   z-index: inherit 1;
   left: 0;
@@ -179,7 +177,7 @@ a:hover {
 }
 
 .allLikesList {
- background-color: #f4f4f4;
+background-color: #f4f4f4;
 margin: 10% auto;
 padding: 20px;
 width: 30%;
