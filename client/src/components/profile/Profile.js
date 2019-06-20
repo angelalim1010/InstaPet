@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 import ProfileHeader from './ProfileHeader';
 import ProfilePosts from './ProfilePosts';
-import { getUsers, getUser } from '../../actions/userActions';
 import { withRouter } from 'react-router';
 
 class Profile extends Component {
@@ -20,16 +19,6 @@ class Profile extends Component {
     if (nextProps.match.params.userName !== prevState.userName)
       return { userName: nextProps.match.params.userName };
     else return null;
-  };
-
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log('Running componentDidUpdate');
-    console.log(prevState.userName);
-    console.log(this.state.userName);
-    if (prevState.userName !== this.state.userName) {
-      // Gets this specific user and sets them to the this.props.user.user
-      this.props.getUser(this.state.userName);
-    }
   };
 
   render() {
@@ -65,10 +54,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(getUsers()),
-  getUser: userName => dispatch(getUser(userName))
-});
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default withRouter(
   connect(

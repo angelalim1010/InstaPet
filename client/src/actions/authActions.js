@@ -33,7 +33,7 @@ const setErrors = err => {
  */
 export const registerUser = (user, history) => dispatch => {
   return axios
-    .post(`/profile/register`, user)
+    .post(`/accounts/register`, user)
     .then(res => {
       // Register new user in the store
       dispatch(addUser(res.data));
@@ -51,7 +51,7 @@ export const registerUser = (user, history) => dispatch => {
  */
 export const loginUser = user => dispatch => {
   return axios
-    .post(`/profile/login`, user)
+    .post(`/accounts/login`, user)
     .then(res => {
       // Grab token from res
       const { token } = res.data; // Equivalent to const token = res.data.token
