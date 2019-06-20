@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchAllPostsThunk } from '../../actions/postActions';
-import { fetchAllCommentsThunk } from '../../actions/postActions';
-import { fetchAllLikesThunk } from '../../actions/postActions';
-import { getRelationshipsThunk } from '../../actions/userActions';
-import { getUsersThunk } from '../../actions/userActions';
-import Post from '../post/Post';
-import CreatePostForm from '../post/CreatePostForm';
-import '../post/Post.css';
-import { Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchAllPostsThunk } from "../../actions/postActions";
+import { fetchAllCommentsThunk } from "../../actions/postActions";
+import { fetchAllLikesThunk } from "../../actions/postActions";
+import { getRelationshipsThunk } from "../../actions/userActions";
+import { getUsers } from "../../actions/userActions";
+import Post from "../post/Post";
+import CreatePostForm from "../post/CreatePostForm";
+import "../post/Post.css";
+import { Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronCircleDown,
   faChevronCircleUp,
   faMinusCircle
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 class AllPosts extends Component {
   constructor(props) {
@@ -95,7 +95,7 @@ const mapDispatchToProps = dispatch => {
     fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
     fetchAllLikes: () => dispatch(fetchAllLikesThunk()),
     getRelationships: () => dispatch(getRelationshipsThunk()),
-    getUsers: () => dispatch(getUsersThunk())
+    getUsers: () => dispatch(getUsers())
   };
 };
 

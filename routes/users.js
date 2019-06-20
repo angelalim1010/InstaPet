@@ -18,7 +18,7 @@ const { User } = require('../database/models');
 
 /**
  * FindAllUsers endpoint
- * @route GET /accounts
+ * @route GET /profile
  * @desc Find all users
  * @access Public
  */
@@ -30,9 +30,51 @@ router.get('/', (req, res, next) => {
     .catch(err => res.status(400).json(err));
 }); // End FindAllUsers endpoint
 
+router.put('/:userName', (req, res, next) => {
+  return User.findOne({ where: { id: req.body.id } })
+    .then(newUser => {
+      return User.update({
+        userName: req.body.userName,
+        displayName: req.body.displayName,
+        profilePicture: req.body.profilePicture,
+        bio: req.body.bio,
+        email: req.body.email
+      });
+    })
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(400).json(err));
+});
+
+/**
+ * FindUser endpoint
+ * @route GET /profile/:userName
+ * @desc Find a user
+ * @access Public
+ */
+router.get('/:userName', (req, res, next) => {
+  return User.findOne({
+    where: {
+      userName: req.params.userName
+    }
+  })
+    .then(user => {
+      console.log('FindUser endpoint');
+      const objectWithoutKey = (object, key) => {
+        const { [key]: deletedKey, ...otherKeys } = object;
+        console.log(deletedKey);
+        console.log(otherKeys);
+        return otherKeys;
+      };
+      console.log(objectWithoutKey(user, password));
+      //res.status(200).json(objectWithoutKey(user, password));
+      res.status(200).json(user);
+    })
+    .catch(err => res.status(400).json(err));
+}); // End FindUser endpoint
+
 /**
  * UpdateUser endpoint
- * @route PUT /accounts/:userId
+ * @route PUT /profile/:userName
  * @desc Update a user
  * @access Public
  */
@@ -47,8 +89,7 @@ router.put('/:userName', (req, res, next) => {
         email: req.body.email
       });
     })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(400).json(err));
+    .catch(err => console.log(err));
   // return User.update({
   //   where: {
   //     id: req.params.userId
@@ -60,20 +101,20 @@ router.put('/:userName', (req, res, next) => {
 
 /**
  * Register endpoint
- * @route POST /accounts/register
+ * @route POST /profile/register
  * @desc Register user
  * @access Public
  */
 router.post('/register', (req, res, next) => {
   // Validate form inputs
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValuserName } = validateRegisterInput(req.body);
 
-  // If not valid, return errors
-  if (!isValid) {
+  // If not valuserName, return errors
+  if (!isValuserName) {
     return res.status(400).json(errors);
   }
 
-  // If valid, try to find existing user with same email
+  // If valuserName, try to find existing user with same email
   User.findOne({
     where: {
       email: req.body.email
@@ -107,22 +148,22 @@ router.post('/register', (req, res, next) => {
 
 /**
  * Login endpoint
- * @route POST /accounts/login
+ * @route POST /profile/login
  * @desc Login user
  * @access Public
  */
 router.post('/login', (req, res, next) => {
   // Validate form inputs
-  const { errors, isValid } = validateLoginInput(req.body);
+  const { errors, isValuserName } = validateLoginInput(req.body);
 
-  // If not valid, return errors
-  if (!isValid) {
+  // If not valuserName, return errors
+  if (!isValuserName) {
     return res.status(400).json(errors);
   }
 
   const { email, password } = req.body;
 
-  // If valid, try to find existing user with same email
+  // If valuserName, try to find existing user with same email
   User.findOne({
     where: {
       email: email
@@ -139,7 +180,7 @@ router.post('/login', (req, res, next) => {
       if (isMatch) {
         // Create JWT Payload
         const payload = {
-          id: user.id,
+          userName: user.userName,
           userName: user.userName,
           email: user.email,
           displayName: user.displayName,
@@ -172,14 +213,14 @@ router.post('/login', (req, res, next) => {
 
 /**
  * DeleteUser endpoint
- * @route DELETE /accounts/:userId
+ * @route DELETE /profile/:userName
  * @desc Delete a user
  * @access Public
  */
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userName', (req, res, next) => {
   return User.destroy({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(() => res.status(200).json({ message: 'User successfully deleted' }))

@@ -1,6 +1,6 @@
 import {
-  GET_USERS,
-  GET_USER,
+  SET_USERS,
+  SET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
   ADD_USER,
@@ -15,18 +15,18 @@ import {
 
 const initialState = {
   users: [], // array of User Id's
-  user: { auth: false }, // user object
+  user: {}, // user object
   relationships: [] // array with followees and followers id objects
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_USERS:
+    case SET_USERS:
       return {
         ...state,
         users: action.payload
       };
-    case GET_USER:
+    case SET_USER:
       return {
         ...state,
         user: action.payload

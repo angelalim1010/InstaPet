@@ -25,7 +25,7 @@ class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.displayName === '' || this.state.profilePicture === '') {
+    if (this.state.userName === '' || this.state.profilePicture === '') {
       alert('One or more fields are invalid');
     } else {
       // send changed user data
