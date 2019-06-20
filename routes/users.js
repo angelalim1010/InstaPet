@@ -72,12 +72,12 @@ router.get("/:userName", (req, res, next) => {
             order: [["createdAt", "DESC"]]
           })
             // Take the posts that were returned and
-            .then(posts => {
+            .then(async posts => {
               let newPosts = [];
               // For each post
               for (let i in posts) {
                 // Get the number of likes
-                Like.count({
+                await Like.count({
                   where: {
                     postId: posts[i].id
                   }
@@ -93,9 +93,29 @@ router.get("/:userName", (req, res, next) => {
                     // Add each post to the array of new posts
                     newPosts.push(newPost);
                   });
-              }
-              // Add them to the user's posts array
+
+                // Get the number of likes
+                await Comment.count({
+                  where: {
+                    postId: posts[i].id
+                  }
+                })
+                  // Take that and
+                  .then(commentCount => {
+                    // Modify each post object to add commentCount
+                    let newPost = {
+                      ...newPosts[i],
+                      commentCount: commentCount
+                    };
+
+                    // Replace each post in the newPosts array
+                    newPosts[i] = newPost;
+                  });
+              } // End for loop
+
+              // Add all the modified posts to the user's posts array
               user.posts = newPosts;
+
               // Return the user for the next .then handler
               return user;
             })
