@@ -23,7 +23,6 @@ class PostComments extends Component {
     // filter through comments array in store for comments in this post
     let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
 
-    console.log("LIL VIEW ALL SECTION");
     if (allCommentsForPost.length === 0) {
       return <div className="postCommentsNone" />;
     }
