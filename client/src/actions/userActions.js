@@ -7,10 +7,8 @@ import {
   REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
-
   FOLLOW_USER,
   UNFOLLOW_USER
-
 } from './types';
 
 // Users
@@ -50,11 +48,6 @@ const getRelationships = relationships => {
   };
 };
 
-
-
-
-
-
 //payload has follower and following
 const followUser = newFollow => {
   return {
@@ -85,17 +78,6 @@ export const unfollowUserThunk = relationshipId => dispatch => {
     .catch(err => console.log(err));
 };
 
-
-
-
-
-
-
-
-
-
-
-
 // User Posts
 
 const addUserPost = newPost => {
@@ -124,14 +106,20 @@ export const getUsersThunk = () => dispatch => {
 
 export const getUserThunk = userName => dispatch => {
   return axios
-    .get('/profile/${userName}')
+    .get(`/profile/${userName}`)
     .catch(err => console.log(err))
     .then(res => res.data)
     .then(userName => dispatch(getUser(userName)));
 };
 
 export const editUserThunk = editedUser => dispatch => {
-  return dispatch(editUser(editedUser));
+  return axios
+    .put(`/profile/${editedUser.userName}`, editUser)
+    .then(res => res.data)
+    .then(editedUser => dispatch(editUser(editedUser)))
+    .catch(err => console.log(err));
+
+  //return dispatch(editUser(editedUser));
 };
 
 export const getRelationshipsThunk = () => dispatch => {

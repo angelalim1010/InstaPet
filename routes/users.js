@@ -1,20 +1,20 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // Set input validation methods
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
+const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
 
 // Require .env config
-require("dotenv").config();
+require('dotenv').config();
 
 // Grab jwt secret
-const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
+const JWT_SECRET = process.env.JWT_SECRET || 'DEFAULT_SECRET';
 
 // Set User model
-const { User } = require("../database/models");
+const { User } = require('../database/models');
 
 /**
  * FindAllUsers endpoint
@@ -22,9 +22,9 @@ const { User } = require("../database/models");
  * @desc Find all users
  * @access Public
  */
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   return User.findAll({
-    order: [["id", "DESC"]]
+    order: [['id', 'DESC']]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
@@ -36,14 +36,25 @@ router.get("/", (req, res, next) => {
  * @desc Update a user
  * @access Public
  */
-router.put("/:userId", (req, res, next) => {
-  return User.update({
-    where: {
-      id: req.params.userId
-    }
-  })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(400).json(err));
+router.put('/:userName', (req, res, next) => {
+  return User.findOne({ where: { id: req.body.id } })
+    .then(newUser => {
+      return User.update({
+        userName: req.body.userName,
+        displayName: req.body.displayName,
+        profilePicture: req.body.profilePicture,
+        bio: req.body.bio,
+        email: req.body.email
+      });
+    })
+    .catch(err => console.log(err));
+  // return User.update({
+  //   where: {
+  //     id: req.params.userId
+  //   }
+  // })
+  //   .then(user => res.status(200).json(user))
+  //   .catch(err => res.status(400).json(err));
 }); // End UpdateUser endpoint
 
 /**
@@ -52,7 +63,7 @@ router.put("/:userId", (req, res, next) => {
  * @desc Register user
  * @access Public
  */
-router.post("/register", (req, res, next) => {
+router.post('/register', (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -69,7 +80,7 @@ router.post("/register", (req, res, next) => {
   }).then(user => {
     // If a user was found
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+      return res.status(400).json({ email: 'Email already exists' });
     }
 
     // Otherwise
@@ -99,7 +110,7 @@ router.post("/register", (req, res, next) => {
  * @desc Login user
  * @access Public
  */
-router.post("/login", (req, res, next) => {
+router.post('/login', (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -118,7 +129,7 @@ router.post("/login", (req, res, next) => {
   }).then(user => {
     // If a user was not found
     if (!user) {
-      return res.status(400).json({ email: "Email not found" });
+      return res.status(400).json({ email: 'Email not found' });
     }
 
     // Otherwise, check password
@@ -147,12 +158,12 @@ router.post("/login", (req, res, next) => {
           (err, token) => {
             res.json({
               success: true,
-              token: "JWT " + token
+              token: 'JWT ' + token
             });
           }
         );
       } else {
-        return res.status(400).json({ password: "Password incorrect" });
+        return res.status(400).json({ password: 'Password incorrect' });
       }
     });
   });
@@ -164,13 +175,13 @@ router.post("/login", (req, res, next) => {
  * @desc Delete a user
  * @access Public
  */
-router.delete("/:userId", (req, res, next) => {
+router.delete('/:userId', (req, res, next) => {
   return User.destroy({
     where: {
       id: req.params.userId
     }
   })
-    .then(() => res.status(200).json({ message: "User successfully deleted" }))
+    .then(() => res.status(200).json({ message: 'User successfully deleted' }))
     .catch(err => res.status(400).json(err));
 }); // End DeleteUser endpoint
 

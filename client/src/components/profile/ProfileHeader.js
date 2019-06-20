@@ -10,13 +10,28 @@ import { timingSafeEqual } from 'crypto';
 import { followUserThunk } from '../../actions/userActions';
 import { unfollowUserThunk } from '../../actions/userActions';
 
+import EditeProfile from './EditProfile';
+
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserName: this.props.auth.user.userName
+      currentUserName: this.props.auth.user.userName,
+      toggleEdit: false
     };
   }
+
+  handleClick = () => {
+    this.setState(state => ({
+      toggleEdit: !state.toggleEdit
+    }));
+  };
+
+  toggleEdit = () => {
+    if (this.state.toggleEdit) {
+      return <EditeProfile />;
+    }
+  };
 
   clickedFollow = () => {
     //if current user did not follow and clicked follow
@@ -37,7 +52,14 @@ class ProfileHeader extends Component {
     let userName = this.props.viewUserObject.userName;
     //if on your own profile put edit button
     if (userName === this.state.currentUserName) {
-      return <Button className="followButton">Edit Profile</Button>;
+      return (
+        <div>
+          <Button onClick={this.handleClick} className="followButton">
+            Edit Profile
+          </Button>
+          {this.toggleEdit()}
+        </div>
+      );
     } else {
       // filter through relationships array in store for followings of currentUser
       let allFollowingForUser = this.props.user.relationships.filter(
