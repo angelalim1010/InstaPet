@@ -15,6 +15,7 @@ class ProfileHeader extends Component {
     super(props);
     this.state = {
       clickedShowFollowers: false,
+      clickedShowFollowing: false,
       currentUserName: this.props.auth.user.userName
     };
   }
@@ -102,12 +103,11 @@ class ProfileHeader extends Component {
     )
   }
 
-
   displayFollowersList = () => {
     if (this.state.clickedShowFollowers === true) {
       return (
-        <div className="allFollowersSection">
-          <div className="allFollowersList">
+        <div className="allFollowersandFollowingSection">
+          <div className="allFollowersandFollowingList">
             <span className="closeBtn" onClick={this.clickedUnshowFollowers}>&times;</span>
             <p>All Followers</p>
             <b>{this.displayFollowersArray()}</b>
@@ -121,8 +121,52 @@ class ProfileHeader extends Component {
     }
   }
 
-  displayAllFollowing = () => {
-    console.log("clicked following")
+  clickedShowAllFollowing = () => {
+    this.setState({
+      clickedShowFollowing: true
+    })
+  }
+
+  clickedUnshowFollowing = () => {
+    this.setState({
+      clickedShowFollowing: false
+    })
+  }
+
+  displayFollowingArray = () => {
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower == this.props.viewUserObject.userName
+    );
+
+    return (
+      allFollowingForUser.map(relationship => {
+        return (
+          <div className="singleFollowing" key={relationship.id}>
+            <b>
+              <Link to={"/profile/" + relationship.following}> {relationship.following} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
+  }
+
+  displayFollowingList = () => {
+    if (this.state.clickedShowFollowing === true) {
+      return (
+        <div className="allFollowersandFollowingSection">
+          <div className="allFollowersandFollowingList">
+            <span className="closeBtn" onClick={this.clickedUnshowFollowing}>&times;</span>
+            <p>All Following</p>
+            <b>{this.displayFollowingArray()}</b>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div />
+      )
+    }
   }
 
   render() {
@@ -151,6 +195,7 @@ class ProfileHeader extends Component {
 
     return (
       <div className="profileHeader">
+
         <img
           className="profilePicture"
           src="https://i.pinimg.com/originals/9f/81/2d/9f812d4cf313e887ef99d8722229eee1.jpg"
@@ -158,47 +203,41 @@ class ProfileHeader extends Component {
         />
 
         <div className="userInfoContainer">
+
           <div className="userNameFollowStatus">
+
             <div className="userName">
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
-
             <div>{this.displayButton()}</div>
+
           </div>
 
           <div className="userStats">
+
             <div className="userStat userPostCount">
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-
-
-
-
             <div className="userStat userFollowers" onClick={this.clickedShowAllFollowers}>
               <b>{allFollowersForUser.length}</b> followers
-        </div>
-
+            </div>
             <div>{this.displayFollowersList()}</div>
 
-
-
-
-
-
-
-            <div className="userStat userFollowing" onClick={this.displayAllFollowing}>
+            <div className="userStat userFollowing" onClick={this.clickedShowAllFollowing}>
               <b>{allFollowingForUser.length}</b> following
             </div>
-          </div>
+            <div>{this.displayFollowingList()}</div>
 
+          </div>
           <div className="userDisplayName">
             <b>{this.props.viewUserObject.displayName}</b>
           </div>
 
           <div className="userBio">
-            <p>{this.props.viewUserObject.bio}</p>
+            <b>{this.props.viewUserObject.bio}</b>
           </div>
+
         </div>
       </div>
     );
