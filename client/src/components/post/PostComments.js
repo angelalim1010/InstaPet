@@ -17,28 +17,20 @@ class PostComments extends Component {
   //   // this.props.getComments(this.props.postId);
   // };
 
-  // displayViewAllComments = () => {
-  //   console.log("LIL VIEW ALL SECTION");
-  //   if (this.props.comments.length === 0) {
-  //     return <div className="postCommentsNone" />;
-  //   }
-  //   if (this.props.comments.length >= 3) {
-  //     return <i>View all {this.props.comments.length} comments</i>;
-  //   }
-  // };
+  displayViewAllComments = () => {
+    // filter through comments for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == postId);
 
-  // displayComment = comment => {
-  //   console.log("TRYING TO DISPLAY COMMENTS");
-  //   return (
-  //     <Comment
-  //       userName={comment.userId}
-  //       content={comment.content}
-  //       key={comment.id}
-  //     />
-
-  // {/* {this.displayViewAllComments()} */ }
-  //   );
-  // };
+    console.log("LIL VIEW ALL SECTION");
+    if (allCommentsForPost.length === 0) {
+      return <div className="postCommentsNone" />;
+    }
+    if (allCommentsForPost.length >= 3) {
+      return <i>View all {allCommentsForPost.length} comments</i>;
+    }
+  };
 
   displayComments = () => {
     // filter through comments for postId
@@ -82,6 +74,7 @@ class PostComments extends Component {
   render() {
     return (
       <div className="postComments">
+        {this.displayViewAllComments()}
         {this.displayComments()}
       </div>
     );

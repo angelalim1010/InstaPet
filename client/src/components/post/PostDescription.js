@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
 import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
@@ -55,7 +55,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
-          icon={faStarFull}
+          icon={faHeartFull}
           onClick={() => this.clickedUnlikePost(likeId)}
         />
       );
@@ -63,7 +63,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
-          icon={faStarEmpty}
+          icon={faHeartEmpty}
           onClick={() => this.clickedLikePost()}
         />
       );
