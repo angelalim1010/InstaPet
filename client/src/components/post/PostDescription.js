@@ -8,21 +8,16 @@ import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import './Post.css';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedShow: false,
+      modal: false,
       currentUserName: this.props.auth.user.userName
     };
   }
-
-  // componentWillReceiveProps = async nextProps => {
-  //   await this.setState({
-  //     currentUserName: nextProps.auth.user.userName
-  //   });
-  // };
 
   clickedLikePost = () => {
     //if current user did not like post and clicked like
@@ -73,12 +68,6 @@ class PostDescription extends Component {
   };
 
   displayLikeCount = () => {
-
-    /*
-    *   ADD CLICK EVENT LISTENER (pop up array of likes)
-    *
-    */
-
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
@@ -116,33 +105,34 @@ class PostDescription extends Component {
   }
 
 
+  handleLikesClick = () => {
+    this.toggleModal();
+  };
 
-  clickedShow = () => {
-    this.setState({
-      clickedShow: true
-    })
-  }
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
 
-  clickedUnshow = () => {
-    this.setState({
-      clickedShow: false
-    })
-  }
 
-  displayLikeList = () => {
-    if (this.state.clickedShow === true) {
+  displayModal = () => {
+
+    // filter through likes for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
+
+    if (allLikesForPost !== undefined) {
       return (
-        <div className="allLikesSection">
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
           <div className="allLikesList">
-            <span className="closeBtn" onClick={this.clickedUnshow}>&times;</span>
             <p>All Likes</p>
             <b>{this.displayLikeArray()}</b>
           </div>
-        </div>
-      )
-    } else {
-      return (
-        <div />
+        </Modal >
       )
     }
   }
@@ -152,11 +142,11 @@ class PostDescription extends Component {
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
 
-        <div className="postLikeCount" onClick={this.clickedShow}>
+        <div className="postLikeCount" onClick={this.handleLikesClick}>
           <b>{this.displayLikeCount()}</b>
         </div>
 
-        <div>{this.displayLikeList()}</div>
+        <div>{this.displayModal()}</div>
 
         <b>
           <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>
