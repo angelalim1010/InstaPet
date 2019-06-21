@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
   GET_USERS,
-  SET_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
   FOLLOW_USER,
@@ -14,13 +13,6 @@ const getUsers = users => {
   return {
     type: GET_USERS,
     payload: users
-  };
-};
-
-const setUser = user => {
-  return {
-    type: SET_USER,
-    payload: user
   };
 };
 
@@ -75,14 +67,6 @@ export const getUsersThunk = () => dispatch => {
     .get(`/profile/`)
     .then(res => res.data)
     .then(users => dispatch(getUsers(users)))
-    .catch(err => console.log(err));
-};
-
-export const getUser = userName => dispatch => {
-  return axios
-    .get(`/profile/${userName}`)
-    .then(res => res.data)
-    .then(user => dispatch(setUser(user)))
     .catch(err => console.log(err));
 };
 
