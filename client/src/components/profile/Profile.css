@@ -21,9 +21,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 100px;
   border-radius: 100px;
   border: 3px solid #f5f5f5;
+  object-fit: cover;
+}
+
+.profilePictureContainer {
+  height: 168px;
+  width: 168px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
 }
 
 .userInfoContainer {
@@ -51,6 +60,11 @@
 .userStat:hover {
   color: gray;
   cursor: pointer;
+}
+
+.userPostCount:hover {
+  color: black;
+  cursor: default;
 }
 
 .profilePostsContainer {

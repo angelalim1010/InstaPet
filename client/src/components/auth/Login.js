@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
-import { loginUser } from "../../actions/authActions";
-import { clearErrors } from "../../actions/errorActions";
-import "./Login.css";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
+import { loginUser } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import './Login.css';
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {}
     };
   }
@@ -19,14 +19,14 @@ class Login extends Component {
   componentDidMount = () => {
     // If the user is already logged in and navigates to the Login page, they will be redirected to the homepage
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
   };
 
   componentWillReceiveProps = nextProps => {
     // Upon successful login, redirect the user to the homepage
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/');
     }
 
     // If there are errors in the form fields, set them to the errors object in the state
@@ -67,41 +67,41 @@ class Login extends Component {
     return (
       <div className="background">
         <div className="box">
-        <img src={require("../../img/phone.png")} className = "phoneImage"></img>
-        <div className = "formContainer">
-          <h1 className="title">Instapet</h1>
-          <Form className = "form" onSubmit={this.handleSubmit}>
-            <FormGroup className="formBox">
-              <Input
-                type="email"
-                name="email"
-                placeholder="Email"
-                className="formBoxInput"
-                onChange={this.handleChange}
-              />
-              <FormText className="formBoxError">{errors.email}</FormText>
-            </FormGroup>
-            <FormGroup className="formBox">
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="formBoxInput"
-                onChange={this.handleChange}
-              />
-              <FormText className="formBoxError">{errors.password}</FormText>
-            </FormGroup>
-            <Button
-              type="submit"
-              className="submit"
-              onClick={this.handleSubmit}
-            >
-              Log In
-            </Button>
-          </Form>
-          <div className="signupbox">
-            Don't have an account? <Link to="/register">Sign Up</Link>
-          </div>
+          <img src={require('../../img/phone.png')} className="phoneImage" />
+          <div className="formContainer">
+            <h1 className="title">Instapet</h1>
+            <Form className="form" onSubmit={this.handleSubmit}>
+              <FormGroup className="formBox">
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="formBoxInput"
+                  onChange={this.handleChange}
+                />
+                <FormText className="formBoxError">{errors.email}</FormText>
+              </FormGroup>
+              <FormGroup className="formBox">
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="formBoxInput"
+                  onChange={this.handleChange}
+                />
+                <FormText className="formBoxError">{errors.password}</FormText>
+              </FormGroup>
+              <Button
+                type="submit"
+                className="submit"
+                onClick={this.handleSubmit}
+              >
+                Log In
+              </Button>
+            </Form>
+            <div className="signupbox">
+              Don't have an account? <Link to="/register">Sign Up</Link>
+            </div>
           </div>
         </div>
       </div>

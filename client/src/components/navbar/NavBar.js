@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import { Form, Input, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser as faUserEmpty } from "@fortawesome/free-regular-svg-icons";
 import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
@@ -11,12 +10,26 @@ import { logoutUser } from "../../actions/authActions";
 class NavBar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      auth: {}
+    };
   }
 
   logout = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    if (nextProps.auth !== prevState.auth) {
+      return { auth: nextProps.auth };
+    } else {
+      return null;
+    }
+  };
+
+  componentDidMount = () => {};
 
   render() {
     return (
@@ -52,7 +65,8 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  users: state.users
 });
 
 const mapDispatchToProps = dispatch => {

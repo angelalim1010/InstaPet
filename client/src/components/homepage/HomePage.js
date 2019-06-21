@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import AllPosts from "./AllPosts";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AllPosts from './AllPosts';
 
 class HomePage extends Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {

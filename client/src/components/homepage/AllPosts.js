@@ -22,6 +22,12 @@ class AllPosts extends Component {
     this.state = { toggleForm: false };
   }
 
+  // static getDerivedStateFromProps = (nextProps, prevState) => {
+  //   console.log('NEXT PROPS AND PREVSTATE');
+  //   console.log(nextProps);
+  //   console.log(prevState);
+  // };
+
   componentDidMount = () => {
     this.props.fetchAllPosts();
     this.props.fetchAllComments();
@@ -86,6 +92,9 @@ class AllPosts extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
+  user: state.user,
+  users: state.users,
   post: state.post
 });
 
