@@ -19,29 +19,6 @@ class PostComments extends Component {
   //   // this.props.getComments(this.props.postId);
   // };
 
-  // displayViewAllComments = () => {
-  //   console.log("LIL VIEW ALL SECTION");
-  //   if (this.props.comments.length === 0) {
-  //     return <div className="postCommentsNone" />;
-  //   }
-  //   if (this.props.comments.length >= 3) {
-  //     return <i>View all {this.props.comments.length} comments</i>;
-  //   }
-  // };
-
-  // displayComment = comment => {
-  //   console.log("TRYING TO DISPLAY COMMENTS");
-  //   return (
-  //     <Comment
-  //       userName={comment.userId}
-  //       content={comment.content}
-  //       key={comment.id}
-  //     />
-
-  // {/* {this.displayViewAllComments()} */ }
-  //   );
-  // };
-
   displayComments = () => {
     // filter through comments for postId
     let postId = this.props.postId;
@@ -61,8 +38,8 @@ class PostComments extends Component {
                     <Link to={"/profile/" + comment.userName}> {comment.userName} </Link>
                   </b>{" "}
                   {comment.content}
-                  <Button  className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
-                    <FontAwesomeIcon className= "deleteCommentIcon"icon={faTrashAlt} size="2x" />
+                  <Button className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
+                    <FontAwesomeIcon className="deleteCommentIcon" icon={faTrashAlt} size="2x" />
                   </Button>
                 </div>
               )

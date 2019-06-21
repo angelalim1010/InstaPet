@@ -1,23 +1,23 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const path = require('path');
-const passport = require('passport');
+const express = require("express");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const path = require("path");
+const passport = require("passport");
 
 // Initialize Express
 const app = express();
 
 // Require .env config
-require('dotenv').config();
+require("dotenv").config();
 
 // Grab or initialize port
 const port = parseInt(process.env.PORT, 10) || 5000;
 
 // Set port
-app.set('port', port);
+app.set("port", port);
 
 // Use logger
-app.use(logger('dev'));
+app.use(logger("dev"));
 
 // Use bodyParser middleware to parse requests
 app.use(bodyParser.json());
@@ -27,25 +27,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 // Require Passport config and pipe it to passport
-require('./config/passport')(passport);
+require("./config/passport")(passport);
 
 // Obtain routes
-const { users, posts, comments, relationships, likes } = require('./routes');
+const { users, posts, comments, relationships, likes } = require("./routes");
 
 // Use routes
-app.use('/profile', users);
-app.use('/p', posts);
-app.use('/comments', comments);
-app.use('/relationships', relationships);
-app.use('/likes', likes);
+app.use("/profile", users);
+app.use("/p", posts);
+app.use("/comments", comments);
+app.use("/relationships", relationships);
+app.use("/likes", likes);
 
 // Heroku post-build script
 // Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 

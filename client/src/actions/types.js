@@ -21,7 +21,7 @@ export const EDIT_USER = "EDIT_USERS";
 export const ADD_USER = "ADD_USER";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const GET_RELATIONSHIPS = "GET_RELATIONSHIPS";
-export const GET_USER = "GET_USER";
+export const SET_USER = "SET_USER";
 export const ADD_USER_POST = "ADD_USER_POST";
 export const REMOVE_USER_POST = "REMOVE_USER_POSTS";
 export const REMOVE_USER = "REMOVE_USER";
@@ -29,7 +29,7 @@ export const REMOVE_USER = "REMOVE_USER";
 export const FOLLOW_USER = "FOLLOW_USER";
 export const UNFOLLOW_USER = "UNFOLLOW_USER";
 
-export const EDIT_AUTH = 'EDIT_AUTH';
+export const EDIT_AUTH = "EDIT_AUTH";
 
 // ERRORS
 

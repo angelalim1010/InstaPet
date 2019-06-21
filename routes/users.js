@@ -1,20 +1,26 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // Set input validation methods
-const validateRegisterInput = require('../validation/register');
-const validateLoginInput = require('../validation/login');
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 // Require .env config
-require('dotenv').config();
+require("dotenv").config();
 
 // Grab jwt secret
-const JWT_SECRET = process.env.JWT_SECRET || 'DEFAULT_SECRET';
+const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
 
-// Set User model
-const { User } = require('../database/models');
+// Set models
+const {
+  User,
+  Post,
+  Comment,
+  Like,
+  Relationship
+} = require("../database/models");
 
 /**
  * FindAllUsers endpoint
@@ -22,9 +28,9 @@ const { User } = require('../database/models');
  * @desc Find all users
  * @access Public
  */
-router.get('/', (req, res, next) => {
+router.get("/", (req, res, next) => {
   return User.findAll({
-    order: [['id', 'DESC']]
+    order: [["createdAt", "DESC"]]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
@@ -36,14 +42,14 @@ router.get('/', (req, res, next) => {
  * @desc Find a user
  * @access Public
  */
-router.get('/:userName', (req, res, next) => {
+router.get("/:userName", (req, res, next) => {
   return User.findOne({
     where: {
       userName: req.params.userName
     }
   })
     .then(user => {
-      console.log('FindUser endpoint');
+      console.log("FindUser endpoint");
       const objectWithoutKey = (object, key) => {
         const { [key]: deletedKey, ...otherKeys } = object;
         console.log(deletedKey);
@@ -63,7 +69,7 @@ router.get('/:userName', (req, res, next) => {
  * @desc Update a user
  * @access Public
  */
-router.put('/:userName', async (req, res, next) => {
+router.put("/:userName", async (req, res, next) => {
   try {
     // Get the user we want to modify
     let targetUser = await User.findOne({
@@ -89,7 +95,7 @@ router.put('/:userName', async (req, res, next) => {
  * @desc Register user
  * @access Public
  */
-router.post('/register', (req, res, next) => {
+router.post("/register", (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateRegisterInput(req.body);
   // If not valuserName, return errors
@@ -105,7 +111,7 @@ router.post('/register', (req, res, next) => {
   }).then(user => {
     // If a user was found
     if (user) {
-      return res.status(400).json({ email: 'Email already exists' });
+      return res.status(400).json({ email: "Email already exists" });
     }
 
     // Otherwise
@@ -137,7 +143,7 @@ router.post('/register', (req, res, next) => {
  * @desc Login user
  * @access Public
  */
-router.post('/login', (req, res, next) => {
+router.post("/login", (req, res, next) => {
   console.log(req.body);
   // Validate form inputs
   const { errors, isValid } = validateLoginInput(req.body);
@@ -157,7 +163,7 @@ router.post('/login', (req, res, next) => {
   }).then(user => {
     // If a user was not found
     if (!user) {
-      return res.status(400).json({ email: 'Email not found' });
+      return res.status(400).json({ email: "Email not found" });
     }
 
     // Otherwise, check password
@@ -186,12 +192,12 @@ router.post('/login', (req, res, next) => {
           (err, token) => {
             res.json({
               success: true,
-              token: 'JWT ' + token
+              token: "JWT " + token
             });
           }
         );
       } else {
-        return res.status(400).json({ password: 'Password incorrect' });
+        return res.status(400).json({ password: "Password incorrect" });
       }
     });
   });
@@ -203,13 +209,13 @@ router.post('/login', (req, res, next) => {
  * @desc Delete a user
  * @access Public
  */
-router.delete('/:userName', (req, res, next) => {
+router.delete("/:userName", (req, res, next) => {
   return User.destroy({
     where: {
       userName: req.params.userName
     }
   })
-    .then(() => res.status(200).json({ message: 'User successfully deleted' }))
+    .then(() => res.status(200).json({ message: "User successfully deleted" }))
     .catch(err => res.status(400).json(err));
 }); // End DeleteUser endpoint
 
