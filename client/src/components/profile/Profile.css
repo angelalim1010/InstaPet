@@ -100,6 +100,7 @@
 .profilePostHoverItem {
   margin: 0 10px;
   font-size: 18px;
+  pointer-events: none;
 }
 .profilePostHoverItem svg {
   margin: 0 5px;
