@@ -105,7 +105,7 @@ class PostDescription extends Component {
   }
 
 
-  handlePostClick = () => {
+  handleLikesClick = () => {
     this.toggleModal();
   };
 
@@ -142,7 +142,7 @@ class PostDescription extends Component {
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
 
-        <div className="postLikeCount" onClick={this.handlePostClick}>
+        <div className="postLikeCount" onClick={this.handleLikesClick}>
           <b>{this.displayLikeCount()}</b>
         </div>
 

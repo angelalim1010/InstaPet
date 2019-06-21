@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 import { withRouter } from 'react-router';
 import './Profile.css';
-import { Button } from 'reactstrap';
 import { timingSafeEqual } from 'crypto';
 
 import { followUserThunk } from '../../actions/userActions';
 import { unfollowUserThunk } from '../../actions/userActions';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedShowFollowers: false,
+      modalFollowers: false,
       clickedShowFollowing: false,
       currentUserName: this.props.auth.user.userName
     };
@@ -74,17 +74,19 @@ class ProfileHeader extends Component {
     }
   };
 
-  clickedShowAllFollowers = () => {
-    this.setState({
-      clickedShowFollowers: true
-    })
-  }
 
-  clickedUnshowFollowers = () => {
-    this.setState({
-      clickedShowFollowers: false
-    })
-  }
+  handleFollowersClick = e => {
+    this.toggleFollowersModal();
+  };
+
+  toggleFollowersModal = () => {
+    this.setState(prevState => ({
+      modalFollowers: !prevState.modalFollowers
+    }));
+  };
+
+
+
 
   displayFollowersArray = () => {
     let allFollowersForUser = this.props.user.relationships.filter(
@@ -103,23 +105,23 @@ class ProfileHeader extends Component {
     )
   }
 
-  displayFollowersList = () => {
-    if (this.state.clickedShowFollowers === true) {
+  displayFollowersModal = () => {
+    let userName = this.props.viewUserObject.userName;
+    let allFollowersForUser = this.props.user.relationships.filter(
+      relationship => relationship.following == userName
+    );
+    if (allFollowersForUser !== undefined) {
       return (
-        <div className="allFollowersandFollowingSection">
+        <Modal isOpen={this.state.modalFollowers} toggle={this.toggleFollowersModal}>
           <div className="allFollowersandFollowingList">
-            <span className="closeBtn" onClick={this.clickedUnshowFollowers}>&times;</span>
             <p>All Followers</p>
             <b>{this.displayFollowersArray()}</b>
           </div>
-        </div>
-      )
-    } else {
-      return (
-        <div />
+        </Modal >
       )
     }
   }
+
 
   clickedShowAllFollowing = () => {
     this.setState({
@@ -219,10 +221,10 @@ class ProfileHeader extends Component {
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-            <div className="userStat userFollowers" onClick={this.clickedShowAllFollowers}>
+            <div className="userStat userFollowers" onClick={this.handleFollowersClick}>
               <b>{allFollowersForUser.length}</b> followers
             </div>
-            <div>{this.displayFollowersList()}</div>
+            <div>{this.displayFollowersModal()}</div>
 
             <div className="userStat userFollowing" onClick={this.clickedShowAllFollowing}>
               <b>{allFollowingForUser.length}</b> following
