@@ -123,6 +123,12 @@ class PostDescription extends Component {
     }
   };
 
+  toggleProfileModal = () => {
+    if (this.props.toggleModalFromAfar !== undefined) {
+      this.props.toggleModalFromAfar();
+    }
+  };
+
   toggleModal = () => {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -160,7 +166,7 @@ class PostDescription extends Component {
         <b>
           <Link
             to={"/profile/" + this.props.userName}
-            onClick={this.props.toggleModal}
+            onClick={this.toggleProfileModal}
           >
             {" "}
             {this.props.userName}{" "}
