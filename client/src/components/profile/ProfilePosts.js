@@ -118,8 +118,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps
-  )(ProfilePosts)
-);
+export default withRouter(connect(mapStateToProps)(ProfilePosts));

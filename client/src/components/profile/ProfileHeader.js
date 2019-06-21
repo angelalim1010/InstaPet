@@ -58,9 +58,7 @@ class ProfileHeader extends Component {
       return (
         <div>
           <Button onClick={this.handleClick} className="editProfile">
-            <FontAwesomeIcon
-              icon={faCogFull}
-            />
+            <FontAwesomeIcon icon={faCogFull} />
           </Button>
           {this.toggleEdit()}
         </div>

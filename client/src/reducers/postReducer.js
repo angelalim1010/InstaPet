@@ -8,7 +8,7 @@ import {
   UNLIKE_POST,
   CREATE_POST,
   DELETE_POST
-} from '../actions/types';
+} from "../actions/types";
 
 const initialState = {
   posts: [],
@@ -45,7 +45,9 @@ export default (state = initialState, action) => {
     case DELETE_COMMENT:
       return {
         ...state,
-        comments: state.comments.filter(comment => comment.id !== action.payload)
+        comments: state.comments.filter(
+          comment => comment.id !== action.payload
+        )
       };
 
     case LIKE_POST:
