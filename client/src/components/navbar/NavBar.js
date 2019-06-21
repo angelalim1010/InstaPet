@@ -32,14 +32,19 @@ class NavBar extends Component {
             </Link>
           </div>
 
-          <div className="navBarProfile navBarItem">
+          <div className="navBarIcons navBarItem">
             <Link to={"/profile/" + this.props.auth.user.userName}>
-              <FontAwesomeIcon className="navBarIcon" icon={faUserEmpty} />
+              <FontAwesomeIcon
+                className="navBarIcon navBarIconProfile"
+                icon={faUserEmpty}
+              />
             </Link>
+            <FontAwesomeIcon
+              className="navBarIcon navBarIconLogout"
+              icon={faDoorOpen}
+              onClick={this.logout}
+            />
           </div>
-          <Button className="navBarItem" onClick={this.logout}>
-            <FontAwesomeIcon className="navBarIcon" icon={faDoorOpen} />
-          </Button>
         </div>
       </div>
     );
