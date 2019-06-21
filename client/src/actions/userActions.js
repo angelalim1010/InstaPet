@@ -112,8 +112,14 @@ export const getUser = userName => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const editUserThunk = editedUser => dispatch => {
-  return dispatch(editUser(editedUser));
+export const editUserThunk = editedUser => async dispatch => {
+  let url = `/profile/${editedUser.userName}`;
+  try {
+    let { data } = await axios.put(url, editedUser);
+    dispatch(editUser(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getRelationshipsThunk = () => dispatch => {

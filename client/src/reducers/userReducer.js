@@ -57,11 +57,11 @@ export default (state = initialState, action) => {
 
       // edit user in the array
 
-      newArr[targetIndex].name = action.payload.name;
+      newArr[targetIndex].displayName = action.payload.displayName;
       newArr[targetIndex].userName = action.payload.userName;
       newArr[targetIndex].email = action.payload.email;
-      newArr[targetIndex].imageURL = action.payload.imageURL;
-      newArr[targetIndex].phone = action.payload.phone;
+      newArr[targetIndex].profilePicture = action.payload.profilePicture;
+      newArr[targetIndex].bio = action.payload.bio;
 
       return {
         ...state,

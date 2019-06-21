@@ -1,24 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { withRouter } from 'react-router';
-import './Profile.css';
-import { timingSafeEqual } from 'crypto';
+import { withRouter } from "react-router";
+import "./Profile.css";
+import { timingSafeEqual } from "crypto";
 
-import { followUserThunk } from '../../actions/userActions';
-import { unfollowUserThunk } from '../../actions/userActions';
+import { followUserThunk } from "../../actions/userActions";
+import { unfollowUserThunk } from "../../actions/userActions";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
+import EditProfile from "./EditProfile";
 
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
+    let defsrc =
+      " https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg";
     this.state = {
+      currentUserName: this.props.auth.user.userName,
+      defaultSrc: defsrc,
+      toggleEdit: false,
       modalFollowers: false,
       modalFollowing: false,
       currentUserName: this.props.auth.user.userName
     };
   }
+
+  handleClick = () => {
+    this.setState(state => ({
+      toggleEdit: !state.toggleEdit
+    }));
+  };
+
+  toggleEdit = () => {
+    if (this.state.toggleEdit) {
+      return <EditProfile viewUserObject={this.props.viewUserObject} />;
+    }
+  };
 
   clickedFollow = () => {
     //if current user did not follow and clicked follow
@@ -39,7 +58,14 @@ class ProfileHeader extends Component {
     let userName = this.props.viewUserObject.userName;
     //if on your own profile put edit button
     if (userName === this.state.currentUserName) {
-      return <Button className="followButton">Edit Profile</Button>;
+      return (
+        <div>
+          <Button onClick={this.handleClick} className="followButton">
+            Edit Profile
+          </Button>
+          {this.toggleEdit()}
+        </div>
+      );
     } else {
       // filter through relationships array in store for followings of currentUser
       let allFollowingForUser = this.props.user.relationships.filter(
@@ -74,7 +100,6 @@ class ProfileHeader extends Component {
     }
   };
 
-
   handleFollowersClick = e => {
     this.toggleFollowersModal();
   };
@@ -85,25 +110,24 @@ class ProfileHeader extends Component {
     }));
   };
 
-
-
-
   displayFollowersArray = () => {
     let allFollowersForUser = this.props.user.relationships.filter(
-      relationship => relationship.following == this.props.viewUserObject.userName
+      relationship =>
+        relationship.following == this.props.viewUserObject.userName
     );
-    return (
-      allFollowersForUser.map(relationship => {
-        return (
-          <div className="singleFollower" key={relationship.id}>
-            <b>
-              <Link to={"/profile/" + relationship.follower}> {relationship.follower} </Link>
-            </b>
-          </div>
-        )
-      })
-    )
-  }
+    return allFollowersForUser.map(relationship => {
+      return (
+        <div className="singleFollower" key={relationship.id}>
+          <b>
+            <Link to={"/profile/" + relationship.follower}>
+              {" "}
+              {relationship.follower}{" "}
+            </Link>
+          </b>
+        </div>
+      );
+    });
+  };
 
   displayFollowersModal = () => {
     let userName = this.props.viewUserObject.userName;
@@ -112,15 +136,18 @@ class ProfileHeader extends Component {
     );
     if (allFollowersForUser !== undefined) {
       return (
-        <Modal isOpen={this.state.modalFollowers} toggle={this.toggleFollowersModal}>
+        <Modal
+          isOpen={this.state.modalFollowers}
+          toggle={this.toggleFollowersModal}
+        >
           <div className="allFollowersandFollowingList">
             <p>All Followers</p>
             <b>{this.displayFollowersArray()}</b>
           </div>
-        </Modal >
-      )
+        </Modal>
+      );
     }
-  }
+  };
 
   handleFollowingClick = e => {
     this.toggleFollowingModal();
@@ -132,26 +159,25 @@ class ProfileHeader extends Component {
     }));
   };
 
-
-
-
   displayFollowingArray = () => {
     let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower == this.props.viewUserObject.userName
+      relationship =>
+        relationship.follower == this.props.viewUserObject.userName
     );
 
-    return (
-      allFollowingForUser.map(relationship => {
-        return (
-          <div className="singleFollowing" key={relationship.id}>
-            <b>
-              <Link to={"/profile/" + relationship.following}> {relationship.following} </Link>
-            </b>
-          </div>
-        )
-      })
-    )
-  }
+    return allFollowingForUser.map(relationship => {
+      return (
+        <div className="singleFollowing" key={relationship.id}>
+          <b>
+            <Link to={"/profile/" + relationship.following}>
+              {" "}
+              {relationship.following}{" "}
+            </Link>
+          </b>
+        </div>
+      );
+    });
+  };
 
   displayFollowingModal = () => {
     let userName = this.props.viewUserObject.userName;
@@ -161,15 +187,18 @@ class ProfileHeader extends Component {
 
     if (allFollowingForUser !== undefined) {
       return (
-        <Modal isOpen={this.state.modalFollowing} toggle={this.toggleFollowingModal}>
+        <Modal
+          isOpen={this.state.modalFollowing}
+          toggle={this.toggleFollowingModal}
+        >
           <div className="allFollowersandFollowingList">
             <p>All Following</p>
             <b>{this.displayFollowingArray()}</b>
           </div>
-        </Modal >
-      )
+        </Modal>
+      );
     }
-  }
+  };
 
   render() {
     let userName = this.props.viewUserObject.userName;
@@ -197,51 +226,48 @@ class ProfileHeader extends Component {
 
     return (
       <div className="profileHeader">
-
-        <img
-          className="profilePicture"
-          src="https://i.pinimg.com/originals/9f/81/2d/9f812d4cf313e887ef99d8722229eee1.jpg"
-          alt="profilepic"
-        />
+        <div className="profilePictureContainer">
+          <img
+            className="profilePicture"
+            src={this.props.viewUserObject.profilePicture}
+            alt="profilepic"
+          />
+        </div>
 
         <div className="userInfoContainer">
-
           <div className="userNameFollowStatus">
-
             <div className="userName">
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
             <div>{this.displayButton()}</div>
-
           </div>
 
           <div className="userStats">
-
             <div className="userStat userPostCount">
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-            <div className="userStat userFollowers" onClick={this.handleFollowersClick}>
+            <div
+              className="userStat userFollowers"
+              onClick={this.handleFollowersClick}
+            >
               <b>{allFollowersForUser.length}</b> followers
             </div>
             <div>{this.displayFollowersModal()}</div>
 
-
-            <div className="userStat userFollowing" onClick={this.handleFollowingClick}>
+            <div
+              className="userStat userFollowing"
+              onClick={this.handleFollowingClick}
+            >
               <b>{allFollowingForUser.length}</b> following
             </div>
             <div>{this.displayFollowingModal()}</div>
-
-
           </div>
           <div className="userDisplayName">
             <b>{this.props.viewUserObject.displayName}</b>
           </div>
 
-          <div className="userBio">
-            <b>{this.props.viewUserObject.bio}</b>
-          </div>
-
+          <div className="userBio">{this.props.viewUserObject.bio}</div>
         </div>
       </div>
     );

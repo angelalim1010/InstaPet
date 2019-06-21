@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Form, Input } from 'reactstrap';
-import { createPostThunk } from '../../actions/postActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Form, Input } from "reactstrap";
+import { createPostThunk } from "../../actions/postActions";
 
 class CreatePostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentUserName: this.props.auth.user.userName,
-      imageURL: '',
-      caption: ''
+      imageURL: "",
+      caption: ""
     };
   }
 
@@ -34,19 +34,12 @@ class CreatePostForm extends Component {
   render() {
     return (
       <Form className="createPostForm">
-        {/* <Input
-          className="createPostInput createPostText"
-          type="number"
-          name="username"
-          onChange={this.handleChange}
-          placeholder="userId (Will remove after login auth setup)"
-        /> */}
         <Input
           className="createPostInput createPostText"
           type="text"
           name="imageURL"
           onChange={this.handleChange}
-          placeholder="imageURL"
+          placeholder="Image URL"
         />
         <Input
           className="createPostInput createPostText"

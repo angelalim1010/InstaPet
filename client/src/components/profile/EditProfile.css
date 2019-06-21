@@ -1,0 +1,30 @@
+.editUser {
+  margin: 10px;
+  padding: 20px;
+  background-color: rgb(200, 199, 199);
+  border: 2px black;
+  border-radius: 15px;
+  width: 400px;
+}
+
+.editUserForm {
+  margin: 5px;
+}
+
+.editProfileTextarea {
+  resize: none;
+}
+
+.editProfileSubmit {
+  padding: 5px;
+  border: 3px white;
+  border-radius: 40px;
+  transition: background-color 0.5s;
+  background-color: lightblue;
+  margin: 5px;
+}
+
+.editProfileSubmit:active,
+.editProfileSubmit:hover {
+  background-color: rgb(123, 169, 185);
+}
