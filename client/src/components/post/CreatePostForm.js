@@ -34,19 +34,12 @@ class CreatePostForm extends Component {
   render() {
     return (
       <Form className="createPostForm">
-        {/* <Input
-          className="createPostInput createPostText"
-          type="number"
-          name="username"
-          onChange={this.handleChange}
-          placeholder="userId (Will remove after login auth setup)"
-        /> */}
         <Input
           className="createPostInput createPostText"
           type="text"
           name="imageURL"
           onChange={this.handleChange}
-          placeholder="imageURL"
+          placeholder="Image URL"
         />
         <Input
           className="createPostInput createPostText"

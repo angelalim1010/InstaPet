@@ -39,10 +39,6 @@ class ProfileHeader extends Component {
     }
   };
 
-  // addDefaultSrc = e => {
-  //   e.target.src = this.state.defaultSrc;
-  // };
-
   clickedFollow = () => {
     //if current user did not follow and clicked follow
     let newFollow = {
