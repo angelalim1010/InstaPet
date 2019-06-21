@@ -36,7 +36,7 @@ class ProfilePosts extends Component {
   displayModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     if (allPostsForUser !== undefined) {
@@ -61,7 +61,7 @@ class ProfilePosts extends Component {
 
   getCommentsLength = post => {
     let allCommentsForPost = this.props.post.comments.filter(
-      comment => comment.postId == post.id
+      comment => comment.postId === post.id
     );
     return <b>{allCommentsForPost.length}</b>;
   };
@@ -69,7 +69,7 @@ class ProfilePosts extends Component {
   displayPosts = () => {
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     if (allPostsForUser === undefined) {
@@ -80,7 +80,11 @@ class ProfilePosts extends Component {
           {allPostsForUser.map((post, index) => {
             return (
               <div className="profilePost">
-                <img className="profilePostImage" src={post.imageURL} />
+                <img
+                  className="profilePostImage"
+                  src={post.imageURL}
+                  alt="profileImage"
+                />
                 <div
                   className="profilePostHover"
                   key={post.id}
@@ -118,8 +122,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps
-  )(ProfilePosts)
-);
+export default withRouter(connect(mapStateToProps)(ProfilePosts));
