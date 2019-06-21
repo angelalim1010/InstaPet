@@ -47,32 +47,28 @@ class ProfilePosts extends Component {
           <Post
             className="specificPost"
             post={allPostsForUser[this.state.postIndex]}
+            toggleModalFromAfar={this.toggleModal}
           />
         </Modal>
       );
     }
   };
 
-
   getLikesLength = post => {
     let allLikesForPost = this.props.post.likes.filter(
       like => like.postId === post.id
     );
-    return (
-      <b>{allLikesForPost.length}</b>
-    )
-  }
+    return <b>{allLikesForPost.length}</b>;
+  };
 
   getCommentsLength = post => {
-    let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == post.id);
-    return (
-      <b>{allCommentsForPost.length}</b>
-    )
-  }
-
+    let allCommentsForPost = this.props.post.comments.filter(
+      comment => comment.postId == post.id
+    );
+    return <b>{allCommentsForPost.length}</b>;
+  };
 
   displayPosts = () => {
-
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
       post => post.userName == userName

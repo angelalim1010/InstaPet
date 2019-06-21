@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './Post.css';
-import PostTopBar from './PostTopBar';
-import PostImage from './PostImage';
-import PostDescription from './PostDescription';
-import PostComments from './PostComments';
-import PostTimestamp from './PostTimestamp';
-import PostAddComment from './PostAddComment';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "./Post.css";
+import PostTopBar from "./PostTopBar";
+import PostImage from "./PostImage";
+import PostDescription from "./PostDescription";
+import PostComments from "./PostComments";
+import PostTimestamp from "./PostTimestamp";
+import PostAddComment from "./PostAddComment";
 
 class Post extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Post extends Component {
     };
   }
 
-  componentDidMount = () => { };
+  componentDidMount = () => {};
 
   displayPost = () => {
     if (!this.state.post) {
@@ -33,9 +33,13 @@ class Post extends Component {
             postId={this.state.post.id}
             userName={this.state.post.userName}
             caption={this.state.post.caption}
+            toggleModalFromAfar={this.props.toggleModalFromAfar}
           />
           <PostTimestamp createdAt={this.state.post.createdAt} />
-          <PostComments postId={this.state.post.id} />
+          <PostComments
+            postId={this.state.post.id}
+            toggleModalFromAfar={this.props.toggleModalFromAfar}
+          />
           <PostAddComment postId={this.state.post.id} />
         </div>
       );
