@@ -113,6 +113,7 @@ class EditProfile extends Component {
           <br />
           <Input
             type="textarea"
+            className="editProfileTextarea"
             value={this.state.bio}
             name="bio"
             placeholder="Bio"
@@ -120,7 +121,7 @@ class EditProfile extends Component {
           />
           <br />
           <Input
-            className="submitBtn"
+            className="editProfileSubmit"
             type="submit"
             onClick={this.handleSubmit}
             value="Save Changes"
