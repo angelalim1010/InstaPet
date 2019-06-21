@@ -119,5 +119,7 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProp)(ProfilePosts)
+  connect(
+    mapStateToProps
+  )(ProfilePosts)
 );
