@@ -22,7 +22,7 @@ a {
 .navBarItems {
   margin: auto;
   height: 100%;
-  width: 60%;
+  width: 800px;
   display: flex;
   align-items: center;
   justify-content: space-between;
