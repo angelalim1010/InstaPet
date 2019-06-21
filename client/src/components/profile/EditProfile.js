@@ -56,12 +56,10 @@ class EditProfile extends Component {
         bio: this.state.bio
       };
 
-      // send user to update Database
-      console.log('Edited User sent!');
+      // send to edit User to update User AND the database
       this.props.editUser(changedUser);
 
-      // update the Authenticator
-      console.log('AUTH sent');
+      // send to only update Auth
       this.props.editAuth(changedUser);
     }
   };

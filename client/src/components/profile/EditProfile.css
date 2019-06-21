@@ -19,11 +19,11 @@ input[type=submit] {
     border: 3px white;
     border-radius: 40px;
     transition: background-color 0.5s; 
-    background-color: rgb(223, 166, 166);
+    background-color: lightblue;
     margin: 5px;
 }
 
 input[type=submit]:active,
 input[type=submit]:hover {
-    background-color: rgb(156, 108, 108);
+    background-color: rgb(123, 169, 185);
 }
