@@ -15,7 +15,7 @@ class ProfileHeader extends Component {
     super(props);
     this.state = {
       modalFollowers: false,
-      clickedShowFollowing: false,
+      modalFollowing: false,
       currentUserName: this.props.auth.user.userName
     };
   }
@@ -122,18 +122,18 @@ class ProfileHeader extends Component {
     }
   }
 
+  handleFollowingClick = e => {
+    this.toggleFollowingModal();
+  };
 
-  clickedShowAllFollowing = () => {
-    this.setState({
-      clickedShowFollowing: true
-    })
-  }
+  toggleFollowingModal = () => {
+    this.setState(prevState => ({
+      modalFollowing: !prevState.modalFollowing
+    }));
+  };
 
-  clickedUnshowFollowing = () => {
-    this.setState({
-      clickedShowFollowing: false
-    })
-  }
+
+
 
   displayFollowingArray = () => {
     let allFollowingForUser = this.props.user.relationships.filter(
@@ -153,20 +153,20 @@ class ProfileHeader extends Component {
     )
   }
 
-  displayFollowingList = () => {
-    if (this.state.clickedShowFollowing === true) {
+  displayFollowingModal = () => {
+    let userName = this.props.viewUserObject.userName;
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower == userName
+    );
+
+    if (allFollowingForUser !== undefined) {
       return (
-        <div className="allFollowersandFollowingSection">
+        <Modal isOpen={this.state.modalFollowing} toggle={this.toggleFollowingModal}>
           <div className="allFollowersandFollowingList">
-            <span className="closeBtn" onClick={this.clickedUnshowFollowing}>&times;</span>
             <p>All Following</p>
             <b>{this.displayFollowingArray()}</b>
           </div>
-        </div>
-      )
-    } else {
-      return (
-        <div />
+        </Modal >
       )
     }
   }
@@ -226,10 +226,12 @@ class ProfileHeader extends Component {
             </div>
             <div>{this.displayFollowersModal()}</div>
 
-            <div className="userStat userFollowing" onClick={this.clickedShowAllFollowing}>
+
+            <div className="userStat userFollowing" onClick={this.handleFollowingClick}>
               <b>{allFollowingForUser.length}</b> following
             </div>
-            <div>{this.displayFollowingList()}</div>
+            <div>{this.displayFollowingModal()}</div>
+
 
           </div>
           <div className="userDisplayName">
