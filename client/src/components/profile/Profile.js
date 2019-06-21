@@ -5,7 +5,16 @@ import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
 import { withRouter } from "react-router";
-import { getUser } from "../../actions/userActions";
+import {
+  fetchAllPostsThunk,
+  fetchAllCommentsThunk,
+  fetchAllLikesThunk
+} from "../../actions/postActions";
+import {
+  getRelationshipsThunk,
+  getUsersThunk,
+  getUser
+} from "../../actions/userActions";
 
 class Profile extends Component {
   constructor(props) {
@@ -23,6 +32,11 @@ class Profile extends Component {
   };
 
   componentDidMount = () => {
+    this.props.fetchAllPosts();
+    this.props.fetchAllComments();
+    this.props.fetchAllLikes();
+    this.props.getUsers();
+    this.props.getRelationships();
     this.props.getUser(this.state.userName);
   };
 
@@ -33,9 +47,6 @@ class Profile extends Component {
     );
 
     let viewUserObject = viewUserArray[0];
-
-    console.log("viewUserObject:");
-    console.log(viewUserObject);
 
     if (viewUserObject == undefined) {
       return (
@@ -55,12 +66,19 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   user: state.user,
-  auth: state.auth
+  users: state.users,
+  post: state.post
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: userName => dispatch(getUser(userName))
+  getUser: userName => dispatch(getUser(userName)),
+  fetchAllPosts: () => dispatch(fetchAllPostsThunk()),
+  fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
+  fetchAllLikes: () => dispatch(fetchAllLikesThunk()),
+  getRelationships: () => dispatch(getRelationshipsThunk()),
+  getUsers: () => dispatch(getUsersThunk())
 });
 
 export default withRouter(

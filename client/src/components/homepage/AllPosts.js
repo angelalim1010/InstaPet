@@ -1,32 +1,29 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchAllPostsThunk } from '../../actions/postActions';
-import { fetchAllCommentsThunk } from '../../actions/postActions';
-import { fetchAllLikesThunk } from '../../actions/postActions';
-import { getRelationshipsThunk } from '../../actions/userActions';
-import { getUsersThunk } from '../../actions/userActions';
-import Post from '../post/Post';
-import CreatePostForm from '../post/CreatePostForm';
-import '../post/Post.css';
-import { Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  fetchAllPostsThunk,
+  fetchAllCommentsThunk,
+  fetchAllLikesThunk
+} from "../../actions/postActions";
+import {
+  getRelationshipsThunk,
+  getUsersThunk
+} from "../../actions/userActions";
+import Post from "../post/Post";
+import CreatePostForm from "../post/CreatePostForm";
+import "../post/Post.css";
+import { Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronCircleDown,
-  faChevronCircleUp,
-  faMinusCircle
-} from '@fortawesome/free-solid-svg-icons';
+  faChevronCircleUp
+} from "@fortawesome/free-solid-svg-icons";
 
 class AllPosts extends Component {
   constructor(props) {
     super(props);
     this.state = { toggleForm: false };
   }
-
-  // static getDerivedStateFromProps = (nextProps, prevState) => {
-  //   console.log('NEXT PROPS AND PREVSTATE');
-  //   console.log(nextProps);
-  //   console.log(prevState);
-  // };
 
   componentDidMount = () => {
     this.props.fetchAllPosts();
