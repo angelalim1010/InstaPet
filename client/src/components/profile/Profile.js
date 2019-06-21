@@ -11,8 +11,7 @@ import {
 } from "../../actions/postActions";
 import {
   getRelationshipsThunk,
-  getUsersThunk,
-  getUser
+  getUsersThunk
 } from "../../actions/userActions";
 
 class Profile extends Component {
@@ -36,7 +35,6 @@ class Profile extends Component {
     this.props.fetchAllLikes();
     this.props.getUsers();
     this.props.getRelationships();
-    this.props.getUser(this.state.userName);
   };
 
   render() {
@@ -73,7 +71,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: userName => dispatch(getUser(userName)),
   fetchAllPosts: () => dispatch(fetchAllPostsThunk()),
   fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
   fetchAllLikes: () => dispatch(fetchAllLikesThunk()),
