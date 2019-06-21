@@ -1,9 +1,6 @@
 import axios from "axios";
 import {
   GET_USERS,
-  ADD_USER_POST,
-  REMOVE_USER_POST,
-  REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
   FOLLOW_USER,
@@ -16,13 +13,6 @@ const getUsers = users => {
   return {
     type: GET_USERS,
     payload: users
-  };
-};
-
-const removeUser = userId => {
-  return {
-    type: REMOVE_USER,
-    payload: userId
   };
 };
 
@@ -68,22 +58,6 @@ export const unfollowUserThunk = relationshipId => dispatch => {
     .then(res => res.data)
     .then(relationshipId => dispatch(unfollowUser(relationshipId)))
     .catch(err => console.log(err));
-};
-
-// User Posts
-
-const addUserPost = newPost => {
-  return {
-    type: ADD_USER_POST,
-    action: newPost
-  };
-};
-
-const removeUserPost = postId => {
-  return {
-    type: REMOVE_USER_POST,
-    action: postId
-  };
 };
 
 // USER THUNKS
