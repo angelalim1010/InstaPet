@@ -116,7 +116,7 @@ class ProfileHeader extends Component {
       return (
         <div className="singleFollower" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.follower} onClick={this.toggleFollowersModal}>
+            <Link to={"/profile/" + relationship.follower}>
               {" "}
               {relationship.follower}{" "}
             </Link>
@@ -166,7 +166,7 @@ class ProfileHeader extends Component {
       return (
         <div className="singleFollowing" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.following} onClick={this.toggleFollowingModal}>
+            <Link to={"/profile/" + relationship.following}>
               {" "}
               {relationship.following}{" "}
             </Link>
