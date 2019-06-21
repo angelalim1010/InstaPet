@@ -22,34 +22,11 @@ a {
 .navBarItems {
   margin: auto;
   height: 100%;
-  width: 60%;
+  width: 800px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-}
-
-
-.navBarSearch {
-  display: flex;
-  width: 215px;
-  min-width: 125px;
-  height: 28px;
-  padding-bottom: 35px;
-}
-
-.navBarSearch input[type="text"] {
-  border: solid 1px #dbdbdb;
-  border-radius: 3px;
-  color: #262626;
-  outline: 0;
-  padding: 3px 10px;
-  font-size: 16px;
-  text-align: center;
-}
-
-.navBarSearch input[type="text"]::placeholder {
-  opacity: 0.8;
 }
 
 .navBarLogo {
@@ -65,13 +42,30 @@ a {
 }
 
 .navBarItem {
-    background-color: transparent;
-    border: transparent;
-    color: black;
-    display: flex;
+  background-color: transparent;
+  border: transparent;
+  color: black;
+  display: flex;
 }
 
-.navBarIcon{
-    display: flex;
-    font-size: 24px;
+.navBarIcons {
+  display: flex;
+  align-items: center;
+}
+
+.navBarIcon {
+  margin: 0 15px;
+}
+
+.navBarIcon:hover {
+  color: lightskyblue;
+  cursor: pointer;
+}
+
+.navBarIconProfile {
+  font-size: 35px;
+}
+
+.navBarIconLogout {
+  font-size: 32px;
 }

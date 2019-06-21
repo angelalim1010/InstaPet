@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Form, Input } from 'reactstrap';
-import { createPostThunk } from '../../actions/postActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Form, Input } from "reactstrap";
+import { createPostThunk } from "../../actions/postActions";
 
 class CreatePostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentUserName: this.props.auth.user.userName,
-      imageURL: '',
-      caption: ''
+      imageURL: "",
+      caption: ""
     };
   }
 

@@ -79,6 +79,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 10px;
+  user-select: none;
 }
 
 .profilePost {
@@ -113,6 +114,7 @@
 .profilePostHoverItem {
   margin: 0 10px;
   font-size: 18px;
+  pointer-events: none;
 }
 .profilePostHoverItem svg {
   margin: 0 5px;
