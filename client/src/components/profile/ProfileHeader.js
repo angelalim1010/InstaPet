@@ -230,11 +230,13 @@ class ProfileHeader extends Component {
 
     return (
       <div className="profileHeader">
-        <img
-          className="profilePicture"
-          src={this.props.viewUserObject.profilePicture}
-          alt="profilepic"
-        />
+        <div className="profilePictureContainer">
+          <img
+            className="profilePicture"
+            src={this.props.viewUserObject.profilePicture}
+            alt="profilepic"
+          />
+        </div>
 
         <div className="userInfoContainer">
           <div className="userNameFollowStatus">
@@ -269,9 +271,7 @@ class ProfileHeader extends Component {
             <b>{this.props.viewUserObject.displayName}</b>
           </div>
 
-          <div className="userBio">
-            <b>{this.props.viewUserObject.bio}</b>
-          </div>
+          <div className="userBio">{this.props.viewUserObject.bio}</div>
         </div>
       </div>
     );
