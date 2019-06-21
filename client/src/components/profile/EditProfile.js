@@ -89,17 +89,6 @@ class EditProfile extends Component {
             placeholder="Name"
             onChange={this.handleChange}
           />
-          <br />
-          {/* <br />
-          <Label>Email: </Label>
-          <Input
-            type="text"
-            value={this.state.email}
-            name="email"
-            placeholder="New email"
-            onChange={this.handleChange}
-          />
-          <br /> */}
           <Label>Profile Picture</Label>
           <Input
             type="text"
@@ -108,9 +97,7 @@ class EditProfile extends Component {
             placeholder="URL of Profile Picture"
             onChange={this.handleChange}
           />
-          <br />
           <Label>Bio</Label>
-          <br />
           <Input
             type="textarea"
             className="editProfileTextarea"
@@ -119,7 +106,6 @@ class EditProfile extends Component {
             placeholder="Bio"
             onChange={this.handleChange}
           />
-          <br />
           <Input
             className="editProfileSubmit"
             type="submit"
