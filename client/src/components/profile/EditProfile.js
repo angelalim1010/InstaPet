@@ -120,6 +120,7 @@ class EditProfile extends Component {
           />
           <br />
           <label>Bio:</label>
+          <br />
           <textarea
             type="text"
             value={this.state.bio}
@@ -129,9 +130,10 @@ class EditProfile extends Component {
           />
           <br />
           <input
+            className="submitBtn"
             type="submit"
             onClick={this.handleSubmit}
-            value="Save changes"
+            value="Save Changes"
           />
         </form>
       </div>
