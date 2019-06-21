@@ -9,39 +9,6 @@ import { faStar, faComment } from "@fortawesome/free-solid-svg-icons";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Post from "../post/Post";
 
-
-// class ProfilePosts extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//     // This component will receive a prop with the postIds
-//   }
-
-//   render() {
-//     let userName = this.props.viewUserObject.userName;
-//     let allPostsForUser = this.props.post.posts.filter(
-//       post => post.userName == userName
-//     );
-
-//     if (allPostsForUser.length === 0) {
-//       return <div className="postCommentsNone" />;
-//     } else {
-//       return allPostsForUser.map(post => {
-//         {
-//           return (
-//             <img className="profilePost" key={post.id} src={post.imageURL} />
-//           );
-//         }
-//       });
-//     }
-//   }
-// }
-
-
-
-
-
-
 class ProfilePosts extends Component {
   constructor(props) {
     super(props);
