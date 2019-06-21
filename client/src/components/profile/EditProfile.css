@@ -1,29 +1,33 @@
 .editUser {
-    margin: 10px;
-    padding: 20px;
-    background-color: rgb(200, 199, 199);
-    border: 2px black;
-    border-radius: 15px;
+  margin: 10px;
+  padding: 20px;
+  background-color: rgb(200, 199, 199);
+  border: 2px black;
+  border-radius: 15px;
+  width: 400px;
 }
 
 .editUserForm {
-    margin:5px;
+  margin: 5px;
 }
 label {
-    color: black;
+  color: black;
 }
 
-
-input[type=submit] {
-    padding: 5px;
-    border: 3px white;
-    border-radius: 40px;
-    transition: background-color 0.5s; 
-    background-color: lightblue;
-    margin: 5px;
+textarea {
+  resize: none;
 }
 
-input[type=submit]:active,
-input[type=submit]:hover {
-    background-color: rgb(123, 169, 185);
+input[type="submit"] {
+  padding: 5px;
+  border: 3px white;
+  border-radius: 40px;
+  transition: background-color 0.5s;
+  background-color: lightblue;
+  margin: 5px;
+}
+
+input[type="submit"]:active,
+input[type="submit"]:hover {
+  background-color: rgb(123, 169, 185);
 }

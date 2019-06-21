@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { editUserThunk } from '../../actions/userActions';
-import { modifyAuth } from '../../actions/authActions';
-import './EditProfile.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { editUserThunk } from "../../actions/userActions";
+import { modifyAuth } from "../../actions/authActions";
+import "./EditProfile.css";
+import { Form, Label, Input } from "reactstrap";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -24,11 +25,11 @@ class EditProfile extends Component {
     // set values to empty strings to avoid errors in case props recived are null
 
     if (this.state.bio === null) {
-      this.setState({ bio: '' });
+      this.setState({ bio: "" });
     }
 
     if (this.state.profilePicture === null) {
-      this.setState({ profilePicture: '' });
+      this.setState({ profilePicture: "" });
     }
   };
 
@@ -41,8 +42,8 @@ class EditProfile extends Component {
     // this is only if the user deletes the initial properties and leaves fields blank
     // Its okay if save changes is clicked and nothing actually changed
     e.preventDefault();
-    if (this.state.userName === '') {
-      alert('Username CANNOT be empty');
+    if (this.state.userName === "") {
+      alert("Username CANNOT be empty");
     } else {
       // send changed user data
       let changedUser = {
@@ -68,39 +69,30 @@ class EditProfile extends Component {
     // if null set to empty string to avoid warning and unwatned errors
 
     if (this.state.bio === null) {
-      this.setState({ bio: '' });
+      this.setState({ bio: "" });
     }
 
     if (this.state.profilePicture === null) {
-      this.setState({ profilePicture: '' });
+      this.setState({ profilePicture: "" });
     }
   };
 
   render() {
     return (
       <div className="editUser">
-        <form className="editUserForm">
-          {/* <label>UserName: </label>
-          <input
-            type="text"
-            value={this.state.userName}
-            name="userName"
-            placeholder="New userName"
-            onChange={this.handleChange}
-          />
-          <br /> */}
-          <label>Display Name: </label>
-          <input
+        <Form className="editUserForm">
+          <Label>Name</Label>
+          <Input
             type="text"
             value={this.state.displayName}
             name="displayName"
-            placeholder="New name"
+            placeholder="Name"
             onChange={this.handleChange}
           />
           <br />
           {/* <br />
-          <label>Email: </label>
-          <input
+          <Label>Email: </Label>
+          <Input
             type="text"
             value={this.state.email}
             name="email"
@@ -108,32 +100,32 @@ class EditProfile extends Component {
             onChange={this.handleChange}
           />
           <br /> */}
-          <label>Profile Picture: </label>
-          <input
+          <Label>Profile Picture</Label>
+          <Input
             type="text"
             value={this.state.profilePicture}
             name="profilePicture"
-            placeholder="New image"
+            placeholder="URL of Profile Picture"
             onChange={this.handleChange}
           />
           <br />
-          <label>Bio:</label>
+          <Label>Bio</Label>
           <br />
-          <textarea
-            type="text"
+          <Input
+            type="textarea"
             value={this.state.bio}
             name="bio"
-            placeholder="your bio..."
+            placeholder="Bio"
             onChange={this.handleChange}
           />
           <br />
-          <input
+          <Input
             className="submitBtn"
             type="submit"
             onClick={this.handleSubmit}
             value="Save Changes"
           />
-        </form>
+        </Form>
       </div>
     );
   }
