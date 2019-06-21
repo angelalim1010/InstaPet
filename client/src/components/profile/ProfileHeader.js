@@ -215,7 +215,7 @@ class ProfileHeader extends Component {
 
     //THIS USERS' FOLLOWING
     // filter through relationships for where this user is the follower
-    // filter through posts array in store for posts for this user
+    // filter through posts array in store for posts for this user=
     let allFollowingForUser = this.props.user.relationships.filter(
       relationship => relationship.follower === userName
     );

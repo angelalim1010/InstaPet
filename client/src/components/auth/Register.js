@@ -6,15 +6,16 @@ import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import { registerUser } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 import './Login.css';
+
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      userName: '',
-      email: '',
-      displayName: '',
-      password: '',
-      password2: '',
+      userName: "",
+      email: "",
+      displayName: "",
+      password: "",
+      password2: "",
       errors: {}
     };
   }
@@ -22,7 +23,7 @@ class Register extends Component {
   componentDidMount = () => {
     // If the user is already logged in and navigates to the Register page, they will be redirected to the homepage
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/');
+      this.props.history.push("/");
     }
   };
 
@@ -65,7 +66,11 @@ class Register extends Component {
     return (
       <div className="background">
         <div className="box">
-          <img src={require('../../img/phone.png')} className="phoneImage" />
+          <img
+            src={require("../../img/phone.png")}
+            className="phoneImage"
+            alt="phoneImg"
+          />
           <div className="formContainer">
             <h1 className="title">Instapet</h1>
             <h3 className="signupmessage">

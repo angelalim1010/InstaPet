@@ -80,7 +80,11 @@ class ProfilePosts extends Component {
           {allPostsForUser.map((post, index) => {
             return (
               <div className="profilePost" key={post.id}>
-                <img className="profilePostImage" src={post.imageURL} />
+                <img
+                  className="profilePostImage"
+                  src={post.imageURL}
+                  alt="profileImage"
+                />
                 <div
                   className="profilePostHover"
                   key={post.id}
