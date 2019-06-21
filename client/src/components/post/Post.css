@@ -184,11 +184,17 @@ a:hover {
   float: right;
   color: gray;
   background-color: #fff;
-  border-color: #fff;
+  border: none;
+}
+
+.deleteButton:hover {
+  color: red;
+  background-color: transparent;
+  border: none;
 }
 
 .postLikeCount:hover {
-  color: gray;
+  color: #007bff;
   cursor: pointer;
 }
 
