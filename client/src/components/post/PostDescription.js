@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
@@ -8,7 +7,7 @@ import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import "./Post.css";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal } from "reactstrap";
 
 class PostDescription extends Component {
   constructor(props) {
@@ -80,6 +79,16 @@ class PostDescription extends Component {
     } else {
       return `${allLikesForPost.length} likes`;
     }
+  };
+
+  handleLikesClick = () => {
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
   };
 
   displayLikeArray = () => {

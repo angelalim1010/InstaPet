@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { withRouter } from "react-router";
 import "./Profile.css";
-import { timingSafeEqual } from "crypto";
-
 import { followUserThunk } from "../../actions/userActions";
 import { unfollowUserThunk } from "../../actions/userActions";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog as faCogFull } from "@fortawesome/free-solid-svg-icons";
-
 import EditProfile from "./EditProfile";
 
 class ProfileHeader extends Component {
@@ -24,8 +20,7 @@ class ProfileHeader extends Component {
       defaultSrc: defsrc,
       toggleEdit: false,
       modalFollowers: false,
-      modalFollowing: false,
-      currentUserName: this.props.auth.user.userName
+      modalFollowing: false
     };
   }
 
@@ -206,7 +201,6 @@ class ProfileHeader extends Component {
 
   render() {
     let userName = this.props.viewUserObject.userName;
-
     //THIS USERS' POSTS
     // filter through posts for userName
     // filter through posts array in store for posts for this user
