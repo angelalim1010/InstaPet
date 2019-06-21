@@ -13,8 +13,14 @@ require("dotenv").config();
 // Grab jwt secret
 const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
 
-// Set User model
-const { User } = require("../database/models");
+// Set models
+const {
+  User,
+  Post,
+  Comment,
+  Like,
+  Relationship
+} = require("../database/models");
 
 /**
  * FindAllUsers endpoint
@@ -24,22 +30,156 @@ const { User } = require("../database/models");
  */
 router.get("/", (req, res, next) => {
   return User.findAll({
-    order: [["id", "DESC"]]
+    order: [["createdAt", "DESC"]]
   })
     .then(users => res.status(200).json(users))
     .catch(err => res.status(400).json(err));
 }); // End FindAllUsers endpoint
 
 /**
+ * FindUser endpoint
+ * @route GET /profile/:userName
+ * @desc Find a user
+ * @access Public
+ */
+router.get("/:userName", (req, res, next) => {
+  return (
+    User.findOne({
+      where: {
+        userName: req.params.userName
+      }
+    })
+
+      // Filter out key:value pairs from the user
+      .then(user => {
+        // Convert it to JSON format
+        const jsonUser = user.toJSON();
+
+        // Destructure (filter) these key:value pairs from jsonUser because they contain sensitive information
+        const { email, password, createdAt, updatedAt, ...rest } = jsonUser;
+
+        // Return the other key:value pairs.
+        return rest;
+      })
+
+      // Find all the posts made by the user and return them
+      .then(user => {
+        return (
+          Post.findAll({
+            where: {
+              userName: user.userName
+            },
+            order: [["createdAt", "DESC"]]
+          })
+            // Take the posts that were returned and
+            .then(async posts => {
+              let newPosts = [];
+              // For each post
+              for (let i in posts) {
+                // Get the number of likes
+                await Like.count({
+                  where: {
+                    postId: posts[i].id
+                  }
+                })
+                  // Take that and
+                  .then(likeCount => {
+                    // Modify each post object to add likeCount
+                    let newPost = {
+                      ...posts[i].toJSON(),
+                      likeCount: likeCount
+                    };
+
+                    // Add each post to the array of new posts
+                    newPosts.push(newPost);
+                  });
+
+                // Get the number of likes
+                await Comment.count({
+                  where: {
+                    postId: posts[i].id
+                  }
+                })
+                  // Take that and
+                  .then(commentCount => {
+                    // Modify each post object to add commentCount
+                    let newPost = {
+                      ...newPosts[i],
+                      commentCount: commentCount
+                    };
+
+                    // Replace each post in the newPosts array
+                    newPosts[i] = newPost;
+                  });
+              } // End for loop
+
+              // Add all the modified posts to the user's posts array
+              user.posts = newPosts;
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Find all the users that this user is following and return them
+      .then(user => {
+        return (
+          Relationship.findAll({
+            where: {
+              follower: user.userName
+            },
+            order: [["createdAt", "DESC"]]
+          })
+            // Take the users that were returned
+            .then(following => {
+              // Add them to the user's following array
+              user.following = following;
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Find all the users that this following this user and return them
+      .then(user => {
+        return (
+          Relationship.findAll({
+            where: {
+              following: user.userName
+            },
+            order: [["createdAt", "DESC"]]
+          })
+            // Take the users that were returned
+            .then(followers => {
+              // Add them to the user's followers array
+              user.followers = followers;
+
+              // Return the user for the next .then handler
+              return user;
+            })
+        );
+      })
+
+      // Take the user and send a 200 response with the user
+      .then(user => res.status(200).json(user))
+
+      // Catch any errors and send a 400 response with the error
+      .catch(err => res.status(400).json(err))
+  );
+}); // End FindUser endpoint
+
+/**
  * UpdateUser endpoint
- * @route PUT /accounts/:userId
+ * @route PUT /profile/:userName
  * @desc Update a user
  * @access Public
  */
-router.put("/:userId", (req, res, next) => {
+router.put("/:userName", (req, res, next) => {
   return User.update({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(user => res.status(200).json(user))
@@ -48,7 +188,7 @@ router.put("/:userId", (req, res, next) => {
 
 /**
  * Register endpoint
- * @route POST /accounts/register
+ * @route POST /profile/register
  * @desc Register user
  * @access Public
  */
@@ -95,7 +235,7 @@ router.post("/register", (req, res, next) => {
 
 /**
  * Login endpoint
- * @route POST /accounts/login
+ * @route POST /profile/login
  * @desc Login user
  * @access Public
  */
@@ -160,14 +300,14 @@ router.post("/login", (req, res, next) => {
 
 /**
  * DeleteUser endpoint
- * @route DELETE /accounts/:userId
+ * @route DELETE /profile/:userName
  * @desc Delete a user
  * @access Public
  */
-router.delete("/:userId", (req, res, next) => {
+router.delete("/:userName", (req, res, next) => {
   return User.destroy({
     where: {
-      id: req.params.userId
+      userName: req.params.userName
     }
   })
     .then(() => res.status(200).json({ message: "User successfully deleted" }))

@@ -44,7 +44,7 @@ class PostComments extends Component {
         <Form className="postAddCommentForm">
           <Input
             className="postAddCommentInput postAddCommentText"
-            type="textarea"
+            type="text"
             placeholder="Add a comment..."
             value={this.state.content}
             rows="1"

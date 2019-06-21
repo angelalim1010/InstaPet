@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom';
 
 import { withRouter } from 'react-router';
 import './Profile.css';
-import { Button } from 'reactstrap';
 import { timingSafeEqual } from 'crypto';
 
 import { followUserThunk } from '../../actions/userActions';
 import { unfollowUserThunk } from '../../actions/userActions';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class ProfileHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalFollowers: false,
+      modalFollowing: false,
       currentUserName: this.props.auth.user.userName
     };
   }
@@ -72,6 +74,103 @@ class ProfileHeader extends Component {
     }
   };
 
+
+  handleFollowersClick = e => {
+    this.toggleFollowersModal();
+  };
+
+  toggleFollowersModal = () => {
+    this.setState(prevState => ({
+      modalFollowers: !prevState.modalFollowers
+    }));
+  };
+
+
+
+
+  displayFollowersArray = () => {
+    let allFollowersForUser = this.props.user.relationships.filter(
+      relationship => relationship.following == this.props.viewUserObject.userName
+    );
+    return (
+      allFollowersForUser.map(relationship => {
+        return (
+          <div className="singleFollower" key={relationship.id}>
+            <b>
+              <Link to={"/profile/" + relationship.follower}> {relationship.follower} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
+  }
+
+  displayFollowersModal = () => {
+    let userName = this.props.viewUserObject.userName;
+    let allFollowersForUser = this.props.user.relationships.filter(
+      relationship => relationship.following == userName
+    );
+    if (allFollowersForUser !== undefined) {
+      return (
+        <Modal isOpen={this.state.modalFollowers} toggle={this.toggleFollowersModal}>
+          <div className="allFollowersandFollowingList">
+            <p>All Followers</p>
+            <b>{this.displayFollowersArray()}</b>
+          </div>
+        </Modal >
+      )
+    }
+  }
+
+  handleFollowingClick = e => {
+    this.toggleFollowingModal();
+  };
+
+  toggleFollowingModal = () => {
+    this.setState(prevState => ({
+      modalFollowing: !prevState.modalFollowing
+    }));
+  };
+
+
+
+
+  displayFollowingArray = () => {
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower == this.props.viewUserObject.userName
+    );
+
+    return (
+      allFollowingForUser.map(relationship => {
+        return (
+          <div className="singleFollowing" key={relationship.id}>
+            <b>
+              <Link to={"/profile/" + relationship.following}> {relationship.following} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
+  }
+
+  displayFollowingModal = () => {
+    let userName = this.props.viewUserObject.userName;
+    let allFollowingForUser = this.props.user.relationships.filter(
+      relationship => relationship.follower == userName
+    );
+
+    if (allFollowingForUser !== undefined) {
+      return (
+        <Modal isOpen={this.state.modalFollowing} toggle={this.toggleFollowingModal}>
+          <div className="allFollowersandFollowingList">
+            <p>All Following</p>
+            <b>{this.displayFollowingArray()}</b>
+          </div>
+        </Modal >
+      )
+    }
+  }
+
   render() {
     let userName = this.props.viewUserObject.userName;
 
@@ -98,44 +197,51 @@ class ProfileHeader extends Component {
 
     return (
       <div className="profileHeader">
+
         <img
           className="profilePicture"
-          src="https://images-na.ssl-images-amazon.com/images/I/41YEgvbgVcL.jpg"
+          src="https://i.pinimg.com/originals/9f/81/2d/9f812d4cf313e887ef99d8722229eee1.jpg"
           alt="profilepic"
         />
 
         <div className="userInfoContainer">
+
           <div className="userNameFollowStatus">
+
             <div className="userName">
               <h3>{this.props.viewUserObject.userName}</h3>
             </div>
-
             <div>{this.displayButton()}</div>
+
           </div>
 
           <div className="userStats">
+
             <div className="userStat userPostCount">
               <b>{allPostsForUser.length}</b> posts
             </div>
 
-            <div className="userStat userFollowers">
-              {/* ADD CLICK EVENT LISTENER (pop up array of followers) */}
+            <div className="userStat userFollowers" onClick={this.handleFollowersClick}>
               <b>{allFollowersForUser.length}</b> followers
             </div>
+            <div>{this.displayFollowersModal()}</div>
 
-            <div className="userStat userFollowing">
-              {/* ADD CLICK EVENT LISTENER (pop up array of following) */}
+
+            <div className="userStat userFollowing" onClick={this.handleFollowingClick}>
               <b>{allFollowingForUser.length}</b> following
             </div>
-          </div>
+            <div>{this.displayFollowingModal()}</div>
 
+
+          </div>
           <div className="userDisplayName">
             <b>{this.props.viewUserObject.displayName}</b>
           </div>
 
           <div className="userBio">
-            <p>{this.props.viewUserObject.bio}</p>
+            <b>{this.props.viewUserObject.bio}</b>
           </div>
+
         </div>
       </div>
     );

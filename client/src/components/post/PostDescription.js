@@ -2,25 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarFull } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
 import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
+import './Post.css';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class PostDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modal: false,
       currentUserName: this.props.auth.user.userName
     };
   }
-
-  // componentWillReceiveProps = async nextProps => {
-  //   await this.setState({
-  //     currentUserName: nextProps.auth.user.userName
-  //   });
-  // };
 
   clickedLikePost = () => {
     //if current user did not like post and clicked like
@@ -55,7 +52,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusFull"
-          icon={faStarFull}
+          icon={faHeartFull}
           onClick={() => this.clickedUnlikePost(likeId)}
         />
       );
@@ -63,7 +60,7 @@ class PostDescription extends Component {
       return (
         <FontAwesomeIcon
           className="postLikeStatus postLikeStatusEmpty"
-          icon={faStarEmpty}
+          icon={faHeartEmpty}
           onClick={() => this.clickedLikePost()}
         />
       );
@@ -71,12 +68,6 @@ class PostDescription extends Component {
   };
 
   displayLikeCount = () => {
-
-    /*
-    *   ADD CLICK EVENT LISTENER (pop up array of likes)
-    *
-    */
-
     // filter through likes for postId
     let postId = this.props.postId;
     // filter through comments array in store for comments in this post
@@ -91,13 +82,71 @@ class PostDescription extends Component {
     }
   };
 
+
+  displayLikeArray = () => {
+    // filter through likes for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
+
+    return (
+      allLikesForPost.map(like => {
+        return (
+          <div className="singleLike" key={like.id}>
+            <b>
+              <Link to={"/profile/" + like.userName}> {like.userName} </Link>
+            </b>
+          </div>
+        )
+      })
+    )
+  }
+
+
+  handleLikesClick = () => {
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+
+  displayModal = () => {
+
+    // filter through likes for postId
+    let postId = this.props.postId;
+    // filter through comments array in store for comments in this post
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === postId
+    );
+
+    if (allLikesForPost !== undefined) {
+      return (
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+          <div className="allLikesList">
+            <p>All Likes</p>
+            <b>{this.displayLikeArray()}</b>
+          </div>
+        </Modal >
+      )
+    }
+  }
+
   render() {
     return (
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
-        <div className="postLikeCount">
+
+        <div className="postLikeCount" onClick={this.handleLikesClick}>
           <b>{this.displayLikeCount()}</b>
         </div>
+
+        <div>{this.displayModal()}</div>
 
         <b>
           <Link to={"/profile/" + this.props.userName}> {this.props.userName} </Link>

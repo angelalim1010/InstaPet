@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { deleteCommentThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 class PostComments extends Component {
   constructor(props) {
@@ -15,29 +17,6 @@ class PostComments extends Component {
 
   // componentDidMount = () => {
   //   // this.props.getComments(this.props.postId);
-  // };
-
-  // displayViewAllComments = () => {
-  //   console.log("LIL VIEW ALL SECTION");
-  //   if (this.props.comments.length === 0) {
-  //     return <div className="postCommentsNone" />;
-  //   }
-  //   if (this.props.comments.length >= 3) {
-  //     return <i>View all {this.props.comments.length} comments</i>;
-  //   }
-  // };
-
-  // displayComment = comment => {
-  //   console.log("TRYING TO DISPLAY COMMENTS");
-  //   return (
-  //     <Comment
-  //       userName={comment.userId}
-  //       content={comment.content}
-  //       key={comment.id}
-  //     />
-
-  // {/* {this.displayViewAllComments()} */ }
-  //   );
   // };
 
   displayComments = () => {
@@ -59,7 +38,9 @@ class PostComments extends Component {
                     <Link to={"/profile/" + comment.userName}> {comment.userName} </Link>
                   </b>{" "}
                   {comment.content}
-                  <Button onClick={() => this.props.deleteComment(comment.id)}>Delete</Button>
+                  <Button className="deleteButton" onClick={() => this.props.deleteComment(comment.id)}>
+                    <FontAwesomeIcon className="deleteCommentIcon" icon={faTrashAlt} size="2x" />
+                  </Button>
                 </div>
               )
             } else {
