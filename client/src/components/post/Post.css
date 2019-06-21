@@ -52,6 +52,7 @@ a:hover {
 
 .postImage {
   max-height: 750px;
+  overflow: hidden;
 }
 
 .postImage img {
