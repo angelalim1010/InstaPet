@@ -137,8 +137,17 @@
 }
 .editProfile{
     background-color: transparent;
-    border: transparent;
+    border: none;
     color: #afafaf;
     font-size: 24px;
+}
 
+.editProfile:hover,
+.editProfile:active,
+.editProfile:focus {
+  color: lightskyblue;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
