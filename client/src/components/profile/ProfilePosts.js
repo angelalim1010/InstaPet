@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import "./Profile.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Post from "../post/Post";
 
@@ -53,13 +53,23 @@ class ProfilePosts extends Component {
     }
   };
 
+
+  getLikesLength = post => {
+    let allLikesForPost = this.props.post.likes.filter(
+      like => like.postId === post.id
+    );
+    return (
+      <b>{allLikesForPost.length}</b>
+    )
+  }
+
+
   displayPosts = () => {
 
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
       post => post.userName == userName
     );
-
 
     if (allPostsForUser === undefined) {
       return <div className="postCommentsNone">No Posts Available</div>;
@@ -77,8 +87,8 @@ class ProfilePosts extends Component {
                   onClick={this.handlePostClick}
                 >
                   <span className="profilePostHoverItem">
-                    <FontAwesomeIcon icon={faStar} />
-                    <b>{post.likeCount}</b>
+                    <FontAwesomeIcon icon={faHeart} />
+                    <b>{this.getLikesLength(post)}</b>
                   </span>
                   <span className="profilePostHoverItem">
                     <FontAwesomeIcon icon={faComment} />
