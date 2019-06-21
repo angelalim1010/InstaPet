@@ -63,6 +63,13 @@ class ProfilePosts extends Component {
     )
   }
 
+  getCommentsLength = post => {
+    let allCommentsForPost = this.props.post.comments.filter(comment => comment.postId == post.id);
+    return (
+      <b>{allCommentsForPost.length}</b>
+    )
+  }
+
 
   displayPosts = () => {
 
@@ -92,7 +99,7 @@ class ProfilePosts extends Component {
                   </span>
                   <span className="profilePostHoverItem">
                     <FontAwesomeIcon icon={faComment} />
-                    <b>{post.commentCount}</b>
+                    <b>{this.getCommentsLength(post)}</b>
                   </span>
                 </div>
               </div>
