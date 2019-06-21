@@ -58,9 +58,7 @@ class ProfileHeader extends Component {
       return (
         <div>
           <Button onClick={this.handleClick} className="editProfile">
-              <FontAwesomeIcon
-                icon={faCogFull}
-              />
+            <FontAwesomeIcon icon={faCogFull} />
           </Button>
           {this.toggleEdit()}
         </div>
@@ -112,7 +110,7 @@ class ProfileHeader extends Component {
   displayFollowersArray = () => {
     let allFollowersForUser = this.props.user.relationships.filter(
       relationship =>
-        relationship.following == this.props.viewUserObject.userName
+        relationship.following === this.props.viewUserObject.userName
     );
     return allFollowersForUser.map(relationship => {
       return (
@@ -131,7 +129,7 @@ class ProfileHeader extends Component {
   displayFollowersModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allFollowersForUser = this.props.user.relationships.filter(
-      relationship => relationship.following == userName
+      relationship => relationship.following === userName
     );
     if (allFollowersForUser !== undefined) {
       return (
@@ -161,7 +159,7 @@ class ProfileHeader extends Component {
   displayFollowingArray = () => {
     let allFollowingForUser = this.props.user.relationships.filter(
       relationship =>
-        relationship.follower == this.props.viewUserObject.userName
+        relationship.follower === this.props.viewUserObject.userName
     );
 
     return allFollowingForUser.map(relationship => {
@@ -181,7 +179,7 @@ class ProfileHeader extends Component {
   displayFollowingModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower == userName
+      relationship => relationship.follower === userName
     );
 
     if (allFollowingForUser !== undefined) {
@@ -205,21 +203,21 @@ class ProfileHeader extends Component {
     // filter through posts for userName
     // filter through posts array in store for posts for this user
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     //THIS USERS' FOLLOWERS
     // filter through relationships for where this user is the following
     // filter through posts array in store for posts for this user
     let allFollowersForUser = this.props.user.relationships.filter(
-      relationship => relationship.following == userName
+      relationship => relationship.following === userName
     );
 
     //THIS USERS' FOLLOWING
     // filter through relationships for where this user is the follower
     // filter through posts array in store for posts for this user
     let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower == userName
+      relationship => relationship.follower === userName
     );
 
     return (
