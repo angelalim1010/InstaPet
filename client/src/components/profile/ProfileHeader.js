@@ -129,7 +129,7 @@ class ProfileHeader extends Component {
       <div className="profileHeader">
         <img
           className="profilePicture"
-          src={this.props.auth.user.profilePicture}
+          src={this.props.viewUserObject.profilePicture}
           alt="profilepic"
         />
 

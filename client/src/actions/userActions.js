@@ -112,14 +112,14 @@ export const getUserThunk = userName => dispatch => {
     .then(userName => dispatch(getUser(userName)));
 };
 
-export const editUserThunk = editedUser => dispatch => {
-  console.log('USERNAME IN THUNK:');
-  console.log(editedUser.userName);
-  return axios
-    .put(`/profile/${editedUser.userName}`, editedUser)
-    .then(res => res.data)
-    .then(editedUser => dispatch(editUser(editedUser)))
-    .catch(err => console.log(err));
+export const editUserThunk = editedUser => async dispatch => {
+  let url = `/profile/${editedUser.userName}`;
+  try {
+    let { data } = await axios.put(url, editedUser);
+    dispatch(editUser(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getRelationshipsThunk = () => dispatch => {

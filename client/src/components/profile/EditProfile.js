@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editUserThunk } from '../../actions/userActions';
 import { modifyAuth } from '../../actions/authActions';
+import './EditProfile.css';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -45,10 +46,12 @@ class EditProfile extends Component {
     } else {
       // send changed user data
       let changedUser = {
-        id: this.props.auth.user.id,
+        // NOT changed but need it for Link
         userName: this.state.userName,
+
+        id: this.props.auth.user.id,
         displayName: this.state.displayName,
-        email: this.state.email,
+        //  email: this.state.email,
         profilePicture: this.state.profilePicture,
         bio: this.state.bio
       };
@@ -64,6 +67,8 @@ class EditProfile extends Component {
   };
 
   componentDidUpdate = () => {
+    // if null set to empty string to avoid warning and unwatned errors
+
     if (this.state.bio === null) {
       this.setState({ bio: '' });
     }
@@ -75,9 +80,9 @@ class EditProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="editUser">
         <form className="editUserForm">
-          <label>UserName: </label>
+          {/* <label>UserName: </label>
           <input
             type="text"
             value={this.state.userName}
@@ -85,7 +90,7 @@ class EditProfile extends Component {
             placeholder="New userName"
             onChange={this.handleChange}
           />
-          <br />
+          <br /> */}
           <label>Display Name: </label>
           <input
             type="text"
@@ -95,6 +100,7 @@ class EditProfile extends Component {
             onChange={this.handleChange}
           />
           <br />
+          {/* <br />
           <label>Email: </label>
           <input
             type="text"
@@ -103,7 +109,7 @@ class EditProfile extends Component {
             placeholder="New email"
             onChange={this.handleChange}
           />
-          <br />
+          <br /> */}
           <label>Profile Picture: </label>
           <input
             type="text"

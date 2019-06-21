@@ -101,9 +101,6 @@ export const logoutUser = () => dispatch => {
  */
 
 export const modifyAuth = editedAuth => dispatch => {
-  axios
-    .put(`/profile/${editedAuth.userName}`, editedAuth)
-    .then(res => res.data)
-    .then(editedAuth => dispatch(editAuth(editedAuth)))
-    .catch(err => console.log(err));
+  // EditUser Thunk has already updated the database, only need to send auth to the store
+  return dispatch(editAuth(editedAuth));
 };

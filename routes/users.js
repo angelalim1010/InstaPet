@@ -63,23 +63,24 @@ router.get('/:userName', (req, res, next) => {
  * @desc Update a user
  * @access Public
  */
-router.put('/:userName', (req, res, next) => {
-  console.log('request BODY: ');
-  console.log(req.body);
-  console.log('Id:');
-  console.log(req.body.id);
-  return User.findOne({ where: { id: req.body.id } })
-    .then(user => {
-      return user.update({
-        userName: req.body.userName,
-        displayName: req.body.displayName,
-        profilePicture: req.body.profilePicture,
-        bio: req.body.bio,
-        email: req.body.email
-      });
-    })
-    .then(updatedUser => res.status(200).json(updatedUser))
-    .catch(err => res.status(400).json(err));
+router.put('/:userName', async (req, res, next) => {
+  try {
+    // Get the user we want to modify
+    let targetUser = await User.findOne({
+      where: req.body.id
+    });
+
+    // update the User with the new attributes
+    let updatedUser = await targetUser.update({
+      displayName: req.body.displayName,
+      profilePicture: req.body.profilePicture,
+      bio: req.body.bio
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
 }); // End UpdateUser endpoint
 
 /**

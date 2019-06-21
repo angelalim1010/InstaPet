@@ -30,6 +30,8 @@ class NavBar extends Component {
     }
   };
 
+  componentDidMount = () => {};
+
   render() {
     return (
       <div className="navBar">
@@ -63,7 +65,8 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  users: state.users
 });
 
 const mapDispatchToProps = dispatch => {
