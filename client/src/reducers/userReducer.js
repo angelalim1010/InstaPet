@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         relationships: state.relationships.filter(
-          relationship => relationship.id != action.payload
+          relationship => relationship.id !== action.payload
         )
       };
 
