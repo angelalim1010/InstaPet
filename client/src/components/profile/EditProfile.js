@@ -10,12 +10,12 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.auth.user.id,
-      displayName: this.props.auth.user.displayName,
-      userName: this.props.auth.user.userName,
-      email: this.props.auth.user.email,
-      profilePicture: this.props.auth.user.profilePicture,
-      bio: this.props.auth.user.bio
+      id: this.props.viewUserObject.id,
+      displayName: this.props.viewUserObject.displayName,
+      userName: this.props.viewUserObject.userName,
+      email: this.props.viewUserObject.email,
+      profilePicture: this.props.viewUserObject.profilePicture,
+      bio: this.props.viewUserObject.bio
     };
 
     this.initial = this.state;
@@ -50,7 +50,7 @@ class EditProfile extends Component {
         // NOT changed but need it for Link
         userName: this.state.userName,
 
-        id: this.props.auth.user.id,
+        id: this.props.viewUserObject.id,
         displayName: this.state.displayName,
         //  email: this.state.email,
         profilePicture: this.state.profilePicture,

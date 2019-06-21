@@ -10,7 +10,7 @@ import { followUserThunk } from "../../actions/userActions";
 import { unfollowUserThunk } from "../../actions/userActions";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-import EditeProfile from "./EditProfile";
+import EditProfile from "./EditProfile";
 
 class ProfileHeader extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class ProfileHeader extends Component {
 
   toggleEdit = () => {
     if (this.state.toggleEdit) {
-      return <EditeProfile />;
+      return <EditProfile viewUserObject={this.props.viewUserObject} />;
     }
   };
 
