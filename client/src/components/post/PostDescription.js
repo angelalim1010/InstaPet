@@ -94,15 +94,22 @@ class PostDescription extends Component {
       return (
         <div className="singleLike" key={like.id}>
           <b>
-            <Link to={"/profile/" + like.userName}> {like.userName} </Link>
+            <Link
+              to={"/profile/" + like.userName}
+              onClick={this.toggleBothModals}
+            >
+              {" "}
+              {like.userName}{" "}
+            </Link>
           </b>
         </div>
       );
     });
   };
 
-  handleLikesClick = () => {
+  toggleBothModals = () => {
     this.toggleModal();
+    this.props.toggleModalFromAfar();
   };
 
   toggleModal = () => {
@@ -135,12 +142,15 @@ class PostDescription extends Component {
     return (
       <div className="postDescription">
         <div>{this.displayLikeStatus()}</div>
-        <div className="postLikeCount" onClick={this.handleLikesClick}>
+        <div className="postLikeCount" onClick={this.toggleModal}>
           <b>{this.displayLikeCount()}</b>
         </div>
         <div>{this.displayModal()}</div>
         <b>
-          <Link to={"/profile/" + this.props.userName}>
+          <Link
+            to={"/profile/" + this.props.userName}
+            onClick={this.props.toggleModalFromAfar}
+          >
             {" "}
             {this.props.userName}{" "}
           </Link>
