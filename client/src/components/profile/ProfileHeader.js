@@ -6,7 +6,8 @@ import "./Profile.css";
 import { followUserThunk } from "../../actions/userActions";
 import { unfollowUserThunk } from "../../actions/userActions";
 import { Button, Modal } from "reactstrap";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog as faCogFull } from "@fortawesome/free-solid-svg-icons";
 import EditProfile from "./EditProfile";
 
 class ProfileHeader extends Component {
@@ -56,8 +57,10 @@ class ProfileHeader extends Component {
     if (userName === this.state.currentUserName) {
       return (
         <div>
-          <Button onClick={this.handleClick} className="followButton">
-            Edit Profile
+          <Button onClick={this.handleClick} className="editProfile">
+              <FontAwesomeIcon
+                icon={faCogFull}
+              />
           </Button>
           {this.toggleEdit()}
         </div>
