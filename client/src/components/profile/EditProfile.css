@@ -9,6 +9,8 @@
 
 .editUserForm {
   margin: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .editProfileTextarea {
@@ -18,10 +20,11 @@
 .editProfileSubmit {
   padding: 5px;
   border: 3px white;
-  border-radius: 40px;
+  border-radius: 5px;
   transition: background-color 0.5s;
   background-color: lightblue;
-  margin: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .editProfileSubmit:active,
