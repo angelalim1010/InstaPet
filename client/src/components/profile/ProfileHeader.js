@@ -58,9 +58,7 @@ class ProfileHeader extends Component {
       return (
         <div>
           <Button onClick={this.handleClick} className="editProfile">
-              <FontAwesomeIcon
-                icon={faCogFull}
-              />
+            <FontAwesomeIcon icon={faCogFull} />
           </Button>
           {this.toggleEdit()}
         </div>
@@ -118,7 +116,10 @@ class ProfileHeader extends Component {
       return (
         <div className="singleFollower" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.follower}>
+            <Link
+              to={"/profile/" + relationship.follower}
+              onClick={this.toggleFollowersModal}
+            >
               {" "}
               {relationship.follower}{" "}
             </Link>
@@ -168,7 +169,10 @@ class ProfileHeader extends Component {
       return (
         <div className="singleFollowing" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.following}>
+            <Link
+              to={"/profile/" + relationship.following}
+              onClick={this.toggleFollowingModal}
+            >
               {" "}
               {relationship.following}{" "}
             </Link>
