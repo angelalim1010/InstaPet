@@ -65,7 +65,7 @@ class Login extends Component {
     return (
       <div className="background">
         <div className="box">
-          <img src={require("../../img/phone.png")} className="phoneImage" alt="" />
+          <img src={require("../../img/phone.png")} className="phoneImage" />
           <div className="formContainer">
             <h1 className="title">Instapet</h1>
             <Form className="form" onSubmit={this.handleSubmit}>
