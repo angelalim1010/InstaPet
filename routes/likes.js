@@ -10,10 +10,13 @@ const { Like } = require("../database/models");
  * @desc Add a like
  * @access Public
  */
-router.post("/", (req, res, next) => {
-  return Like.create(req.body)
-    .then(like => res.status(200).json(like))
-    .catch(err => res.status(400).json(err));
+router.post("/", async (req, res, next) => {
+  try {
+    let newLike = await Like.create(req.body);
+    res.status(200).send(newLike);
+  } catch (err) {
+    next(err);
+  }
 }); // End AddLike endpoint
 
 /**
@@ -22,12 +25,16 @@ router.post("/", (req, res, next) => {
  * @desc Find all likes
  * @access Public
  */
-router.get("/", (req, res, next) => {
-  return Like.findAll({
-    order: [["id", "DESC"]]
-  })
-    .then(likes => res.status(200).json(likes))
-    .catch(err => res.status(400).json(err));
+router.get("/", async (req, res, next) => {
+  try {
+    // get likes in descending order by id
+    let allLikes = await Like.findAll({
+      order: [["id", "DESC"]]
+    });
+    res.status(200).send(allLikes);
+  } catch (err) {
+    next(err);
+  }
 }); // End FindAllLikes endpoint
 
 /**
@@ -36,14 +43,17 @@ router.get("/", (req, res, next) => {
  * @desc Update a like
  * @access Public
  */
-router.put("/:likeId", (req, res, next) => {
-  return Like.update({
-    where: {
-      id: req.params.likeId
-    }
-  })
-    .then(like => res.status(200).json(like))
-    .catch(err => res.status(400).json(err));
+router.put("/:likeId", async (req, res, next) => {
+  try {
+    let updatedLike = await Like.update({
+      where: {
+        id: req.params.likeId
+      }
+    });
+    res.status(200).send(updatedLike);
+  } catch (err) {
+    next(err);
+  }
 }); // End UpdateLike endpoint
 
 /**
@@ -52,14 +62,17 @@ router.put("/:likeId", (req, res, next) => {
  * @desc Delete a like
  * @access Public
  */
-router.delete("/:likeId", (req, res, next) => {
-  return Like.destroy({
-    where: {
-      id: req.params.likeId
-    }
-  })
-    .then(() => res.status(200).json(req.params.likeId))
-    .catch(err => res.status(400).json(err));
+router.delete("/:likeId", async (req, res, next) => {
+  try {
+    const targetLike = await Like.destroy({
+      where: {
+        id: req.params.likeId
+      }
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 }); // End DeleteLike endpoint
 
 module.exports = router;

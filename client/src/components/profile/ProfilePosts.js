@@ -80,7 +80,11 @@ class ProfilePosts extends Component {
           {allPostsForUser.map((post, index) => {
             return (
               <div className="profilePost">
-                <img className="profilePostImage" src={post.imageURL} />
+                <img
+                  className="profilePostImage"
+                  src={post.imageURL}
+                  alt="postImg"
+                />
                 <div
                   className="profilePostHover"
                   key={post.id}
@@ -118,8 +122,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps
-  )(ProfilePosts)
-);
+export default withRouter(connect(mapStateToProps)(ProfilePosts));
