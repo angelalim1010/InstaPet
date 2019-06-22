@@ -13,54 +13,18 @@ require("dotenv").config();
 // Grab jwt secret
 const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
 
-// Set models
-const {
-  User,
-  Post,
-  Comment,
-  Like,
-  Relationship
-} = require("../database/models");
+// Set model
+const { User } = require("../database/models");
 
 /**
- * FindAllUsers endpoint
- * @route GET /profile
- * @desc Find all users
- * @access Public
+ *
+ *
+ *
+ *  USER AUTHENTICATION
+ *
+ *
+ *
  */
-router.get("/", (req, res, next) => {
-  return User.findAll({
-    order: [["createdAt", "DESC"]]
-  })
-    .then(users => res.status(200).json(users))
-    .catch(err => res.status(400).json(err));
-}); // End FindAllUsers endpoint
-
-/**
- * UpdateUser endpoint
- * @route PUT /profile/:userName
- * @desc Update a user
- * @access Public
- */
-router.put("/:userName", async (req, res, next) => {
-  try {
-    // Get the user we want to modify
-    let targetUser = await User.findOne({
-      where: req.body.id
-    });
-
-    // update the User with the new attributes
-    let updatedUser = await targetUser.update({
-      displayName: req.body.displayName,
-      profilePicture: req.body.profilePicture,
-      bio: req.body.bio
-    });
-
-    res.status(200).json(updatedUser);
-  } catch (err) {
-    next(err);
-  }
-}); // End UpdateUser endpoint
 
 /**
  * Register endpoint
@@ -117,7 +81,6 @@ router.post("/register", (req, res, next) => {
  * @access Public
  */
 router.post("/login", (req, res, next) => {
-  console.log(req.body);
   // Validate form inputs
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -177,19 +140,79 @@ router.post("/login", (req, res, next) => {
 }); // End Login endpoint
 
 /**
+ *
+ *
+ *
+ *  GENERAL USER REQUESTS
+ *
+ *
+ *
+ */
+
+/**
+ * FindAllUsers endpoint
+ * @route GET /profile
+ * @desc Find all users
+ * @access Public
+ */
+router.get("/", async (req, res, next) => {
+  try {
+    // get users in descending order by the time they were created
+    let users = await User.findAll({
+      order: [["createdAt", "DESC"]]
+    });
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+}); // End FindAllUsers endpoint
+
+/**
+ * UpdateUser endpoint
+ * @route PUT /profile/:userName
+ * @desc Update a user
+ * @access Public
+ */
+router.put("/:userName", async (req, res, next) => {
+  try {
+    // Get the user we want to modify
+    let targetUser = await User.findOne({
+      where: req.body.id
+    });
+
+    // update the User with the new attributes only if they are valid
+    if (targetUser) {
+      let updatedUser = await targetUser.update({
+        displayName: req.body.displayName,
+        profilePicture: req.body.profilePicture,
+        bio: req.body.bio
+      });
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(400).send("Cannot Update Student");
+    }
+  } catch (err) {
+    next(err);
+  }
+}); // End UpdateUser endpoint
+
+/**
  * DeleteUser endpoint
  * @route DELETE /profile/:userName
  * @desc Delete a user
  * @access Public
  */
-router.delete("/:userName", (req, res, next) => {
-  return User.destroy({
-    where: {
-      userName: req.params.userName
-    }
-  })
-    .then(() => res.status(200).json({ message: "User successfully deleted" }))
-    .catch(err => res.status(400).json(err));
+router.delete("/:userName", async (req, res, next) => {
+  try {
+    const targetUser = await User.destroy({
+      where: {
+        userName: req.params.userName
+      }
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 }); // End DeleteUser endpoint
 
 module.exports = router;
