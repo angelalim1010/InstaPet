@@ -10,13 +10,10 @@ const { Post } = require("../database/models");
  * @desc Create a post
  * @access Public
  */
-router.post("/", async (req, res, next) => {
-  try {
-    let newPost = await Post.create(req.body);
-    res.status(200).json(newPost);
-  } catch (err) {
-    next(err);
-  }
+router.post("/", (req, res, next) => {
+  return Post.create(req.body)
+    .then(post => res.status(200).json(post))
+    .catch(err => res.status(400).json(err));
 }); // End CreatePost endpoint
 
 /**
@@ -25,16 +22,12 @@ router.post("/", async (req, res, next) => {
  * @desc Find all posts
  * @access Public
  */
-router.get("/", async (req, res, next) => {
-  try {
-    // gets posts in descending order by id
-    let allPosts = await Post.findAll({
-      order: [["id", "DESC"]]
-    });
-    res.status(200).json(allPosts);
-  } catch (err) {
-    next(err);
-  }
+router.get("/", (req, res, next) => {
+  return Post.findAll({
+    order: [["id", "DESC"]]
+  })
+    .then(posts => res.status(200).json(posts))
+    .catch(err => res.status(400).json(err));
 }); // End FindAllPosts endpoint
 
 /**
@@ -43,17 +36,14 @@ router.get("/", async (req, res, next) => {
  * @desc Update a post
  * @access Public
  */
-router.put("/:postId", async (req, res, next) => {
-  try {
-    let updatedPost = await Post.update({
-      where: {
-        id: req.params.postId
-      }
-    });
-    res.status(200).json(updatedPost);
-  } catch (err) {
-    next(err);
-  }
+router.put("/:postId", (req, res, next) => {
+  return Post.update({
+    where: {
+      id: req.params.postId
+    }
+  })
+    .then(post => res.status(200).json(post))
+    .catch(err => res.status(400).json(err));
 }); // End UpdatePost endpoint
 
 /**
@@ -62,17 +52,14 @@ router.put("/:postId", async (req, res, next) => {
  * @desc Delete a post
  * @access Public
  */
-router.delete("/:postId", async (req, res, next) => {
-  try {
-    const targetPost = await Post.destroy({
-      where: {
-        id: req.params.postId
-      }
-    });
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
-  }
+router.delete("/:postId", (req, res, next) => {
+  return Post.destroy({
+    where: {
+      id: req.params.postId
+    }
+  })
+    .then(() => res.status(200).json(req.params.postId))
+    .catch(err => res.status(400).json(err));
 }); // End DeletePost endpoint
 
 module.exports = router;

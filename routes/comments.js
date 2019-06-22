@@ -10,13 +10,10 @@ const { Comment } = require("../database/models");
  * @desc Create a comment
  * @access Public
  */
-router.post("/", async (req, res, next) => {
-  try {
-    let newComment = await Comment.create(req.body);
-    res.status(200).json(newComment);
-  } catch (err) {
-    next(err);
-  }
+router.post("/", (req, res, next) => {
+  return Comment.create(req.body)
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
 }); // End CreateComment endpoint
 
 /**
@@ -25,16 +22,12 @@ router.post("/", async (req, res, next) => {
  * @desc Find all comments
  * @access Public
  */
-router.get("/", async (req, res, next) => {
-  try {
-    // gets comments in ascending order of id
-    let allComments = await Comment.findAll({
-      order: [["id", "ASC"]]
-    });
-    res.status(200).json(allComments);
-  } catch (err) {
-    next(err);
-  }
+router.get("/", (req, res, next) => {
+  return Comment.findAll({
+    order: [["id", "ASC"]]
+  })
+    .then(comments => res.status(200).json(comments))
+    .catch(err => res.status(400).json(err));
 }); // End FindAllComments endpoint
 
 /**
@@ -43,17 +36,14 @@ router.get("/", async (req, res, next) => {
  * @desc Update a comment
  * @access Public
  */
-router.put("/:commentId", async (req, res, next) => {
-  try {
-    let updatedComment = await Comment.update({
-      where: {
-        id: req.params.commentId
-      }
-    });
-    res.status(200).json(updatedComment);
-  } catch (err) {
-    next(err);
-  }
+router.put("/:commentId", (req, res, next) => {
+  return Comment.update({
+    where: {
+      id: req.params.commentId
+    }
+  })
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
 }); // End UpdateComment endpoint
 
 /**
@@ -62,17 +52,14 @@ router.put("/:commentId", async (req, res, next) => {
  * @desc Delete a comment
  * @access Public
  */
-router.delete("/:commentId", async (req, res, next) => {
-  try {
-    const targetPost = await Comment.destroy({
-      where: {
-        id: req.params.commentId
-      }
-    });
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
-  }
+router.delete("/:commentId", (req, res, next) => {
+  return Comment.destroy({
+    where: {
+      id: req.params.commentId
+    }
+  })
+    .then(() => res.status(200).json(req.params.commentId))
+    .catch(err => res.status(400).json(err));
 }); // End DeleteComment endpoint
 
 module.exports = router;
