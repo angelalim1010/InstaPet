@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartFull } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
@@ -8,7 +7,7 @@ import { likePostThunk } from "../../actions/postActions";
 import { unlikePostThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
 import "./Post.css";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal } from "reactstrap";
 
 class PostDescription extends Component {
   constructor(props) {
@@ -82,6 +81,16 @@ class PostDescription extends Component {
     }
   };
 
+  handleLikesClick = () => {
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
   displayLikeArray = () => {
     // filter through likes for postId
     let postId = this.props.postId;
@@ -109,7 +118,15 @@ class PostDescription extends Component {
 
   toggleBothModals = () => {
     this.toggleModal();
-    this.props.toggleModalFromAfar();
+    if (this.props.toggleModalFromAfar !== undefined) {
+      this.props.toggleModalFromAfar();
+    }
+  };
+
+  toggleProfileModal = () => {
+    if (this.props.toggleModalFromAfar !== undefined) {
+      this.props.toggleModalFromAfar();
+    }
   };
 
   toggleModal = () => {
@@ -149,7 +166,7 @@ class PostDescription extends Component {
         <b>
           <Link
             to={"/profile/" + this.props.userName}
-            onClick={this.props.toggleModalFromAfar}
+            onClick={this.toggleProfileModal}
           >
             {" "}
             {this.props.userName}{" "}

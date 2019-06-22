@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./Profile.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal } from "reactstrap";
 import Post from "../post/Post";
 
 class ProfilePosts extends Component {
@@ -38,7 +36,7 @@ class ProfilePosts extends Component {
   displayModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     if (allPostsForUser !== undefined) {
@@ -63,7 +61,7 @@ class ProfilePosts extends Component {
 
   getCommentsLength = post => {
     let allCommentsForPost = this.props.post.comments.filter(
-      comment => comment.postId == post.id
+      comment => comment.postId === post.id
     );
     return <b>{allCommentsForPost.length}</b>;
   };
@@ -71,7 +69,7 @@ class ProfilePosts extends Component {
   displayPosts = () => {
     let userName = this.props.viewUserObject.userName;
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     if (allPostsForUser === undefined) {
@@ -81,11 +79,11 @@ class ProfilePosts extends Component {
         <div className="profilePosts">
           {allPostsForUser.map((post, index) => {
             return (
-              <div className="profilePost" key={post.id}>
+              <div className="profilePost" key={index}>
                 <img
                   className="profilePostImage"
                   src={post.imageURL}
-                  alt="profileImage"
+                  alt="postImg"
                 />
                 <div
                   className="profilePostHover"
@@ -124,13 +122,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ProfilePosts)
-);
+export default withRouter(connect(mapStateToProps)(ProfilePosts));

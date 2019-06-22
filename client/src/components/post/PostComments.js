@@ -1,94 +1,69 @@
 import React, { Component } from "react";
-import Comment from "./Comment";
 import { connect } from "react-redux";
-import { deleteCommentThunk } from "../../actions/postActions";
-import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { Form, Input } from "reactstrap";
+import { addCommentThunk } from "../../actions/postActions";
 
 class PostComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      content: "",
       currentUserName: this.props.auth.user.userName
     };
   }
 
-  // componentDidMount = () => {
-  //   // this.props.getComments(this.props.postId);
-  // };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-  displayComments = () => {
-    // filter through comments for postId
-    let postId = this.props.postId;
-    // filter through comments array in store for comments in this post
-    let allCommentsForPost = this.props.post.comments.filter(
-      comment => comment.postId == postId
-    );
-
-    if (allCommentsForPost.length === 0) {
-      return <div className="postCommentsNone" />;
-    } else {
-      return allCommentsForPost.map(comment => {
-        if (comment.userName === this.state.currentUserName) {
-          return (
-            <div className="comment" key={comment.id}>
-              <b>
-                <Link
-                  to={"/profile/" + comment.userName}
-                  onClick={this.props.toggleModalFromAfar}
-                >
-                  {" "}
-                  {comment.userName}{" "}
-                </Link>
-              </b>{" "}
-              {comment.content}
-              <Button
-                className="deleteButton"
-                onClick={() => this.props.deleteComment(comment.id)}
-              >
-                <FontAwesomeIcon
-                  className="deleteCommentIcon"
-                  icon={faTrashAlt}
-                  size="2x"
-                />
-              </Button>
-            </div>
-          );
-        } else {
-          return (
-            <div className="comment" key={comment.id}>
-              <b>
-                <Link
-                  to={"/profile/" + comment.userName}
-                  onClick={this.props.toggleModalFromAfar}
-                >
-                  {" "}
-                  {comment.userName}{" "}
-                </Link>
-              </b>{" "}
-              {comment.content}
-            </div>
-          );
-        }
-      });
-    }
+  handleSubmit = e => {
+    e.preventDefault();
+    let addedComment = {
+      userName: this.state.currentUserName,
+      postId: this.props.postId,
+      content: this.state.content
+    };
+    this.props.addComment(addedComment);
+    this.setState({
+      content: ""
+    });
   };
 
   render() {
-    return <div className="postComments">{this.displayComments()}</div>;
+    return (
+      <div className="postAddComment">
+        <Form className="postAddCommentForm">
+          <Input
+            className="postAddCommentInput postAddCommentText"
+            type="text"
+            placeholder="Add a comment..."
+            value={this.state.content}
+            rows="1"
+            name="content"
+            onChange={this.handleChange}
+          />
+          <Input
+            className="postAddCommentInput postAddCommentSubmit"
+            type="submit"
+            value="Post"
+            onClick={this.handleSubmit}
+          />
+        </Form>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  post: state.post
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteComment: commentId => dispatch(deleteCommentThunk(commentId))
+    addComment: addedComment => dispatch(addCommentThunk(addedComment))
   };
 };
 

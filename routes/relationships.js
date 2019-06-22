@@ -10,10 +10,13 @@ const { Relationship } = require("../database/models");
  * @desc Create a relationship
  * @access Public
  */
-router.post("/", (req, res, next) => {
-  return Relationship.create(req.body)
-    .then(relationship => res.status(200).json(relationship))
-    .catch(err => res.status(400).json(err));
+router.post("/", async (req, res, next) => {
+  try {
+    let newRelationship = await Relationship.create(req.body);
+    res.status(200).send(newRelationship);
+  } catch (err) {
+    next(err);
+  }
 }); // End CreateRelationship endpoint
 
 /**
@@ -22,12 +25,15 @@ router.post("/", (req, res, next) => {
  * @desc Find all relationships
  * @access Public
  */
-router.get("/", (req, res, next) => {
-  return Relationship.findAll({
-    order: [["id", "DESC"]]
-  })
-    .then(relationships => res.status(200).json(relationships))
-    .catch(err => res.status(400).json(err));
+router.get("/", async (req, res, next) => {
+  try {
+    let allRelationships = await Relationship.findAll({
+      order: [["id", "DESC"]]
+    });
+    res.status(200).send(allRelationships);
+  } catch (err) {
+    next(err);
+  }
 }); // End FindAllRelationships endpoint
 
 /**
@@ -36,14 +42,17 @@ router.get("/", (req, res, next) => {
  * @desc Update a relationship
  * @access Public
  */
-router.put("/:relationshipId", (req, res, next) => {
-  return Relationship.update({
-    where: {
-      id: req.params.relationshipId
-    }
-  })
-    .then(relationship => res.status(200).json(relationship))
-    .catch(err => res.status(400).json(err));
+router.put("/:relationshipId", async (req, res, next) => {
+  try {
+    let updatedRelationship = await Relationship.update({
+      where: {
+        id: req.params.relationshipId
+      }
+    });
+    res.status(200).send(updatedRelationship);
+  } catch (err) {
+    next(err);
+  }
 }); // End UpdateRelationship endpoint
 
 /**
@@ -52,14 +61,17 @@ router.put("/:relationshipId", (req, res, next) => {
  * @desc Delete a relationship
  * @access Public
  */
-router.delete("/:relationshipId", (req, res, next) => {
-  return Relationship.destroy({
-    where: {
-      id: req.params.relationshipId
-    }
-  })
-    .then(() => res.status(200).json(req.params.relationshipId))
-    .catch(err => res.status(400).json(err));
+router.delete("/:relationshipId", async (req, res, next) => {
+  try {
+    await Relationship.destroy({
+      where: {
+        id: req.params.relationshipId
+      }
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 }); // End DeleteRelationship endpoint
 
 module.exports = router;

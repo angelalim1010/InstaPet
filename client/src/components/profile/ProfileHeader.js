@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { withRouter } from "react-router";
 import "./Profile.css";
-import { timingSafeEqual } from "crypto";
-
 import { followUserThunk } from "../../actions/userActions";
 import { unfollowUserThunk } from "../../actions/userActions";
 import { Button, Modal } from "reactstrap";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog as faCogFull } from "@fortawesome/free-solid-svg-icons";
 import EditProfile from "./EditProfile";
 
 class ProfileHeader extends Component {
@@ -22,8 +20,7 @@ class ProfileHeader extends Component {
       defaultSrc: defsrc,
       toggleEdit: false,
       modalFollowers: false,
-      modalFollowing: false,
-      currentUserName: this.props.auth.user.userName
+      modalFollowing: false
     };
   }
 
@@ -60,8 +57,8 @@ class ProfileHeader extends Component {
     if (userName === this.state.currentUserName) {
       return (
         <div>
-          <Button onClick={this.handleClick} className="followButton">
-            Edit Profile
+          <Button onClick={this.handleClick} className="editProfile">
+            <FontAwesomeIcon icon={faCogFull} />
           </Button>
           {this.toggleEdit()}
         </div>
@@ -113,13 +110,16 @@ class ProfileHeader extends Component {
   displayFollowersArray = () => {
     let allFollowersForUser = this.props.user.relationships.filter(
       relationship =>
-        relationship.following == this.props.viewUserObject.userName
+        relationship.following === this.props.viewUserObject.userName
     );
     return allFollowersForUser.map(relationship => {
       return (
         <div className="singleFollower" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.follower}>
+            <Link
+              to={"/profile/" + relationship.follower}
+              onClick={this.toggleFollowersModal}
+            >
               {" "}
               {relationship.follower}{" "}
             </Link>
@@ -132,7 +132,7 @@ class ProfileHeader extends Component {
   displayFollowersModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allFollowersForUser = this.props.user.relationships.filter(
-      relationship => relationship.following == userName
+      relationship => relationship.following === userName
     );
     if (allFollowersForUser !== undefined) {
       return (
@@ -162,14 +162,17 @@ class ProfileHeader extends Component {
   displayFollowingArray = () => {
     let allFollowingForUser = this.props.user.relationships.filter(
       relationship =>
-        relationship.follower == this.props.viewUserObject.userName
+        relationship.follower === this.props.viewUserObject.userName
     );
 
     return allFollowingForUser.map(relationship => {
       return (
         <div className="singleFollowing" key={relationship.id}>
           <b>
-            <Link to={"/profile/" + relationship.following}>
+            <Link
+              to={"/profile/" + relationship.following}
+              onClick={this.toggleFollowingModal}
+            >
               {" "}
               {relationship.following}{" "}
             </Link>
@@ -182,7 +185,7 @@ class ProfileHeader extends Component {
   displayFollowingModal = () => {
     let userName = this.props.viewUserObject.userName;
     let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower == userName
+      relationship => relationship.follower === userName
     );
 
     if (allFollowingForUser !== undefined) {
@@ -202,26 +205,25 @@ class ProfileHeader extends Component {
 
   render() {
     let userName = this.props.viewUserObject.userName;
-
     //THIS USERS' POSTS
     // filter through posts for userName
     // filter through posts array in store for posts for this user
     let allPostsForUser = this.props.post.posts.filter(
-      post => post.userName == userName
+      post => post.userName === userName
     );
 
     //THIS USERS' FOLLOWERS
     // filter through relationships for where this user is the following
     // filter through posts array in store for posts for this user
     let allFollowersForUser = this.props.user.relationships.filter(
-      relationship => relationship.following == userName
+      relationship => relationship.following === userName
     );
 
     //THIS USERS' FOLLOWING
     // filter through relationships for where this user is the follower
-    // filter through posts array in store for posts for this user=
+    // filter through posts array in store for posts for this user
     let allFollowingForUser = this.props.user.relationships.filter(
-      relationship => relationship.follower == userName
+      relationship => relationship.follower === userName
     );
 
     return (

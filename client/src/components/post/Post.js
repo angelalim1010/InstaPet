@@ -16,8 +16,6 @@ class Post extends Component {
     };
   }
 
-  componentDidMount = () => {};
-
   displayPost = () => {
     if (!this.state.post) {
       return <div />;
@@ -28,7 +26,7 @@ class Post extends Component {
             userName={this.state.post.userName}
             postId={this.state.post.id}
           />
-          <PostImage imageURL={this.state.post.imageURL} caption={this.state.post.caption} />
+          <PostImage imageURL={this.state.post.imageURL} />
           <PostDescription
             postId={this.state.post.id}
             userName={this.state.post.userName}
@@ -55,11 +53,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Post);
+export default connect(mapStateToProps)(Post);
