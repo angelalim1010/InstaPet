@@ -13,7 +13,7 @@ require("dotenv").config();
 // Grab jwt secret
 const JWT_SECRET = process.env.JWT_SECRET || "DEFAULT_SECRET";
 
-// Set model
+// Set User model
 const { User } = require("../database/models");
 
 /**
@@ -32,44 +32,57 @@ const { User } = require("../database/models");
  *  @desc Register user
  *  @access Public
  */
-router.post("/register", (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateRegisterInput(req.body);
-  // If not valuserName, return errors
+
+  // If not valid, return errors
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  // If valuserName, try to find existing user with same email
-  User.findOne({
+  // Otherwise, try to find an existing user with the same email
+  const userWithEmail = await User.findOne({
     where: {
       email: req.body.email
     }
-  }).then(user => {
-    // If a user was found
-    if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+  });
+
+  // If a user was found, send an error that the email is already in use
+  if (userWithEmail) {
+    return res.status(400).json({ email: "Email already in use" });
+  }
+
+  // Otherwise, try to find an existing user with the same username
+  const userWithUsername = await User.findOne({
+    where: {
+      userName: req.body.userName
     }
+  });
 
-    // Otherwise
-    const newUser = {
-      userName: req.body.userName,
-      email: req.body.email,
-      password: req.body.password,
-      displayName: req.body.displayName
-    };
+  // If a user was found, send an error that the username is already in use
+  if (userWithUsername) {
+    return res.status(400).json({ userName: "Username already in use" });
+  }
 
-    // Hash password before saving to database
-    bcrypt.genSalt(12, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err;
-        newUser.password = hash;
-        User.create(newUser)
-          .then(user => {
-            return res.json(user);
-          })
-          .catch(err => console.log(err));
-      });
+  // Otherwise
+  const newUser = {
+    userName: req.body.userName,
+    email: req.body.email,
+    password: req.body.password,
+    displayName: req.body.displayName
+  };
+
+  // Hash password before saving to database
+  bcrypt.genSalt(12, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      User.create(newUser)
+        .then(user => {
+          return res.json(user);
+        })
+        .catch(err => console.log(err));
     });
   });
 }); // End Register endpoint
@@ -91,7 +104,7 @@ router.post("/login", (req, res, next) => {
 
   const { email, password } = req.body;
 
-  // If valuserName, try to find existing user with same email
+  // If valid, try to find existing user with same email
   User.findOne({
     where: {
       email: email
