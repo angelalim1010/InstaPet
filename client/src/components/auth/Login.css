@@ -1,0 +1,68 @@
+.title {
+  font-family: "Brush Script MT";
+  font-style: normal;
+  font-size: 70px;
+
+}
+
+.signupmessage{
+    text-align: center;
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 20px;
+
+}
+
+.box {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+ }
+ .phoneImage{
+     height: 618px;
+     width:500px;
+ }
+.formContainer{
+    border:1px solid #e6e6e6;
+    background-color: #fff;
+    border-radius: 1px;
+    padding: 40px 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+.form{
+    width:100%;
+    margin: 0 auto;
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.formBoxInput {
+  background-color: #fafafa;
+  color: gray;
+}
+
+.formBoxError {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.submit {
+  color: white;
+  background-color: #4286f4;
+  margin: auto;
+  width: 100%;
+}
+.signupbox {
+  margin-top: 15px;
+  text-align: center;
+  color: #404040;
+}
