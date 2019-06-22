@@ -13,7 +13,7 @@ const { Like } = require("../database/models");
 router.post("/", async (req, res, next) => {
   try {
     let newLike = await Like.create(req.body);
-    res.status(200).send(newLike);
+    res.status(200).json(newLike);
   } catch (err) {
     next(err);
   }
@@ -31,7 +31,7 @@ router.get("/", async (req, res, next) => {
     let allLikes = await Like.findAll({
       order: [["id", "DESC"]]
     });
-    res.status(200).send(allLikes);
+    res.status(200).json(allLikes);
   } catch (err) {
     next(err);
   }
@@ -50,7 +50,7 @@ router.put("/:likeId", async (req, res, next) => {
         id: req.params.likeId
       }
     });
-    res.status(200).send(updatedLike);
+    res.status(200).json(updatedLike);
   } catch (err) {
     next(err);
   }
@@ -69,6 +69,7 @@ router.delete("/:likeId", async (req, res, next) => {
         id: req.params.likeId
       }
     });
+    //res.status(200).json(req.params.likeId);
     res.sendStatus(200);
   } catch (err) {
     next(err);

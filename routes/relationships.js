@@ -68,7 +68,8 @@ router.delete("/:relationshipId", async (req, res, next) => {
         id: req.params.relationshipId
       }
     });
-    res.sendStatus(200);
+    // res.status(200).json(req.params.relationshipId);
+    res.status(200).json(req.params.relationshipId);
   } catch (err) {
     next(err);
   }

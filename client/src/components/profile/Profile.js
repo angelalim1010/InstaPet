@@ -41,12 +41,12 @@ class Profile extends Component {
     let userName = this.state.userName;
     //go thrpugh AllUsers array to find viewingUser
     let viewUserArray = this.props.user.users.filter(
-      user => user.userName == userName
+      user => user.userName === userName
     );
     //get the userObject from the array
     let viewUserObject = viewUserArray[0];
 
-    if (viewUserObject == undefined) {
+    if (viewUserObject === undefined) {
       return (
         <div className="noPosts">
           <h2>Loading User...</h2>

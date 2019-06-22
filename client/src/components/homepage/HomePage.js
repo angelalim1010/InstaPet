@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
-import AllPosts from './AllPosts';
+import React, { Component } from "react";
+import AllPosts from "./AllPosts";
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="homePage">

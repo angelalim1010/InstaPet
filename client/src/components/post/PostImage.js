@@ -1,16 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-class PostImage extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="postImage">
-        <img src={this.props.imageURL} />
-      </div>
-    );
-  }
-}
+const PostImage = ({ imageURL }) => {
+  return (
+    <div className="postImage">
+      <img src={imageURL} alt="postImg" />
+    </div>
+  );
+};
 
 export default PostImage;

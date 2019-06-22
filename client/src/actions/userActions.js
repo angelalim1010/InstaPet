@@ -117,8 +117,8 @@ const unfollowUser = relationshipId => {
 
 export const unfollowUserThunk = relationshipId => async dispatch => {
   try {
-    let { data } = await axios.delete(`/relationships/${relationshipId}`);
-    dispatch(unfollowUser(data));
+    await axios.delete(`/relationships/${relationshipId}`);
+    dispatch(unfollowUser(relationshipId));
   } catch (err) {
     console.log(err);
   }

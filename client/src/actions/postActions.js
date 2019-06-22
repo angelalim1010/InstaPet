@@ -120,8 +120,8 @@ const deleteComment = commentId => {
 
 export const deleteCommentThunk = commentId => async dispatch => {
   try {
-    let { data } = await axios.delete(`/comments/${commentId}`);
-    dispatch(deleteComment(data));
+    await axios.delete(`/comments/${commentId}`);
+    dispatch(deleteComment(commentId));
   } catch (err) {
     console.log(err);
   }
@@ -167,8 +167,8 @@ const unlikePost = likeId => {
 
 export const unlikePostThunk = likeId => async dispatch => {
   try {
-    let { data } = await axios.delete(`/likes/${likeId}`);
-    dispatch(unlikePost(data));
+    await axios.delete(`/likes/${likeId}`);
+    dispatch(unlikePost(likeId));
   } catch (err) {
     console.log(err);
   }
@@ -213,8 +213,8 @@ const deletePost = postId => {
 
 export const deletePostThunk = postId => async dispatch => {
   try {
-    let { data } = await axios.delete(`/p/${postId}`);
-    dispatch(deletePost(data));
+    await axios.delete(`/p/${postId}`);
+    dispatch(deletePost(postId));
   } catch (err) {
     console.log(err);
   }
