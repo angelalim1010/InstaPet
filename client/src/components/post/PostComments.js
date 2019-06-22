@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Comment from "./Comment";
 import { connect } from "react-redux";
 import { deleteCommentThunk } from "../../actions/postActions";
 import { Link } from "react-router-dom";
@@ -14,10 +13,6 @@ class PostComments extends Component {
       currentUserName: this.props.auth.user.userName
     };
   }
-
-  // componentDidMount = () => {
-  //   // this.props.getComments(this.props.postId);
-  // };
 
   displayComments = () => {
     // filter through comments for postId

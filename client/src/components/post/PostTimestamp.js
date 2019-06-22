@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class PostTimestamp extends Component {
   constructor(props) {
@@ -126,13 +125,4 @@ class PostTimestamp extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostTimestamp);
+export default PostTimestamp;

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import "./Profile.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "reactstrap";

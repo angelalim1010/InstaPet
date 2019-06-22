@@ -11,7 +11,7 @@ import "./App.css";
 // Authentication
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { setAuthUser, logoutUser } from "./actions/authActions";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute"; // ProtectedRoutes will only display if the user isAuthenticated
 
 // Components
@@ -33,7 +33,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
 
   // Set current user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setAuthUser(decoded));
 
   // Check for expired token
   const currentTime = Date.now() / 1000; // Date.now() returns the current time in milliseconds. Divide by 1000 to convert it into seconds. The token is configured to expire in terms of seconds.

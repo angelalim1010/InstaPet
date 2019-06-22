@@ -11,9 +11,4 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user,
-  auth: state.auth
-});
-
 export default HomePage;
