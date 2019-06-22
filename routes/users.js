@@ -37,6 +37,33 @@ router.get("/", (req, res, next) => {
 }); // End FindAllUsers endpoint
 
 /**
+ * FindUser endpoint
+ * @route GET /profile/:userName
+ * @desc Find a user
+ * @access Public
+ */
+router.get("/:userName", (req, res, next) => {
+  return User.findOne({
+    where: {
+      userName: req.params.userName
+    }
+  })
+    .then(user => {
+      console.log("FindUser endpoint");
+      const objectWithoutKey = (object, key) => {
+        const { [key]: deletedKey, ...otherKeys } = object;
+        console.log(deletedKey);
+        console.log(otherKeys);
+        return otherKeys;
+      };
+      console.log(objectWithoutKey(user, password));
+      //res.status(200).json(objectWithoutKey(user, password));
+      res.status(200).json(user);
+    })
+    .catch(err => res.status(400).json(err));
+}); // End FindUser endpoint
+
+/**
  * UpdateUser endpoint
  * @route PUT /profile/:userName
  * @desc Update a user
