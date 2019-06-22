@@ -12,6 +12,12 @@ class PostTopBar extends Component {
     super(props);
   }
 
+  // static getDerivedStateFromProps = (nextProps, prevState) => {
+  //   console.log('POST TOP BAR:');
+  //   console.log(nextProps);
+  //   console.log(prevState);
+  // };
+
   canDelete = () => {
     if (this.props.auth.user.userName === this.props.userName) {
       return (

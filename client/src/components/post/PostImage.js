@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class PostImage extends Component {
   constructor(props) {
@@ -13,4 +14,13 @@ class PostImage extends Component {
   }
 }
 
-export default PostImage;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostImage);

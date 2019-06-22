@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./Profile.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
-import { Modal } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Post from "../post/Post";
 
 class ProfilePosts extends Component {
@@ -122,8 +124,13 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
 export default withRouter(
   connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
   )(ProfilePosts)
 );

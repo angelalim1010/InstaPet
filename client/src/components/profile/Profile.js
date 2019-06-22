@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
@@ -41,11 +42,10 @@ class Profile extends Component {
 
   render() {
     let userName = this.state.userName;
-    //go thrpugh AllUsers array to find viewingUser
     let viewUserArray = this.props.user.users.filter(
       user => user.userName == userName
     );
-    //get the userObject from the array
+
     let viewUserObject = viewUserArray[0];
 
     if (viewUserObject == undefined) {

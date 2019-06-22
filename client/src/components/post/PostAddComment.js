@@ -12,6 +12,13 @@ class PostComments extends Component {
     };
   }
 
+  // componentWillReceiveProps = async nextProps => {
+  //   await console.log(nextProps.auth.user.userName);
+  //   await this.setState({
+  //     currentUserName: nextProps.auth.user.userName
+  //   });
+  // };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value

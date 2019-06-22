@@ -16,6 +16,8 @@ class Post extends Component {
     };
   }
 
+  componentDidMount = () => {};
+
   displayPost = () => {
     if (!this.state.post) {
       return <div />;
@@ -53,6 +55,11 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Post);
