@@ -21,7 +21,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Profile from "./components/profile/Profile";
 
-// Check localStorage for token
+// Check if localStorage has jwt token
 if (localStorage.jwtToken) {
   // Grab token from localStorage
   const token = localStorage.jwtToken;
@@ -37,6 +37,8 @@ if (localStorage.jwtToken) {
 
   // Check for expired token
   const currentTime = Date.now() / 1000; // Date.now() returns the current time in milliseconds. Divide by 1000 to convert it into seconds. The token is configured to expire in terms of seconds.
+
+  // If the token has expired already
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
