@@ -63,7 +63,7 @@ router.put("/:relationshipId", async (req, res, next) => {
  */
 router.delete("/:relationshipId", async (req, res, next) => {
   try {
-    const targetRelationship = await Relationship.destroy({
+    await Relationship.destroy({
       where: {
         id: req.params.relationshipId
       }

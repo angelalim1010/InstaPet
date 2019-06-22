@@ -204,7 +204,7 @@ router.put("/:userName", async (req, res, next) => {
  */
 router.delete("/:userName", async (req, res, next) => {
   try {
-    const targetUser = await User.destroy({
+    await User.destroy({
       where: {
         userName: req.params.userName
       }

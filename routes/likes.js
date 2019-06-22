@@ -64,12 +64,11 @@ router.put("/:likeId", async (req, res, next) => {
  */
 router.delete("/:likeId", async (req, res, next) => {
   try {
-    const targetLike = await Like.destroy({
+    await Like.destroy({
       where: {
         id: req.params.likeId
       }
     });
-    //res.status(200).json(req.params.likeId);
     res.sendStatus(200);
   } catch (err) {
     next(err);
