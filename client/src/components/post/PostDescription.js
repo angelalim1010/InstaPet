@@ -118,15 +118,7 @@ class PostDescription extends Component {
 
   toggleBothModals = () => {
     this.toggleModal();
-    if (this.props.toggleModalFromAfar !== undefined) {
-      this.props.toggleModalFromAfar();
-    }
-  };
-
-  toggleProfileModal = () => {
-    if (this.props.toggleModalFromAfar !== undefined) {
-      this.props.toggleModalFromAfar();
-    }
+    this.props.toggleModalFromAfar();
   };
 
   toggleModal = () => {
@@ -166,7 +158,7 @@ class PostDescription extends Component {
         <b>
           <Link
             to={"/profile/" + this.props.userName}
-            onClick={this.toggleProfileModal}
+            onClick={this.props.toggleModalFromAfar}
           >
             {" "}
             {this.props.userName}{" "}
