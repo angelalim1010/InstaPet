@@ -51,6 +51,8 @@ class Login extends Component {
       password: this.state.password
     };
 
+    console.log(user);
+
     // Since the redirect is handled within our component, the history does not need to be passed. 'withRouter' is NOT necessary for this.
     // The redirect is handled in componentWillReceiveProps when the component hears that the user is authenticated.
     this.props.loginUser(user);
@@ -65,7 +67,11 @@ class Login extends Component {
     return (
       <div className="background">
         <div className="box">
-          <img src={require("../../img/phone.png")} className="phoneImage" alt="" />
+          <img
+            src={require("../../img/phone.png")}
+            className="phoneImage"
+            alt=""
+          />
           <div className="formContainer">
             <h1 className="title">Instapet</h1>
             <Form className="form" onSubmit={this.handleSubmit}>
