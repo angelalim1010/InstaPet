@@ -8,7 +8,7 @@ import { timingSafeEqual } from "crypto";
 
 import { followUserThunk } from "../../actions/userActions";
 import { unfollowUserThunk } from "../../actions/userActions";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal } from "reactstrap";
 
 import EditProfile from "./EditProfile";
 
