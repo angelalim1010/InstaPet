@@ -1,11 +1,11 @@
-import axios from "axios";
-import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from "jwt-decode";
-import { ADD_USER, SET_AUTH_USER, SET_ERRORS, EDIT_AUTH } from "./types";
+import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
+import { ADD_USER, SET_CURRENT_USER, SET_ERRORS, EDIT_AUTH } from './types';
 
-export const setAuthUser = user => {
+export const setCurrentUser = user => {
   return {
-    type: SET_AUTH_USER,
+    type: SET_CURRENT_USER,
     payload: user
   };
 };
@@ -46,7 +46,7 @@ export const registerUser = (user, history) => dispatch => {
       dispatch(addUser(res.data));
 
       // Re-direct to login on successful register. It is necessary to wrap the component with 'withRouter'.
-      history.push("/login");
+      history.push('/login');
     })
     .catch(err => dispatch(setErrors(err)));
 };
@@ -64,7 +64,7 @@ export const loginUser = user => dispatch => {
       const { token } = res.data; // Equivalent to const token = res.data.token
 
       // Set token to localStorage
-      localStorage.setItem("jwtToken", token);
+      localStorage.setItem('jwtToken', token);
 
       // Set token to Authorization header
       setAuthToken(token);
@@ -73,7 +73,7 @@ export const loginUser = user => dispatch => {
       const decoded = jwt_decode(token);
 
       // Set current user and isAuthenticated
-      dispatch(setAuthUser(decoded));
+      dispatch(setCurrentUser(decoded));
     })
     .catch(err => dispatch(setErrors(err)));
 };
@@ -86,13 +86,13 @@ export const loginUser = user => dispatch => {
  */
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
-  localStorage.removeItem("jwtToken");
+  localStorage.removeItem('jwtToken');
 
   // Remove token from Authorization header
   setAuthToken(false);
 
   // Set current user to empty object {}, which will set isAuthenticated to false because it will receive an empty object
-  dispatch(setAuthUser({}));
+  dispatch(setCurrentUser({}));
 };
 
 /**

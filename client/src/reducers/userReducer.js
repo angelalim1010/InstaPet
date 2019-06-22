@@ -1,5 +1,6 @@
 import {
   GET_USERS,
+  SET_USER,
   REMOVE_USER_POST,
   ADD_USER_POST,
   ADD_USER,
@@ -22,6 +23,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: action.payload
+      };
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload
       };
     case ADD_USER:
       return {
