@@ -24,6 +24,7 @@
   border-radius: 100px;
   border: 3px solid #f5f5f5;
   object-fit: cover;
+  user-select: none;
   -webkit-user-drag: none;
 }
 
@@ -34,7 +35,6 @@
   justify-content: center;
   align-items: center;
   margin-right: 100px;
-  user-select: none;
 }
 
 .userInfoContainer {
