@@ -32,36 +32,37 @@ const { User } = require("../database/models");
  *  @desc Register user
  *  @access Public
  */
-router.post("/register", (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   // Validate form inputs
   const { errors, isValid } = validateRegisterInput(req.body);
+
   // If not valid, return errors
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  // If valid, try to find existing user with same email
-  const userWithEmail = User.findOne({
+  // Otherwise, try to find an existing user with the same email
+  const userWithEmail = await User.findOne({
     where: {
       email: req.body.email
     }
   });
 
-  // If a user was found, send an error that the email already exists
+  // If a user was found, send an error that the email is already in use
   if (userWithEmail) {
-    return res.status(400).json({ email: "Email already exists" });
+    return res.status(400).json({ email: "Email already in use" });
   }
 
-  // If valid, try to find existing user with same username
-  const userWithUsername = User.findOne({
+  // Otherwise, try to find an existing user with the same username
+  const userWithUsername = await User.findOne({
     where: {
       userName: req.body.userName
     }
   });
 
-  // If a user was found, send an error that the username already exists
+  // If a user was found, send an error that the username is already in use
   if (userWithUsername) {
-    return res.status(400).json({ userName: "Email already exists" });
+    return res.status(400).json({ userName: "Username already in use" });
   }
 
   // Otherwise
