@@ -70,7 +70,7 @@ class Login extends Component {
           <img
             src={require("../../img/phone.png")}
             className="phoneImage"
-            alt=""
+            alt="phoneImg"
           />
           <div className="formContainer">
             <h1 className="title">Instapet</h1>

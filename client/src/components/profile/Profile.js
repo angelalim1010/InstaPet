@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import "./Profile.css";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
@@ -12,8 +11,7 @@ import {
 } from "../../actions/postActions";
 import {
   getRelationshipsThunk,
-  getUsersThunk,
-  getUser
+  getUsersThunk
 } from "../../actions/userActions";
 
 class Profile extends Component {
@@ -37,18 +35,17 @@ class Profile extends Component {
     this.props.fetchAllLikes();
     this.props.getUsers();
     this.props.getRelationships();
-    this.props.getUser(this.state.userName);
   };
 
   render() {
     let userName = this.state.userName;
     let viewUserArray = this.props.user.users.filter(
-      user => user.userName == userName
+      user => user.userName === userName
     );
 
     let viewUserObject = viewUserArray[0];
 
-    if (viewUserObject == undefined) {
+    if (viewUserObject === undefined) {
       return (
         <div className="noPosts">
           <h2>Loading User...</h2>
@@ -73,7 +70,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: userName => dispatch(getUser(userName)),
   fetchAllPosts: () => dispatch(fetchAllPostsThunk()),
   fetchAllComments: () => dispatch(fetchAllCommentsThunk()),
   fetchAllLikes: () => dispatch(fetchAllLikesThunk()),

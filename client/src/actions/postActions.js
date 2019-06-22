@@ -11,6 +11,13 @@ import {
   DELETE_POST
 } from "../actions/types";
 
+/**
+ *  Fetch Posts Actions and Dispatch
+ *  Fetches all the posts from the database
+ *  @route GET /p
+ *  @param {*} posts
+ */
+
 const fetchAllPosts = posts => {
   return {
     type: FETCH_ALL_POSTS,
@@ -18,13 +25,21 @@ const fetchAllPosts = posts => {
   };
 };
 
-export const fetchAllPostsThunk = () => dispatch => {
-  return axios
-    .get(`/p/`)
-    .then(res => res.data)
-    .then(posts => dispatch(fetchAllPosts(posts)))
-    .catch(err => console.log(err));
+export const fetchAllPostsThunk = () => async dispatch => {
+  try {
+    let { data } = await axios.get(`/p/`);
+    dispatch(fetchAllPosts(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Fetch Comments Actions and Dispatch
+ *  Get all all the comments from the Database
+ *  @route GET /comments
+ *  @param {} comments
+ */
 
 const fetchAllComments = comments => {
   return {
@@ -33,13 +48,21 @@ const fetchAllComments = comments => {
   };
 };
 
-export const fetchAllCommentsThunk = () => dispatch => {
-  return axios
-    .get(`/comments/`)
-    .then(res => res.data)
-    .then(comments => dispatch(fetchAllComments(comments)))
-    .catch(err => console.log(err));
+export const fetchAllCommentsThunk = () => async dispatch => {
+  try {
+    let { data } = await axios.get(`/comments/`);
+    dispatch(fetchAllComments(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Fetch all likes actions and dispatch
+ *  get the likes from the database
+ *  @route GET /likes
+ *  @param {*} likes
+ */
 
 const fetchAllLikes = likes => {
   return {
@@ -47,13 +70,22 @@ const fetchAllLikes = likes => {
     payload: likes
   };
 };
-export const fetchAllLikesThunk = () => dispatch => {
-  return axios
-    .get(`/likes/`)
-    .then(res => res.data)
-    .then(likes => dispatch(fetchAllLikes(likes)))
-    .catch(err => console.log(err));
+
+export const fetchAllLikesThunk = () => async dispatch => {
+  try {
+    let { data } = await axios.get(`/likes/`);
+    dispatch(fetchAllLikes(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Add Comment actions and dispatch
+ *  Add a comment
+ *  @route POST /comments
+ *  @param {*} likes
+ */
 
 //payload has postId, content, userName)
 const addComment = addedComment => {
@@ -62,13 +94,22 @@ const addComment = addedComment => {
     payload: addedComment
   };
 };
-export const addCommentThunk = addedComment => dispatch => {
-  return axios
-    .post(`/comments/`, addedComment)
-    .then(res => res.data)
-    .then(addedComment => dispatch(addComment(addedComment)))
-    .catch(err => console.log(err));
+
+export const addCommentThunk = addedComment => async dispatch => {
+  try {
+    let { data } = await axios.post(`/comments/`, addedComment);
+    dispatch(addComment(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Delete Comment actions and dispatch
+ *  delete  a comment
+ *  @route DELETE /comments/:commentId
+ *  @param {*} likes
+ */
 
 const deleteComment = commentId => {
   return {
@@ -76,13 +117,22 @@ const deleteComment = commentId => {
     payload: commentId
   };
 };
-export const deleteCommentThunk = commentId => dispatch => {
-  return axios
-    .delete(`/comments/${commentId}`)
-    .then(res => res.data)
-    .then(commentId => dispatch(deleteComment(commentId)))
-    .catch(err => console.log(err));
+
+export const deleteCommentThunk = commentId => async dispatch => {
+  try {
+    await axios.delete(`/comments/${commentId}`);
+    dispatch(deleteComment(commentId));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Like Post actions and dispatch
+ *  Like a post
+ *  @route POST /likes
+ *  @param {*} likes
+ */
 
 //payload has postId and userId
 const likePost = newLike => {
@@ -91,13 +141,22 @@ const likePost = newLike => {
     payload: newLike
   };
 };
-export const likePostThunk = newLike => dispatch => {
-  return axios
-    .post(`/likes/`, newLike)
-    .then(res => res.data)
-    .then(newLike => dispatch(likePost(newLike)))
-    .catch(err => console.log(err));
+
+export const likePostThunk = newLike => async dispatch => {
+  try {
+    let { data } = await axios.post(`/likes/`, newLike);
+    dispatch(likePost(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Unlike actions and dispatch
+ *  unlike a post
+ *  @route DELETE /likes/:likeId
+ *  @param {*} likes
+ */
 
 const unlikePost = likeId => {
   return {
@@ -106,13 +165,21 @@ const unlikePost = likeId => {
   };
 };
 
-export const unlikePostThunk = likeId => dispatch => {
-  return axios
-    .delete(`/likes/${likeId}`)
-    .then(res => res.data)
-    .then(likeId => dispatch(unlikePost(likeId)))
-    .catch(err => console.log(err));
+export const unlikePostThunk = likeId => async dispatch => {
+  try {
+    await axios.delete(`/likes/${likeId}`);
+    dispatch(unlikePost(likeId));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Create Post actions and dispatch
+ *  Create a new post
+ *  @route POST /p
+ *  @param {*} likes
+ */
 
 const createPost = post => {
   return {
@@ -120,13 +187,22 @@ const createPost = post => {
     payload: post
   };
 };
-export const createPostThunk = post => dispatch => {
-  return axios
-    .post(`/p/`, post)
-    .then(res => res.data)
-    .then(post => dispatch(createPost(post)))
-    .catch(err => console.log(err));
+
+export const createPostThunk = post => async dispatch => {
+  try {
+    let { data } = await axios.post(`/p/`, post);
+    dispatch(createPost(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+/**
+ *  Delete Post actions and dispatch
+ *  delete a Post
+ *  @route DELETE /p/:postId
+ *  @param {*} likes
+ */
 
 const deletePost = postId => {
   return {
@@ -134,10 +210,12 @@ const deletePost = postId => {
     payload: postId
   };
 };
-export const deletePostThunk = postId => dispatch => {
-  return axios
-    .delete(`/p/${postId}`)
-    .then(res => res.data)
-    .then(postId => dispatch(deletePost(postId)))
-    .catch(err => console.log(err));
+
+export const deletePostThunk = postId => async dispatch => {
+  try {
+    await axios.delete(`/p/${postId}`);
+    dispatch(deletePost(postId));
+  } catch (err) {
+    console.log(err);
+  }
 };

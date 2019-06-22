@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
-import { registerUser } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
-import './Login.css';
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { Button, Form, FormGroup, Input, FormText } from "reactstrap";
+import { registerUser } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
+import "./Login.css";
 class Register extends Component {
   constructor() {
     super();

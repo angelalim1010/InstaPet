@@ -1,17 +1,18 @@
 import axios from "axios";
 import {
   GET_USERS,
-  SET_USER,
-  ADD_USER_POST,
-  REMOVE_USER_POST,
-  REMOVE_USER,
   EDIT_USER,
   GET_RELATIONSHIPS,
   FOLLOW_USER,
   UNFOLLOW_USER
 } from "./types";
 
-// Users
+/**
+ *  Get Users actions and dispatch
+ *  Fetch all the users in the database
+ *  @route GET /profile
+ *  @param {*} users
+ */
 
 const getUsers = users => {
   return {
@@ -20,19 +21,21 @@ const getUsers = users => {
   };
 };
 
-const setUser = user => {
-  return {
-    type: SET_USER,
-    payload: user
-  };
+export const getUsersThunk = () => async dispatch => {
+  try {
+    let { data } = await axios.get(`/profile`);
+    dispatch(getUsers(data));
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-const removeUser = userId => {
-  return {
-    type: REMOVE_USER,
-    payload: userId
-  };
-};
+/**
+ *  Edit User actions and dispatch
+ *  Edit the selected user and update it in the redux store/database
+ *  @route  PUT /profile/:userName
+ *  @param {*} editedUser
+ */
 
 const editUser = editedUser => {
   return {
@@ -41,63 +44,8 @@ const editUser = editedUser => {
   };
 };
 
-const getRelationships = relationships => {
-  return {
-    type: GET_RELATIONSHIPS,
-    payload: relationships
-  };
-};
-
-//payload has follower and following
-const followUser = newFollow => {
-  return {
-    type: FOLLOW_USER,
-    payload: newFollow
-  };
-};
-export const followUserThunk = newFollow => dispatch => {
-  return axios
-    .post(`/relationships/`, newFollow)
-    .then(res => res.data)
-    .then(newFollow => dispatch(followUser(newFollow)))
-    .catch(err => console.log(err));
-};
-
-const unfollowUser = relationshipId => {
-  return {
-    type: UNFOLLOW_USER,
-    payload: relationshipId
-  };
-};
-
-export const unfollowUserThunk = relationshipId => dispatch => {
-  return axios
-    .delete(`/relationships/${relationshipId}`)
-    .then(res => res.data)
-    .then(relationshipId => dispatch(unfollowUser(relationshipId)))
-    .catch(err => console.log(err));
-};
-
-// USER THUNKS
-
-export const getUsersThunk = () => dispatch => {
-  return axios
-    .get(`/profile/`)
-    .then(res => res.data)
-    .then(users => dispatch(getUsers(users)))
-    .catch(err => console.log(err));
-};
-
-export const getUser = userName => dispatch => {
-  return axios
-    .get(`/profile/${userName}`)
-    .then(res => res.data)
-    .then(user => dispatch(setUser(user)))
-    .catch(err => console.log(err));
-};
-
 export const editUserThunk = editedUser => async dispatch => {
-  let url = `/profile/${editedUser.userName}`;
+  const url = `/profile/${editedUser.userName}`;
   try {
     let { data } = await axios.put(url, editedUser);
     dispatch(editUser(data));
@@ -106,10 +54,72 @@ export const editUserThunk = editedUser => async dispatch => {
   }
 };
 
-export const getRelationshipsThunk = () => dispatch => {
-  return axios
-    .get(`/relationships/`)
-    .then(res => res.data)
-    .then(relationships => dispatch(getRelationships(relationships)))
-    .catch(err => console.log(err));
+/**
+ *  Get Relationships actions and dispatch
+ *  Fetch the relationships from the database
+ *  @route GET /relationships
+ *  @param {*} relationships
+ */
+
+const getRelationships = relationships => {
+  return {
+    type: GET_RELATIONSHIPS,
+    payload: relationships
+  };
+};
+
+export const getRelationshipsThunk = () => async dispatch => {
+  try {
+    let { data } = await axios.get(`/relationships`);
+    dispatch(getRelationships(data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+/**
+ *  Follow User actions and dispatch
+ *  Add a new follower for the appropriate user
+ *  @route POST /relationships
+ *  @param {} newFollow
+ */
+
+//payload has follower and following
+const followUser = newFollow => {
+  return {
+    type: FOLLOW_USER,
+    payload: newFollow
+  };
+};
+
+export const followUserThunk = newFollow => async dispatch => {
+  try {
+    let { data } = await axios.post(`/relationships`, newFollow);
+    dispatch(followUser(data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+/**
+ *  Unfollow User actions and dispatch
+ *  Unfollow the specified user and update the redux store/database
+ *  @route DELETE /relationships/:relationshipId
+ *  @param {*} relationshipId
+ */
+
+const unfollowUser = relationshipId => {
+  return {
+    type: UNFOLLOW_USER,
+    payload: relationshipId
+  };
+};
+
+export const unfollowUserThunk = relationshipId => async dispatch => {
+  try {
+    await axios.delete(`/relationships/${relationshipId}`);
+    dispatch(unfollowUser(relationshipId));
+  } catch (err) {
+    console.log(err);
+  }
 };

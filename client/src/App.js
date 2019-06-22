@@ -1,5 +1,5 @@
 // React & Redux
-import React, { Component } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -46,25 +46,26 @@ if (localStorage.jwtToken) {
   }
 } // End checking for token
 
-class App extends Component {
-
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <div className="app">
-            <ProtectedRoute path="/" component={NavBar} />
-            <div className="content">
-              <ProtectedRoute exact path="/" component={HomePage} />
-              <ProtectedRoute exact path="/profile/:userName" component={Profile} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-            </div>
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className="app">
+          <ProtectedRoute path="/" component={NavBar} />
+          <div className="content">
+            <ProtectedRoute exact path="/" component={HomePage} />
+            <ProtectedRoute
+              exact
+              path="/profile/:userName"
+              component={Profile}
+            />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
           </div>
-        </Router>
-      </Provider>
-    );
-  }
-}
+        </div>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
