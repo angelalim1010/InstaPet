@@ -26,46 +26,48 @@ class PostComments extends Component {
       return <div className="postCommentsNone" />;
     } else {
       return allCommentsForPost.map(comment => {
-        if (comment.userName === this.state.currentUserName) {
-          return (
-            <div className="comment" key={comment.id}>
-              <b>
-                <Link
-                  to={"/profile/" + comment.userName}
-                  onClick={this.props.toggleModalFromAfar}
+        {
+          if (comment.userName === this.state.currentUserName) {
+            return (
+              <div className="comment" key={comment.id}>
+                <b>
+                  <Link
+                    to={"/profile/" + comment.userName}
+                    onClick={this.props.toggleModalFromAfar}
+                  >
+                    {" "}
+                    {comment.userName}{" "}
+                  </Link>
+                </b>{" "}
+                {comment.content}
+                <Button
+                  className="deleteButton"
+                  onClick={() => this.props.deleteComment(comment.id)}
                 >
-                  {" "}
-                  {comment.userName}{" "}
-                </Link>
-              </b>{" "}
-              {comment.content}
-              <Button
-                className="deleteButton"
-                onClick={() => this.props.deleteComment(comment.id)}
-              >
-                <FontAwesomeIcon
-                  className="deleteCommentIcon"
-                  icon={faTrashAlt}
-                  size="2x"
-                />
-              </Button>
-            </div>
-          );
-        } else {
-          return (
-            <div className="comment" key={comment.id}>
-              <b>
-                <Link
-                  to={"/profile/" + comment.userName}
-                  onClick={this.props.toggleModalFromAfar}
-                >
-                  {" "}
-                  {comment.userName}{" "}
-                </Link>
-              </b>{" "}
-              {comment.content}
-            </div>
-          );
+                  <FontAwesomeIcon
+                    className="deleteCommentIcon"
+                    icon={faTrashAlt}
+                    size="2x"
+                  />
+                </Button>
+              </div>
+            );
+          } else {
+            return (
+              <div className="comment" key={comment.id}>
+                <b>
+                  <Link
+                    to={"/profile/" + comment.userName}
+                    onClick={this.props.toggleModalFromAfar}
+                  >
+                    {" "}
+                    {comment.userName}{" "}
+                  </Link>
+                </b>{" "}
+                {comment.content}
+              </div>
+            );
+          }
         }
       });
     }

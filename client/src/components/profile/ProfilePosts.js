@@ -79,7 +79,7 @@ class ProfilePosts extends Component {
         <div className="profilePosts">
           {allPostsForUser.map((post, index) => {
             return (
-              <div className="profilePost" key={post.id}>
+              <div className="profilePost">
                 <img
                   className="profilePostImage"
                   src={post.imageURL}

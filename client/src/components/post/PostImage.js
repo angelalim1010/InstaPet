@@ -4,7 +4,7 @@ class PostImage extends Component {
   render() {
     return (
       <div className="postImage">
-        <img src={this.props.imageURL} alt={this.props.caption} />
+        <img src={this.props.imageURL} />
       </div>
     );
   }
