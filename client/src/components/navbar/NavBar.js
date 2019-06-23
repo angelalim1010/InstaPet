@@ -8,28 +8,10 @@ import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { logoutUser } from "../../actions/authActions";
 
 class NavBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      auth: {}
-    };
-  }
-
   logout = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    if (nextProps.auth !== prevState.auth) {
-      return { auth: nextProps.auth };
-    } else {
-      return null;
-    }
-  };
-
-  componentDidMount = () => {};
 
   render() {
     return (
