@@ -23,17 +23,17 @@ class Login extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
+  static getDerivedStateFromProps = nextProps => {
     // Upon successful login, redirect the user to the homepage
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
+      nextProps.history.push("/");
     }
 
     // If there are errors in the form fields, set them to the errors object in the state
     if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+      return { errors: nextProps.errors };
+    } else {
+      return null;
     }
   };
 
@@ -51,14 +51,9 @@ class Login extends Component {
       password: this.state.password
     };
 
-    console.log(user);
-
     // Since the redirect is handled within our component, the history does not need to be passed. 'withRouter' is NOT necessary for this.
-    // The redirect is handled in componentWillReceiveProps when the component hears that the user is authenticated.
+    // The redirect is handled in getDerivedStateFromProps when the component hears that the user is authenticated.
     this.props.loginUser(user);
-
-    // Clear the errors in the store
-    // this.props.clearErrors();
   };
 
   render() {
