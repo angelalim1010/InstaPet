@@ -32,3 +32,4 @@ $ npm install
 $ npm run dev
 ```
 ### Here is a demo of our app!
+![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/login.gif)
