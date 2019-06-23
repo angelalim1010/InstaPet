@@ -57,6 +57,8 @@ a:hover {
 
 .postImage img {
   width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .postLikeStatus {
@@ -113,6 +115,7 @@ a:hover {
   background-color: lightskyblue;
   color: black;
   padding: 10px;
+  border: 3px solid #efefef;
 }
 
 .createPostForm * {
@@ -124,16 +127,11 @@ a:hover {
 
 .createPostForm {
   width: 600px;
-  margin: 100px auto;
-}
-
-.createPostForm {
-  width: 600px;
   margin: 50px auto;
   text-align: center;
   padding: 50px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 3px;
   border: 1px solid #dadada;
 }
 
@@ -187,10 +185,17 @@ a:hover {
   border: none;
 }
 
-.deleteButton:hover {
+.deleteButton:hover,
+.deleteButton:focus {
   color: red;
   background-color: transparent;
   border: none;
+  box-shadow: none;
+}
+
+.deleteButton svg:active {
+  color: red;
+  background-color: transparent;
 }
 
 .postLikeCount:hover {
