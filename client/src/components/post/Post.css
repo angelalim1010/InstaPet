@@ -185,10 +185,17 @@ a:hover {
   border: none;
 }
 
-.deleteButton:hover {
+.deleteButton:hover,
+.deleteButton:focus {
   color: red;
   background-color: transparent;
   border: none;
+  box-shadow: none;
+}
+
+.deleteButton svg:active {
+  color: red;
+  background-color: transparent;
 }
 
 .postLikeCount:hover {

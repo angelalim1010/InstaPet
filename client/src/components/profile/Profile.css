@@ -142,14 +142,19 @@
   border: none;
   color: #afafaf;
   font-size: 24px;
-  user-select: none;
 }
 
 .editProfile:hover,
-.editProfile:focus {
+.editProfile:focus,
+.editProfile:active {
   color: lightskyblue;
   cursor: pointer;
   background-color: transparent;
   border: none;
   box-shadow: none;
+}
+
+.editProfile svg:active {
+  color: lightskyblue;
+  background-color: transparent;
 }
