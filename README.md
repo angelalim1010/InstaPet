@@ -24,3 +24,11 @@ https://ttp-instapet.herokuapp.com/login
 -   Sequelize
 -   Elephantsql
 -   Bcrypt, passport, and JWT for authentication
+
+### How to run
+In the root directory run:
+```sh
+$ npm install
+$ npm run dev
+```
+### Here is a demo of our app!
