@@ -13,6 +13,7 @@ import {
   getRelationshipsThunk,
   getUsersThunk
 } from "../../actions/userActions";
+import defaultProfilePicture from "../../img/defaultProfilePicture.png";
 
 class Profile extends Component {
   constructor(props) {
@@ -53,6 +54,9 @@ class Profile extends Component {
         </div>
       );
     } else {
+      if (!viewUserObject.profilePicture) {
+        viewUserObject.profilePicture = defaultProfilePicture;
+      }
       return (
         <div className="profile">
           <ProfileHeader viewUserObject={viewUserObject} />
