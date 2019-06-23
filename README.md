@@ -10,4 +10,4 @@ Webapp that is instagram but for your pets
 -   Tony Fung
 
 Test it live on heroku:
-(https://ttp-instapet.herokuapp.com/login)
+https://ttp-instapet.herokuapp.com/login
