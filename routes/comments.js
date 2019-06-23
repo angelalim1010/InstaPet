@@ -12,7 +12,7 @@ const { Comment } = require("../database/models");
  */
 router.post("/", async (req, res, next) => {
   try {
-    let newComment = await Comment.create(req.body);
+    const newComment = await Comment.create(req.body);
     res.status(200).json(newComment);
   } catch (err) {
     next(err);
@@ -28,7 +28,7 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     // gets comments in ascending order of id
-    let allComments = await Comment.findAll({
+    const allComments = await Comment.findAll({
       order: [["id", "ASC"]]
     });
     res.status(200).json(allComments);
@@ -36,25 +36,6 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 }); // End FindAllComments endpoint
-
-/**
- * UpdateComment endpoint
- * @route PUT /comments/:commentId
- * @desc Update a comment
- * @access Public
- */
-router.put("/:commentId", async (req, res, next) => {
-  try {
-    let updatedComment = await Comment.update({
-      where: {
-        id: req.params.commentId
-      }
-    });
-    res.status(200).json(updatedComment);
-  } catch (err) {
-    next(err);
-  }
-}); // End UpdateComment endpoint
 
 /**
  * DeleteComment endpoint

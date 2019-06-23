@@ -65,8 +65,7 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  users: state.users
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => {

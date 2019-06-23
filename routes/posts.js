@@ -12,7 +12,7 @@ const { Post } = require("../database/models");
  */
 router.post("/", async (req, res, next) => {
   try {
-    let newPost = await Post.create(req.body);
+    const newPost = await Post.create(req.body);
     res.status(200).json(newPost);
   } catch (err) {
     next(err);
@@ -28,7 +28,7 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     // gets posts in descending order by id
-    let allPosts = await Post.findAll({
+    const allPosts = await Post.findAll({
       order: [["id", "DESC"]]
     });
     res.status(200).json(allPosts);
@@ -36,25 +36,6 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 }); // End FindAllPosts endpoint
-
-/**
- * UpdatePost endpoint
- * @route PUT /posts/:postId
- * @desc Update a post
- * @access Public
- */
-router.put("/:postId", async (req, res, next) => {
-  try {
-    let updatedPost = await Post.update({
-      where: {
-        id: req.params.postId
-      }
-    });
-    res.status(200).json(updatedPost);
-  } catch (err) {
-    next(err);
-  }
-}); // End UpdatePost endpoint
 
 /**
  * DeletePost endpoint
