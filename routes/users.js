@@ -202,7 +202,7 @@ router.put("/:userName", async (req, res, next) => {
       });
       res.status(200).json(updatedUser);
     } else {
-      res.status(400).send("Cannot Update Student");
+      res.status(400).send("Cannot update user");
     }
   } catch (err) {
     next(err);
