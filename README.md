@@ -33,3 +33,6 @@ $ npm run dev
 ```
 ### Here is a demo of our app!
 ![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/login.gif)
+![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/likeandfollow.gif)
+![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/post.gif)
+![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/profile.gif)
