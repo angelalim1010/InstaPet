@@ -11,3 +11,16 @@ Webapp that is instagram but for your pets
 
 ### Test it live on heroku:
 https://ttp-instapet.herokuapp.com/login
+
+### Tech used
+#### Frontend
+-   React
+-   Redux
+-   Reactstrap/Bootstrap
+-   Fontawesome
+#### Backend
+-   Express
+-   Postgres
+-   Sequelize
+-   Elephantsql
+-   Bcrypt, passport, and JWT for authentication
