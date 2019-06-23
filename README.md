@@ -9,5 +9,5 @@ Webapp that is instagram but for your pets
 -   [Marin Marinov](https://github.com/marinov98)
 -   [Tony Fung](https://github.com/tfung5)
 
-Test it live on heroku:
+### Test it live on heroku:
 https://ttp-instapet.herokuapp.com/login
