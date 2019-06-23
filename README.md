@@ -36,3 +36,4 @@ $ npm run dev
 ![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/likeandfollow.gif)
 ![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/post.gif)
 ![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/profile.gif)
+![alt text](https://github.com/angelalim1010/InstaPet/blob/update-readme/editprofile.gif)
