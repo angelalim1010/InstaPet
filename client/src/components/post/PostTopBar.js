@@ -42,7 +42,6 @@ class PostTopBar extends Component {
 const mapStateToProps = state => ({
   post: state.post,
   user: state.user,
-  users: state.users,
   auth: state.auth
 });
 

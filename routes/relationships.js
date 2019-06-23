@@ -12,7 +12,7 @@ const { Relationship } = require("../database/models");
  */
 router.post("/", async (req, res, next) => {
   try {
-    let newRelationship = await Relationship.create(req.body);
+    const newRelationship = await Relationship.create(req.body);
     res.status(200).send(newRelationship);
   } catch (err) {
     next(err);
@@ -27,7 +27,7 @@ router.post("/", async (req, res, next) => {
  */
 router.get("/", async (req, res, next) => {
   try {
-    let allRelationships = await Relationship.findAll({
+    const allRelationships = await Relationship.findAll({
       order: [["id", "DESC"]]
     });
     res.status(200).send(allRelationships);
@@ -35,25 +35,6 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 }); // End FindAllRelationships endpoint
-
-/**
- * UpdateRelationship endpoint
- * @route PUT /relationships/:relationshipId
- * @desc Update a relationship
- * @access Public
- */
-router.put("/:relationshipId", async (req, res, next) => {
-  try {
-    let updatedRelationship = await Relationship.update({
-      where: {
-        id: req.params.relationshipId
-      }
-    });
-    res.status(200).send(updatedRelationship);
-  } catch (err) {
-    next(err);
-  }
-}); // End UpdateRelationship endpoint
 
 /**
  * DeleteRelationship endpoint

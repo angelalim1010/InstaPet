@@ -91,7 +91,6 @@ class AllPosts extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.user,
-  users: state.users,
   post: state.post
 });
 

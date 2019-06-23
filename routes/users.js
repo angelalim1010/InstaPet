@@ -171,7 +171,7 @@ router.post("/login", (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     // get users in descending order by the time they were created
-    let users = await User.findAll({
+    const users = await User.findAll({
       order: [["createdAt", "DESC"]]
     });
     res.status(200).json(users);
@@ -195,7 +195,7 @@ router.put("/:userName", async (req, res, next) => {
 
     // update the User with the new attributes only if they are valid
     if (targetUser) {
-      let updatedUser = await targetUser.update({
+      const updatedUser = await targetUser.update({
         displayName: req.body.displayName,
         profilePicture: req.body.profilePicture,
         bio: req.body.bio
@@ -208,24 +208,5 @@ router.put("/:userName", async (req, res, next) => {
     next(err);
   }
 }); // End UpdateUser endpoint
-
-/**
- * DeleteUser endpoint
- * @route DELETE /profile/:userName
- * @desc Delete a user
- * @access Public
- */
-router.delete("/:userName", async (req, res, next) => {
-  try {
-    await User.destroy({
-      where: {
-        userName: req.params.userName
-      }
-    });
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
-  }
-}); // End DeleteUser endpoint
 
 module.exports = router;

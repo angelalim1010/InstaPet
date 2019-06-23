@@ -44,16 +44,16 @@ export default (state = initialState, action) => {
         ...state
       };
     case EDIT_USER:
-      let newArr = state.users;
+      const newArr = state.users;
 
       // find index of edited  user
-      let targetIndex = newArr.findIndex(user => user.id === action.payload.id);
+      const targetIndex = newArr.findIndex(
+        user => user.id === action.payload.id
+      );
 
       // edit user in the array
 
       newArr[targetIndex].displayName = action.payload.displayName;
-      newArr[targetIndex].userName = action.payload.userName;
-      newArr[targetIndex].email = action.payload.email;
       newArr[targetIndex].profilePicture = action.payload.profilePicture;
       newArr[targetIndex].bio = action.payload.bio;
 
