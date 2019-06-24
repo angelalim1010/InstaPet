@@ -28,6 +28,7 @@ https://ttp-instapet.herokuapp.com/
 -   FontAwesome
 ### Backend
 -   Express
+-   Node
 -   PostgreSQL
 -   ElephantSQL
 -   Sequelize
